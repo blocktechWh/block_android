@@ -2,8 +2,6 @@ package com.blocktechwh.app.block;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.os.Handler;
-
 
 public class MainActivity extends AppCompatActivity {
 

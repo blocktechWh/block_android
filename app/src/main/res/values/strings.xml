@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">block</string>
+    <string name="app_name">部落客</string>
     <string name="title_activity_login">登录</string>
 
     <!-- Strings related to login -->
