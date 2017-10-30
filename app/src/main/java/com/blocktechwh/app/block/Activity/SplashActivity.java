@@ -26,7 +26,8 @@ public class SplashActivity extends AppCompatActivity {
         public void run() {
             String value = mCache.getAsString("token");
             if(value == null){
-                startActivity(new Intent(getApplication(),LoginActivity.class));
+                startActivity(new Intent(getApplication(),MainActivity.class));
+//                startActivity(new Intent(getApplication(),LoginActivity.class));
             }else{
                 startActivity(new Intent(getApplication(),MainActivity.class));
             }

@@ -53,6 +53,9 @@ public class MainActivity extends AppCompatActivity{
 
         mViewPager=(ViewPager) findViewById(R.id.container1);
         mTabHost=(TabLayout)findViewById(R.id.tabHost);
+
+        SupportMultipleScreensUtil.init(getApplicationContext());
+        SupportMultipleScreensUtil.scale(mTabHost);
         setContent();
     }
 
@@ -65,6 +68,7 @@ public class MainActivity extends AppCompatActivity{
         for(int i=0;i<mTabHost.getTabCount();i++){
             mTabHost.getTabAt(i).setCustomView(getTabItemView(i));
         }
+        mTabHost.setTabMode(TabLayout.MODE_FIXED);
     }
 
     class ContentPagerAdapter extends FragmentPagerAdapter {

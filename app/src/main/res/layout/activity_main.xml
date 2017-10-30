@@ -27,12 +27,12 @@
             app:tabPaddingTop="-1dp"
             app:tabMode="fixed"
             app:tabGravity="fill"
-            app:tabMinWidth="270px"
-            android:layout_height="162px"
+            app:tabMaxWidth="0dp"
+            android:layout_width="match_parent"
+            android:layout_height="179px"
             android:background="@color/white"
             android:id="@+id/tabHost"
             android:layout_alignParentBottom="true"
-            android:layout_width="match_parent"
             />
     </LinearLayout>
 
