@@ -1,24 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
+    android:layout_width="360px"
     android:layout_height="match_parent"
     android:gravity="bottom|center_horizontal"
     android:orientation="vertical"
     android:id="@+id/linear_tab"
     >
     <ImageView
-        android:layout_gravity="bottom"
-        android:layout_width="270px"
-        android:layout_height="162px"
+        android:layout_width="99px"
+        android:layout_height="99px"
         android:scaleType="fitXY"
         android:id="@+id/item_icon"
         />
     <TextView
         android:visibility="visible"
-        android:layout_width="216px"
-        android:layout_height="130px"
+        android:layout_width="360px"
+        android:layout_height="48px"
         android:id="@+id/item_text"
-        android:textSize="50px"
+        android:textSize="24px"
         android:textColor="#000000"
         android:gravity="center"
         />

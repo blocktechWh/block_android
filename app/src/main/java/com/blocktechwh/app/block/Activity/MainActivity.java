@@ -16,6 +16,7 @@ import com.blocktechwh.app.block.R;
 
 import com.blocktechwh.app.block.Fragment.HomeFragment;
 import com.blocktechwh.app.block.Fragment.UserFragment;
+import com.blocktechwh.app.block.Fragment.ContactFragment;
 import com.blocktechwh.app.block.SupportMultipleScreensUtil.SupportMultipleScreensUtil;
 
 import java.util.ArrayList;
@@ -25,16 +26,14 @@ import java.util.List;
 public class MainActivity extends FragmentActivity{
 
     private TabLayout mTabHost;
-    private List<String> tab_texts =
-            Arrays.asList(
-                "0","1"
-            );
+    private List<String> tab_texts = Arrays.asList("主页","联系人","我的");
     private List<Integer> tab_icons =
             Arrays.asList(
-                R.drawable.tab_home_pressed,
-                R.drawable.tab_user_pressed
+                    R.mipmap.tab_home,
+                    R.mipmap.tab_contact,
+                    R.mipmap.tab_user
             );
-    private List<String> lists_indicators = Arrays.asList("","");
+    private List<String> lists_indicators = Arrays.asList("","","");
     private List<Fragment> lists_fragment = new ArrayList<>();
     private ViewPager mViewPager;
     private ContentPagerAdapter contentAdapter;
@@ -50,6 +49,7 @@ public class MainActivity extends FragmentActivity{
     private void initView() {
         lists_fragment.add(new HomeFragment());
         lists_fragment.add(new UserFragment());
+        lists_fragment.add(new ContactFragment());
 
         mViewPager=(ViewPager) findViewById(R.id.container1);
         mTabHost=(TabLayout)findViewById(R.id.tabHost);
@@ -80,7 +80,7 @@ public class MainActivity extends FragmentActivity{
 
         @Override
         public int getCount() {
-            return 2;
+            return 3;
         }
 
         @Override
