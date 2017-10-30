@@ -4,10 +4,10 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewCompat;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.view.ViewPager;
 import android.support.design.widget.TabLayout;
@@ -23,7 +23,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-public class MainActivity extends FragmentActivity{
+public class MainActivity extends AppCompatActivity{
 
     private TabLayout mTabHost;
     private List<String> tab_texts = Arrays.asList("主页","联系人","我的");
@@ -53,6 +53,9 @@ public class MainActivity extends FragmentActivity{
 
         mViewPager=(ViewPager) findViewById(R.id.container1);
         mTabHost=(TabLayout)findViewById(R.id.tabHost);
+
+        SupportMultipleScreensUtil.init(getApplicationContext());
+        SupportMultipleScreensUtil.scale(mTabHost);
         setContent();
     }
 
@@ -65,6 +68,7 @@ public class MainActivity extends FragmentActivity{
         for(int i=0;i<mTabHost.getTabCount();i++){
             mTabHost.getTabAt(i).setCustomView(getTabItemView(i));
         }
+        mTabHost.setTabMode(TabLayout.MODE_FIXED);
     }
 
     class ContentPagerAdapter extends FragmentPagerAdapter {
