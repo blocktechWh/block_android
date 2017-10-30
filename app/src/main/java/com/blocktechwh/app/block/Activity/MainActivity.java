@@ -10,6 +10,7 @@ import android.support.v4.view.ViewCompat;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.view.ViewPager;
+import android.support.v4.content.ContextCompat;
 import android.support.design.widget.TabLayout;
 
 import com.blocktechwh.app.block.R;
@@ -27,12 +28,8 @@ public class MainActivity extends AppCompatActivity{
 
     private TabLayout mTabHost;
     private List<String> tab_texts = Arrays.asList("主页","联系人","我的");
-    private List<Integer> tab_icons =
-            Arrays.asList(
-                    R.mipmap.tab_home,
-                    R.mipmap.tab_contact,
-                    R.mipmap.tab_user
-            );
+    private List<Integer> tab_icons = Arrays.asList( R.mipmap.tab_home, R.mipmap.tab_contact, R.mipmap.tab_user );
+    private List<Integer> tab_active_icons = Arrays.asList( R.mipmap.tab_home_pressed, R.mipmap.tab_contact_pressed, R.mipmap.tab_user_pressed );
     private List<String> lists_indicators = Arrays.asList("","","");
     private List<Fragment> lists_fragment = new ArrayList<>();
     private ViewPager mViewPager;
@@ -68,6 +65,7 @@ public class MainActivity extends AppCompatActivity{
         for(int i=0;i<mTabHost.getTabCount();i++){
             mTabHost.getTabAt(i).setCustomView(getTabItemView(i));
         }
+        mTabHost.setOnClickListener(mTabOnClickListener);
         mTabHost.setTabMode(TabLayout.MODE_FIXED);
     }
 
@@ -94,14 +92,49 @@ public class MainActivity extends AppCompatActivity{
         }
     }
 
+    private View.OnClickListener mTabOnClickListener = new View.OnClickListener(){
+        @Override
+        public void onClick(View view){
+            for(int i=0;i<mTabHost.getTabCount();i++){
+                inactiveTab(mTabHost.getTabAt(i).getCustomView());
+            }
+            activeTab(view);
+            int pos = (int) view.getTag();
+            TabLayout.Tab tab = mTabHost.getTabAt(pos);
+            tab.select();
+        }
+    };
+
     private View getTabItemView(int index) {
         View view = getLayoutInflater().inflate(R.layout.item_tab_view, null);
         ImageView imageView = (ImageView) view.findViewById(R.id.item_icon);
-        imageView.setImageResource(tab_icons.get(index));
         TextView textView=(TextView)view.findViewById(R.id.item_text);
         textView.setText(tab_texts.get(index));
+        view.setTag(index);
+        if(mTabHost.getSelectedTabPosition() == index){
+            activeTab(view);
+        }else{
+            inactiveTab(view);
+        }
+        view.setOnClickListener(mTabOnClickListener);
         SupportMultipleScreensUtil.scale(view);
         return view;
+    }
+
+    private void activeTab(View view){
+        ImageView imageView = (ImageView) view.findViewById(R.id.item_icon);
+        TextView textView=(TextView)view.findViewById(R.id.item_text);
+        int index = (int) view.getTag();
+        imageView.setImageResource(tab_active_icons.get(index));
+        textView.setTextColor(ContextCompat.getColor(getApplicationContext(), R.color.tabActive));
+    }
+
+    private void inactiveTab(View view){
+        ImageView imageView = (ImageView) view.findViewById(R.id.item_icon);
+        TextView textView=(TextView)view.findViewById(R.id.item_text);
+        int index = (int) view.getTag();
+        imageView.setImageResource(tab_icons.get(index));
+        textView.setTextColor(ContextCompat.getColor(getApplicationContext(), R.color.tab));
     }
 
 }
