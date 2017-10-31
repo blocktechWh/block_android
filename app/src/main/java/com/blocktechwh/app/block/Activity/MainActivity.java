@@ -45,8 +45,8 @@ public class MainActivity extends AppCompatActivity{
 
     private void initView() {
         lists_fragment.add(new HomeFragment());
-        lists_fragment.add(new UserFragment());
         lists_fragment.add(new ContactFragment());
+        lists_fragment.add(new UserFragment());
 
         mViewPager=(ViewPager) findViewById(R.id.container1);
         mTabHost=(TabLayout)findViewById(R.id.tabHost);
