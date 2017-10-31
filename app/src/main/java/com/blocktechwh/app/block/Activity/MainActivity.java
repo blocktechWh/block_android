@@ -97,8 +97,9 @@ public class MainActivity extends AppCompatActivity{
                 }else{
                     inactiveTab(mTabHost.getTabAt(i).getCustomView());
                 }
-
             }
+            TabLayout.Tab tab = mTabHost.getTabAt(index);
+            tab.select();
         }
     };
 
