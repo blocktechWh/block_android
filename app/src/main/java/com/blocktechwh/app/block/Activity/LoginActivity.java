@@ -7,6 +7,11 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
+import okhttp3.Response;
+
+import com.blocktechwh.app.block.Utils.CallBack;
+import com.blocktechwh.app.block.Utils.HttpClient;
+
 import com.blocktechwh.app.block.R;
 
 public class LoginActivity extends AppCompatActivity {
@@ -21,17 +26,29 @@ public class LoginActivity extends AppCompatActivity {
 
         btn_login = (Button) findViewById(R.id.button2);
         tv_register = (TextView) findViewById(R.id.textView5);
-        btn_login.setOnClickListener(mLocalLogin);
+        btn_login.setOnClickListener(mLoginClick);
         tv_register.setOnClickListener(toRegister);
     }
 
-    private View.OnClickListener mLocalLogin = new View.OnClickListener(){
+    private View.OnClickListener mLoginClick = new View.OnClickListener(){
         @Override
         public void onClick(View view) {
+            mLocalLogin();
             Intent intent =new Intent(LoginActivity.this,MainActivity.class);
             startActivity(intent);
         }
     };
+
+    private void mLocalLogin(){
+        String url = "https://www.baidu.com/";
+        HttpClient.get(this, url, null, new CallBack<String>(){
+            @Override
+            public void onSuccess(String result){
+                System.out.print(result);
+            }
+        });
+    }
+
     private View.OnClickListener toRegister = new View.OnClickListener(){
         @Override
         public void onClick(View view) {
