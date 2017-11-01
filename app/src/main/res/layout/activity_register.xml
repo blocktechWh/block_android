@@ -1,8 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/appBackground">
+    android:background="@color/appBackground"
+    tools:context="com.blocktechwh.app.block.Activity.RegisterActivity">
     <!--<include layout="@layout/titlebar_view"/>-->
     <LinearLayout
         android:id="@+id/LinearLayout1"
@@ -34,7 +36,7 @@
             android:layout_weight="1"
             android:background="@color/colorPrimary"
             android:text="发送验证码" />
-    </>
+    </LinearLayout>
 
     <LinearLayout
         android:id="@+id/LinearLayout2"

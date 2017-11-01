@@ -12,7 +12,7 @@
         <!--<item name="android:background">@color/style_blue</item>-->
     </style>
 
-    <style name="theme_register" parent="android:Theme">
+    <style name="theme_register" parent="Theme.AppCompat">
         <item name="android:windowTitleSize">20dp</item>
         <item name="android:windowTitleBackgroundStyle">@style/CustomWindowTitleBackground</item>
         <item name="android:textColor">@color/tab</item>

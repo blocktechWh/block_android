@@ -13,13 +13,14 @@ public class LoginActivity extends AppCompatActivity {
 
     private Button btn_login;
     private TextView tv_register;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
         btn_login = (Button) findViewById(R.id.button2);
-        tv_register=(TextView) findViewById(R.id.editText4);
+        tv_register = (TextView) findViewById(R.id.textView5);
         btn_login.setOnClickListener(mLocalLogin);
         tv_register.setOnClickListener(toRegister);
     }

@@ -1,13 +1,12 @@
 package com.blocktechwh.app.block.Activity;
 
-import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.widget.TextView;
 
+import com.blocktechwh.app.block.R;
 
 public class RegisterActivity extends AppCompatActivity {
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
