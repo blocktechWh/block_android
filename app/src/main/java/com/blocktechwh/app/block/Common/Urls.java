@@ -8,9 +8,9 @@ public class Urls {
     /**
      * Host
      */
-    private static  String HOST="http://122.112.217.180/";
+    private static  String HOST="http://111.231.146.57:20086/";
     /**
      * It is new version
      */
-    public static final String Login=HOST+"login";
+    public static final String ActiveCode=HOST+"front/getidentifyingcode/";
 }

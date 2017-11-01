@@ -7,8 +7,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
-import okhttp3.Response;
-
+import com.blocktechwh.app.block.Common.Urls;
 import com.blocktechwh.app.block.Utils.CallBack;
 import com.blocktechwh.app.block.Utils.HttpClient;
 
@@ -40,7 +39,7 @@ public class LoginActivity extends AppCompatActivity {
     };
 
     private void mLocalLogin(){
-        String url = "https://www.baidu.com/";
+        String url = Urls.ActiveCode+"18565609835";
         HttpClient.get(this, url, null, new CallBack<String>(){
             @Override
             public void onSuccess(String result){

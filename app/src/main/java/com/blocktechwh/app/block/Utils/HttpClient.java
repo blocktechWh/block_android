@@ -50,6 +50,7 @@ public class HttpClient {
             @Override
             public void onResponse(final Call call, Response response) throws IOException {
                 String json = response.body().string();
+                System.out.println(json);
                 json = json.replace("null", "\"\"");
                 callBack.onSuccess(json);
 //                handleResponse(response, callBack);
