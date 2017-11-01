@@ -30,4 +30,10 @@ public class NonSwipeableViewPager extends ViewPager {
         return false;
     }
 
+    @Override
+    public void setCurrentItem(int item) {
+        //去除页面切换时的滑动翻页效果
+        super.setCurrentItem(item, false);
+    }
+
 }
