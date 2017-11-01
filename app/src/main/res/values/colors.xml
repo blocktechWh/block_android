@@ -8,5 +8,6 @@
     <color name="tab">#000000</color>
     <color name="tabActive">#87CEEB</color>
     <color name="appBackground">#e8e8ed</color>
+    <color name="btnColor">#1790e1</color>
 
 </resources>

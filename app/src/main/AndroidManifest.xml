@@ -27,8 +27,7 @@
         <activity android:name=".Activity.MainActivity" />
         <activity
             android:name=".Activity.RegisterActivity"
-            android:label="@string/register_title"
-            android:theme="@style/theme_register"/>
+            android:label="@string/register_title" />
     </application>
 
 </manifest>

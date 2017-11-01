@@ -2,22 +2,20 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="@dimen/titlebar_height"
-    android:background="#CCCCCC"
+    android:background="@color/white"
     android:orientation="vertical">
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
-        android:background="#AAAAAA"
         android:gravity="center_vertical"
         android:orientation="horizontal">
+
         <ImageView
-            android:layout_width="36dp"
-            android:layout_height="36dp"
-            android:src="@android:drawable/ic_menu_compass"/>
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="首页"/>
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:layout_marginStart="10dp"
+            android:src="@mipmap/icon_back" />
+
     </LinearLayout>
     <TextView
         android:id="@+id/titlebar_title_tv"
@@ -25,20 +23,5 @@
         android:layout_height="wrap_content"
         android:layout_centerInParent="true"
         android:text="title text"/>
-    <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="match_parent"
-        android:background="#AAAAAA"
-        android:layout_alignParentRight="true"
-        android:gravity="center_vertical"
-        android:orientation="horizontal">
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="重设"/>
-        <ImageView
-            android:layout_width="36dp"
-            android:layout_height="36dp"
-            android:src="@android:drawable/ic_menu_add"/>
-    </LinearLayout>
+
 </RelativeLayout>

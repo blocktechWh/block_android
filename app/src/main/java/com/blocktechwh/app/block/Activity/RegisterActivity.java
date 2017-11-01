@@ -12,6 +12,7 @@ public class RegisterActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
+        setTitle("用户注册");
 
     }
     public void setTitle(CharSequence title) {

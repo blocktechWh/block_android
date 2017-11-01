@@ -77,10 +77,12 @@
         android:gravity="center_vertical|center_horizontal"
         android:orientation="horizontal"
         android:id="@+id/relativeLayout4">
+
         <TextView
             android:id="@+id/textView8"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:textSize="@dimen/text_size1"
             android:layout_weight="1"
             android:text="钱包地址：" />
         <TextView
@@ -88,6 +90,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_toRightOf="@id/textView8"
+            android:textSize="@dimen/text_size1"
             android:layout_weight="1"
             android:text="1DQe9F3agsDcr4qoTZ3Sush4e88Nv9tNxa" />
     </RelativeLayout>
