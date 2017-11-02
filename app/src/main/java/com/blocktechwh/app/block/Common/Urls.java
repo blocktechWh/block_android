@@ -9,8 +9,10 @@ public class Urls {
      * Host
      */
     private static  String HOST="http://111.231.146.57:20086/";
+
     /**
-     * It is new version
+     * 注册
      */
-    public static final String ActiveCode=HOST+"front/getidentifyingcode/";
+    public static final String RegistorActiveCode = HOST+"front/getidentifyingcode/";
+    public static final String Registor = HOST+"front/reg";
 }

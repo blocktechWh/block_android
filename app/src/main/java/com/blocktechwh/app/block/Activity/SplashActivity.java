@@ -7,6 +7,7 @@ import android.os.Handler;
 
 import org.afinal.simplecache.ACache;
 
+import com.blocktechwh.app.block.Common.App;
 import com.blocktechwh.app.block.R;
 
 public class SplashActivity extends AppCompatActivity {
@@ -24,10 +25,8 @@ public class SplashActivity extends AppCompatActivity {
 
     class splashhandler implements Runnable{
         public void run() {
-            String value = mCache.getAsString("token");
-            if(value == null){
-                startActivity(new Intent(getApplication(),MainActivity.class));
-//                startActivity(new Intent(getApplication(),LoginActivity.class));
+            if("".equals(App.token)){
+                startActivity(new Intent(getApplication(),LoginActivity.class));
             }else{
                 startActivity(new Intent(getApplication(),MainActivity.class));
             }
