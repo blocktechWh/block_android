@@ -7,11 +7,13 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
+import com.blocktechwh.app.block.Common.App;
 import com.blocktechwh.app.block.Common.Urls;
 import com.blocktechwh.app.block.Utils.CallBack;
 import com.blocktechwh.app.block.Utils.HttpClient;
 
 import com.blocktechwh.app.block.R;
+import com.blocktechwh.app.block.Utils.PreferencesUtils;
 
 public class LoginActivity extends AppCompatActivity {
 
@@ -40,6 +42,14 @@ public class LoginActivity extends AppCompatActivity {
 
     private void mLocalLogin(){
 
+    }
+
+    public void IntoMainActivity(String token){
+        PreferencesUtils.putString(App.getContext(),"Token",token);
+        PreferencesUtils.putBoolean(App.getContext(),"isLogin",true);
+        App.token=token;
+        startActivity(new Intent(this, RegisterActivity.class));
+        finish();
     }
 
     private View.OnClickListener toRegister = new View.OnClickListener(){
