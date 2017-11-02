@@ -3,6 +3,8 @@ package com.blocktechwh.app.block.Utils;
 import android.os.Handler;
 import android.os.Looper;
 
+import org.json.JSONObject;
+
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.concurrent.TimeUnit;
@@ -45,15 +47,24 @@ public class HttpClient {
             @Override
             public void onFailure(Call call, final IOException e) {
                 System.out.println("onFail+++");
-//                handleError(e, callBack);
             }
             @Override
             public void onResponse(final Call call, Response response) throws IOException {
                 String json = response.body().string();
-                System.out.println(json);
                 json = json.replace("null", "\"\"");
-                callBack.onSuccess(json);
-//                handleResponse(response, callBack);
+                final String finalJson = json;
+                handler.post(new Runnable() {
+                    @Override
+                    public void run() {
+                        try {
+                            JSONObject jsonObject = new JSONObject(finalJson);
+                            callBack.onSuccess(jsonObject);
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                            callBack.onFailure(4, e.getLocalizedMessage());
+                        }
+                    }
+                });
             }
         });
 

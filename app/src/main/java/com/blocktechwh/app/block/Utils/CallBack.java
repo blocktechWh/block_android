@@ -5,12 +5,14 @@ import android.widget.Toast;
 
 import com.blocktechwh.app.block.Common.App;
 
+import org.json.JSONObject;
+
 /**
  * Created by eagune on 2017/11/1.
  */
-public abstract class CallBack<T> {
+public abstract class CallBack{
 
-    public abstract void onSuccess(T result);
+    public abstract void onSuccess(JSONObject result);
 
     public void onFailure(int errorType, String message) {
         if (errorType != 0) {

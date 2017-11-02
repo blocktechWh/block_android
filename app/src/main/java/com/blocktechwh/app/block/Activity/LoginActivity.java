@@ -39,13 +39,7 @@ public class LoginActivity extends AppCompatActivity {
     };
 
     private void mLocalLogin(){
-        String url = Urls.ActiveCode+"18565609835";
-        HttpClient.get(this, url, null, new CallBack<String>(){
-            @Override
-            public void onSuccess(String result){
-                System.out.print(result);
-            }
-        });
+
     }
 
     private View.OnClickListener toRegister = new View.OnClickListener(){
