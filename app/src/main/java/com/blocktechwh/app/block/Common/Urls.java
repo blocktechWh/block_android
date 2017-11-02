@@ -15,4 +15,5 @@ public class Urls {
      */
     public static final String RegistorActiveCode = HOST+"front/getidentifyingcode/";
     public static final String Registor = HOST+"front/reg";
+    public static final String Login = HOST+"front/reg";
 }

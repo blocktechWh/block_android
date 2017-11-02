@@ -10,7 +10,6 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.blocktechwh.app.block.Common.App;
-import com.blocktechwh.app.block.Common.ErrorTip;
 import com.blocktechwh.app.block.Common.Urls;
 import com.blocktechwh.app.block.R;
 import com.blocktechwh.app.block.Utils.CallBack;
@@ -35,30 +34,30 @@ public class RegisterActivity extends AppCompatActivity {
 
     public void initView() {
         ((TextView)findViewById(R.id.titlebar_title_tv)).setText("用户注册");
-        ((Button)findViewById(R.id.id_button_send)).setOnClickListener(mSendVerifyCode);
-        ((Button)findViewById(R.id.id_button_submit)).setOnClickListener(mRegister);
+
         editPhone = (EditText)findViewById(R.id.id_edit_phone);
         editCode = (EditText)findViewById(R.id.id_edit_code);
         editPassword = (EditText)findViewById(R.id.id_edit_password);
+
+        ((Button)findViewById(R.id.id_button_send)).setOnClickListener(mSendVerifyCodeClick);
+        ((Button)findViewById(R.id.id_button_submit)).setOnClickListener(mRegisterClick);
     }
 
-    private View.OnClickListener mSendVerifyCode = new View.OnClickListener(){
+    private View.OnClickListener mSendVerifyCodeClick = new View.OnClickListener(){
         @Override
         public void onClick(View view) {
-            mSendVerifyCodeHttp();
+            mSendVerifyCode();
         }
     };
 
-    private View.OnClickListener mRegister = new View.OnClickListener(){
+    private View.OnClickListener mRegisterClick = new View.OnClickListener(){
         @Override
         public void onClick(View view) {
-            mRegisterHttp();
-//            Intent intent =new Intent(RegisterActivity.this,MainActivity.class);
-//            startActivity(intent);
+            mRegister();
         }
     };
 
-    private void mSendVerifyCodeHttp(){
+    private void mSendVerifyCode(){
         String phone = editPhone.getText().toString();
         if("".equals(phone)){
             Toast.makeText(App.getContext(), "手机号不能为空", Toast.LENGTH_SHORT).show();
@@ -66,16 +65,11 @@ public class RegisterActivity extends AppCompatActivity {
             String url = Urls.RegistorActiveCode + phone;
             HttpClient.get(this, url, null, new CallBack() {
                 @Override
-                public void onSuccess(JSONObject result) {
+                public void onSuccess(JSONObject data) {
                     try {
-                        String statusCode = result.getString("code");
-                        String verifyCode = result.getString("data");
+                        String verifyCode = data.getString("data");
                         CharSequence verifyMsg = "您的验证码是：" + verifyCode;
-                        if (statusCode.equals("000")) {
-                            Toast.makeText(App.getContext(), verifyMsg, Toast.LENGTH_LONG).show();
-                        }else{
-                            Toast.makeText(App.getContext(), ErrorTip.getReason(statusCode), Toast.LENGTH_SHORT).show();
-                        }
+                        Toast.makeText(App.getContext(), verifyMsg, Toast.LENGTH_LONG).show();
                     } catch (JSONException e) {
                         e.printStackTrace();
                     }
@@ -84,7 +78,7 @@ public class RegisterActivity extends AppCompatActivity {
         }
     }
 
-    private void mRegisterHttp(){
+    private void mRegister(){
         String phone = editPhone.getText().toString();
         String code = editCode.getText().toString();
         String password = editPassword.getText().toString();
@@ -103,18 +97,11 @@ public class RegisterActivity extends AppCompatActivity {
                 json.put("rePassword",password);
                 HttpClient.post(this, Urls.Registor, json.toString(), new CallBack() {
                     @Override
-                    public void onSuccess(JSONObject result) {
+                    public void onSuccess(JSONObject data) {
                         try {
-                            String statusCode = result.getString("code");
-                            if(statusCode.equals("000")){
-                                String data = result.getString("data");
-                                JSONObject userJson = new JSONObject(data);
-                                String token = userJson.getString("token");
-                                Toast.makeText(App.getContext(), "注册成功", Toast.LENGTH_SHORT).show();
-                                IntoMainActivity(token);
-                            }else{
-                                Toast.makeText(App.getContext(), ErrorTip.getReason(statusCode), Toast.LENGTH_SHORT).show();
-                            }
+                            String token = data.getString("token");
+                            Toast.makeText(App.getContext(), "注册成功", Toast.LENGTH_SHORT).show();
+                            IntoMainActivity(token);
                         } catch (JSONException e) {
                             e.printStackTrace();
                         }

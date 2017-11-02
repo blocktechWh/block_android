@@ -2,7 +2,6 @@ package com.blocktechwh.app.block.Utils;
 
 import android.os.Handler;
 import android.os.Looper;
-import android.widget.Toast;
 
 import org.json.JSONObject;
 
@@ -13,7 +12,6 @@ import java.util.concurrent.TimeUnit;
 
 import okhttp3.Call;
 import okhttp3.Callback;
-import okhttp3.FormBody;
 import okhttp3.MediaType;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
@@ -21,6 +19,8 @@ import okhttp3.RequestBody;
 import okhttp3.Response;
 
 import com.blocktechwh.app.block.Common.App;
+import com.blocktechwh.app.block.Common.ErrorTip;
+
 /**
  * Created by eagune on 2017/11/1.
  */
@@ -94,7 +94,23 @@ public class HttpClient {
             public void run() {
                 try {
                     JSONObject jsonObject = new JSONObject(finalJson);
-                    callBack.onSuccess(jsonObject);
+                    String statusCode = jsonObject.getString("code");
+                    if(statusCode.equals("000")){
+                        String dataStr = jsonObject.getString("data");
+                        final char fistChar = dataStr.charAt(0);
+                        if(fistChar == '{'){
+                            JSONObject dataJson = new JSONObject(dataStr);
+                            callBack.onSuccess(dataJson);
+                        }else{
+                            JSONObject dataJson = new JSONObject();
+                            dataJson.put("data",dataStr);
+                            callBack.onSuccess(dataJson);
+                        }
+                    }else{
+                        String msg = jsonObject.getString("msg");
+                        String errMsg =  "".equals(ErrorTip.getReason(statusCode))?msg:ErrorTip.getReason(statusCode);
+                        callBack.onFailure(2, errMsg);
+                    }
                 } catch (Exception e) {
                     e.printStackTrace();
                     callBack.onFailure(4, e.getLocalizedMessage());
