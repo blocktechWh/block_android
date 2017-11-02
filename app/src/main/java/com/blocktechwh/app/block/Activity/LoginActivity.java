@@ -47,8 +47,8 @@ public class LoginActivity extends AppCompatActivity {
     public void IntoMainActivity(String token){
         PreferencesUtils.putString(App.getContext(),"Token",token);
         PreferencesUtils.putBoolean(App.getContext(),"isLogin",true);
-        App.token=token;
-        startActivity(new Intent(this, RegisterActivity.class));
+        App.token = token;
+        startActivity(new Intent(this, MainActivity.class));
         finish();
     }
 

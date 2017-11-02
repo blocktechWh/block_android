@@ -41,7 +41,7 @@ public class HttpClient {
         RequestBody requestBody = RequestBody.create(JSON, json);
 
         String Cookie_token = PreferencesUtils.getString(App.getContext(), "Cookie_token", UUID.randomUUID().toString());
-        String token = PreferencesUtils.getString(App.getContext(), "Token", "");
+        String token = App.token;
 
         Request request = new Request.Builder()
                 .addHeader("Cookie_token", Cookie_token)

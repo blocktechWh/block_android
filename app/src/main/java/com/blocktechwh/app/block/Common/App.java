@@ -14,7 +14,7 @@ public class App extends Application {
 
     private static Context context;
     private static String versionName;
-    public static String token="";
+    public static String token = "";
 
     @Override
     public void onCreate() {
@@ -29,8 +29,7 @@ public class App extends Application {
 
     private void setPrepare() {
         if(PreferencesUtils.getBoolean(this,"isLogin",false)){
-            token= PreferencesUtils.getString(this,"Token","");
-            System.out.println("token = " + token);
+            token = PreferencesUtils.getString(this,"Token","");
         }
     }
 
