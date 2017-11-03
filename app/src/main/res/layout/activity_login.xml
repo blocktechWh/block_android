@@ -18,7 +18,7 @@
         app:srcCompat="@mipmap/logo" />
 
     <EditText
-        android:id="@+id/editText"
+        android:id="@+id/id_edit_phone"
         android:layout_width="340dp"
         android:layout_height="wrap_content"
         android:layout_below="@+id/imageView2"
@@ -32,10 +32,10 @@
         android:textSize="15sp" />
 
     <EditText
-        android:id="@+id/editText2"
+        android:id="@+id/id_edit_password"
         android:layout_width="340dp"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/editText"
+        android:layout_below="@+id/id_edit_phone"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="7dp"
         android:ems="10"
@@ -48,7 +48,7 @@
         android:id="@+id/textView3"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/editText2"
+        android:layout_below="@+id/id_edit_password"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="16dp"
         android:autoLink="all"
