@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -34,6 +35,12 @@ public class RegisterActivity extends AppCompatActivity {
 
     public void initView() {
         ((TextView)findViewById(R.id.titlebar_title_tv)).setText("用户注册");
+        ((ImageButton)findViewById(R.id.titlebar_button_back)).setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View view) {
+                RegisterActivity.this.finish();
+            }
+        });
 
         editPhone = (EditText)findViewById(R.id.id_edit_phone);
         editCode = (EditText)findViewById(R.id.id_edit_code);
@@ -79,7 +86,7 @@ public class RegisterActivity extends AppCompatActivity {
     }
 
     private void mRegister(){
-        String phone = editPhone.getText().toString();
+        final String phone = editPhone.getText().toString();
         String code = editCode.getText().toString();
         String password = editPassword.getText().toString();
         if("".equals(phone)){
@@ -98,6 +105,8 @@ public class RegisterActivity extends AppCompatActivity {
                 HttpClient.post(this, Urls.Registor, json.toString(), new CallBack() {
                     @Override
                     public void onSuccess(JSONObject data) {
+                        PreferencesUtils.putString(App.getContext(),"Phone",phone);
+                        App.phone = phone;
                         try {
                             String token = data.getString("token");
                             Toast.makeText(App.getContext(), "注册成功", Toast.LENGTH_SHORT).show();

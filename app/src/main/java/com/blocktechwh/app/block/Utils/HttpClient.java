@@ -97,15 +97,20 @@ public class HttpClient {
                     String statusCode = jsonObject.getString("code");
                     if(statusCode.equals("000")){
                         String dataStr = jsonObject.getString("data");
-                        final char fistChar = dataStr.charAt(0);
-                        if(fistChar == '{'){
-                            JSONObject dataJson = new JSONObject(dataStr);
-                            callBack.onSuccess(dataJson);
+                        if("".equals(dataStr)){
+                            callBack.onSuccess(null);
                         }else{
-                            JSONObject dataJson = new JSONObject();
-                            dataJson.put("data",dataStr);
-                            callBack.onSuccess(dataJson);
+                            final char fistChar = dataStr.charAt(0);
+                            if(fistChar == '{'){
+                                JSONObject dataJson = new JSONObject(dataStr);
+                                callBack.onSuccess(dataJson);
+                            }else{
+                                JSONObject dataJson = new JSONObject();
+                                dataJson.put("data",dataStr);
+                                callBack.onSuccess(dataJson);
+                            }
                         }
+
                     }else{
                         String msg = jsonObject.getString("msg");
                         String errMsg =  "".equals(ErrorTip.getReason(statusCode))?msg:ErrorTip.getReason(statusCode);

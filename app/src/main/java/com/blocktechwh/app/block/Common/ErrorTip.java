@@ -9,7 +9,7 @@ public class ErrorTip {
 
     private static HashMap<String, String> reasonMap = new HashMap<String, String>(){
         {
-            put("50800001","注册失败");
+            put("50800001","执行失败");
             put("50800002","未找到用户");
             put("50800003","添加用户失败");
             put("50800004","添加联系人失败");

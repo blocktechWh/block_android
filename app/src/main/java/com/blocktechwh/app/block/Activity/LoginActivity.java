@@ -10,7 +10,6 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.blocktechwh.app.block.Common.App;
-import com.blocktechwh.app.block.Common.ErrorTip;
 import com.blocktechwh.app.block.Common.Urls;
 import com.blocktechwh.app.block.Utils.CallBack;
 import com.blocktechwh.app.block.Utils.HttpClient;
@@ -50,7 +49,7 @@ public class LoginActivity extends AppCompatActivity {
     };
 
     private void mLocalLogin(){
-        String phone = editPhone.getText().toString();
+        final String phone = editPhone.getText().toString();
         String password = editPassword.getText().toString();
         if("".equals(phone)){
             Toast.makeText(App.getContext(), "手机号不能为空", Toast.LENGTH_SHORT).show();
@@ -59,14 +58,15 @@ public class LoginActivity extends AppCompatActivity {
         }else {
             try{
                 JSONObject json = new JSONObject();
-                json.put("phone",phone);
+                json.put("account",phone);
                 json.put("password",password);
                 HttpClient.post(this, Urls.Login, json.toString(), new CallBack() {
                     @Override
                     public void onSuccess(JSONObject data) {
+                        PreferencesUtils.putString(App.getContext(),"Phone",phone);
+                        App.phone = phone;
                         try {
                             String token = data.getString("token");
-                            Toast.makeText(App.getContext(), "注册成功", Toast.LENGTH_SHORT).show();
                             IntoMainActivity(token);
                         } catch (JSONException e) {
                             e.printStackTrace();
@@ -90,7 +90,7 @@ public class LoginActivity extends AppCompatActivity {
     private View.OnClickListener toRegister = new View.OnClickListener(){
         @Override
         public void onClick(View view) {
-            Intent intent =new Intent(LoginActivity.this,RegisterActivity.class);
+            Intent intent = new Intent(LoginActivity.this,RegisterActivity.class);
             startActivity(intent);
         }
     };
