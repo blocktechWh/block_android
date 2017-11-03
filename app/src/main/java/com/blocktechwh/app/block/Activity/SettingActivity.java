@@ -14,6 +14,7 @@ import com.blocktechwh.app.block.Common.Urls;
 import com.blocktechwh.app.block.R;
 import com.blocktechwh.app.block.Utils.CallBack;
 import com.blocktechwh.app.block.Utils.HttpClient;
+import com.blocktechwh.app.block.Utils.PreferencesUtils;
 
 import org.json.JSONObject;
 
@@ -58,6 +59,8 @@ public class SettingActivity extends AppCompatActivity {
             @Override
             public void onSuccess(JSONObject data) {
                 Toast.makeText(App.getContext(), "退出登录成功", Toast.LENGTH_LONG).show();
+                App.token = "";
+                PreferencesUtils.putString(App.getContext(),"Token","");
                 Intent intent = new Intent(SettingActivity.this,LoginActivity.class);
                 startActivity(intent);
             }
