@@ -24,20 +24,23 @@ public class LoginActivity extends AppCompatActivity {
 
     private Button btn_login;
     private TextView tv_register;
-    private EditText editPhone;
-    private EditText editPassword;
+    private TextView tv_forget;
+    private EditText et_phone;
+    private EditText et_password;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
-        btn_login = (Button) findViewById(R.id.button2);
-        tv_register = (TextView) findViewById(R.id.textView5);
-        editPhone = (EditText)findViewById(R.id.id_edit_phone);
-        editPassword = (EditText)findViewById(R.id.id_edit_password);
+        btn_login = (Button) findViewById(R.id.id_button_login);
+        tv_forget = (TextView) findViewById(R.id.id_text_forget);
+        tv_register = (TextView) findViewById(R.id.id_text_register);
+        et_phone = (EditText)findViewById(R.id.id_edit_phone);
+        et_password = (EditText)findViewById(R.id.id_edit_password);
 
         btn_login.setOnClickListener(mLoginClick);
+        tv_forget.setOnClickListener(toForget);
         tv_register.setOnClickListener(toRegister);
     }
 
@@ -47,10 +50,24 @@ public class LoginActivity extends AppCompatActivity {
             mLocalLogin();
         }
     };
+    private View.OnClickListener toRegister = new View.OnClickListener(){
+        @Override
+        public void onClick(View view) {
+            Intent intent = new Intent(LoginActivity.this,RegisterActivity.class);
+            startActivity(intent);
+        }
+    };
+    private View.OnClickListener toForget = new View.OnClickListener(){
+        @Override
+        public void onClick(View view) {
+            Intent intent = new Intent(LoginActivity.this,ForgetActivity.class);
+            startActivity(intent);
+        }
+    };
 
     private void mLocalLogin(){
-        final String phone = editPhone.getText().toString();
-        String password = editPassword.getText().toString();
+        final String phone = et_phone.getText().toString();
+        String password = et_password.getText().toString();
         if("".equals(phone)){
             Toast.makeText(App.getContext(), "手机号不能为空", Toast.LENGTH_SHORT).show();
         }else if("".equals(password)){
@@ -87,12 +104,6 @@ public class LoginActivity extends AppCompatActivity {
         finish();
     }
 
-    private View.OnClickListener toRegister = new View.OnClickListener(){
-        @Override
-        public void onClick(View view) {
-            Intent intent = new Intent(LoginActivity.this,RegisterActivity.class);
-            startActivity(intent);
-        }
-    };
+
 
 }
