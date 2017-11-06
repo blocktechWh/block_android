@@ -36,7 +36,7 @@ public class SettingActivity extends AppCompatActivity {
         ((ImageButton)findViewById(R.id.titlebar_button_back)).setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View view) {
-                logOut();
+                SettingActivity.this.finish();
             }
         });
 

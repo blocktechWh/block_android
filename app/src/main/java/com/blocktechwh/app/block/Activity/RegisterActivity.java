@@ -33,7 +33,7 @@ public class RegisterActivity extends AppCompatActivity {
         initView();
     }
 
-    public void initView() {
+    private void initView() {
         ((TextView)findViewById(R.id.titlebar_title_tv)).setText("用户注册");
         ((ImageButton)findViewById(R.id.titlebar_button_back)).setOnClickListener(new View.OnClickListener(){
             @Override

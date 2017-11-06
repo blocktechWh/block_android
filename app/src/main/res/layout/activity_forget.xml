@@ -3,6 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
     <include layout="@layout/titlebar_view"/>
+
     <LinearLayout
         android:id="@+id/LinearLayout1"
         android:layout_width="match_parent"
@@ -24,7 +25,8 @@
             android:ems="10"
             android:hint="输入手机号码"
             android:inputType="phone"
-            android:paddingLeft="10dp" />
+            android:paddingLeft="10dp"
+            android:paddingRight="10dp"/>
 
         <Button
             android:id="@+id/button"
@@ -49,14 +51,15 @@
 
         <EditText
             android:id="@+id/editText4"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="3"
             android:background="@null"
             android:ems="10"
             android:hint="输入验证码"
             android:inputType="phone"
-            android:paddingLeft="10dp" />
+            android:paddingLeft="10dp"
+            android:paddingRight="10dp"/>
 
     </LinearLayout>
 
@@ -69,9 +72,7 @@
         android:layout_centerHorizontal="true"
         android:layout_marginTop="30dp"
         android:background="@drawable/coners_bg2"
-        android:elevation="0dp"
         android:text="找回"
         android:textColor="#ffffff"
         android:textSize="15sp" />
-
 </RelativeLayout>
