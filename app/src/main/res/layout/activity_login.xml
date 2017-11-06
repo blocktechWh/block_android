@@ -83,15 +83,10 @@
         android:id="@+id/relativeLayout"
         android:layout_width="200dp"
         android:layout_height="wrap_content"
-<<<<<<< HEAD
         android:layout_below="@id/textView4"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="16dp"
         android:visibility="gone">
-=======
-        android:layout_marginTop="16dp">
->>>>>>> 4657a62c86caee46845fb133f33d7e6f52b4da8f
-
         <ImageButton
             android:id="@+id/imageButton2"
             android:layout_width="41dp"
@@ -120,7 +115,6 @@
             app:srcCompat="@mipmap/xinlang" />
     </RelativeLayout>
 
-<<<<<<< HEAD
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -145,7 +139,4 @@
             android:src="@mipmap/icon7" />
     </LinearLayout>
 
-</RelativeLayout>
-=======
 </LinearLayout>
->>>>>>> 4657a62c86caee46845fb133f33d7e6f52b4da8f
