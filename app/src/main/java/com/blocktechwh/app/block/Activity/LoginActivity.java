@@ -6,6 +6,8 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -26,6 +28,10 @@ public class LoginActivity extends AppCompatActivity {
     private TextView tv_register;
     private EditText editPhone;
     private EditText editPassword;
+    private TextView tv_more;
+    private ImageView iv_more;
+    private TextView tv_text;
+    private RelativeLayout rl;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,9 +42,15 @@ public class LoginActivity extends AppCompatActivity {
         tv_register = (TextView) findViewById(R.id.textView5);
         editPhone = (EditText)findViewById(R.id.id_edit_phone);
         editPassword = (EditText)findViewById(R.id.id_edit_password);
+        tv_more=(TextView) findViewById(R.id.textView62);
+        iv_more=(ImageView) findViewById(R.id.imageView19);
+        tv_text=(TextView) findViewById(R.id.textView4);
+        rl=(RelativeLayout) findViewById(R.id.relativeLayout);
 
         btn_login.setOnClickListener(mLoginClick);
         tv_register.setOnClickListener(toRegister);
+        tv_more.setOnClickListener(getMore);
+        iv_more.setOnClickListener(getMore);
     }
 
     private View.OnClickListener mLoginClick = new View.OnClickListener(){
@@ -92,6 +104,16 @@ public class LoginActivity extends AppCompatActivity {
         public void onClick(View view) {
             Intent intent = new Intent(LoginActivity.this,RegisterActivity.class);
             startActivity(intent);
+        }
+    };
+
+    private View.OnClickListener getMore = new View.OnClickListener(){
+        @Override
+        public void onClick(View view) {
+            tv_text.setVisibility(View.VISIBLE);
+            rl.setVisibility(View.VISIBLE);
+            tv_more.setVisibility(View.GONE);
+            iv_more.setVisibility(View.GONE);
         }
     };
 

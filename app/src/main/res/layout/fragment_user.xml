@@ -68,48 +68,58 @@
     </RelativeLayout>
 
     <RelativeLayout
+        android:id="@+id/relativeLayout4"
         android:layout_width="match_parent"
-        android:layout_height="45.12dp"
-        android:layout_marginTop="4.8dp"
-        android:background="@color/white"
+        android:layout_height="wrap_content"
         android:layout_below="@+id/relativeLayout2"
         android:layout_centerHorizontal="true"
+        android:layout_marginTop="4.8dp"
+        android:background="@color/white"
         android:gravity="center_vertical|center_horizontal"
         android:orientation="horizontal"
-        android:id="@+id/relativeLayout4">
+        android:paddingBottom="10dp"
+        android:paddingEnd="@dimen/padding_right"
+        android:paddingLeft="@dimen/padding_left"
+        android:paddingRight="@dimen/padding_right"
+        android:paddingStart="@dimen/padding_left"
+        android:paddingTop="10dp">
 
         <TextView
             android:id="@+id/textView8"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textSize="@dimen/text_size1"
             android:layout_weight="1"
-            android:text="钱包地址：" />
+            android:text="钱包地址："
+            android:textSize="14sp" />
+
         <TextView
             android:id="@+id/textView9"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_toRightOf="@id/textView8"
-            android:textSize="@dimen/text_size1"
             android:layout_weight="1"
-            android:text="1DQe9F3agsDcr4qoTZ3Sush4e88Nv9tNxa" />
+            android:text="1DQe9F3agsDcr4qoTZ3Sush4e88Nv9tNxa"
+            android:textSize="14sp" />
     </RelativeLayout>
 
     <LinearLayout
+        android:id="@+id/linearLayout2"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="4.8dp"
-        android:background="@color/gray"
         android:layout_below="@+id/relativeLayout4"
         android:layout_centerHorizontal="true"
+        android:layout_marginTop="4.8dp"
+        android:background="@color/gray"
         android:orientation="vertical"
-        android:id="@+id/linearLayout2">
+        android:visibility="gone">
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="54.72dp"
-            android:gravity="center_vertical"
             android:background="@color/white"
+            android:gravity="center_vertical"
             android:orientation="horizontal">
+
             <ImageButton
                 android:id="@+id/id_wallet_image"
                 android:layout_width="28.8dp"
@@ -117,19 +127,22 @@
                 android:layout_margin="17.76dp"
                 android:background="@android:color/transparent"
                 app:srcCompat="@mipmap/icon_wallet" />
+
             <TextView
                 android:id="@+id/id_wallet_text"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="钱包" />
         </LinearLayout>
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="54.72dp"
-            android:gravity="center_vertical"
-            android:background="@color/white"
             android:layout_marginTop="1dp"
+            android:background="@color/white"
+            android:gravity="center_vertical"
             android:orientation="horizontal">
+
             <ImageButton
                 android:id="@+id/id_redPacket_image"
                 android:layout_width="28.8dp"
@@ -137,19 +150,22 @@
                 android:layout_margin="17.76dp"
                 android:background="@android:color/transparent"
                 app:srcCompat="@mipmap/icon_red_packet" />
+
             <TextView
                 android:id="@+id/id_redPacket_text"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="红包" />
         </LinearLayout>
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="54.72dp"
-            android:gravity="center_vertical"
-            android:background="@color/white"
             android:layout_marginTop="1dp"
+            android:background="@color/white"
+            android:gravity="center_vertical"
             android:orientation="horizontal">
+
             <ImageButton
                 android:id="@+id/id_vote_image"
                 android:layout_width="28.8dp"
@@ -157,19 +173,22 @@
                 android:layout_margin="17.76dp"
                 android:background="@android:color/transparent"
                 app:srcCompat="@mipmap/icon_vote" />
+
             <TextView
                 android:id="@+id/id_vote_text"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="投票" />
         </LinearLayout>
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="54.72dp"
-            android:gravity="center_vertical"
-            android:background="@color/white"
             android:layout_marginTop="1dp"
+            android:background="@color/white"
+            android:gravity="center_vertical"
             android:orientation="horizontal">
+
             <ImageButton
                 android:id="@+id/id_event_image"
                 android:layout_width="28.8dp"
@@ -177,6 +196,7 @@
                 android:layout_margin="17.76dp"
                 android:background="@android:color/transparent"
                 app:srcCompat="@mipmap/icon_event" />
+
             <TextView
                 android:id="@+id/id_event_text"
                 android:layout_width="wrap_content"
