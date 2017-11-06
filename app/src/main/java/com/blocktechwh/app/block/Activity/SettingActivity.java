@@ -7,7 +7,6 @@ import android.view.View;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.blocktechwh.app.block.Common.App;
 import com.blocktechwh.app.block.Common.Urls;
@@ -16,7 +15,7 @@ import com.blocktechwh.app.block.Utils.CallBack;
 import com.blocktechwh.app.block.Utils.HttpClient;
 import com.blocktechwh.app.block.Utils.PreferencesUtils;
 
-import org.json.JSONObject;
+import com.alibaba.fastjson.JSONObject;
 
 public class SettingActivity extends AppCompatActivity {
 
@@ -58,13 +57,12 @@ public class SettingActivity extends AppCompatActivity {
         HttpClient.get(this, url, null, new CallBack() {
             @Override
             public void onSuccess(JSONObject data) {
-                Toast.makeText(App.getContext(), "退出登录成功", Toast.LENGTH_LONG).show();
-                App.token = "";
-                PreferencesUtils.putString(App.getContext(),"Token","");
-                Intent intent = new Intent(SettingActivity.this,LoginActivity.class);
-                startActivity(intent);
             }
         });
+        App.token = "";
+        PreferencesUtils.putString(App.getContext(),"Token","");
+        Intent intent = new Intent(SettingActivity.this,LoginActivity.class);
+        startActivity(intent);
     }
 
 }

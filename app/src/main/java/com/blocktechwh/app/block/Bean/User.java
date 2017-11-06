@@ -2,6 +2,8 @@ package com.blocktechwh.app.block.Bean;
 
 import java.util.Date;
 
+import com.blocktechwh.app.block.Utils.DateUtil;
+
 public class User{
       
 	    /**  
@@ -101,6 +103,9 @@ public class User{
 	        return this.sex;  
 	    }
 
+        public String getCreateTimeString() {
+        return DateUtil.formatDatetime(getCreateTime());
+    }
 	    public void setCreateTime(Date createTime) {
 	        this.createTime = createTime;  
 	    }
@@ -108,6 +113,9 @@ public class User{
 	        return this.createTime;  
 	    }
 
+        public String getUpdateTimeString() {
+        return DateUtil.formatDatetime(getUpdateTime());
+    }
 	    public void setUpdateTime(Date updateTime) {  
 	        this.updateTime = updateTime;  
 	    }

@@ -17,8 +17,7 @@ import com.blocktechwh.app.block.Utils.CallBack;
 import com.blocktechwh.app.block.Utils.HttpClient;
 import com.blocktechwh.app.block.Utils.PreferencesUtils;
 
-import org.json.JSONObject;
-import org.json.JSONException;
+import com.alibaba.fastjson.JSONObject;
 
 public class RegisterActivity extends AppCompatActivity {
 
@@ -73,13 +72,9 @@ public class RegisterActivity extends AppCompatActivity {
             HttpClient.get(this, url, null, new CallBack() {
                 @Override
                 public void onSuccess(JSONObject data) {
-                    try {
-                        String verifyCode = data.getString("data");
-                        CharSequence verifyMsg = "您的验证码是：" + verifyCode;
-                        Toast.makeText(App.getContext(), verifyMsg, Toast.LENGTH_LONG).show();
-                    } catch (JSONException e) {
-                        e.printStackTrace();
-                    }
+                    String verifyCode = data.getString("data");
+                    CharSequence verifyMsg = "您的验证码是：" + verifyCode;
+                    Toast.makeText(App.getContext(), verifyMsg, Toast.LENGTH_LONG).show();
                 }
             });
         }
@@ -97,28 +92,20 @@ public class RegisterActivity extends AppCompatActivity {
             Toast.makeText(App.getContext(), "密码不能为空", Toast.LENGTH_SHORT).show();
         }else {
             JSONObject json = new JSONObject();
-            try{
-                json.put("phone",phone);
-                json.put("identifyCode",code);
-                json.put("password",password);
-                json.put("rePassword",password);
-                HttpClient.post(this, Urls.Registor, json.toString(), new CallBack() {
-                    @Override
-                    public void onSuccess(JSONObject data) {
-                        PreferencesUtils.putString(App.getContext(),"Phone",phone);
-                        App.phone = phone;
-                        try {
-                            String token = data.getString("token");
-                            Toast.makeText(App.getContext(), "注册成功", Toast.LENGTH_SHORT).show();
-                            IntoMainActivity(token);
-                        } catch (JSONException e) {
-                            e.printStackTrace();
-                        }
-                    }
-                });
-            }catch (JSONException e){
-                e.printStackTrace();
-            }
+            json.put("phone",phone);
+            json.put("identifyCode",code);
+            json.put("password",password);
+            json.put("rePassword",password);
+            HttpClient.post(this, Urls.Registor, json.toString(), new CallBack() {
+                @Override
+                public void onSuccess(JSONObject data) {
+                    PreferencesUtils.putString(App.getContext(),"Phone",phone);
+                    App.phone = phone;
+                    String token = data.getString("token");
+                    Toast.makeText(App.getContext(), "注册成功", Toast.LENGTH_SHORT).show();
+                    IntoMainActivity(token);
+                }
+            });
         }
     }
 

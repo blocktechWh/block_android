@@ -3,7 +3,7 @@ package com.blocktechwh.app.block.Utils;
 import android.os.Handler;
 import android.os.Looper;
 
-import org.json.JSONObject;
+import com.alibaba.fastjson.JSONObject;
 
 import java.io.IOException;
 import java.util.HashMap;
@@ -92,33 +92,28 @@ public class HttpClient {
         handler.post(new Runnable() {
             @Override
             public void run() {
-                try {
-                    JSONObject jsonObject = new JSONObject(finalJson);
-                    String statusCode = jsonObject.getString("code");
-                    if(statusCode.equals("000")){
-                        String dataStr = jsonObject.getString("data");
-                        if("".equals(dataStr)){
-                            callBack.onSuccess(null);
-                        }else{
-                            final char fistChar = dataStr.charAt(0);
-                            if(fistChar == '{'){
-                                JSONObject dataJson = new JSONObject(dataStr);
-                                callBack.onSuccess(dataJson);
-                            }else{
-                                JSONObject dataJson = new JSONObject();
-                                dataJson.put("data",dataStr);
-                                callBack.onSuccess(dataJson);
-                            }
-                        }
-
+                JSONObject jsonObject = JSONObject.parseObject(finalJson);
+                String statusCode = jsonObject.getString("code");
+                System.out.println(statusCode);
+                if(statusCode.equals("000")){
+                    String dataStr = jsonObject.getString("data");
+                    if("".equals(dataStr)){
+                        callBack.onSuccess(null);
                     }else{
-                        String msg = jsonObject.getString("msg");
-                        String errMsg =  "".equals(ErrorTip.getReason(statusCode))?msg:ErrorTip.getReason(statusCode);
-                        callBack.onFailure(2, errMsg);
+                        final char fistChar = dataStr.charAt(0);
+                        if(fistChar == '{'){
+                            JSONObject dataJson = JSONObject.parseObject(dataStr);
+                            callBack.onSuccess(dataJson);
+                        }else{
+                            JSONObject dataJson = new JSONObject();
+                            dataJson.put("data",dataStr);
+                            callBack.onSuccess(dataJson);
+                        }
                     }
-                } catch (Exception e) {
-                    e.printStackTrace();
-                    callBack.onFailure(4, e.getLocalizedMessage());
+                }else{
+                    String msg = jsonObject.getString("msg");
+                    String errMsg =  "".equals(ErrorTip.getReason(statusCode))?msg:ErrorTip.getReason(statusCode);
+                    callBack.onFailure(2, errMsg);
                 }
             }
         });

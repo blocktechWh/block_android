@@ -5,7 +5,7 @@ import android.widget.Toast;
 
 import com.blocktechwh.app.block.Common.App;
 
-import org.json.JSONObject;
+import com.alibaba.fastjson.JSONObject;
 
 /**
  * Created by eagune on 2017/11/1.

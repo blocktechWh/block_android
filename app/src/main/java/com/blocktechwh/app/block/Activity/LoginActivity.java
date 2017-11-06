@@ -11,6 +11,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.blocktechwh.app.block.Bean.User;
 import com.blocktechwh.app.block.Common.App;
 import com.blocktechwh.app.block.Common.Urls;
 import com.blocktechwh.app.block.Utils.CallBack;
@@ -19,8 +20,8 @@ import com.blocktechwh.app.block.Utils.HttpClient;
 import com.blocktechwh.app.block.R;
 import com.blocktechwh.app.block.Utils.PreferencesUtils;
 
-import org.json.JSONException;
-import org.json.JSONObject;
+import com.alibaba.fastjson.JSONObject;
+
 
 public class LoginActivity extends AppCompatActivity {
 
@@ -90,26 +91,20 @@ public class LoginActivity extends AppCompatActivity {
         }else if("".equals(password)){
             Toast.makeText(App.getContext(), "密码不能为空", Toast.LENGTH_SHORT).show();
         }else {
-            try{
-                JSONObject json = new JSONObject();
-                json.put("account",phone);
-                json.put("password",password);
-                HttpClient.post(this, Urls.Login, json.toString(), new CallBack() {
-                    @Override
-                    public void onSuccess(JSONObject data) {
-                        PreferencesUtils.putString(App.getContext(),"Phone",phone);
-                        App.phone = phone;
-                        try {
-                            String token = data.getString("token");
-                            IntoMainActivity(token);
-                        } catch (JSONException e) {
-                            e.printStackTrace();
-                        }
-                    }
-                });
-            }catch (JSONException e){
-                e.printStackTrace();
-            }
+            JSONObject json = new JSONObject();
+            json.put("account",phone);
+            json.put("password",password);
+            HttpClient.post(this, Urls.Login, json.toString(), new CallBack() {
+                @Override
+                public void onSuccess(JSONObject data) {
+                    PreferencesUtils.putString(App.getContext(),"Phone",phone);
+                    App.phone = phone;
+                    String token = data.getString("token");
+                    User user = JSONObject.parseObject(data.getString("userInfo"), User.class);
+                    System.out.println(user);
+                    IntoMainActivity(token);
+                }
+            });
         }
     }
 
