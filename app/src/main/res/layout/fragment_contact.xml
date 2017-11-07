@@ -20,8 +20,6 @@
             android:layout_height="wrap_content"
             android:layout_weight="8"
             android:gravity="center"
-            android:paddingLeft="50dp"
-            android:paddingStart="50dp"
             android:text="联系人" />
 
         <!--<ImageButton-->
