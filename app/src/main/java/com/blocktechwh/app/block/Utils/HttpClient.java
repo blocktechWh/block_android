@@ -1,5 +1,6 @@
 package com.blocktechwh.app.block.Utils;
 
+import android.content.Intent;
 import android.os.Handler;
 import android.os.Looper;
 
@@ -18,6 +19,8 @@ import okhttp3.Request;
 import okhttp3.RequestBody;
 import okhttp3.Response;
 
+import com.blocktechwh.app.block.Activity.LoginActivity;
+import com.blocktechwh.app.block.Activity.MainActivity;
 import com.blocktechwh.app.block.Common.App;
 import com.blocktechwh.app.block.Common.ErrorTip;
 
@@ -41,11 +44,10 @@ public class HttpClient {
         RequestBody requestBody = RequestBody.create(JSON, json);
 
         String Cookie_token = PreferencesUtils.getString(App.getContext(), "Cookie_token", UUID.randomUUID().toString());
-        String token = App.token;
 
         Request request = new Request.Builder()
                 .addHeader("Cookie_token", Cookie_token)
-                .addHeader("Authorization", token)
+                .addHeader("Authorization", App.token)
                 .tag(tag)
                 .url(url)
                 .post(requestBody)
@@ -71,7 +73,11 @@ public class HttpClient {
         }
         System.out.println("urlkizi = " + url);
 
+        String Cookie_token = PreferencesUtils.getString(App.getContext(), "Cookie_token", UUID.randomUUID().toString());
+
         Request request = new Request.Builder()
+                .addHeader("Cookie_token", Cookie_token)
+                .addHeader("Authorization", App.token)
                 .tag(tag)
                 .url(url)
                 .build();
@@ -118,6 +124,8 @@ public class HttpClient {
                                 callBack.onSuccess(dataJson);
                             }
                         }
+                    }else if(statusCode.equals("403")){
+                        App.getContext().startActivity(new Intent(App.getContext(), LoginActivity.class));
                     }else{
                         String msg = jsonObject.getString("msg");
                         String errMsg =  "".equals(ErrorTip.getReason(statusCode))?msg:ErrorTip.getReason(statusCode);

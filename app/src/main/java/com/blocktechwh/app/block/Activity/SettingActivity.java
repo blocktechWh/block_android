@@ -27,7 +27,6 @@ public class SettingActivity extends AppCompatActivity {
         setContentView(R.layout.activity_setting);
 
         initView();
-        addEvent();
     }
 
     private void initView(){
@@ -40,16 +39,12 @@ public class SettingActivity extends AppCompatActivity {
         });
 
         logoutButton = (LinearLayout)findViewById(R.id.id_logout_button);
-    }
-
-    private void addEvent(){
         logoutButton.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View view) {
                 logOut();
             }
         });
-
     }
 
     private void logOut(){
