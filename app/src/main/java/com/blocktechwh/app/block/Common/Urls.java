@@ -10,7 +10,8 @@ public class Urls {
      */
     private static  String HOST="http://111.231.146.57:20086/";
 
-    public static final String RegistorActiveCode = HOST+"front/getidentifyingcode/";
+
+    public static final String RegistorActiveCode = HOST+"front/yzm-reg/";
 
     /**
      * 注册POST

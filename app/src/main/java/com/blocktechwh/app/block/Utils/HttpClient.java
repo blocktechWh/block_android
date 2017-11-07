@@ -85,38 +85,47 @@ public class HttpClient {
     }
 
     private static void handleResponse(Response response, final CallBack callBack) throws IOException {
-        String json = response.body().string();
-        json = json.replace("null", "\"\"");
-        final String finalJson = json;
-        System.out.println(finalJson);
-        handler.post(new Runnable() {
-            @Override
-            public void run() {
-                JSONObject jsonObject = JSONObject.parseObject(finalJson);
-                String statusCode = jsonObject.getString("code");
-                System.out.println(statusCode);
-                if(statusCode.equals("000")){
-                    String dataStr = jsonObject.getString("data");
-                    if("".equals(dataStr)){
-                        callBack.onSuccess(null);
-                    }else{
-                        final char fistChar = dataStr.charAt(0);
-                        if(fistChar == '{'){
-                            JSONObject dataJson = JSONObject.parseObject(dataStr);
-                            callBack.onSuccess(dataJson);
+        int httpCode = response.code();
+        if ((httpCode/100) == 5){
+            callBack.onFailure(2, "服务器内部错误");
+            return;
+        }else if((httpCode/100) == 4){
+            callBack.onFailure(2, "网络请求错误");
+            return;
+        }else if((httpCode/100) == 2){
+            String json = response.body().string();
+            json = json.replace("null", "\"\"");
+            final String finalJson = json;
+            System.out.println(finalJson);
+            handler.post(new Runnable() {
+                @Override
+                public void run() {
+                    JSONObject jsonObject = JSONObject.parseObject(finalJson);
+                    String statusCode = jsonObject.getString("code");
+                    System.out.println(statusCode);
+                    if(statusCode.equals("000")){
+                        String dataStr = jsonObject.getString("data");
+                        if("".equals(dataStr)){
+                            callBack.onSuccess(null);
                         }else{
-                            JSONObject dataJson = new JSONObject();
-                            dataJson.put("data",dataStr);
-                            callBack.onSuccess(dataJson);
+                            final char fistChar = dataStr.charAt(0);
+                            if(fistChar == '{'){
+                                JSONObject dataJson = JSONObject.parseObject(dataStr);
+                                callBack.onSuccess(dataJson);
+                            }else{
+                                JSONObject dataJson = new JSONObject();
+                                dataJson.put("data",dataStr);
+                                callBack.onSuccess(dataJson);
+                            }
                         }
+                    }else{
+                        String msg = jsonObject.getString("msg");
+                        String errMsg =  "".equals(ErrorTip.getReason(statusCode))?msg:ErrorTip.getReason(statusCode);
+                        callBack.onFailure(2, errMsg);
                     }
-                }else{
-                    String msg = jsonObject.getString("msg");
-                    String errMsg =  "".equals(ErrorTip.getReason(statusCode))?msg:ErrorTip.getReason(statusCode);
-                    callBack.onFailure(2, errMsg);
                 }
-            }
-        });
+            });
+        }
     }
 
     private static void handleError(final IOException e, final CallBack callBack) {
