@@ -48,7 +48,7 @@
         android:layout_marginTop="16dp"
         android:autoLink="all"
         android:text="@string/forget"
-        android:textSize="13dp" />
+        android:textSize="13sp" />
 
     <Button
         android:id="@+id/id_button_login"

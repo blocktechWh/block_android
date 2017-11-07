@@ -6,8 +6,8 @@
     tools:context="com.blocktechwh.app.block.Fragment.ContactFragment"
     android:orientation="vertical">
 
-    <LinearLayout
-        android:id="@+id/linearLayout"
+    <RelativeLayout
+        android:id="@+id/id_layout_title"
         android:layout_width="match_parent"
         android:layout_height="45dp"
         android:background="@color/white"
@@ -18,20 +18,22 @@
             android:id="@+id/textView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_weight="8"
-            android:gravity="center"
-            android:text="联系人" />
+            android:text="联系人"
+            android:layout_centerInParent="true" />
 
         <ImageButton
             android:id="@+id/id_add_new"
             android:layout_width="30dp"
             android:layout_height="30dp"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true"
             android:layout_marginEnd="20dp"
             android:layout_marginRight="20dp"
             android:background="@android:color/transparent"
-            app:srcCompat="@mipmap/icon12" />
+            app:srcCompat="@mipmap/icon12"
+            android:layout_centerVertical="true" />
 
-    </LinearLayout>
+    </RelativeLayout>
 
     <LinearLayout
         android:id="@+id/id_text_request_layout"

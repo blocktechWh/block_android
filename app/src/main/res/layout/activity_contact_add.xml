@@ -9,6 +9,7 @@
     <include layout="@layout/titlebar_view" />
 
     <LinearLayout
+        android:id="@+id/id_add_by_phone"
         android:layout_width="match_parent"
         android:layout_height="60dp"
         android:layout_marginTop="@dimen/margin_top"
