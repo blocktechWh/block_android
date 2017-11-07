@@ -5,6 +5,8 @@ import android.content.Context;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 
+import com.alibaba.fastjson.JSONObject;
+import com.blocktechwh.app.block.Bean.User;
 import com.blocktechwh.app.block.Utils.PreferencesUtils;
 
 /**
@@ -16,6 +18,7 @@ public class App extends Application {
     private static String versionName;
     public static String token = "";
     public static String phone = "";
+    public static User userInfo;
 
     @Override
     public void onCreate() {
@@ -32,6 +35,7 @@ public class App extends Application {
         if(PreferencesUtils.getBoolean(this,"isLogin",false)){
             token = PreferencesUtils.getString(this,"Token","");
             phone = PreferencesUtils.getString(this,"Phone","");
+            userInfo = JSONObject.parseObject(PreferencesUtils.getString(this,"UserInfo",""), User.class);
         }
     }
 

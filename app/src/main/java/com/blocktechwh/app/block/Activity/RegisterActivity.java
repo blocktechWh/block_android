@@ -10,6 +10,7 @@ import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.blocktechwh.app.block.Bean.User;
 import com.blocktechwh.app.block.Common.App;
 import com.blocktechwh.app.block.Common.Urls;
 import com.blocktechwh.app.block.R;
@@ -101,18 +102,19 @@ public class RegisterActivity extends AppCompatActivity {
                 public void onSuccess(JSONObject data) {
                     PreferencesUtils.putString(App.getContext(),"Phone",phone);
                     App.phone = phone;
-                    String token = data.getString("token");
                     Toast.makeText(App.getContext(), "注册成功", Toast.LENGTH_SHORT).show();
-                    IntoMainActivity(token);
+                    IntoMainActivity(data.getString("token"), data.getString("userInfo"));
                 }
             });
         }
     }
 
-    public void IntoMainActivity(String token){
+    public void IntoMainActivity(String token,String user){
         PreferencesUtils.putString(App.getContext(),"Token",token);
+        PreferencesUtils.putString(App.getContext(),"UserInfo",user);
         PreferencesUtils.putBoolean(App.getContext(),"isLogin",true);
         App.token = token;
+        App.userInfo = JSONObject.parseObject(user, User.class);
         startActivity(new Intent(this, MainActivity.class));
         finish();
     }

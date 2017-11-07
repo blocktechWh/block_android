@@ -99,20 +99,18 @@ public class LoginActivity extends AppCompatActivity {
                 public void onSuccess(JSONObject data) {
                     PreferencesUtils.putString(App.getContext(),"Phone",phone);
                     App.phone = phone;
-                    String token = data.getString("token");
-                    System.out.println(token);
-                    User user = JSONObject.parseObject(data.getString("userInfo"), User.class);
-                    System.out.println(user);
-                    IntoMainActivity(token);
+                    IntoMainActivity(data.getString("token"), data.getString("userInfo"));
                 }
             });
         }
     }
 
-    public void IntoMainActivity(String token){
+    public void IntoMainActivity(String token,String user){
         PreferencesUtils.putString(App.getContext(),"Token",token);
+        PreferencesUtils.putString(App.getContext(),"UserInfo",user);
         PreferencesUtils.putBoolean(App.getContext(),"isLogin",true);
         App.token = token;
+        App.userInfo = JSONObject.parseObject(user, User.class);
         startActivity(new Intent(this, MainActivity.class));
         finish();
     }

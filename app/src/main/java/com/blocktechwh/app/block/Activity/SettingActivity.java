@@ -53,10 +53,13 @@ public class SettingActivity extends AppCompatActivity {
     }
 
     private void logOut(){
-        String url = Urls.Logout + App.phone;
+        String url = Urls.Logout;
         HttpClient.get(this, url, null, new CallBack() {
             @Override
             public void onSuccess(JSONObject data) {
+            }
+            @Override
+            public void onFailure(int errorType, String message){
             }
         });
         App.token = "";

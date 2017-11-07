@@ -7,13 +7,19 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 
+import com.blocktechwh.app.block.Common.App;
 import com.blocktechwh.app.block.R;
 import com.blocktechwh.app.block.Activity.SettingActivity;
+
+import org.w3c.dom.Text;
 
 public class UserFragment extends Fragment {
 
     private View view;
+    private TextView userName;
+    private TextView userPhone;
     private LinearLayout settingButton;
 
     @Override
@@ -28,6 +34,11 @@ public class UserFragment extends Fragment {
 
     private void initView(){
         settingButton = (LinearLayout)view.findViewById(R.id.id_setting_button);
+        userName = (TextView)view.findViewById(R.id.id_text_name);
+        userPhone = (TextView)view.findViewById(R.id.id_phone);
+
+        userName.setText(App.userInfo.getName());
+        userPhone.setText(App.userInfo.getPhone());
     }
 
     private void addEvent(){
