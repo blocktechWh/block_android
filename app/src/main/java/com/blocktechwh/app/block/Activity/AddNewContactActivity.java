@@ -49,6 +49,8 @@ public class AddNewContactActivity extends AppCompatActivity {
     public static class AddContactByPhoneActivity extends AppCompatActivity {
 
         private EditText textInput;
+        private TextView userName_tv;
+        private LinearLayout user_layout;
 
         @Override
         protected void onCreate(Bundle savedInstanceState) {
@@ -76,6 +78,11 @@ public class AddNewContactActivity extends AppCompatActivity {
                     return false;
                 }
             });
+
+            user_layout = (LinearLayout)findViewById(R.id.id_user_layout);
+            user_layout.setVisibility(View.GONE);
+
+            userName_tv = (TextView)findViewById(R.id.id_user_name);
         }
 
         private void queryUser(){
@@ -90,7 +97,8 @@ public class AddNewContactActivity extends AppCompatActivity {
         }
 
         private void setUser(User user){
-            System.out.println(user);
+            userName_tv.setText(user.getName());
+            user_layout.setVisibility(View.VISIBLE);
         }
 
     }

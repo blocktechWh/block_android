@@ -19,7 +19,6 @@
             android:src="@mipmap/icon_back"
             android:background="@android:color/transparent"
             android:layout_margin="10dp" />
-
         <EditText
             android:layout_width="0dp"
             android:layout_height="wrap_content"
@@ -34,7 +33,31 @@
             android:drawableRight="@mipmap/icon15"
             android:drawableEnd="@mipmap/icon15"
             android:id="@+id/editText" />
+    </LinearLayout>
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:orientation="horizontal"
+        android:background="@color/white"
+        android:layout_marginTop="10dp"
+        android:gravity="center_vertical"
+        android:id="@+id/id_user_layout">
+        <ImageView
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginStart="10dp"
+            android:layout_marginRight="10dp"
+            android:layout_marginEnd="10dp"
+            android:src="@mipmap/icon21">
+        </ImageView>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/id_user_name"
+            >
+        </TextView>
     </LinearLayout>
 
 </LinearLayout>

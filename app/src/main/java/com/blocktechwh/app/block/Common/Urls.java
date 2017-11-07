@@ -81,7 +81,7 @@ public class Urls {
      *
      * 返回值: count:数量
      */
-    public static final String ContactRequestsCount = HOST+"/front/link/new-count";
+    public static final String ContactRequestsCount = HOST+"front/link/new-count";
 
     /**
      * 获取用户好友请求列表GET
