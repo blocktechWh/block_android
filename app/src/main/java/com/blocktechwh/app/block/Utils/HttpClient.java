@@ -128,8 +128,7 @@ public class HttpClient {
                         App.getContext().startActivity(new Intent(App.getContext(), LoginActivity.class));
                     }else{
                         String msg = jsonObject.getString("msg");
-                        String errMsg =  "".equals(ErrorTip.getReason(statusCode))?msg:ErrorTip.getReason(statusCode);
-                        callBack.onFailure(2, errMsg);
+                        callBack.ErrorHandler(statusCode, msg);
                     }
                 }
             });
