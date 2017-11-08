@@ -7,7 +7,7 @@
     <color name="gray">#F1F1F1</color>
     <color name="tab">#000000</color>
     <color name="tabActive">#428FDB</color>
-    <color name="appBackground">#f0f0f6</color>
+    <color name="appBackground">#f1f1f1</color>
     <color name="btnColor">#1790e1</color>
 
 </resources>

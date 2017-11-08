@@ -8,6 +8,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
 
+import com.blocktechwh.app.block.Activity.RedTicketDetailActivity;
 import com.blocktechwh.app.block.R;
 import com.blocktechwh.app.block.Activity.SettingActivity;
 
@@ -15,6 +16,7 @@ public class UserFragment extends Fragment {
 
     private View view;
     private LinearLayout settingButton;
+    private LinearLayout redPacketButton;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -28,6 +30,7 @@ public class UserFragment extends Fragment {
 
     private void initView(){
         settingButton = (LinearLayout)view.findViewById(R.id.id_setting_button);
+        redPacketButton = (LinearLayout)view.findViewById(R.id.id_red_package);
     }
 
     private void addEvent(){
@@ -35,6 +38,13 @@ public class UserFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 Intent intent =new Intent(getActivity(),SettingActivity.class);
+                startActivity(intent);
+            }
+        });
+        redPacketButton.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View view) {
+                Intent intent =new Intent(getActivity(),RedTicketDetailActivity.class);
                 startActivity(intent);
             }
         });
