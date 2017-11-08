@@ -20,6 +20,7 @@ import com.alibaba.fastjson.JSONObject;
 public class SettingActivity extends AppCompatActivity {
 
     private LinearLayout logoutButton;
+    private LinearLayout updateButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,6 +44,14 @@ public class SettingActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 logOut();
+            }
+        });
+
+        updateButton = (LinearLayout)findViewById(R.id.id_update_button);
+        updateButton.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(SettingActivity.this,UpdateUserInfoActivity.class));
             }
         });
     }
