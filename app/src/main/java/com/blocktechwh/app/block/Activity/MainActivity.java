@@ -4,7 +4,6 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.support.v7.app.AppCompatActivity;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewCompat;
 import android.support.v4.app.Fragment;
@@ -13,18 +12,19 @@ import android.support.v4.view.ViewPager;
 import android.support.v4.content.ContextCompat;
 import android.support.design.widget.TabLayout;
 
+import com.blocktechwh.app.block.CustomView.BaseActivity;
 import com.blocktechwh.app.block.R;
 
 import com.blocktechwh.app.block.Fragment.HomeFragment;
 import com.blocktechwh.app.block.Fragment.UserFragment;
 import com.blocktechwh.app.block.Fragment.ContactFragment;
-import com.blocktechwh.app.block.SupportMultipleScreensUtil.SupportMultipleScreensUtil;
+import com.blocktechwh.app.block.Utils.SupportMultipleScreensUtil;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-public class MainActivity extends AppCompatActivity{
+public class MainActivity extends BaseActivity{
 
     private TabLayout mTabHost;
     private List<String> tab_texts = Arrays.asList("主页","联系人","我的");
