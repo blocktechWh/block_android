@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Activity.AddNewContactActivity$AddContactByPhoneActivity"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:orientation="horizontal"
+        android:background="@color/white"
+        android:gravity="center_vertical">
+        <ImageButton
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:id="@+id/titlebar_button_back"
+            android:src="@mipmap/icon_back"
+            android:background="@android:color/transparent"
+            android:layout_margin="10dp" />
+        <EditText
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:textColorLink="@color/btnColor"
+            android:inputType="phone"
+            android:ems="10"
+            android:textSize="14sp"
+            android:hint="请输入手机号"
+            android:layout_marginRight="10dp"
+            android:layout_marginEnd="10dp"
+            android:drawableRight="@mipmap/icon15"
+            android:drawableEnd="@mipmap/icon15"
+            android:id="@+id/editText" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:orientation="horizontal"
+        android:background="@color/white"
+        android:layout_marginTop="10dp"
+        android:gravity="center_vertical"
+        android:id="@+id/id_user_layout">
+        <ImageView
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginStart="10dp"
+            android:layout_marginRight="10dp"
+            android:layout_marginEnd="10dp"
+            android:src="@mipmap/icon21">
+        </ImageView>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/id_user_name"
+            >
+        </TextView>
+    </LinearLayout>
+
+</LinearLayout>

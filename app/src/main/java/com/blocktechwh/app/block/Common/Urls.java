@@ -81,7 +81,7 @@ public class Urls {
      *
      * 返回值: count:数量
      */
-    public static final String ContactRequestsCount = HOST+"front/getaddcontactrequestcount/";
+    public static final String ContactRequestsCount = HOST+"front/link/new-count";
 
     /**
      * 获取用户好友请求列表GET
@@ -124,7 +124,7 @@ public class Urls {
      *
      * 返回值:{userImg:String用户头像地址,userName:String用户姓名,userId:Int用户id}
      */
-    public static final String SearchContact = HOST+"front/getuserbyphone/";
+    public static final String SearchContact = HOST+"front/user/phone/";
 
     /**
      * 申请对方为联系人POST

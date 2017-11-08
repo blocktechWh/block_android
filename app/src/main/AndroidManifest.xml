@@ -30,6 +30,9 @@
         <activity android:name=".Activity.SettingActivity" />
         <activity android:name=".Activity.ForgetActivity"/>
         <activity android:name=".Activity.RedTicketDetailActivity"/>
+        <activity android:name=".Activity.AddNewContactActivity" />
+        <activity android:name=".Activity.AddNewContactActivity$AddContactByPhoneActivity" />
+        <activity android:name=".Activity.UpdateUserInfoActivity"></activity>
     </application>
 
 </manifest>

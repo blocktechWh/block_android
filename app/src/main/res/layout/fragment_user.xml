@@ -37,7 +37,7 @@
             android:layout_marginTop="28.8dp"
             android:layout_marginLeft="28.8dp"
             android:layout_marginStart="28.8dp"
-            android:text="王五" />
+            android:text="" />
         <TextView
             android:id="@+id/id_text_phone_tip"
             android:layout_width="wrap_content"
@@ -50,7 +50,7 @@
             android:id="@+id/id_phone"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="18872280258"
+            android:text=""
             android:layout_toRightOf="@+id/id_text_phone_tip"
             android:layout_alignBottom="@id/id_text_phone_tip"
             android:layout_toEndOf="@+id/id_text_phone_tip" />

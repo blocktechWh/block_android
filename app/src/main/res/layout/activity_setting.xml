@@ -104,6 +104,23 @@
         android:layout_below="@+id/include">
 
         <LinearLayout
+            android:id="@+id/id_update_button"
+            android:layout_width="match_parent"
+            android:layout_height="54.72dp"
+            android:layout_marginTop="20dp"
+            android:gravity="center_vertical"
+            android:background="@color/white"
+            android:orientation="horizontal">
+            <TextView
+                android:id="@+id/id_update_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20dp"
+                android:layout_marginStart="20dp"
+                android:text="更新资料" />
+        </LinearLayout>
+
+        <LinearLayout
             android:id="@+id/id_logout_button"
             android:layout_width="match_parent"
             android:layout_height="45dp"
@@ -115,9 +132,11 @@
             android:paddingStart="30dp">
 
             <TextView
-                android:id="@+id/id_wallet_text"
+                android:id="@+id/id_logout_text"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginLeft="20dp"
+                android:layout_marginStart="20dp"
                 android:text="退出登录" />
         </LinearLayout>
     </LinearLayout>

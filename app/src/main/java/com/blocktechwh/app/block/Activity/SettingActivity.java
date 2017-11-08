@@ -20,6 +20,7 @@ import com.alibaba.fastjson.JSONObject;
 public class SettingActivity extends AppCompatActivity {
 
     private LinearLayout logoutButton;
+    private LinearLayout updateButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,7 +28,6 @@ public class SettingActivity extends AppCompatActivity {
         setContentView(R.layout.activity_setting);
 
         initView();
-        addEvent();
     }
 
     private void initView(){
@@ -40,9 +40,6 @@ public class SettingActivity extends AppCompatActivity {
         });
 
         logoutButton = (LinearLayout)findViewById(R.id.id_logout_button);
-    }
-
-    private void addEvent(){
         logoutButton.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View view) {
@@ -50,13 +47,23 @@ public class SettingActivity extends AppCompatActivity {
             }
         });
 
+        updateButton = (LinearLayout)findViewById(R.id.id_update_button);
+        updateButton.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(SettingActivity.this,UpdateUserInfoActivity.class));
+            }
+        });
     }
 
     private void logOut(){
-        String url = Urls.Logout + App.phone;
+        String url = Urls.Logout;
         HttpClient.get(this, url, null, new CallBack() {
             @Override
             public void onSuccess(JSONObject data) {
+            }
+            @Override
+            public void onFailure(int errorType, String message){
             }
         });
         App.token = "";
