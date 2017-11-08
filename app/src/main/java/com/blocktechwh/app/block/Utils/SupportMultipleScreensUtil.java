@@ -1,4 +1,4 @@
-package com.blocktechwh.app.block.SupportMultipleScreensUtil;
+package com.blocktechwh.app.block.Utils;
 
 import android.content.Context;
 import android.content.res.Resources;

@@ -13,6 +13,7 @@ import android.widget.TextView;
 import com.alibaba.fastjson.JSONObject;
 import com.blocktechwh.app.block.Bean.User;
 import com.blocktechwh.app.block.Common.Urls;
+import com.blocktechwh.app.block.CustomView.TitleActivity;
 import com.blocktechwh.app.block.R;
 import com.blocktechwh.app.block.Utils.CallBack;
 import com.blocktechwh.app.block.Utils.HttpClient;
@@ -20,23 +21,18 @@ import com.blocktechwh.app.block.Utils.HttpClient;
 /**
  * Created by eagune on 2017/11/7.
  */
-public class AddNewContactActivity extends AppCompatActivity {
+public class AddNewContactActivity extends TitleActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_contact_add);
+
+        initTitle("添加联系人");
         initView();
     }
 
     private void initView() {
-        ((TextView)findViewById(R.id.titlebar_title_tv)).setText("添加联系人");
-        ((ImageButton)findViewById(R.id.titlebar_button_back)).setOnClickListener(new View.OnClickListener(){
-            @Override
-            public void onClick(View view) {
-                AddNewContactActivity.this.finish();
-            }
-        });
         ((LinearLayout)findViewById(R.id.id_add_by_phone)).setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View view) {
