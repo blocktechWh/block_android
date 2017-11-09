@@ -74,7 +74,7 @@ public class Urls {
      *
      * 返回值:[{userImg:String联系人头像地址,userName:String联系人姓名,userId:Int联系人id,id:Int添加记录id},...,{}]
      */
-    public static final String Contacts = HOST+"front/getcontacts/";
+    public static final String Contacts = HOST+"front/link/contacts";
 
     /**
      * 获取用户好友请求GET

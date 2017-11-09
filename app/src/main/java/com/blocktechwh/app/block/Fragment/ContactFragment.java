@@ -70,6 +70,13 @@ public class ContactFragment extends Fragment {
                 }
             }
         });
+
+        HttpClient.get(this, Urls.Contacts, null, new CallBack() {
+            @Override
+            public void onSuccess(JSONObject data) {
+
+            }
+        });
     }
 
 }

@@ -148,6 +148,7 @@
         <!--</LinearLayout>-->
 
         <LinearLayout
+            android:id="@+id/id_user_sex_btn"
             android:layout_width="match_parent"
             android:layout_height="@dimen/info_li_height"
             android:orientation="horizontal">
@@ -163,7 +164,7 @@
                 android:text="性别" />
 
             <TextView
-                android:id="@+id/textView23"
+                android:id="@+id/text_user_sex"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
@@ -171,7 +172,7 @@
                 android:background="@drawable/lines_bg"
                 android:paddingEnd="@dimen/padding_right"
                 android:paddingRight="@dimen/padding_right"
-                android:text="女" />
+                android:text="" />
         </LinearLayout>
 
         <!--<LinearLayout-->

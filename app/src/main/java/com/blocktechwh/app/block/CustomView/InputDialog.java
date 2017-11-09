@@ -50,12 +50,13 @@ public class InputDialog extends Dialog {
             switch (v.getId()) {
                 case R.id.btn_save_pop:
                     String text = text_edit.getText().toString().trim();
-                    text_edit.setText("");
                     handle(text);
+                    text_edit.setText("");
+                    InputDialog.this.hide();
                     break;
                 case R.id.btn_cancle_pop:
-                    InputDialog.this.hide();
                     text_edit.setText("");
+                    InputDialog.this.hide();
                     break;
             }
         }
