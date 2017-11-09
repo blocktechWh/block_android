@@ -39,14 +39,14 @@ public class Urls {
     public static final String Logout = HOST+"front/logout/";
 
     /**
-     * 更改用户信息POST
+     * 更改用户信息PUT
      * userNmae:String
      * sex:Int 1男 2女
      * email:String
      * birthDay:String (yyyy-MM-dd)
      * address:String
      */
-    public static final String UpdateUserInfo = HOST+"front/updateuserinfo/";
+    public static final String UpdateUserInfo = HOST+"front/user/update";
 
     /**
      * 忘记密码验证码POST
