@@ -21,10 +21,11 @@ android {
 }
 
 dependencies {
-    compile fileTree(dir: 'libs', include: ['*.jar'])
+    compile fileTree(include: ['*.jar'], dir: 'libs')
     compile 'com.android.support:appcompat-v7:26.+'
     compile 'com.android.support:design:26.+'
     compile 'com.android.support:support-v4:26.+'
     compile 'com.squareup.okhttp3:okhttp:3.3.0'
     compile 'com.alibaba:fastjson:1.2.32'
+    compile 'com.twelvemonkeys.imageio:imageio-pict:3.3.2'
 }
