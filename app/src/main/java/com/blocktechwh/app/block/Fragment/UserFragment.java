@@ -10,9 +10,9 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.blocktechwh.app.block.Activity.RedTicketDetailActivity;
+import com.blocktechwh.app.block.Activity.SettingActivity;
 import com.blocktechwh.app.block.Common.App;
 import com.blocktechwh.app.block.R;
-import com.blocktechwh.app.block.Activity.SettingActivity;
 
 
 public class UserFragment extends Fragment {
@@ -22,6 +22,8 @@ public class UserFragment extends Fragment {
     private TextView userPhone;
     private LinearLayout settingButton;
     private LinearLayout redPacketButton;
+    private LinearLayout voteButton;
+
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -58,6 +60,13 @@ public class UserFragment extends Fragment {
                 startActivity(intent);
             }
         });
+//        voteButton.setOnClickListener(new View.OnClickListener(){
+//            @Override
+//            public void onClick(View view) {
+//                Intent intent =new Intent(getActivity(),VotesListActivity.class);
+//                startActivity(intent);
+//            }
+//        });
     }
 
 

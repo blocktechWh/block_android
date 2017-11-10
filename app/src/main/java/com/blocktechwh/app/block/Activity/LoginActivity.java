@@ -100,6 +100,7 @@ public class LoginActivity extends AppCompatActivity {
                     PreferencesUtils.putString(App.getContext(),"Phone",phone);
                     App.phone = phone;
                     IntoMainActivity(data.getString("token"), data.getString("userInfo"));
+                   // System.out.print("1234");
                 }
             });
         }

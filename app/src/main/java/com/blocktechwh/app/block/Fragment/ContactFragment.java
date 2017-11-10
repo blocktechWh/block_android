@@ -3,7 +3,6 @@ package com.blocktechwh.app.block.Fragment;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -15,8 +14,6 @@ import android.widget.Toast;
 
 import com.alibaba.fastjson.JSONObject;
 import com.blocktechwh.app.block.Activity.AddNewContactActivity;
-import com.blocktechwh.app.block.Activity.SettingActivity;
-import com.blocktechwh.app.block.Common.App;
 import com.blocktechwh.app.block.Common.Urls;
 import com.blocktechwh.app.block.R;
 import com.blocktechwh.app.block.Utils.CallBack;
@@ -67,6 +64,8 @@ public class ContactFragment extends Fragment {
                 if(requestCount != 0){
                     requestCount_tv.setText(data.getString("data"));
                     request_view.setVisibility(View.VISIBLE);
+                }else{
+                    Toast.makeText(getContext(),"4444",Toast.LENGTH_SHORT).show();
                 }
             }
         });
