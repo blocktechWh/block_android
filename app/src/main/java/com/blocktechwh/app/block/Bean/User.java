@@ -96,9 +96,7 @@ public class User{
 	        return this.birthday;  
 	    }
 
-	    public void setSex(String sex) {  
-	        this.sex = sex;  
-	    }
+	    public void setSex(String sex) { this.sex = sex.equals("1")?"男":"女"; }
 	    public String getSex() {
 	        return this.sex;  
 	    }

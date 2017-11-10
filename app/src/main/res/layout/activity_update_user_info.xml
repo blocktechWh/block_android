@@ -22,13 +22,13 @@
             android:gravity="center_vertical"
             android:orientation="vertical">
             <TextView
-                android:id="@+id/textView14"
+                android:id="@+id/text_user_name"
                 android:layout_width="match_parent"
                 android:layout_height="20dp"
                 android:gravity="center_vertical"
                 android:paddingLeft="@dimen/padding_left"
                 android:paddingStart="@dimen/padding_left"
-                android:text="王五"
+                android:text=""
                 android:textSize="@dimen/text_size1" />
         </LinearLayout>
 
@@ -57,33 +57,33 @@
         android:background="@color/white"
         android:orientation="vertical">
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/info_li_height"
-            android:orientation="horizontal">
+        <!--<LinearLayout-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="@dimen/info_li_height"-->
+            <!--android:orientation="horizontal">-->
 
-            <TextView
-                android:id="@+id/textView16"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:layout_marginLeft="@dimen/padding_left"
-                android:layout_marginStart="@dimen/padding_left"
-                android:layout_weight="1"
-                android:background="@drawable/lines_bg"
-                android:gravity="center_vertical"
-                android:text="昵称" />
+            <!--<TextView-->
+                <!--android:id="@+id/textView16"-->
+                <!--android:layout_width="wrap_content"-->
+                <!--android:layout_height="match_parent"-->
+                <!--android:layout_marginLeft="@dimen/padding_left"-->
+                <!--android:layout_marginStart="@dimen/padding_left"-->
+                <!--android:layout_weight="1"-->
+                <!--android:background="@drawable/lines_bg"-->
+                <!--android:gravity="center_vertical"-->
+                <!--android:text="昵称" />-->
 
-            <TextView
-                android:id="@+id/textView17"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:background="@drawable/lines_bg"
-                android:gravity="right|center_vertical"
-                android:paddingEnd="@dimen/padding_right"
-                android:paddingRight="@dimen/padding_right"
-                android:text="王二" />
-        </LinearLayout>
+            <!--<TextView-->
+                <!--android:id="@+id/textView17"-->
+                <!--android:layout_width="wrap_content"-->
+                <!--android:layout_height="match_parent"-->
+                <!--android:layout_weight="1"-->
+                <!--android:background="@drawable/lines_bg"-->
+                <!--android:gravity="right|center_vertical"-->
+                <!--android:paddingEnd="@dimen/padding_right"-->
+                <!--android:paddingRight="@dimen/padding_right"-->
+                <!--android:text="王二" />-->
+        <!--</LinearLayout>-->
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -101,7 +101,7 @@
                 android:text="电话" />
 
             <TextView
-                android:id="@+id/textView19"
+                android:id="@+id/text_user_phone"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
@@ -109,45 +109,46 @@
                 android:background="@drawable/lines_bg"
                 android:paddingEnd="@dimen/padding_right"
                 android:paddingRight="@dimen/padding_right"
-                android:text="18033333333" />
+                android:text="" />
         </LinearLayout>
 
+        <!--<LinearLayout-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="@dimen/info_li_height"-->
+            <!--android:orientation="horizontal">-->
+
+            <!--<TextView-->
+                <!--android:id="@+id/textView20"-->
+                <!--android:layout_width="wrap_content"-->
+                <!--android:layout_height="match_parent"-->
+                <!--android:layout_marginLeft="@dimen/padding_left"-->
+                <!--android:layout_marginStart="@dimen/padding_left"-->
+                <!--android:layout_weight="1"-->
+                <!--android:background="@drawable/lines_bg"-->
+                <!--android:gravity="center_vertical"-->
+                <!--android:text="二维码名片" />-->
+
+            <!--<LinearLayout-->
+                <!--android:layout_width="wrap_content"-->
+                <!--android:layout_height="match_parent"-->
+                <!--android:layout_weight="0.77"-->
+                <!--android:background="@drawable/lines_bg"-->
+                <!--android:gravity="right|center_vertical|end"-->
+                <!--android:orientation="horizontal"-->
+                <!--android:paddingEnd="@dimen/padding_right"-->
+                <!--android:paddingRight="@dimen/padding_right">-->
+
+                <!--<ImageView-->
+                    <!--android:id="@+id/imageView5"-->
+                    <!--android:layout_width="20dp"-->
+                    <!--android:layout_height="20dp"-->
+                    <!--app:srcCompat="@mipmap/icon_wx" />-->
+            <!--</LinearLayout>-->
+
+        <!--</LinearLayout>-->
+
         <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/info_li_height"
-            android:orientation="horizontal">
-
-            <TextView
-                android:id="@+id/textView20"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:layout_marginLeft="@dimen/padding_left"
-                android:layout_marginStart="@dimen/padding_left"
-                android:layout_weight="1"
-                android:background="@drawable/lines_bg"
-                android:gravity="center_vertical"
-                android:text="二维码名片" />
-
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:layout_weight="0.77"
-                android:background="@drawable/lines_bg"
-                android:gravity="right|center_vertical|end"
-                android:orientation="horizontal"
-                android:paddingEnd="@dimen/padding_right"
-                android:paddingRight="@dimen/padding_right">
-
-                <ImageView
-                    android:id="@+id/imageView5"
-                    android:layout_width="20dp"
-                    android:layout_height="20dp"
-                    app:srcCompat="@mipmap/icon_wx" />
-            </LinearLayout>
-
-        </LinearLayout>
-
-        <LinearLayout
+            android:id="@+id/id_user_sex_btn"
             android:layout_width="match_parent"
             android:layout_height="@dimen/info_li_height"
             android:orientation="horizontal">
@@ -163,7 +164,7 @@
                 android:text="性别" />
 
             <TextView
-                android:id="@+id/textView23"
+                android:id="@+id/text_user_sex"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
@@ -171,37 +172,38 @@
                 android:background="@drawable/lines_bg"
                 android:paddingEnd="@dimen/padding_right"
                 android:paddingRight="@dimen/padding_right"
-                android:text="女" />
+                android:text="" />
         </LinearLayout>
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/info_li_height"
-            android:orientation="horizontal">
-            <TextView
-                android:id="@+id/textView24"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:gravity="center_vertical"
-                android:background="@drawable/lines_bg"
-                android:layout_marginLeft="@dimen/padding_left"
-                android:layout_marginStart="@dimen/padding_left"
-                android:text="生日" />
+        <!--<LinearLayout-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="@dimen/info_li_height"-->
+            <!--android:orientation="horizontal">-->
+            <!--<TextView-->
+                <!--android:id="@+id/textView24"-->
+                <!--android:layout_width="wrap_content"-->
+                <!--android:layout_height="match_parent"-->
+                <!--android:layout_weight="1"-->
+                <!--android:gravity="center_vertical"-->
+                <!--android:background="@drawable/lines_bg"-->
+                <!--android:layout_marginLeft="@dimen/padding_left"-->
+                <!--android:layout_marginStart="@dimen/padding_left"-->
+                <!--android:text="生日" />-->
 
-            <TextView
-                android:id="@+id/textView25"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:gravity="right|center_vertical"
-                android:background="@drawable/lines_bg"
-                android:paddingEnd="@dimen/padding_right"
-                android:paddingRight="@dimen/padding_right"
-                android:text="1990-10-25" />
-        </LinearLayout>
+            <!--<TextView-->
+                <!--android:id="@+id/textView25"-->
+                <!--android:layout_width="wrap_content"-->
+                <!--android:layout_height="match_parent"-->
+                <!--android:layout_weight="1"-->
+                <!--android:gravity="right|center_vertical"-->
+                <!--android:background="@drawable/lines_bg"-->
+                <!--android:paddingEnd="@dimen/padding_right"-->
+                <!--android:paddingRight="@dimen/padding_right"-->
+                <!--android:text="1990-10-25" />-->
+        <!--</LinearLayout>-->
 
         <LinearLayout
+            android:id="@+id/id_user_address_btn"
             android:layout_width="match_parent"
             android:layout_height="@dimen/info_li_height"
             android:orientation="horizontal">
@@ -217,7 +219,7 @@
                 android:text="地区" />
 
             <TextView
-                android:id="@+id/textView27"
+                android:id="@+id/text_user_address"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
@@ -225,7 +227,7 @@
                 android:background="@drawable/lines_bg"
                 android:paddingEnd="@dimen/padding_right"
                 android:paddingRight="@dimen/padding_right"
-                android:text="加利福利亚" />
+                android:text="" />
         </LinearLayout>
     </LinearLayout>
 

@@ -39,14 +39,14 @@ public class Urls {
     public static final String Logout = HOST+"front/logout/";
 
     /**
-     * 更改用户信息POST
+     * 更改用户信息PUT
      * userNmae:String
      * sex:Int 1男 2女
      * email:String
      * birthDay:String (yyyy-MM-dd)
      * address:String
      */
-    public static final String UpdateUserInfo = HOST+"front/updateuserinfo/";
+    public static final String UpdateUserInfo = HOST+"front/user/update";
 
     /**
      * 忘记密码验证码POST
@@ -74,7 +74,7 @@ public class Urls {
      *
      * 返回值:[{userImg:String联系人头像地址,userName:String联系人姓名,userId:Int联系人id,id:Int添加记录id},...,{}]
      */
-    public static final String Contacts = HOST+"front/getcontacts/";
+    public static final String Contacts = HOST+"front/link/contacts";
 
     /**
      * 获取用户好友请求GET

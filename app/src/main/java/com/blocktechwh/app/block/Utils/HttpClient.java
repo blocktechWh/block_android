@@ -40,6 +40,30 @@ public class HttpClient {
             .readTimeout(100, TimeUnit.SECONDS);
     public static final MediaType JSON = MediaType.parse("application/json; charset=utf-8");
 
+    public static void put(Object tag, String url, String json, final CallBack callBack) {
+        RequestBody requestBody = RequestBody.create(JSON, json);
+
+        String Cookie_token = PreferencesUtils.getString(App.getContext(), "Cookie_token", UUID.randomUUID().toString());
+
+        Request request = new Request.Builder()
+                .addHeader("Cookie_token", Cookie_token)
+                .addHeader("Authorization", App.token)
+                .tag(tag)
+                .url(url)
+                .put(requestBody)
+                .build();
+
+        okHttpClient.newCall(request).enqueue(new Callback() {
+            @Override
+            public void onFailure(Call call, final IOException e) {
+                handleError(e, callBack);
+            }
+
+            @Override
+            public void onResponse(Call call, Response response) throws IOException { handleResponse(response, callBack); }
+        });
+    }
+
     public static void post(Object tag, String url, String json, final CallBack callBack) {
         RequestBody requestBody = RequestBody.create(JSON, json);
 
