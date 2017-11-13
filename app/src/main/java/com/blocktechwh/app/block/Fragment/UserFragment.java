@@ -10,9 +10,10 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.blocktechwh.app.block.Activity.RedTicketDetailActivity;
+import com.blocktechwh.app.block.Activity.SettingActivity;
+import com.blocktechwh.app.block.Activity.VotesListActivity;
 import com.blocktechwh.app.block.Common.App;
 import com.blocktechwh.app.block.R;
-import com.blocktechwh.app.block.Activity.SettingActivity;
 
 
 public class UserFragment extends Fragment {
@@ -22,11 +23,14 @@ public class UserFragment extends Fragment {
     private TextView userPhone;
     private LinearLayout settingButton;
     private LinearLayout redPacketButton;
+    private LinearLayout voteButton;
+
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.fragment_user, container, false);
+
         initView();
         addEvent();
 
@@ -38,6 +42,8 @@ public class UserFragment extends Fragment {
         redPacketButton = (LinearLayout)view.findViewById(R.id.id_red_package);
         userName = (TextView)view.findViewById(R.id.id_text_name);
         userPhone = (TextView)view.findViewById(R.id.id_phone);
+        voteButton = (LinearLayout) view.findViewById(R.id.id_vote);
+
 
         userName.setText(App.userInfo.getName());
         userPhone.setText(App.userInfo.getPhone());
@@ -47,14 +53,26 @@ public class UserFragment extends Fragment {
         settingButton.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View view) {
-                Intent intent =new Intent(getActivity(),SettingActivity.class);
+                Intent intent = new Intent(getActivity(),SettingActivity.class);
+                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_EXCLUDE_FROM_RECENTS);
                 startActivity(intent);
+
             }
         });
         redPacketButton.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View view) {
-                Intent intent =new Intent(getActivity(),RedTicketDetailActivity.class);
+                Intent intent = new Intent(getActivity(),RedTicketDetailActivity.class);
+                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_EXCLUDE_FROM_RECENTS);
+                startActivity(intent);
+
+            }
+        });
+        voteButton.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View view) {
+                Intent intent =new Intent(getActivity(),VotesListActivity.class);
+                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_EXCLUDE_FROM_RECENTS);
                 startActivity(intent);
             }
         });

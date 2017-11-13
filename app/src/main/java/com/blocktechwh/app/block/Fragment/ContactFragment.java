@@ -1,6 +1,5 @@
 package com.blocktechwh.app.block.Fragment;
 
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -12,6 +11,7 @@ import android.view.ViewGroup;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.alibaba.fastjson.JSONObject;
 
@@ -60,8 +60,11 @@ public class ContactFragment extends Fragment {
     private View.OnClickListener mIntoContactAdd = new View.OnClickListener(){
         @Override
         public void onClick(View view){
-            Intent intent =new Intent(getActivity(),AddNewContactActivity.class);
+
+            Intent intent = new Intent(getActivity(),AddNewContactActivity.class);
+            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_EXCLUDE_FROM_RECENTS);
             startActivity(intent);
+
         }
     };
 
@@ -73,6 +76,8 @@ public class ContactFragment extends Fragment {
                 if(requestCount != 0){
                     requestCount_tv.setText(data.getString("data"));
                     request_view.setVisibility(View.VISIBLE);
+                }else{
+                    Toast.makeText(getContext(),"4444", Toast.LENGTH_SHORT).show();
                 }
             }
         });

@@ -1,14 +1,14 @@
 package com.blocktechwh.app.block.Activity;
 
 import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.os.Handler;
-
-import org.afinal.simplecache.ACache;
+import android.support.v7.app.AppCompatActivity;
 
 import com.blocktechwh.app.block.Common.App;
 import com.blocktechwh.app.block.R;
+
+import org.afinal.simplecache.ACache;
 
 public class SplashActivity extends AppCompatActivity {
 

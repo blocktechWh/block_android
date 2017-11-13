@@ -33,6 +33,13 @@
         <activity android:name=".Activity.AddNewContactActivity" />
         <activity android:name=".Activity.AddNewContactActivity$AddContactByPhoneActivity" />
         <activity android:name=".Activity.UpdateUserInfoActivity"></activity>
+        <activity android:name=".Activity.VotesListActivity"></activity>
+        <activity android:name=".Activity.StartActivity"></activity>
+        <activity android:name=".Activity.AddPlayerActivity"></activity>
+        <activity android:name=".Activity.VotersSelectListActivity"></activity>
+
+
+
     </application>
 
 </manifest>

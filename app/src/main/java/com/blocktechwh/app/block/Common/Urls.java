@@ -8,6 +8,7 @@ public class Urls {
     /**
      * Host
      */
+    //private static  String HOST="http://10.0.0.7/";
     private static  String HOST="http://111.231.146.57:20086/";
 
 

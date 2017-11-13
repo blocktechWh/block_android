@@ -107,6 +107,7 @@ public class RegisterActivity extends TitleActivity {
         PreferencesUtils.putBoolean(App.getContext(),"isLogin",true);
         App.token = token;
         App.userInfo = JSONObject.parseObject(user, User.class);
+
         startActivity(new Intent(this, MainActivity.class));
         finish();
     }
