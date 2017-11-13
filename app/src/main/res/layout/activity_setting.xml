@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Activity.SettingActivity"
+    tools:context=".Activity.User.SettingActivity"
     android:orientation="vertical">
     <include layout="@layout/titlebar_view"
         android:id="@+id/include" />

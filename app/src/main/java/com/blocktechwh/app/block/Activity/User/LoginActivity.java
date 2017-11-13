@@ -1,4 +1,4 @@
-package com.blocktechwh.app.block.Activity;
+package com.blocktechwh.app.block.Activity.User;
 
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
@@ -11,6 +11,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.blocktechwh.app.block.Activity.MainActivity;
 import com.blocktechwh.app.block.Bean.User;
 import com.blocktechwh.app.block.Common.App;
 import com.blocktechwh.app.block.Common.Urls;

@@ -1,4 +1,4 @@
-package com.blocktechwh.app.block.Activity;
+package com.blocktechwh.app.block.Activity.Contact;
 
 import android.content.Intent;
 import android.os.Bundle;

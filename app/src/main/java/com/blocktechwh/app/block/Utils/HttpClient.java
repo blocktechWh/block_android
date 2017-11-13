@@ -19,10 +19,8 @@ import okhttp3.Request;
 import okhttp3.RequestBody;
 import okhttp3.Response;
 
-import com.blocktechwh.app.block.Activity.LoginActivity;
-import com.blocktechwh.app.block.Activity.MainActivity;
+import com.blocktechwh.app.block.Activity.User.LoginActivity;
 import com.blocktechwh.app.block.Common.App;
-import com.blocktechwh.app.block.Common.ErrorTip;
 
 /**
  * Created by eagune on 2017/11/1.

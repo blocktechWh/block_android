@@ -24,19 +24,19 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".Activity.LoginActivity" />
+        <activity android:name=".Activity.User.LoginActivity" />
         <activity android:name=".Activity.MainActivity" />
-        <activity android:name=".Activity.RegisterActivity" />
-        <activity android:name=".Activity.SettingActivity" />
-        <activity android:name=".Activity.ForgetActivity"/>
-        <activity android:name=".Activity.RedTicketDetailActivity"/>
-        <activity android:name=".Activity.AddNewContactActivity" />
-        <activity android:name=".Activity.AddNewContactActivity$AddContactByPhoneActivity" />
-        <activity android:name=".Activity.UpdateUserInfoActivity"></activity>
-        <activity android:name=".Activity.VotesListActivity"></activity>
-        <activity android:name=".Activity.StartActivity"></activity>
-        <activity android:name=".Activity.AddPlayerActivity"></activity>
-        <activity android:name=".Activity.VotersSelectListActivity"></activity>
+        <activity android:name=".Activity.User.RegisterActivity" />
+        <activity android:name=".Activity.User.SettingActivity" />
+        <activity android:name=".Activity.User.ForgetActivity"/>
+        <activity android:name=".Activity.Actions.RedTicketDetailActivity"/>
+        <activity android:name=".Activity.Contact.AddNewContactActivity" />
+        <activity android:name=".Activity.Contact.AddNewContactActivity$AddContactByPhoneActivity" />
+        <activity android:name=".Activity.User.UpdateUserInfoActivity"></activity>
+        <activity android:name=".Activity.Actions.VotesListActivity"></activity>
+        <activity android:name=".Activity.Actions.StartActivity"></activity>
+        <activity android:name=".Activity.Actions.AddPlayerActivity"></activity>
+        <activity android:name=".Activity.Actions.VotersSelectListActivity"></activity>
 
 
 

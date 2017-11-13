@@ -8,7 +8,7 @@ import android.widget.BaseAdapter;
 import android.widget.CheckedTextView;
 import android.widget.ImageView;
 
-import com.blocktechwh.app.block.Activity.VotersSelectListActivity;
+import com.blocktechwh.app.block.Activity.Actions.VotersSelectListActivity;
 import com.blocktechwh.app.block.Bean.Players;
 import com.blocktechwh.app.block.R;
 

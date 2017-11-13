@@ -9,9 +9,9 @@ import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import com.blocktechwh.app.block.Activity.RedTicketDetailActivity;
-import com.blocktechwh.app.block.Activity.SettingActivity;
-import com.blocktechwh.app.block.Activity.VotesListActivity;
+import com.blocktechwh.app.block.Activity.Actions.RedTicketDetailActivity;
+import com.blocktechwh.app.block.Activity.User.SettingActivity;
+import com.blocktechwh.app.block.Activity.Actions.VotesListActivity;
 import com.blocktechwh.app.block.Common.App;
 import com.blocktechwh.app.block.R;
 

@@ -15,12 +15,15 @@ import android.widget.Toast;
 
 import com.alibaba.fastjson.JSONObject;
 
-import com.blocktechwh.app.block.Activity.AddNewContactActivity;
+import com.blocktechwh.app.block.Activity.Contact.AddNewContactActivity;
 import com.blocktechwh.app.block.Common.App;
 import com.blocktechwh.app.block.Common.Urls;
 import com.blocktechwh.app.block.R;
 import com.blocktechwh.app.block.Utils.CallBack;
 import com.blocktechwh.app.block.Utils.HttpClient;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class ContactFragment extends Fragment {
 
@@ -28,7 +31,10 @@ public class ContactFragment extends Fragment {
     private TextView requestCount_tv;
     private LinearLayout request_view;
     private ImageButton addNewContact_btn;
+
     private RecyclerView mRecyclerView;
+    private ContactAdapter mAdapter;
+    private List<String> mDatas;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -48,10 +54,47 @@ public class ContactFragment extends Fragment {
         request_view.setVisibility(View.GONE);
 
 
+        mDatas = new ArrayList<String>();
+        for (int i = 'A'; i < 'z'; i++)
+        {
+            mDatas.add("" + (char) i);
+        }
         mRecyclerView = (RecyclerView)view.findViewById(R.id.id_recycler);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(App.getContext()));
+        mRecyclerView.setAdapter(mAdapter = new ContactAdapter());
 
     }
+
+    class ContactAdapter extends RecyclerView.Adapter<ContactAdapter.MyViewHolder>{
+
+        @Override
+        public MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType){
+            MyViewHolder holder = new MyViewHolder(LayoutInflater.from(
+                    App.getContext()).inflate(R.layout.item_contact, parent,
+                    false));
+            return holder;
+        }
+
+        @Override
+        public void onBindViewHolder(MyViewHolder holder, int position){
+            holder.tv.setText(mDatas.get(position));
+        }
+
+        @Override
+        public int getItemCount(){
+            return mDatas.size();
+        }
+
+        class MyViewHolder extends RecyclerView.ViewHolder{
+            TextView tv;
+            public MyViewHolder(View view)
+            {
+                super(view);
+                tv = (TextView) view.findViewById(R.id.id_num);
+            }
+        }
+    }
+
 
     private void addEvent(){
         addNewContact_btn.setOnClickListener(mIntoContactAdd);
@@ -60,11 +103,7 @@ public class ContactFragment extends Fragment {
     private View.OnClickListener mIntoContactAdd = new View.OnClickListener(){
         @Override
         public void onClick(View view){
-
-            Intent intent = new Intent(getActivity(),AddNewContactActivity.class);
-            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_EXCLUDE_FROM_RECENTS);
-            startActivity(intent);
-
+            startActivity(new Intent(getActivity(),AddNewContactActivity.class));
         }
     };
 
