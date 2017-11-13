@@ -3,10 +3,9 @@ package com.blocktechwh.app.block.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.ImageButton;
 import android.widget.LinearLayout;
-import android.widget.TextView;
 
+import com.alibaba.fastjson.JSONObject;
 import com.blocktechwh.app.block.Common.App;
 import com.blocktechwh.app.block.Common.Urls;
 import com.blocktechwh.app.block.CustomView.TitleActivity;
@@ -14,8 +13,6 @@ import com.blocktechwh.app.block.R;
 import com.blocktechwh.app.block.Utils.CallBack;
 import com.blocktechwh.app.block.Utils.HttpClient;
 import com.blocktechwh.app.block.Utils.PreferencesUtils;
-
-import com.alibaba.fastjson.JSONObject;
 
 public class SettingActivity extends TitleActivity {
 
@@ -62,7 +59,9 @@ public class SettingActivity extends TitleActivity {
         });
         App.token = "";
         PreferencesUtils.putString(App.getContext(),"Token","");
+
         Intent intent = new Intent(SettingActivity.this,LoginActivity.class);
+        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_EXCLUDE_FROM_RECENTS);
         startActivity(intent);
     }
 

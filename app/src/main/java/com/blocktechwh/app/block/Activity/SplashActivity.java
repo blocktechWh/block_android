@@ -1,14 +1,14 @@
 package com.blocktechwh.app.block.Activity;
 
 import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.os.Handler;
-
-import org.afinal.simplecache.ACache;
+import android.support.v7.app.AppCompatActivity;
 
 import com.blocktechwh.app.block.Common.App;
 import com.blocktechwh.app.block.R;
+
+import org.afinal.simplecache.ACache;
 
 public class SplashActivity extends AppCompatActivity {
 
@@ -26,9 +26,14 @@ public class SplashActivity extends AppCompatActivity {
     class splashhandler implements Runnable{
         public void run() {
             if("".equals(App.token)){
-                startActivity(new Intent(getApplication(),LoginActivity.class));
+                Intent intent = new Intent(getApplication(),LoginActivity.class);
+                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_EXCLUDE_FROM_RECENTS);
+                startActivity(intent);
             }else{
-                startActivity(new Intent(getApplication(),MainActivity.class));
+                Intent intent = new Intent(getApplication(),MainActivity.class);
+                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_EXCLUDE_FROM_RECENTS);
+                startActivity(intent);
+                //startActivity(new Intent(getApplication(),MainActivity.class));
             }
             SplashActivity.this.finish();
         }

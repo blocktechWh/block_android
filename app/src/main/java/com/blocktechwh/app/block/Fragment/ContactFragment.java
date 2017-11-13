@@ -51,8 +51,11 @@ public class ContactFragment extends Fragment {
     private View.OnClickListener mIntoContactAdd = new View.OnClickListener(){
         @Override
         public void onClick(View view){
-            Intent intent =new Intent(getActivity(),AddNewContactActivity.class);
+
+            Intent intent = new Intent(getActivity(),AddNewContactActivity.class);
+            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_EXCLUDE_FROM_RECENTS);
             startActivity(intent);
+
         }
     };
 
