@@ -12,6 +12,7 @@ import android.widget.TextView;
 
 import com.alibaba.fastjson.JSONObject;
 import com.blocktechwh.app.block.Bean.User;
+import com.blocktechwh.app.block.Common.App;
 import com.blocktechwh.app.block.Common.Urls;
 import com.blocktechwh.app.block.CustomView.TitleActivity;
 import com.blocktechwh.app.block.R;
@@ -92,9 +93,23 @@ public class AddNewContactActivity extends TitleActivity {
             });
         }
 
-        private void setUser(User user){
+        private void setUser(final User user){
             userName_tv.setText(user.getName());
             user_layout.setVisibility(View.VISIBLE);
+            user_layout.setOnClickListener(new View.OnClickListener(){
+                @Override
+                public void onClick(View view){
+                    Intent intent = new Intent(App.getContext(),ContactDetailActivity.class);
+                    Bundle bundle = new Bundle();
+                    bundle.putString("name",user.getName());
+                    bundle.putString("email",user.getEmail());
+                    bundle.putString("phone",user.getPhone());
+                    bundle.putString("address",user.getAddress());
+                    bundle.putString("sex",user.getSex());
+                    intent.putExtras(bundle);
+                    startActivity(intent);
+                }
+            });
         }
 
     }

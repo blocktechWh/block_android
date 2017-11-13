@@ -49,11 +49,11 @@
                 android:text="姓名" />
 
             <TextView
-                android:id="@+id/textView2"
+                android:id="@+id/id_user_name"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="张三" />
+                android:text="" />
         </LinearLayout>
 
         <LinearLayout
@@ -71,11 +71,11 @@
                 android:text="性别" />
 
             <TextView
-                android:id="@+id/textView4"
+                android:id="@+id/id_text_sex"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="男" />
+                android:text="" />
         </LinearLayout>
 
         <LinearLayout
@@ -93,11 +93,11 @@
                 android:text="电话" />
 
             <TextView
-                android:id="@+id/textView6"
+                android:id="@+id/id_text_phone"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="13333333333" />
+                android:text="" />
         </LinearLayout>
 
         <LinearLayout
@@ -115,11 +115,11 @@
                 android:text="邮箱" />
 
             <TextView
-                android:id="@+id/textView8"
+                android:id="@+id/id_text_email"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="1157679239@qq.com" />
+                android:text="" />
         </LinearLayout>
 
         <LinearLayout
@@ -137,11 +137,11 @@
                 android:text="地区" />
 
             <TextView
-                android:id="@+id/textView10"
+                android:id="@+id/id_user_address"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="宾夕法尼亚" />
+                android:text="" />
         </LinearLayout>
     </LinearLayout>
 
