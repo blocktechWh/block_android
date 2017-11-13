@@ -14,11 +14,6 @@ import com.blocktechwh.app.block.R;
 
 public class TitleActivity extends BaseActivity {
 
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-    }
-
     public void initTitle(String title){
         ((TextView)findViewById(R.id.titlebar_title_tv)).setText(title);
         ((ImageButton)findViewById(R.id.titlebar_button_back)).setOnClickListener(new View.OnClickListener(){

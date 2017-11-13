@@ -3,19 +3,19 @@ package com.blocktechwh.app.block.Fragment;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.alibaba.fastjson.JSONObject;
+
 import com.blocktechwh.app.block.Activity.AddNewContactActivity;
-import com.blocktechwh.app.block.Activity.SettingActivity;
 import com.blocktechwh.app.block.Common.App;
 import com.blocktechwh.app.block.Common.Urls;
 import com.blocktechwh.app.block.R;
@@ -28,6 +28,7 @@ public class ContactFragment extends Fragment {
     private TextView requestCount_tv;
     private LinearLayout request_view;
     private ImageButton addNewContact_btn;
+    private RecyclerView mRecyclerView;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -45,6 +46,11 @@ public class ContactFragment extends Fragment {
         requestCount_tv = (TextView)view.findViewById(R.id.id_text_request_count);
         addNewContact_btn = (ImageButton)view.findViewById(R.id.id_add_new);
         request_view.setVisibility(View.GONE);
+
+
+        mRecyclerView = (RecyclerView)view.findViewById(R.id.id_recycler);
+        mRecyclerView.setLayoutManager(new LinearLayoutManager(App.getContext()));
+
     }
 
     private void addEvent(){
