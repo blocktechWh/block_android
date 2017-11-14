@@ -63,7 +63,7 @@ public class RegisterActivity extends TitleActivity {
             Toast.makeText(App.getContext(), "手机号不能为空", Toast.LENGTH_SHORT).show();
         }else {
             String url = Urls.RegistorActiveCode + phone;
-            HttpClient.get(this, url, null, new CallBack() {
+            HttpClient.get(this, url, null, new CallBack<JSONObject>() {
                 @Override
                 public void onSuccess(JSONObject data) {
                     String verifyCode = data.getString("data");
@@ -90,7 +90,7 @@ public class RegisterActivity extends TitleActivity {
             json.put("identifyCode",code);
             json.put("password",password);
             json.put("rePassword",password);
-            HttpClient.post(this, Urls.Registor, json.toString(), new CallBack() {
+            HttpClient.post(this, Urls.Registor, json.toString(), new CallBack<JSONObject>() {
                 @Override
                 public void onSuccess(JSONObject data) {
                     PreferencesUtils.putString(App.getContext(),"Phone",phone);

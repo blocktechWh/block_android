@@ -11,9 +11,9 @@ import com.blocktechwh.app.block.Common.ErrorTip;
 /**
  * Created by eagune on 2017/11/1.
  */
-public abstract class CallBack{
+public abstract class CallBack<T>{
 
-    public abstract void onSuccess(JSONObject result);
+    public abstract void onSuccess(T result);
 
     public void onFailure(int errorType, String message) {
         if (errorType != 0) {

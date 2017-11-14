@@ -108,7 +108,7 @@ public class ContactFragment extends Fragment {
     };
 
     private void getData(){
-        HttpClient.get(this, Urls.ContactRequestsCount, null, new CallBack() {
+        HttpClient.get(this, Urls.ContactRequestsCount, null, new CallBack<JSONObject>() {
             @Override
             public void onSuccess(JSONObject data) {
                 int requestCount = data.getInteger("data");
@@ -121,7 +121,7 @@ public class ContactFragment extends Fragment {
             }
         });
 
-        HttpClient.get(this, Urls.Contacts, null, new CallBack() {
+        HttpClient.get(this, Urls.Contacts, null, new CallBack<JSONObject>() {
             @Override
             public void onSuccess(JSONObject data) {
 

@@ -95,7 +95,7 @@ public class LoginActivity extends AppCompatActivity {
             JSONObject json = new JSONObject();
             json.put("account",phone);
             json.put("password",password);
-            HttpClient.post(this, Urls.Login, json.toString(), new CallBack() {
+            HttpClient.post(this, Urls.Login, json.toString(), new CallBack<JSONObject>() {
                 @Override
                 public void onSuccess(JSONObject data) {
                     PreferencesUtils.putString(App.getContext(),"Phone",phone);
