@@ -8,14 +8,15 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.alibaba.fastjson.JSONObject;
-
 import com.blocktechwh.app.block.Activity.Contact.AddNewContactActivity;
+import com.blocktechwh.app.block.Activity.Contact.ContactDetailActivity;
 import com.blocktechwh.app.block.Common.App;
 import com.blocktechwh.app.block.Common.Urls;
 import com.blocktechwh.app.block.R;
@@ -28,6 +29,7 @@ import java.util.List;
 public class ContactFragment extends Fragment {
 
     private View view;
+    private Button bt_send;
     private TextView requestCount_tv;
     private LinearLayout request_view;
     private ImageButton addNewContact_btn;
@@ -48,6 +50,7 @@ public class ContactFragment extends Fragment {
     }
 
     private void initView(){
+        bt_send=(Button)view.findViewById(R.id.to_send);
         request_view = (LinearLayout)view.findViewById(R.id.id_text_request_layout);
         requestCount_tv = (TextView)view.findViewById(R.id.id_text_request_count);
         addNewContact_btn = (ImageButton)view.findViewById(R.id.id_add_new);
@@ -97,13 +100,21 @@ public class ContactFragment extends Fragment {
 
 
     private void addEvent(){
+
         addNewContact_btn.setOnClickListener(mIntoContactAdd);
+        bt_send.setOnClickListener(showContactDetail);
     }
 
     private View.OnClickListener mIntoContactAdd = new View.OnClickListener(){
         @Override
         public void onClick(View view){
             startActivity(new Intent(getActivity(),AddNewContactActivity.class));
+        }
+    };
+    private View.OnClickListener showContactDetail = new View.OnClickListener(){
+        @Override
+        public void onClick(View view){
+            startActivity(new Intent(getActivity(), ContactDetailActivity.class));
         }
     };
 

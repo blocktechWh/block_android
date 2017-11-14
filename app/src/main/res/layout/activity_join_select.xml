@@ -22,15 +22,13 @@
             android:paddingRight="@dimen/padding_right"
             android:paddingStart="@dimen/padding_left">
 
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/id_players_recycler"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
+
         </LinearLayout>
     </ScrollView>
-
-    <ListView
-        android:id="@+id/votersListView"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
-
-    </ListView>
 
 
 </LinearLayout>

@@ -4,13 +4,17 @@ import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v4.view.PagerTabStrip;
 import android.support.v4.view.ViewPager;
-import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.TextView;
 
+import com.alibaba.fastjson.JSONObject;
 import com.blocktechwh.app.block.Adapter.RedTicketDetailAdapter;
+import com.blocktechwh.app.block.Common.Urls;
 import com.blocktechwh.app.block.CustomView.OnRedPackagePageChangeListener;
+import com.blocktechwh.app.block.CustomView.TitleActivity;
 import com.blocktechwh.app.block.R;
+import com.blocktechwh.app.block.Utils.CallBack;
+import com.blocktechwh.app.block.Utils.HttpClient;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -19,7 +23,7 @@ import java.util.List;
  * Created by Administrator on 2017/11/7.
  */
 
-public class RedTicketDetailActivity extends AppCompatActivity {
+public class RedTicketDetailActivity extends TitleActivity {
     private List<View>viewList;
     private ViewPager vp;
     private PagerTabStrip tab;
@@ -35,6 +39,7 @@ public class RedTicketDetailActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_redticket_detail);
+        initTitle("红包");
 
         textView_got=(TextView)findViewById(R.id.textView66);
         textView_sent=(TextView)findViewById(R.id.textView65);
@@ -84,7 +89,7 @@ public class RedTicketDetailActivity extends AppCompatActivity {
         //监听页卡的滑动
         vp.setOnPageChangeListener(new OnRedPackagePageChangeListener(textWidth,titleList1,currIndex));
 
-
+        getData();
     }
 
     //标题点击监听
@@ -98,5 +103,24 @@ public class RedTicketDetailActivity extends AppCompatActivity {
         public void onClick(View v) {
             vp.setCurrentItem(index);
         }
+    }
+
+    private void getData(){
+        //请求收到红包列表请求
+        HttpClient.get(this, Urls.GiftGetList, null, new CallBack() {
+            @Override
+            public void onSuccess(JSONObject data) {
+
+            }
+        });
+
+        //请求发出红包列表请求
+        HttpClient.get(this, Urls.GiftSendList, null, new CallBack() {
+            @Override
+            public void onSuccess(JSONObject data) {
+
+            }
+        });
+
     }
 }

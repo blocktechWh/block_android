@@ -26,7 +26,6 @@ public class AddPlayerActivity extends TitleActivity {
 
         addEvent();
 
-
     }
 
     private void addEvent(){

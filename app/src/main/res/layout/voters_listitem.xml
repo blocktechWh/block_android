@@ -16,15 +16,26 @@
         android:layout_height="50dp"
         app:srcCompat="@mipmap/icon21" />
 
-    <CheckedTextView
+    <CheckBox
         android:id="@+id/itemText"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="25dp"
-        android:layout_marginStart="25dp"
-        android:filterTouchesWhenObscured="true"
-        android:focusableInTouchMode="true"
-        android:text="CheckedTextView" />
+        android:layout_weight="1"
+        android:text="CheckBox" />
+
+    <!--    <CheckedTextView
+            android:id="@+id/itemText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="25dp"
+            android:layout_marginStart="25dp"
+            android:filterTouchesWhenObscured="true"
+            android:focusableInTouchMode="true"
+            android:checkMark="?android:attr/listChoiceIndicatorMultiple"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:text="CheckedTextView" />-->
+
+
 
     <!--<TextView-->
     <!--android:id="@+id/itemTitle"-->

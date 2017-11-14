@@ -160,21 +160,21 @@ public class Urls {
      *
      * 返回值:[{id:String红包id,amount:金额,SenderInfo:{userImg:String,userName:String},},...]
      */
-    public static final String GiftGetList = HOST+"front/recievegiftlist/";
+    public static final String GiftGetList = HOST+"front/gift/receive-list/";
 
     /**
      * 发出红包列表GET
      *
      * 返回值:[{id:String红包id,amount:金额,type:Int红包类型},...]
      */
-    public static final String GiftSendList = HOST+"front/sendgiftlist/";
+    public static final String GiftSendList = HOST+"front/gift/send-list/";
 
     /**
      * 未接收的红包列表GET(暂时使用)
      *
      * 返回值:[{id:String红包id,amount:金额,SenderInfo:{userImg:String,userName:String},time:发送的时间},...]
      */
-    public static final String GiftWaitRecieveList = HOST+"front/giftwaitrecievelist/";
+    public static final String GiftWaitRecieveList = HOST+"front/gift/toin/";
 
 
 }

@@ -37,6 +37,7 @@
         <activity android:name=".Activity.Actions.StartActivity"></activity>
         <activity android:name=".Activity.Actions.AddPlayerActivity"></activity>
         <activity android:name=".Activity.Actions.VotersSelectListActivity"></activity>
+        <activity android:name=".Activity.Contact.ContactDetailActivity"></activity>
 
 
 

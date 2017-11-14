@@ -1,124 +1,111 @@
 package com.blocktechwh.app.block.Activity.Actions;
 
 import android.os.Bundle;
-import android.view.ContextMenu;
-import android.view.ContextMenu.ContextMenuInfo;
-import android.view.MenuItem;
+import android.support.annotation.Nullable;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
+import android.view.LayoutInflater;
 import android.view.View;
-import android.view.View.OnCreateContextMenuListener;
-import android.widget.AdapterView;
-import android.widget.AdapterView.OnItemClickListener;
-import android.widget.ListView;
-import android.widget.Toast;
+import android.view.ViewGroup;
+import android.widget.CheckBox;
+import android.widget.ImageView;
 
-import com.blocktechwh.app.block.Adapter.PlayerListViewAdapter;
-import com.blocktechwh.app.block.Bean.Players;
+import com.blocktechwh.app.block.Common.App;
 import com.blocktechwh.app.block.CustomView.TitleActivity;
 import com.blocktechwh.app.block.R;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
-
-/**
- * Created by Administrator on 2017/11/10.
- */
+import java.util.Map;
 
 public class VotersSelectListActivity extends TitleActivity {
-//    private ListView list;
-//    @Override
-//    protected void onCreate(Bundle savedInstanceState) {
-//        super.onCreate(savedInstanceState);
-//        super.initTitle("参与人员");
-//        setContentView(R.layout.activity_join_select);
-//
-//        list = (ListView) findViewById(R.id.VotersListView);
-//        //组织数据源
-//        List<HashMap<String, String>> mylist = new ArrayList<HashMap<String, String>>();
-//        for(int i=0;i<20;i++) {
-//            HashMap<String, String> map = new HashMap<String, String>();
-//            map.put("itemTitle", "This is Title");
-//            map.put("itemText", "This is text");
-//            mylist.add(map);
-//        }
-//        //配置适配器
-//        SimpleAdapter adapter = new SimpleAdapter(this,
-//                mylist,//数据源
-//                R.layout.voters_listitem,//显示布局
-//                new String[] {"itemTitle", "itemText"}, //数据源的属性字段
-//                new int[] {R.id.itemTitle,R.id.itemText}); //布局里的控件id
-//        //添加并且显示
-//        list.setAdapter(adapter);
-//    }
 
-    private ListView listView;  //声明一个ListView对象
-    private List<Players> mlistInfo = new ArrayList<Players>();  //声明一个list，动态存储要显示的信息
+
+    private RecyclerView mRecyclerView;
+    private PlayerListAdapter mAdapter;
+    private List<Map<String,Object>> mDatas;
 
     @Override
-    public void onCreate(Bundle savedInstanceState) {
+    public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
         setContentView(R.layout.activity_join_select);
+        initTitle("参与人员");
+        initView();
+        getData();
 
-        listView=(ListView)findViewById(R.id.votersListView);    //将listView与布局对象关联
-
-        setInfo();  //给信息赋值函数，用来测试
-
-        listView.setAdapter(new PlayerListViewAdapter(mlistInfo,new VotersSelectListActivity()));//VotersSelectListActivity.this
-
-        //处理Item的点击事件
-        listView.setOnItemClickListener(new OnItemClickListener(){
-            public void onItemClick(AdapterView<?> parent, View view,int position, long id) {
-                Players getObject = mlistInfo.get(position);   //通过position获取所点击的对象
-                int infoId = getObject.getId(); //获取信息id
-                String infoTitle = getObject.getTitle();    //获取信息标题
-                String infoDetails = getObject.getDetails();    //获取信息详情
-                int avatar=getObject.getAvatar();    //获取信息详情
-
-                //Toast显示测试
-                Toast.makeText(VotersSelectListActivity.this, "信息ID:"+infoId,Toast.LENGTH_SHORT).show();
-            }
-        });
-
-        //长按菜单显示
-        listView.setOnCreateContextMenuListener(new OnCreateContextMenuListener() {
-            public void onCreateContextMenu(ContextMenu conMenu, View view , ContextMenuInfo info) {
-                conMenu.setHeaderTitle("菜单");
-                conMenu.add(0, 0, 0, "条目一");
-                conMenu.add(0, 1, 1, "条目二");
-                conMenu.add(0, 2, 2, "条目三");
-            }
-        });
 
     }
-    //长按菜单处理函数
-    public boolean onContextItemSelected(MenuItem aItem) {
-        AdapterView.AdapterContextMenuInfo info = (AdapterView.AdapterContextMenuInfo)aItem.getMenuInfo();
-        switch (aItem.getItemId()) {
-            case 0:
-                Toast.makeText(VotersSelectListActivity.this, "你点击了条目一",Toast.LENGTH_SHORT).show();
-                return true;
-            case 1:
-                Toast.makeText(VotersSelectListActivity.this, "你点击了条目二",Toast.LENGTH_SHORT).show();
 
-                return true;
-            case 2:
-                Toast.makeText(VotersSelectListActivity.this, "你点击了条目三",Toast.LENGTH_SHORT).show();
-                return true;
+
+    private void initView(){
+
+        mDatas = new ArrayList<Map<String,Object>>();
+        for (int i = 'A'; i < 'z'; i++)
+        {
+            Map<String,Object> hm=new HashMap<String, Object>();
+            hm.put("text","" + (char) i);
+            hm.put("id",R.mipmap.ic_launcher);
+            mDatas.add(hm);
         }
-        return false;
+        mRecyclerView = (RecyclerView)findViewById(R.id.id_players_recycler);
+        mRecyclerView.setLayoutManager(new LinearLayoutManager(App.getContext()));
+        mRecyclerView.setAdapter(mAdapter = new PlayerListAdapter());
+
     }
 
-    public void setInfo(){
-        mlistInfo.clear();
-        int i=0;
-        while(i<10){
-            Players information = new Players();
-            information.setId(1000+i);
-            information.setTitle("标题"+i);
-            information.setDetails("详细信息"+i);
-            information.setAvatar(R.mipmap.ic_launcher);
+    class PlayerListAdapter extends RecyclerView.Adapter<PlayerListAdapter.MyViewHolder>{
 
-            mlistInfo.add(information); //将新的info对象加入到信息列表中
-            i++;
+        @Override
+        public MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType){
+            MyViewHolder holder = new MyViewHolder(LayoutInflater.from(
+                    App.getContext()).inflate(R.layout.voters_listitem, parent,
+                    false));
+            return holder;
+        }
+
+        @Override
+        public void onBindViewHolder(MyViewHolder holder, int position){
+            holder.tv.setText(mDatas.get(position).get("text").toString());
+            holder.iv.setImageResource(Integer.parseInt(mDatas.get(position).get("id").toString()));
+
+        }
+
+        @Override
+        public int getItemCount(){
+            return mDatas.size();
+        }
+
+        class MyViewHolder extends RecyclerView.ViewHolder{
+            CheckBox tv;
+            ImageView iv;
+
+            public MyViewHolder(View view)
+            {
+                super(view);
+                tv = (CheckBox) view.findViewById(R.id.itemText);
+                iv=(ImageView) view.findViewById(R.id.itemImg);
+            }
         }
     }
+
+
+
+    private void getData(){
+//        HttpClient.get(this, Urls.ContactRequestsCount, null, new CallBack() {
+//            @Override
+//            public void onSuccess(JSONObject data) {
+////                int requestCount = data.getInteger("data");
+////                if(requestCount != 0){
+////                    requestCount_tv.setText(data.getString("data"));
+////                    request_view.setVisibility(View.VISIBLE);
+////                }else{
+////                    Toast.makeText(getContext(),"4444", Toast.LENGTH_SHORT).show();
+////                }
+//            }
+//        });
+
+    }
+
 }
