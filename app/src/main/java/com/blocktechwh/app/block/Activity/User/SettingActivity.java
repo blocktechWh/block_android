@@ -49,7 +49,7 @@ public class SettingActivity extends TitleActivity {
 
     private void logOut(){
         String url = Urls.Logout;
-        HttpClient.get(this, url, null, new CallBack() {
+        HttpClient.get(this, url, null, new CallBack<JSONObject>() {
             @Override
             public void onSuccess(JSONObject data) {
             }

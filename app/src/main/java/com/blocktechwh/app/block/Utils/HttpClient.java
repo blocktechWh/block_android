@@ -1,6 +1,8 @@
 package com.blocktechwh.app.block.Utils;
 
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.Handler;
 import android.os.Looper;
 
@@ -38,6 +40,27 @@ public class HttpClient {
             .readTimeout(100, TimeUnit.SECONDS);
     public static final MediaType JSON = MediaType.parse("application/json; charset=utf-8");
 
+    public static void getImage(Object tag, String url, final CallBack callBack){
+        Request request = new Request.Builder()
+                .tag(tag)
+                .url(url)
+                .build();
+
+        okHttpClient.newCall(request).enqueue(new Callback() {
+            @Override
+            public void onFailure(Call call, final IOException e) {
+                handleError(e, callBack);
+            }
+
+            @Override
+            public void onResponse(Call call, Response response) throws IOException {
+                byte[] bytes = response.body().bytes();
+                final Bitmap bmp = BitmapFactory.decodeByteArray(bytes, 0, bytes.length);
+                callBack.onSuccess(bmp);
+            }
+        });
+    }
+
     public static void put(Object tag, String url, String json, final CallBack callBack) {
         RequestBody requestBody = RequestBody.create(JSON, json);
 
@@ -58,7 +81,9 @@ public class HttpClient {
             }
 
             @Override
-            public void onResponse(Call call, Response response) throws IOException { handleResponse(response, callBack); }
+            public void onResponse(Call call, Response response) throws IOException {
+                callBack.onSuccess(response);
+            }
         });
     }
 

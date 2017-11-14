@@ -44,7 +44,8 @@ public class SendRedTicket extends TitleActivity {
         @Override
         public void onClick(View view){
             String s_amount=et_amount.getText().toString();
-            Str
+            String s_pray=et_text_pray.getText().toString();
+
             startActivity(new Intent(SendRedTicket.this,AddNewContactActivity.class));
         }
     };

@@ -9,7 +9,7 @@ public class Urls {
      * Host
      */
     //private static  String HOST="http://10.0.0.7/";
-    private static  String HOST="http://111.231.146.57:20086/";
+    public static final String HOST="http://111.231.146.57:9997/";
 
 
     public static final String RegistorActiveCode = HOST+"front/yzm-reg/";

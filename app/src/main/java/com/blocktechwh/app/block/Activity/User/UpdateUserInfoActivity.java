@@ -98,7 +98,7 @@ public class UpdateUserInfoActivity extends TitleActivity {
     private void mInputHandler(final String string){
         JSONObject json = new JSONObject();
         json.put(jsonKey, string);
-        HttpClient.put(this, Urls.UpdateUserInfo, json.toString(), new CallBack() {
+        HttpClient.put(this, Urls.UpdateUserInfo, json.toString(), new CallBack<JSONObject>() {
             @Override
             public void onSuccess(JSONObject result) {
                 switch (jsonKey){

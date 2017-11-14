@@ -44,6 +44,7 @@
         android:gravity="center_vertical"
         android:id="@+id/id_user_layout">
         <ImageView
+            android:id="@+id/id_user_photo"
             android:layout_width="30dp"
             android:layout_height="30dp"
             android:layout_marginLeft="10dp"
