@@ -6,10 +6,15 @@ import android.support.annotation.Nullable;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
+import com.alibaba.fastjson.JSONObject;
 import com.blocktechwh.app.block.Activity.Contact.AddNewContactActivity;
+import com.blocktechwh.app.block.Common.Urls;
 import com.blocktechwh.app.block.CustomView.TitleActivity;
 import com.blocktechwh.app.block.R;
+import com.blocktechwh.app.block.Utils.CallBack;
+import com.blocktechwh.app.block.Utils.HttpClient;
 
 /**
  * Created by 跳跳蛙 on 2017/11/14.
@@ -46,6 +51,19 @@ public class SendRedTicket extends TitleActivity {
             String s_amount=et_amount.getText().toString();
             String s_pray=et_text_pray.getText().toString();
 
+            JSONObject json = new JSONObject();
+            json.put("receiveId","8");
+            json.put("amount",s_amount);
+            json.put("giftMsg",s_pray);
+
+            System.out.print(json);
+
+            HttpClient.post(this, Urls.SendGift, json.toString(), new CallBack<JSONObject>() {
+                @Override
+                public void onSuccess(JSONObject data) {
+                    Toast.makeText(SendRedTicket.this,"发送成功",Toast.LENGTH_SHORT).show();
+                }
+            });
             startActivity(new Intent(SendRedTicket.this,AddNewContactActivity.class));
         }
     };

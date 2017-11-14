@@ -139,7 +139,7 @@ public class Urls {
      * amount:Float 金额（存四位 用两位）
      * remark:String 备注语
      */
-    public static final String SendGift = HOST+"front/creategift/";
+    public static final String SendGift = HOST+"front/gift/send/";
 
     /**
      * 收红包POST
