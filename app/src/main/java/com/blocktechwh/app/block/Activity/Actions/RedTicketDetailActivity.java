@@ -107,7 +107,7 @@ public class RedTicketDetailActivity extends TitleActivity {
 
     private void getData(){
         //请求收到红包列表请求
-        HttpClient.get(this, Urls.GiftGetList, null, new CallBack() {
+        HttpClient.get(this, Urls.GiftGetList, null, new CallBack<JSONObject>() {
             @Override
             public void onSuccess(JSONObject data) {
 
@@ -115,7 +115,7 @@ public class RedTicketDetailActivity extends TitleActivity {
         });
 
         //请求发出红包列表请求
-        HttpClient.get(this, Urls.GiftSendList, null, new CallBack() {
+        HttpClient.get(this, Urls.GiftSendList, null, new CallBack<JSONObject>() {
             @Override
             public void onSuccess(JSONObject data) {
 

@@ -27,7 +27,7 @@ public class HomeFragment extends Fragment {
 
     private void getData(){
         System.out.print("token="+App.token);
-        HttpClient.get(this, Urls.GiftWaitRecieveList, null, new CallBack() {
+        HttpClient.get(this, Urls.GiftWaitRecieveList, null, new CallBack<JSONObject>() {
             @Override
             public void onSuccess(JSONObject data) {
 
