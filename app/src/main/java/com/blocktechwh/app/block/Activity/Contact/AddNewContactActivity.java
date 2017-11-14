@@ -134,6 +134,7 @@ public class AddNewContactActivity extends TitleActivity {
                     bundle.putString("address",user.getAddress());
                     bundle.putString("sex",user.getSex());
                     bundle.putString("img",user.getImg());
+                    bundle.putString("id",user.getId().toString());
                     intent.putExtras(bundle);
                     startActivity(intent);
                 }

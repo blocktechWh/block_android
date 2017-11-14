@@ -14,9 +14,11 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import com.blocktechwh.app.block.Activity.Contact.AddNewContactActivity;
 import com.blocktechwh.app.block.Activity.Contact.ContactDetailActivity;
+import com.blocktechwh.app.block.Activity.Contact.ContactRequestActivity;
 import com.blocktechwh.app.block.Common.App;
 import com.blocktechwh.app.block.Common.Urls;
 import com.blocktechwh.app.block.R;
@@ -100,7 +102,6 @@ public class ContactFragment extends Fragment {
 
 
     private void addEvent(){
-
         addNewContact_btn.setOnClickListener(mIntoContactAdd);
         bt_send.setOnClickListener(showContactDetail);
     }
@@ -126,15 +127,21 @@ public class ContactFragment extends Fragment {
                 if(requestCount != 0){
                     requestCount_tv.setText(data.getString("data"));
                     request_view.setVisibility(View.VISIBLE);
+                    request_view.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View view) {
+                            startActivity(new Intent(App.getContext(), ContactRequestActivity.class));
+                        }
+                    });
                 }else{
                     Toast.makeText(getContext(),"4444", Toast.LENGTH_SHORT).show();
                 }
             }
         });
 
-        HttpClient.get(this, Urls.Contacts, null, new CallBack<JSONObject>() {
+        HttpClient.get(this, Urls.Contacts, null, new CallBack<JSONArray>() {
             @Override
-            public void onSuccess(JSONObject data) {
+            public void onSuccess(JSONArray data) {
 
             }
         });
