@@ -167,11 +167,19 @@ public class HttpClient {
     private static void handleResponse(Response response, final CallBack callBack) throws IOException {
         int httpCode = response.code();
         if ((httpCode/100) == 5){
-            callBack.onFailure(2, "服务器内部错误");
-            return;
+            handler.post(new Runnable() {
+                @Override
+                public void run() {
+                    callBack.onFailure(2, "服务器内部错误");
+                }
+            });
         }else if((httpCode/100) == 4){
-            callBack.onFailure(2, "网络请求错误");
-            return;
+            handler.post(new Runnable() {
+                @Override
+                public void run() {
+                    callBack.onFailure(2, "网络请求错误");
+                }
+            });
         }else if((httpCode/100) == 2){
             String json = response.body().string();
             json = json.replace("null", "\"\"");

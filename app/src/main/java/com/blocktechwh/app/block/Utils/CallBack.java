@@ -4,8 +4,6 @@ import android.text.TextUtils;
 import android.widget.Toast;
 
 import com.blocktechwh.app.block.Common.App;
-
-import com.alibaba.fastjson.JSONObject;
 import com.blocktechwh.app.block.Common.ErrorTip;
 
 /**
