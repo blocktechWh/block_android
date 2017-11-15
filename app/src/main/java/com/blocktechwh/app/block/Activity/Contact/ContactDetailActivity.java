@@ -118,13 +118,7 @@ public class ContactDetailActivity extends TitleActivity {
         HttpClient.delete(this, urls, new JSONObject().toString(), new CallBack() {
             @Override
             public void onSuccess(Object result) {
-                runOnUiThread(new Runnable() {
-                    @Override
-                    public void run() {
-                        Toast.makeText(App.getContext(),"已解除好友关系",Toast.LENGTH_SHORT).show();
-                    }
-                });
-
+                Toast.makeText(App.getContext(),"已解除好友关系",Toast.LENGTH_SHORT).show();
             }
         });
     }

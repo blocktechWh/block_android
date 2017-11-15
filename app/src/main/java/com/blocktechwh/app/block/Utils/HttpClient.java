@@ -82,9 +82,7 @@ public class HttpClient {
             }
 
             @Override
-            public void onResponse(Call call, Response response) throws IOException {
-                callBack.onSuccess(response);
-            }
+            public void onResponse(Call call, Response response) throws IOException { handleResponse(response, callBack); }
         });
     }
 
@@ -108,9 +106,7 @@ public class HttpClient {
             }
 
             @Override
-            public void onResponse(Call call, Response response) throws IOException {
-                callBack.onSuccess(response);
-            }
+            public void onResponse(Call call, Response response) throws IOException { handleResponse(response, callBack); }
         });
     }
 
@@ -185,38 +181,46 @@ public class HttpClient {
             json = json.replace("null", "\"\"");
             final String finalJson = json;
             System.out.println(finalJson);
-            handler.post(new Runnable() {
-                @Override
-                public void run() {
-                    JSONObject jsonObject = JSONObject.parseObject(finalJson);
-                    String statusCode = jsonObject.getString("code");
-                    System.out.println(statusCode);
-                    if(statusCode.equals("000")){
-                        String dataStr = jsonObject.getString("data");
-                        if("".equals(dataStr)){
+            final JSONObject jsonObject = JSONObject.parseObject(finalJson);
+            final String statusCode = jsonObject.getString("code");
+            if(statusCode.equals("000")){
+                final String dataStr = jsonObject.getString("data");
+                if("".equals(dataStr)){
+                    handler.post(new Runnable() {
+                        @Override
+                        public void run() {
                             callBack.onSuccess(null);
-                        }else{
-                            final char fistChar = dataStr.charAt(0);
-                            if(fistChar == '{'){
-                                JSONObject dataJson = JSONObject.parseObject(dataStr);
-                                callBack.onSuccess(dataJson);
-                            }else if(fistChar == '['){
-                                JSONArray dataJson = JSONObject.parseArray(dataStr);
-                                callBack.onSuccess(dataJson);
-                            }else{
-                                JSONObject dataJson = new JSONObject();
-                                dataJson.put("data",dataStr);
-                                callBack.onSuccess(dataJson);
-                            }
                         }
-                    }else if(statusCode.equals("403")){
-                        App.getContext().startActivity(new Intent(App.getContext(), LoginActivity.class));
+                    });
+                }else{
+                    final char fistChar = dataStr.charAt(0);
+                    if(fistChar == '{'){
+                        handler.post(new Runnable() {
+                            @Override
+                            public void run() { callBack.onSuccess(JSONObject.parseObject(dataStr)); }
+                        });
+                    }else if(fistChar == '['){
+                        handler.post(new Runnable() {
+                            @Override
+                            public void run() { callBack.onSuccess(JSONObject.parseArray(dataStr));     }
+                        });
                     }else{
-                        String msg = jsonObject.getString("msg");
-                        callBack.ErrorHandler(statusCode, msg);
+                        final JSONObject dataJson = new JSONObject();
+                        dataJson.put("data",dataStr);
+                        handler.post(new Runnable() {
+                            @Override
+                            public void run() { callBack.onSuccess(dataJson);     }
+                        });
                     }
                 }
-            });
+            }else if(statusCode.equals("403")){
+                App.getContext().startActivity(new Intent(App.getContext(), LoginActivity.class));
+            }else{
+                handler.post(new Runnable() {
+                    @Override
+                    public void run() { callBack.ErrorHandler(statusCode, jsonObject.getString("msg"));     }
+                });
+            }
         }
     }
 
