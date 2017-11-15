@@ -1,6 +1,8 @@
 package com.blocktechwh.app.block.Fragment;
 
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.media.Image;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
@@ -10,6 +12,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -19,6 +22,7 @@ import com.alibaba.fastjson.JSONObject;
 import com.blocktechwh.app.block.Activity.Contact.AddNewContactActivity;
 import com.blocktechwh.app.block.Activity.Contact.ContactDetailActivity;
 import com.blocktechwh.app.block.Activity.Contact.ContactRequestActivity;
+import com.blocktechwh.app.block.Bean.User;
 import com.blocktechwh.app.block.Common.App;
 import com.blocktechwh.app.block.Common.Urls;
 import com.blocktechwh.app.block.R;
@@ -38,7 +42,7 @@ public class ContactFragment extends Fragment {
 
     private RecyclerView mRecyclerView;
     private ContactAdapter mAdapter;
-    private List<String> mDatas;
+    private List<User> mDatas = new ArrayList<User>();
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -58,16 +62,9 @@ public class ContactFragment extends Fragment {
         addNewContact_btn = (ImageButton)view.findViewById(R.id.id_add_new);
         request_view.setVisibility(View.GONE);
 
-
-        mDatas = new ArrayList<String>();
-        for (int i = 'A'; i < 'z'; i++)
-        {
-            mDatas.add("" + (char) i);
-        }
         mRecyclerView = (RecyclerView)view.findViewById(R.id.id_recycler);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(App.getContext()));
         mRecyclerView.setAdapter(mAdapter = new ContactAdapter());
-
     }
 
     class ContactAdapter extends RecyclerView.Adapter<ContactAdapter.MyViewHolder>{
@@ -81,8 +78,39 @@ public class ContactFragment extends Fragment {
         }
 
         @Override
-        public void onBindViewHolder(MyViewHolder holder, int position){
-            holder.tv.setText(mDatas.get(position));
+        public void onBindViewHolder(final MyViewHolder holder, int position){
+            holder.userName_tv.setText(mDatas.get(position).getName());
+            holder.user_btn.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    int index = holder.getAdapterPosition();
+                    User user = mDatas.get(index);
+                    Intent intent = new Intent(App.getContext(),ContactDetailActivity.class);
+                    Bundle bundle = new Bundle();
+                    bundle.putBoolean("isFriend",true);
+                    bundle.putString("name",user.getName());
+                    bundle.putString("email",user.getEmail());
+                    bundle.putString("phone",user.getPhone());
+                    bundle.putString("address",user.getAddress());
+                    bundle.putString("sex",user.getSex());
+                    bundle.putString("img",user.getImg());
+                    bundle.putString("id",user.getId().toString());
+                    intent.putExtras(bundle);
+                    startActivity(intent);
+                }
+            });
+            String url = Urls.HOST + "staticImg" + mDatas.get(position).getImg();
+            HttpClient.getImage(this, url, new CallBack<Bitmap>() {
+                @Override
+                public void onSuccess(final Bitmap bmp) {
+                    getActivity().runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            holder.userPhoto_iv.setImageBitmap(bmp);
+                        }
+                    });
+                }
+            });
         }
 
         @Override
@@ -91,11 +119,15 @@ public class ContactFragment extends Fragment {
         }
 
         class MyViewHolder extends RecyclerView.ViewHolder{
-            TextView tv;
+            TextView userName_tv;
+            ImageView userPhoto_iv;
+            LinearLayout user_btn;
             public MyViewHolder(View view)
             {
                 super(view);
-                tv = (TextView) view.findViewById(R.id.id_num);
+                user_btn = (LinearLayout) view.findViewById(R.id.id_user_btn);
+                userName_tv = (TextView) view.findViewById(R.id.id_user_name);
+                userPhoto_iv = (ImageView) view.findViewById(R.id.id_user_photo);
             }
         }
     }
@@ -134,7 +166,7 @@ public class ContactFragment extends Fragment {
                         }
                     });
                 }else{
-                    Toast.makeText(getContext(),"4444", Toast.LENGTH_SHORT).show();
+                    request_view.setVisibility(View.GONE);
                 }
             }
         });
@@ -142,9 +174,15 @@ public class ContactFragment extends Fragment {
         HttpClient.get(this, Urls.Contacts, null, new CallBack<JSONArray>() {
             @Override
             public void onSuccess(JSONArray data) {
-
+                mDatas = data.toJavaList(User.class);
+                mAdapter.notifyDataSetChanged();
             }
         });
     }
 
+    @Override
+    public void onResume() {
+        super.onResume();
+        getData();
+    }
 }

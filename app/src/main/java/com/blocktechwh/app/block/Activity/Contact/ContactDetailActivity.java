@@ -1,11 +1,13 @@
 package com.blocktechwh.app.block.Activity.Contact;
 
 
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -31,8 +33,11 @@ public class ContactDetailActivity extends TitleActivity {
     private String sex;
     private String img;
     private String id;
+    private Boolean isFriend;
 
     private Button addBtn;
+    private Button sendBtn;
+    private LinearLayout deleteBtn;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,6 +46,7 @@ public class ContactDetailActivity extends TitleActivity {
 
         Bundle bundle = this.getIntent().getExtras();
 
+        isFriend = bundle.getBoolean("isFriend");
         name = bundle.getString("name");
         email = bundle.getString("email");
         phone = bundle.getString("phone");
@@ -55,12 +61,26 @@ public class ContactDetailActivity extends TitleActivity {
 
     private void initView(){
         addBtn = (Button)findViewById(R.id.id_button_add_contact);
-        addBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                mRequestFriend();
-            }
-        });
+        deleteBtn = (LinearLayout)findViewById(R.id.id_button_delete_contact);
+        sendBtn = (Button)findViewById(R.id.id_button_send_red_ticket);
+        if(isFriend){
+            addBtn.setVisibility(View.GONE);
+            deleteBtn.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    mDeleteFriend();
+                }
+            });
+        }else{
+            deleteBtn.setVisibility(View.GONE);
+            sendBtn.setVisibility(View.GONE);
+            addBtn.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    mRequestFriend();
+                }
+            });
+        }
 
         ((TextView)findViewById(R.id.id_user_name)).setText(name);
         ((TextView)findViewById(R.id.id_text_email)).setText(email);
@@ -88,6 +108,23 @@ public class ContactDetailActivity extends TitleActivity {
             @Override
             public void onSuccess(Object result) {
                 Toast.makeText(App.getContext(),"已发送",Toast.LENGTH_SHORT).show();
+            }
+        });
+    }
+
+    private void mDeleteFriend(){
+        String urls = Urls.DeleteContact + id;
+        System.out.println(urls);
+        HttpClient.delete(this, urls, new JSONObject().toString(), new CallBack() {
+            @Override
+            public void onSuccess(Object result) {
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        Toast.makeText(App.getContext(),"已解除好友关系",Toast.LENGTH_SHORT).show();
+                    }
+                });
+
             }
         });
     }

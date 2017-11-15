@@ -114,10 +114,10 @@ public class Urls {
     public static final String AgreeContactRequest = HOST+"front/link/contact-agree/";
 
     /**
-     * 解除好友关系POST
+     * 解除好友关系DELETE
      * userId:Int 好友id
      */
-    public static final String DeleteContact = HOST+"front/removecontact/";
+    public static final String DeleteContact = HOST+"front/link/contact/";
 
     /**
      * 根据手机号搜索用户GET
