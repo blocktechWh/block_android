@@ -6,6 +6,7 @@ import android.graphics.BitmapFactory;
 import android.os.Handler;
 import android.os.Looper;
 
+import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 
 import java.io.IOException;
@@ -164,6 +165,9 @@ public class HttpClient {
                             final char fistChar = dataStr.charAt(0);
                             if(fistChar == '{'){
                                 JSONObject dataJson = JSONObject.parseObject(dataStr);
+                                callBack.onSuccess(dataJson);
+                            }else if(fistChar == '['){
+                                JSONArray dataJson = JSONObject.parseArray(dataStr);
                                 callBack.onSuccess(dataJson);
                             }else{
                                 JSONObject dataJson = new JSONObject();

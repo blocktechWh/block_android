@@ -89,7 +89,7 @@ public class Urls {
      *
      * 返回值:[{userImg:String联系人头像地址,userName:String联系人姓名,userId:int联系人id,remark:String留言},...,{}]
      */
-    public static final String ContactRequestsList = HOST+"front/getaddcontact/";
+    public static final String ContactRequestsList = HOST+"front/link/new-contacts";
 
     /**
      * 根据用户id获取用户信息GET
@@ -111,7 +111,7 @@ public class Urls {
      * 同意好友请求POST
      * id:Int 添加记录id
      */
-    public static final String AgreeContactRequest = HOST+"front/agreeadd/";
+    public static final String AgreeContactRequest = HOST+"front/link/contact-agree/";
 
     /**
      * 解除好友关系POST
@@ -131,7 +131,7 @@ public class Urls {
      * 申请对方为联系人POST
      * userId:Int 用户id
      */
-    public static final String RequestContact = HOST+"front/addcontact/";
+    public static final String RequestContact = HOST+"front/link/contact-apply/";
 
     /**
      * 向联系人发红包POST

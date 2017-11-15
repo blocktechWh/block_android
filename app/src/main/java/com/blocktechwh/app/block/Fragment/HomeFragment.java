@@ -6,7 +6,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.alibaba.fastjson.JSONObject;
+import com.alibaba.fastjson.JSONArray;
 import com.blocktechwh.app.block.Common.App;
 import com.blocktechwh.app.block.Common.Urls;
 import com.blocktechwh.app.block.R;
@@ -27,9 +27,9 @@ public class HomeFragment extends Fragment {
 
     private void getData(){
         System.out.print("token="+App.token);
-        HttpClient.get(this, Urls.GiftWaitRecieveList, null, new CallBack<JSONObject>() {
+        HttpClient.get(this, Urls.GiftWaitRecieveList, null, new CallBack<JSONArray>() {
             @Override
-            public void onSuccess(JSONObject data) {
+            public void onSuccess(JSONArray data) {
 
             }
         });
