@@ -6,12 +6,13 @@ import android.support.annotation.Nullable;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.alibaba.fastjson.JSONObject;
+import com.blocktechwh.app.block.Activity.MainActivity;
 import com.blocktechwh.app.block.Common.Urls;
 import com.blocktechwh.app.block.CustomView.TitleActivity;
-import com.blocktechwh.app.block.Fragment.ContactFragment;
 import com.blocktechwh.app.block.R;
 import com.blocktechwh.app.block.Utils.CallBack;
 import com.blocktechwh.app.block.Utils.HttpClient;
@@ -24,11 +25,23 @@ public class SendRedTicket extends TitleActivity {
     private Button btn_send;
     private EditText et_amount;
     private EditText et_text_pray;
+    private String id;
+    private String name;
+    private String img;
+    private TextView btv_send_name;
+
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_redticket_send);
         initTitle("发送红包给朋友");
+        //获得上个页面传的数据
+        Bundle bundle = this.getIntent().getExtras();
+        id = bundle.getString("id");
+        img = bundle.getString("img");
+        name = bundle.getString("name");//tv_send_name
+
+
         initData();
         addEvent();
     }
@@ -37,6 +50,9 @@ public class SendRedTicket extends TitleActivity {
         btn_send=(Button) findViewById(R.id.button_send);
         et_amount=(EditText) findViewById(R.id.et_amount);
         et_text_pray=(EditText) findViewById(R.id.et_text_pray);
+        btv_send_name=(TextView)findViewById(R.id.tv_send_name);
+
+        btv_send_name.setText(name);
     }
 
     private void addEvent(){
@@ -52,7 +68,7 @@ public class SendRedTicket extends TitleActivity {
             String s_pray=et_text_pray.getText().toString();
 
             JSONObject json = new JSONObject();
-            json.put("receiveId","8");
+            json.put("receiveId",id);
             json.put("amount",s_amount);
             json.put("giftMsg",s_pray);
 
@@ -64,7 +80,7 @@ public class SendRedTicket extends TitleActivity {
                     Toast.makeText(SendRedTicket.this,"发送成功",Toast.LENGTH_SHORT).show();
                 }
             });
-            startActivity(new Intent(SendRedTicket.this,ContactFragment.class));
+            startActivity(new Intent(SendRedTicket.this,MainActivity.class));
         }
     };
 

@@ -51,6 +51,7 @@
         android:id="@+id/linearLayout2">
 
         <LinearLayout
+            android:id="@+id/lo_gift_sure"
             android:layout_width="match_parent"
             android:layout_height="60dp"
             android:background="@color/white"
@@ -73,7 +74,7 @@
                 android:orientation="vertical">
 
                 <TextView
-                    android:id="@+id/textView32"
+                    android:id="@+id/tv_pray"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="红包祝福" />
@@ -87,7 +88,7 @@
                 android:orientation="vertical">
 
                 <TextView
-                    android:id="@+id/textView34"
+                    android:id="@+id/tv_maker_name"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
@@ -96,7 +97,7 @@
                     android:textSize="12sp" />
 
                 <TextView
-                    android:id="@+id/textView44"
+                    android:id="@+id/tv_create_time"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"

@@ -11,6 +11,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.blocktechwh.app.block.Activity.RedTicket.SendRedTicket;
 import com.blocktechwh.app.block.Common.App;
 import com.blocktechwh.app.block.Common.Urls;
 import com.blocktechwh.app.block.CustomView.TitleActivity;
@@ -38,6 +39,7 @@ public class ContactDetailActivity extends TitleActivity {
     private Button addBtn;
     private Button sendBtn;
     private LinearLayout deleteBtn;
+    private Button btn_tosend;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -69,6 +71,20 @@ public class ContactDetailActivity extends TitleActivity {
                 @Override
                 public void onClick(View view) {
                     mDeleteFriend();
+                }
+            });
+            sendBtn.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    Bundle bundle = new Bundle();
+                    bundle.putString("id",id);
+                    bundle.putString("name",name);
+                    bundle.putString("img",img);
+
+
+                    Intent intent= new Intent(ContactDetailActivity.this, SendRedTicket.class);
+                    intent.putExtras(bundle);
+                    startActivity(intent);
                 }
             });
         }else{
