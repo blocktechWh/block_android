@@ -16,7 +16,7 @@ import android.widget.Toast;
 
 import com.alibaba.fastjson.JSONObject;
 import com.blocktechwh.app.block.Activity.Contact.AddNewContactActivity;
-import com.blocktechwh.app.block.Activity.Contact.ContactDetailActivity;
+import com.blocktechwh.app.block.Activity.Contact.ContactDetailForSendActivity;
 import com.blocktechwh.app.block.Common.App;
 import com.blocktechwh.app.block.Common.Urls;
 import com.blocktechwh.app.block.R;
@@ -114,7 +114,7 @@ public class ContactFragment extends Fragment {
     private View.OnClickListener showContactDetail = new View.OnClickListener(){
         @Override
         public void onClick(View view){
-            startActivity(new Intent(getActivity(), ContactDetailActivity.class));
+            startActivity(new Intent(getActivity(), ContactDetailForSendActivity.class));
         }
     };
 

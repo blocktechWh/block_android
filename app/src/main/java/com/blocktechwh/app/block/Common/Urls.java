@@ -176,5 +176,19 @@ public class Urls {
      */
     public static final String GiftWaitRecieveList = HOST+"front/gift/toin/";
 
+    /**
+     * 发出的红包总额
+     *
+     * 返回值:[{id:String红包id,amount:金额,SenderInfo:{userImg:String,userName:String},time:发送的时间},...]
+     */
+    public static final String GiftSendTotal = HOST+"front/gift/send-total/";
+
+    /**
+     * 收到的红包总额
+     *
+     * 返回值:[{id:String红包id,amount:金额,SenderInfo:{userImg:String,userName:String},time:发送的时间},...]
+     */
+    public static final String GiftReciveTotal = HOST+"front/gift/receive-total/";
+
 
 }
