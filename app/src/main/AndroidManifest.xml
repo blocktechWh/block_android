@@ -39,6 +39,9 @@
         <activity android:name=".Activity.Actions.VotersSelectListActivity" />
         <activity android:name=".Activity.Contact.ContactDetailActivity" />
         <activity android:name=".Activity.Contact.ContactDetailForSendActivity" />
+        <activity android:name=".Activity.RedTicket.SendRedTicket" />
+        <activity android:name=".Activity.RedTicket.RedTicketForSentActivity" />
+
         <activity android:name=".Activity.Contact.ContactRequestActivity"></activity>
     </application>
 

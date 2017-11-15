@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:id="@+id/layout_got"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical">
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="80dp"
@@ -13,9 +13,10 @@
         android:gravity="center_vertical"
         android:orientation="horizontal"
         android:paddingEnd="@dimen/padding_right"
-        android:paddingRight="@dimen/padding_right"
         android:paddingLeft="@dimen/padding_left"
+        android:paddingRight="@dimen/padding_right"
         android:paddingStart="@dimen/padding_left">
+
 
         <LinearLayout
             android:layout_width="80dp"
@@ -24,7 +25,7 @@
             android:orientation="vertical">
 
             <ImageView
-                android:id="@+id/imageView18"
+                android:id="@+id/imageView_getter"
                 android:layout_width="60dp"
                 android:layout_height="60dp"
                 android:layout_weight="1"
@@ -39,13 +40,13 @@
             android:orientation="vertical">
 
             <TextView
-                android:id="@+id/textView68"
+                android:id="@+id/textView_getter"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="来自  Hebe" />
 
             <TextView
-                android:id="@+id/textView67"
+                android:id="@+id/textView_time"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:paddingTop="10dp"
@@ -59,7 +60,7 @@
             android:orientation="vertical">
 
             <TextView
-                android:id="@+id/textView69"
+                android:id="@+id/textView_amount"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="¥  200.80" />

@@ -2,7 +2,6 @@ package com.blocktechwh.app.block.Fragment;
 
 import android.content.Intent;
 import android.graphics.Bitmap;
-import android.media.Image;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
@@ -15,12 +14,12 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import com.blocktechwh.app.block.Activity.Contact.AddNewContactActivity;
 import com.blocktechwh.app.block.Activity.Contact.ContactDetailActivity;
+import com.blocktechwh.app.block.Activity.Contact.ContactDetailForSendActivity;
 import com.blocktechwh.app.block.Activity.Contact.ContactRequestActivity;
 import com.blocktechwh.app.block.Bean.User;
 import com.blocktechwh.app.block.Common.App;
@@ -35,7 +34,6 @@ import java.util.List;
 public class ContactFragment extends Fragment {
 
     private View view;
-    private Button bt_send;
     private TextView requestCount_tv;
     private LinearLayout request_view;
     private ImageButton addNewContact_btn;
@@ -56,7 +54,6 @@ public class ContactFragment extends Fragment {
     }
 
     private void initView(){
-        bt_send=(Button)view.findViewById(R.id.to_send);
         request_view = (LinearLayout)view.findViewById(R.id.id_text_request_layout);
         requestCount_tv = (TextView)view.findViewById(R.id.id_text_request_count);
         addNewContact_btn = (ImageButton)view.findViewById(R.id.id_add_new);
@@ -85,7 +82,7 @@ public class ContactFragment extends Fragment {
                 public void onClick(View view) {
                     int index = holder.getAdapterPosition();
                     User user = mDatas.get(index);
-                    Intent intent = new Intent(App.getContext(),ContactDetailActivity.class);
+                    Intent intent = new Intent(App.getContext(), ContactDetailActivity.class);
                     Bundle bundle = new Bundle();
                     bundle.putBoolean("isFriend",true);
                     bundle.putString("name",user.getName());
@@ -135,19 +132,12 @@ public class ContactFragment extends Fragment {
 
     private void addEvent(){
         addNewContact_btn.setOnClickListener(mIntoContactAdd);
-        bt_send.setOnClickListener(showContactDetail);
     }
 
     private View.OnClickListener mIntoContactAdd = new View.OnClickListener(){
         @Override
         public void onClick(View view){
             startActivity(new Intent(getActivity(),AddNewContactActivity.class));
-        }
-    };
-    private View.OnClickListener showContactDetail = new View.OnClickListener(){
-        @Override
-        public void onClick(View view){
-            startActivity(new Intent(getActivity(), ContactDetailActivity.class));
         }
     };
 

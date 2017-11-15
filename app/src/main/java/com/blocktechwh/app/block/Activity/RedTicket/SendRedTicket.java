@@ -9,9 +9,9 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.alibaba.fastjson.JSONObject;
-import com.blocktechwh.app.block.Activity.Contact.AddNewContactActivity;
 import com.blocktechwh.app.block.Common.Urls;
 import com.blocktechwh.app.block.CustomView.TitleActivity;
+import com.blocktechwh.app.block.Fragment.ContactFragment;
 import com.blocktechwh.app.block.R;
 import com.blocktechwh.app.block.Utils.CallBack;
 import com.blocktechwh.app.block.Utils.HttpClient;
@@ -64,7 +64,7 @@ public class SendRedTicket extends TitleActivity {
                     Toast.makeText(SendRedTicket.this,"发送成功",Toast.LENGTH_SHORT).show();
                 }
             });
-            startActivity(new Intent(SendRedTicket.this,AddNewContactActivity.class));
+            startActivity(new Intent(SendRedTicket.this,ContactFragment.class));
         }
     };
 
