@@ -6,8 +6,9 @@ import android.graphics.BitmapFactory;
 import android.os.Handler;
 import android.os.Looper;
 
-import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
+import com.blocktechwh.app.block.Activity.User.LoginActivity;
+import com.blocktechwh.app.block.Common.App;
 
 import java.io.IOException;
 import java.util.HashMap;
@@ -21,9 +22,6 @@ import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.RequestBody;
 import okhttp3.Response;
-
-import com.blocktechwh.app.block.Activity.User.LoginActivity;
-import com.blocktechwh.app.block.Common.App;
 
 /**
  * Created by eagune on 2017/11/1.
@@ -92,6 +90,7 @@ public class HttpClient {
     }
 
     public static void put(Object tag, String url, String json, final CallBack callBack) {
+        System.out.println("urlkizi = " + url);
         RequestBody requestBody = RequestBody.create(JSON, json);
 
         String Cookie_token = PreferencesUtils.getString(App.getContext(), "Cookie_token", UUID.randomUUID().toString());

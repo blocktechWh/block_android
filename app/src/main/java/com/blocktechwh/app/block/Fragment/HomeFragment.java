@@ -27,6 +27,8 @@ public class HomeFragment extends Fragment {
     private ImageButton id_wallet_image;
     private View view;
     private LinearLayout lo_gift_sure;
+    private int id;
+    private String tv_pray_text;
 
 
     @Override
@@ -57,7 +59,12 @@ public class HomeFragment extends Fragment {
     private View.OnClickListener toGiftSure = new View.OnClickListener(){
         @Override
         public void onClick(View view){
-            startActivity(new Intent(getActivity(),GiftActivity.class));
+            Bundle bundle = new Bundle();
+            bundle.putInt("id",id);
+            bundle.putString("tv_pray",tv_pray_text);
+            Intent intent= new Intent(getActivity(), GiftActivity.class);
+            intent.putExtras(bundle);
+            startActivity(intent);
         }
     };
 
@@ -69,7 +76,9 @@ public class HomeFragment extends Fragment {
 
                 mDatas = data;
                 System.out.print("待接收的红包列表mDatas="+data);
-                operateGiftList(mDatas);
+                if(mDatas.size()>0){
+                    operateGiftList(mDatas);
+                }
 
             }
         });
@@ -77,9 +86,12 @@ public class HomeFragment extends Fragment {
 
     private void operateGiftList(JSONArray ja){
         JSONObject jo=(JSONObject)ja.get(0);
+        id= (int) jo.get("id");
+
         tv_pray.setText(jo.get("sendMsg").toString());
         tv_create_time.setText(jo.get("createTime").toString());
         tv_maker_name.setText(jo.get("sendName").toString());
+        tv_pray_text=jo.get("sendMsg").toString();
 
         for(int i=0;i<mDatas.size();i++){
 

@@ -145,7 +145,7 @@ public class Urls {
      * 收红包POST
      * giftId:Int 红包id
      */
-    public static final String RecieveGift = HOST+"front/recievegift/";
+    public static final String RecieveGift = HOST+"front/gift/receive/";
 
     /**
      * 查看红包详情GET
@@ -153,7 +153,7 @@ public class Urls {
      *
      * 返回值:{giftInfo:{amount:Int,remark:String,SenderInfo:{userImg:String,userName:String}},recieverList:[{},...]}
      */
-    public static final String GiftDetail = HOST+"front/recievegift/";
+    public static final String GiftDetail = HOST+"front/gift/detail/";
 
     /**
      * 收到红包列表GET
@@ -179,16 +179,15 @@ public class Urls {
     /**
      * 发出的红包总额
      *
-     * 返回值:[{id:String红包id,amount:金额,SenderInfo:{userImg:String,userName:String},time:发送的时间},...]
      */
     public static final String GiftSendTotal = HOST+"front/gift/send-total/";
 
     /**
      * 收到的红包总额
      *
-     * 返回值:[{id:String红包id,amount:金额,SenderInfo:{userImg:String,userName:String},time:发送的时间},...]
      */
     public static final String GiftReciveTotal = HOST+"front/gift/receive-total/";
+
 
 
 }

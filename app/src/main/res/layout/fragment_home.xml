@@ -77,6 +77,7 @@
                     android:id="@+id/tv_pray"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:ems="13"
                     android:text="红包祝福" />
 
             </LinearLayout>

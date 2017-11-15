@@ -12,6 +12,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
@@ -202,15 +203,15 @@ public class RedTicketDetailActivity extends TitleActivity {
 
         public MyOnClickListener(int i) {
             index = i;
-//            if(i==0){
-//                tv_recive.setText(count_send);
-//            }else if(i==1){
-//                tv_recive.setText(count_recive);
-//            }
         }
 
         public void onClick(View v) {
             vp.setCurrentItem(index);
+            if(0==index){
+                tv_recive.setText("¥ "+count_recive);
+            }else if(1==index){
+                tv_recive.setText("¥ "+count_send);
+            }
 
         }
     }
@@ -221,11 +222,11 @@ public class RedTicketDetailActivity extends TitleActivity {
         HttpClient.get(this, Urls.GiftSendTotal, null, new CallBack<JSONObject>() {
             @Override
             public void onSuccess(final JSONObject data) {
-                if(data!=null){
-                    System.out.print("data="+data);
-                    tv_recive.setText("¥ "+data.getString("data"));
-                    count_recive="¥ "+data.getString("data").toString();
-                }
+                Toast.makeText(RedTicketDetailActivity.this,"444444",Toast.LENGTH_SHORT).show();
+
+                System.out.println("data="+data);
+                    tv_recive.setText("¥ "+data.getInteger("data").toString());
+                count_send="¥ "+data.getString("data").toString();
             }
         });
 
@@ -233,10 +234,9 @@ public class RedTicketDetailActivity extends TitleActivity {
         HttpClient.get(this, Urls.GiftReciveTotal, null, new CallBack<JSONObject>() {
             @Override
             public void onSuccess(final JSONObject data) {
-                if(data!=null){
+
                     System.out.print("data="+data);
-                    count_send="¥ "+data.getString("data").toString();
-                }
+                count_recive="¥ "+data.getString("data").toString();
             }
         });
 
