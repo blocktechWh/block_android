@@ -128,6 +128,7 @@ public class AddNewContactActivity extends TitleActivity {
                 public void onClick(View view){
                     Intent intent = new Intent(App.getContext(),ContactDetailActivity.class);
                     Bundle bundle = new Bundle();
+                    bundle.putBoolean("isFriend",false);
                     bundle.putString("name",user.getName());
                     bundle.putString("email",user.getEmail());
                     bundle.putString("phone",user.getPhone());

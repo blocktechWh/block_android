@@ -145,6 +145,22 @@
         </LinearLayout>
     </LinearLayout>
 
+    <LinearLayout
+        android:id="@+id/id_button_delete_contact"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:layout_marginTop="20dp"
+        android:background="@drawable/lines_bg"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:paddingLeft="40dp"
+        android:paddingStart="40dp">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="解除好友关系" />
+    </LinearLayout>
+
     <Button
         android:id="@+id/id_button_add_contact"
         android:layout_width="320dp"
@@ -152,6 +168,14 @@
         android:layout_marginTop="50dp"
         android:background="@drawable/coners_bg2"
         android:text="添加到通讯录"
+        android:textColor="@color/white" />
+    <Button
+        android:id="@+id/id_button_send_red_ticket"
+        android:layout_width="320dp"
+        android:layout_height="44dp"
+        android:layout_marginTop="50dp"
+        android:background="@drawable/coners_bg2"
+        android:text="发红包"
         android:textColor="@color/white" />
 
 
