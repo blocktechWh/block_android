@@ -13,6 +13,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import com.blocktechwh.app.block.Adapter.RedTicketDetailAdapter;
 import com.blocktechwh.app.block.Common.App;
@@ -219,10 +220,9 @@ public class RedTicketDetailActivity extends TitleActivity {
         //请求发送红包总金额
         HttpClient.get(this, Urls.GiftSendTotal, null, new CallBack<JSONObject>() {
             @Override
-            public void onSuccess(JSONObject data) {
+            public void onSuccess(final JSONObject data) {
                 if(data!=null){
                     System.out.print("data="+data);
-
                     tv_recive.setText("¥ "+data.getString("data"));
                     count_recive="¥ "+data.getString("data").toString();
                 }
@@ -232,29 +232,28 @@ public class RedTicketDetailActivity extends TitleActivity {
         //请求收到红包总金额
         HttpClient.get(this, Urls.GiftReciveTotal, null, new CallBack<JSONObject>() {
             @Override
-            public void onSuccess(JSONObject data) {
+            public void onSuccess(final JSONObject data) {
                 if(data!=null){
                     System.out.print("data="+data);
                     count_send="¥ "+data.getString("data").toString();
-
                 }
             }
         });
 
         //请求收到红包列表请求
-        HttpClient.get(this, Urls.GiftGetList, null, new CallBack<JSONObject>() {
+        HttpClient.get(this, Urls.GiftGetList, null, new CallBack<JSONArray>() {
             @Override
-            public void onSuccess(JSONObject data) {
+            public void onSuccess(JSONArray data) {
 
             }
         });
 
         //请求发出红包列表请求
-        HttpClient.get(this, Urls.GiftSendList, null, new CallBack<JSONObject>() {
+        HttpClient.get(this, Urls.GiftSendList, null, new CallBack<JSONArray>() {
             @Override
-            public void onSuccess(JSONObject data) {
+            public void onSuccess(JSONArray data) {
                 if(data!=null){
-                    dataReturn=data;
+                    //dataReturn=data;
                 }
             }
         });

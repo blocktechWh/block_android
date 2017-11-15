@@ -165,7 +165,7 @@ public class Urls {
     /**
      * 发出红包列表GET
      *
-     * 返回值:[{id:String红包id,amount:金额,type:Int红包类型},...]
+     * 返回值:[{id:String红包id,amou
      */
     public static final String GiftSendList = HOST+"front/gift/send-list/";
 
