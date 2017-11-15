@@ -92,12 +92,7 @@ public class ContactDetailActivity extends TitleActivity {
         HttpClient.getImage(this, url, new CallBack<Bitmap>() {
             @Override
             public void onSuccess(final Bitmap bmp) {
-                runOnUiThread(new Runnable() {
-                    @Override
-                    public void run() {
-                        ((ImageView)findViewById(R.id.id_user_photo)).setImageBitmap(bmp);
-                    }
-                });
+                ((ImageView)findViewById(R.id.id_user_photo)).setImageBitmap(bmp);
             }
         });
     }

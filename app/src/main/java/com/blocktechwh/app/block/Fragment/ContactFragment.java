@@ -100,12 +100,7 @@ public class ContactFragment extends Fragment {
             HttpClient.getImage(this, url, new CallBack<Bitmap>() {
                 @Override
                 public void onSuccess(final Bitmap bmp) {
-                    getActivity().runOnUiThread(new Runnable() {
-                        @Override
-                        public void run() {
-                            holder.userPhoto_iv.setImageBitmap(bmp);
-                        }
-                    });
+                    holder.userPhoto_iv.setImageBitmap(bmp);
                 }
             });
         }
@@ -128,7 +123,6 @@ public class ContactFragment extends Fragment {
             }
         }
     }
-
 
     private void addEvent(){
         addNewContact_btn.setOnClickListener(mIntoContactAdd);

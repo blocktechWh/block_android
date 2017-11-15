@@ -69,12 +69,7 @@ public class ContactRequestActivity extends TitleActivity {
             HttpClient.getImage(this, url, new CallBack<Bitmap>() {
                 @Override
                 public void onSuccess(final Bitmap bmp) {
-                    runOnUiThread(new Runnable() {
-                        @Override
-                        public void run() {
-                            holder.userPhoto_iv.setImageBitmap(bmp);
-                        }
-                    });
+                    holder.userPhoto_iv.setImageBitmap(bmp);
                 }
             });
         }
@@ -113,13 +108,8 @@ public class ContactRequestActivity extends TitleActivity {
         HttpClient.put(this, url, new JSONObject().toString(), new CallBack() {
             @Override
             public void onSuccess(Object result) {
-                runOnUiThread(new Runnable() {
-                    @Override
-                    public void run() {
-                        mDatas.remove(position);
-                        mAdapter.notifyItemRemoved(position);
-                    }
-                });
+                mDatas.remove(position);
+                mAdapter.notifyItemRemoved(position);
             }
         });
     }

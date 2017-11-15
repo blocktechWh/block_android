@@ -57,7 +57,12 @@ public class HttpClient {
             public void onResponse(Call call, Response response) throws IOException {
                 byte[] bytes = response.body().bytes();
                 final Bitmap bmp = BitmapFactory.decodeByteArray(bytes, 0, bytes.length);
-                callBack.onSuccess(bmp);
+                handler.post(new Runnable() {
+                    @Override
+                    public void run() {
+                        callBack.onSuccess(bmp);
+                    }
+                });
             }
         });
     }

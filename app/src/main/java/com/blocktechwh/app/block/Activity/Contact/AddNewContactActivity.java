@@ -113,12 +113,7 @@ public class AddNewContactActivity extends TitleActivity {
             HttpClient.getImage(this, url, new CallBack<Bitmap>() {
                 @Override
                 public void onSuccess(final Bitmap bmp) {
-                    runOnUiThread(new Runnable() {
-                        @Override
-                        public void run() {
-                            userPhoto_iv.setImageBitmap(bmp);
-                        }
-                    });
+                    userPhoto_iv.setImageBitmap(bmp);
                 }
             });
 
