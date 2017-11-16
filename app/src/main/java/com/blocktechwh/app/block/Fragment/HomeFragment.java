@@ -48,7 +48,6 @@ public class HomeFragment extends Fragment {
         id_wallet_image=view.findViewById(R.id.id_wallet_image);
         lo_gift_sure=view.findViewById(R.id.lo_gift_sure);
 
-
     }
 
     private void addEvent(){
@@ -67,6 +66,7 @@ public class HomeFragment extends Fragment {
             startActivity(intent);
         }
     };
+
 
     private void getData(){
         System.out.print("token="+App.token);

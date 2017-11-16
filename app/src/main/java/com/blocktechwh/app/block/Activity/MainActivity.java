@@ -1,23 +1,22 @@
 package com.blocktechwh.app.block.Activity;
 
 import android.os.Bundle;
+import android.support.design.widget.TabLayout;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentPagerAdapter;
+import android.support.v4.content.ContextCompat;
+import android.support.v4.view.ViewCompat;
+import android.support.v4.view.ViewPager;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.support.v4.app.FragmentPagerAdapter;
-import android.support.v4.view.ViewCompat;
-import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
-import android.support.v4.view.ViewPager;
-import android.support.v4.content.ContextCompat;
-import android.support.design.widget.TabLayout;
 
 import com.blocktechwh.app.block.CustomView.BaseActivity;
-import com.blocktechwh.app.block.R;
-
+import com.blocktechwh.app.block.Fragment.ContactFragment;
 import com.blocktechwh.app.block.Fragment.HomeFragment;
 import com.blocktechwh.app.block.Fragment.UserFragment;
-import com.blocktechwh.app.block.Fragment.ContactFragment;
+import com.blocktechwh.app.block.R;
 import com.blocktechwh.app.block.Utils.SupportMultipleScreensUtil;
 
 import java.util.ArrayList;
