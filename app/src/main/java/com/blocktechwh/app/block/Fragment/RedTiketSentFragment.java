@@ -1,63 +1,67 @@
 package com.blocktechwh.app.block.Fragment;
 
+import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
+import com.alibaba.fastjson.JSONArray;
+import com.blocktechwh.app.block.Bean.RedTicketSendData;
 import com.blocktechwh.app.block.Common.App;
+import com.blocktechwh.app.block.Common.Urls;
 import com.blocktechwh.app.block.R;
+import com.blocktechwh.app.block.Utils.CallBack;
+import com.blocktechwh.app.block.Utils.HttpClient;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 /**
  * Created by 跳跳蛙 on 2017/11/14.
  */
 
 public class RedTiketSentFragment extends Fragment {
+
     private View view;
     private RecyclerView mRecyclerView;
-    private RedTiketSentFragment.reciveListAdapter mAdapter;
-    private List<Map<String,Object>> mDatas;
+    private RedTiketSentFragment.Adapter mAdapter;
+    private List<RedTicketSendData> mDatas = new ArrayList<RedTicketSendData>();
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+
         view=inflater.inflate(R.layout.view_sended, container, false);
-
-        Toast.makeText(getActivity(),"该页面被加载了",Toast.LENGTH_SHORT).show();
         initView();
-        return view;
+        getData();
 
+        return view;
     }
 
     private void initView(){
-
-        mDatas = new ArrayList<Map<String,Object>>();
-        for (int i = 'A'; i < 'z'; i++)
-        {
-            Map<String,Object> hm=new HashMap<String, Object>();
-            hm.put("geter_name","胡艺瑾");
-            hm.put("get_time","10-11");
-            hm.put("amount","250.00");
-
-            hm.put("id_img",R.mipmap.image_test);
-            mDatas.add(hm);
-        }
-//        mRecyclerView = (RecyclerView)view.findViewById(R.id.id_send_recycler);
-//        mRecyclerView.setLayoutManager(new LinearLayoutManager(App.getContext()));
-//        mRecyclerView.setAdapter(mAdapter = new RedTiketSentFragment.reciveListAdapter());
-
+        mRecyclerView = (RecyclerView)view.findViewById(R.id.id_send_recycler);
+        mRecyclerView.setLayoutManager(new LinearLayoutManager(App.getContext()));
+        mRecyclerView.setAdapter(mAdapter = new RedTiketSentFragment.Adapter());
     }
 
-    class reciveListAdapter extends RecyclerView.Adapter<reciveListAdapter.MyViewHolder>{
+    private void getData(){
+        //请求发出红包列表请求
+        HttpClient.get(this, Urls.GiftSendList, null, new CallBack<JSONArray>() {
+            @Override
+            public void onSuccess(JSONArray data) {
+                mDatas = data.toJavaList(RedTicketSendData.class);
+                mAdapter.notifyDataSetChanged();
+            }
+        });
+    }
+
+    class Adapter extends RecyclerView.Adapter<Adapter.MyViewHolder>{
 
         @Override
         public MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType){
@@ -68,13 +72,17 @@ public class RedTiketSentFragment extends Fragment {
         }
 
         @Override
-        public void onBindViewHolder(MyViewHolder holder, int position){
-            holder.geter_name.setText(mDatas.get(position).get("geter_name").toString());
-            holder.get_time.setText(mDatas.get(position).get("get_time").toString());
-            holder.amount.setText(mDatas.get(position).get("amount").toString());
-
-            holder.image_layout.setBackgroundResource(Integer.parseInt(mDatas.get(position).get("id_img").toString()));
-
+        public void onBindViewHolder(final MyViewHolder holder, int position){
+            holder.geter_name.setText(mDatas.get(position).getName());
+            holder.get_time.setText(mDatas.get(position).getCreateTimeString());
+            holder.amount.setText(mDatas.get(position).getAmount().toString());
+            String url = Urls.HOST + "staticImg" + mDatas.get(position).getImg();
+            HttpClient.getImage(this, url, new CallBack<Bitmap>() {
+                @Override
+                public void onSuccess(final Bitmap bmp) {
+                    holder.image_layout.setImageBitmap(bmp);
+                }
+            });
         }
 
         @Override
@@ -84,9 +92,7 @@ public class RedTiketSentFragment extends Fragment {
 
         class MyViewHolder extends RecyclerView.ViewHolder{
 
-
             TextView geter_name,get_time,amount;
-
             ImageView image_layout;
 
             public MyViewHolder(View view)
@@ -97,7 +103,6 @@ public class RedTiketSentFragment extends Fragment {
                 amount = (TextView) view.findViewById(R.id.textView_amount);
 
                 image_layout=(ImageView) view.findViewById(R.id.imageView_getter);
-
             }
         }
     }
