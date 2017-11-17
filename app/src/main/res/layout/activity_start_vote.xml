@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/layout_main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/appBackground"
@@ -59,7 +60,7 @@
                     android:paddingStart="10dp">
 
                     <EditText
-                        android:id="@+id/editText6"
+                        android:id="@+id/etTheme"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:ems="10"
@@ -161,7 +162,9 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:text="单选" />
+                        android:text="多选"
+                        android:textOff="单选"
+                        android:textOn="多选" />
 
                 </LinearLayout>
 
@@ -178,11 +181,12 @@
                         android:layout_weight="1"
                         android:text="结束时间" />
 
-                    <NumberPicker
-                        android:id="@+id/numberPicker"
+                    <TextView
+                        android:id="@+id/tv_popup_time"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_weight="1" />
+                        android:layout_weight="1"
+                        android:text="选择时间" />
 
                 </LinearLayout>
 
@@ -203,9 +207,36 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:text="关" />
+                        android:text="开"
+                        android:textOff="关"
+                        android:textOn="开" />
 
                 </LinearLayout>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/margin_top"
+                android:background="@color/white"
+                android:gravity="center_horizontal"
+                android:minHeight="60dp"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/textView44"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_horizontal"
+                    android:text="奖励信息" />
+
+                <TextView
+                    android:id="@+id/tv_add_reward"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20dp"
+                    android:text="添加奖励" />
 
             </LinearLayout>
 
@@ -232,6 +263,29 @@
                     android:text="选择人员"
                     android:textColor="@color/colorAccent" />
             </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginTop="@dimen/margin_top"
+                android:background="@color/white"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="是否可加注" />
+
+                <Switch
+                    android:id="@+id/switch_if_add"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="关"
+                    android:textOff="关"
+                    android:textOn="开" />
+
+            </LinearLayout>
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -239,7 +293,7 @@
                 android:orientation="horizontal">
 
                 <Button
-                    android:id="@+id/button11"
+                    android:id="@+id/btnStartVote"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"

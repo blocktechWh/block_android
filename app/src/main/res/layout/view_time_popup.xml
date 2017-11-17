@@ -1,0 +1,13 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    tools:context="com.blocktechwh.app.block.Activity.MainActivity" >
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:text="交友需带三分侠气，做人要存一点素心\n  —《菜根谭》"
+        android:textColor="#000"
+        android:background="@mipmap/upload_img" />
+</LinearLayout>

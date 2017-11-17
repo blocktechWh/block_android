@@ -9,7 +9,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -84,8 +83,7 @@ public class AddPlayerActivity extends TitleActivity {
         ll_player_img=(ImageView) findViewById(R.id.ll_player_img);
         tvToAddAction=(TextView) findViewById(R.id.tv_to_add_action);
         btnAddSure=(Button) findViewById(R.id.btn_add_sure);
-        sIfSingle=(Switch) findViewById(R.id.switch_vote1);
-        sIfNoSee=(Switch) findViewById(R.id.switch_vote2);
+
 
         //url = Urls.HOST + "staticImg" + imgUrl.toString();
         if(imgUrl!=""){
@@ -162,35 +160,6 @@ public class AddPlayerActivity extends TitleActivity {
 
     private void addEvent(){
 
-        //点击开关选择是否单选
-        sIfSingle.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                if(isChecked){
-                    sIfSingle.setText("多选");
-                    isLimited=false;
-                }else{
-                    sIfSingle.setText("单选");
-                    isLimited=true;
-                }
-                VoteInfo.setIsLimited(isLimited);
-            }
-        });
-
-        //点击开关选择是否匿名
-        sIfNoSee.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                if(isChecked){
-                    sIfNoSee.setText("开");
-                    isAnonymous=true;
-                }else{
-                    sIfNoSee.setText("关");
-                    isAnonymous=false;
-                }
-                VoteInfo.setIsLimited(isAnonymous);
-            }
-        });
 
         //添加活动项
         tvToAddAction.setOnClickListener(new View.OnClickListener(){
