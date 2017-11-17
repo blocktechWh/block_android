@@ -12,9 +12,9 @@ public class VoteInfo {
     private static List<String>imgUrls=new ArrayList<String>();
     private static String voteImg;
     private static String voteTheme;
-    private static boolean isLimited=false;
-    private static boolean isAnonymous=true;
-    private static boolean isRaise=true;
+    private static boolean isLimited;
+    private static boolean isAnonymous;
+    private static boolean isRaise;
     private static String voteExpireTime;
     private static List<Map<String,Object>>options=new ArrayList<>();
     private static List<Integer>voteTarget=new ArrayList<>();

@@ -11,9 +11,13 @@ import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.alibaba.fastjson.JSONObject;
 import com.blocktechwh.app.block.Common.App;
+import com.blocktechwh.app.block.Common.Urls;
 import com.blocktechwh.app.block.CustomView.TitleActivity;
 import com.blocktechwh.app.block.R;
+import com.blocktechwh.app.block.Utils.CallBack;
+import com.blocktechwh.app.block.Utils.HttpClient;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -37,6 +41,7 @@ public class VotesListActivity extends TitleActivity {
         initView();
         createVoteBtn=(Button) findViewById(R.id.start_vote);
         addEvent();
+        getData();
     }
 
 
@@ -126,6 +131,15 @@ public class VotesListActivity extends TitleActivity {
         });
     }
 
+    private void getData(){
+        //查询投票列表
+        HttpClient.get(this, Urls.ContactRequestsCount, null, new CallBack<JSONObject>() {
+            @Override
+            public void onSuccess(JSONObject data) {
+
+            }
+        });
+    }
 
 }
 

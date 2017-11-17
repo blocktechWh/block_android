@@ -188,6 +188,57 @@ public class Urls {
      */
     public static final String GiftReciveTotal = HOST+"front/gift/receive-total/";
 
+    /**
+     * 查询未投票列表
+     *
+     */
+    public static final String QueryVotesList = HOST+"front/vote/tobe-lists/";
+
+
+    /**
+     * 查询是否已投
+     *
+     */
+            public static final String QueryHasVoted = HOST+"front/vote/voted/";
+
+
+
+    /**
+     * 投票详情
+     *
+     */
+    public static final String QueryVoteDetail = HOST+"front/vote/overview/";
+
+
+    /**
+     * 发起投票
+     *
+     */
+    public static final String MakeVote = HOST+"front/vote/create/";
+
+
+    /**
+     * 投票
+     *
+     */
+
+    public static final String MAKEVote = HOST+"front/vote/do-vote/";
+
+
+    /**
+     * 给投票加注POST
+     *
+     */
+    public static final String MakeRaise = HOST+"front/vote/raise/";
+
+
+    /**
+     * 查询加注列表GET
+     *
+     */
+    public static final String QueryRaiseLIst = HOST+"front/vote/raise-list/";
+
+
 
 
 }

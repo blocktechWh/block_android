@@ -25,6 +25,9 @@ import com.blocktechwh.app.block.R;
 import com.blocktechwh.app.block.Utils.CallBack;
 import com.blocktechwh.app.block.Utils.HttpClient;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * Created by Administrator on 2017/11/10.
  */
@@ -43,7 +46,7 @@ public class StartActivity extends AppCompatActivity {
     private TextView addPlayersButton;
     private Switch sIfSingle;
     private Switch sIfNoSee;
-    private Switch switch_if_add;
+    private Switch switchifAdd;
     private boolean isLimited=false;
     private boolean isAnonymous=true;
     private boolean isRaise=true;
@@ -77,14 +80,24 @@ public class StartActivity extends AppCompatActivity {
         tv_to_add=(TextView) findViewById(R.id.tv_to_add);
         sIfSingle=(Switch) findViewById(R.id.switch_vote1);
         sIfNoSee=(Switch) findViewById(R.id.switch_vote2);
-        switch_if_add=(Switch) findViewById(R.id.switch_if_add);
-        sIfSingle.setChecked(true);
+        switchifAdd=(Switch) findViewById(R.id.switchifAdd);
+        sIfSingle.setChecked(false);
         sIfNoSee.setChecked(true);
+        switchifAdd.setChecked(true);
+
         tvPopupTime=(TextView) findViewById(R.id.tv_popup_time);
         layout=(LinearLayout) findViewById(R.id.layout_main);
         tv_add_reward=(TextView) findViewById(R.id.tv_add_reward);
         btnStartVote=(Button) findViewById(R.id.btnStartVote);
         etTheme=(EditText) findViewById(R.id.etTheme);
+        VoteInfo.setIsLimited(isLimited);
+        VoteInfo.setIsAnonymous(isAnonymous);
+        VoteInfo.setIsRaise(isRaise);
+
+        if(VoteInfo.getVoteTheme()!=null){
+            etTheme.setText(VoteInfo.getVoteTheme().toString());
+        }
+        //etTheme.setText(VoteInfo.getVoteTheme().toString());
 
     }
 
@@ -94,11 +107,11 @@ public class StartActivity extends AppCompatActivity {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 if(isChecked){
-                    sIfSingle.setText("多选");
-                    isLimited=false;
-                }else{
                     sIfSingle.setText("单选");
                     isLimited=true;
+                }else{
+                    sIfSingle.setText("多选");
+                    isLimited=false;
                 }
                 VoteInfo.setIsLimited(isLimited);
                 System.out.print(VoteInfo.getIsLimited());
@@ -151,14 +164,14 @@ public class StartActivity extends AppCompatActivity {
         });
 
         //点击开关选择是否匿名
-        switch_if_add.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+        switchifAdd.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 if(isChecked){
-                    sIfNoSee.setText("开");
+                    switchifAdd.setText("开");
                     isRaise=true;
                 }else{
-                    sIfNoSee.setText("关");
+                    switchifAdd.setText("关");
                     isRaise=false;
                 }
                 VoteInfo.setIsRaise(isRaise);
@@ -171,6 +184,7 @@ public class StartActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 String theme=etTheme.getText().toString();
+                VoteInfo.setVoteTheme(theme);
                 Intent intent = new Intent(StartActivity.this,AddPlayerActivity.class);
                 intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_EXCLUDE_FROM_RECENTS);
                 startActivity(intent);
@@ -192,6 +206,7 @@ public class StartActivity extends AppCompatActivity {
         tv_add_reward.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View view) {
+                VoteInfo.setVoteTheme(etTheme.getText().toString());
                 Intent intent = new Intent(StartActivity.this,AddPlayerActivity.class);
                 intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_EXCLUDE_FROM_RECENTS);
                 startActivity(intent);
@@ -204,17 +219,32 @@ public class StartActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 JSONObject json = new JSONObject();
-                json.put("img","sduhfciusdaghhfi329485yhdbngiuvywiohf");
-                json.put("theme",VoteInfo.getVoteTheme());
-                json.put("isLimited",VoteInfo.getIsLimited());
-                json.put("isAnonymous",VoteInfo.getIsAnonymous());
-                json.put("voteFee",VoteInfo.getVoteFee());
-                json.put("expireTime","2017-11-16T03:52:17.106Z");
-                json.put("items",VoteInfo.getOptions());
-                json.put("voters",VoteInfo.getVoterList());
-                json.put("rewardRule",VoteInfo.getVoteRewardRule());
+                List<Integer>voterList=new ArrayList<>();
+                voterList.add(2);
+                voterList.add(1);
+                List<Integer>rewardRuleList=new ArrayList<>();
+                rewardRuleList.add(80);
+                rewardRuleList.add(20);
 
-                HttpClient.post(this, Urls.Login, json.toString(), new CallBack<JSONObject>() {
+                json.put("voteImg","sduhfciusdaghhfi329485yhdbngiuvywiohf");
+//                if(VoteInfo.getVoteTheme().equals(null)){
+//                    json.put("voteTheme",etTheme.getText().toString());
+//                }else{
+//                    json.put("voteTheme",VoteInfo.getVoteTheme());
+//
+//                }
+                json.put("voteTheme",etTheme.getText().toString());
+                json.put("isLimited",VoteInfo.getIsLimited());
+                json.put("isRaise",VoteInfo.getIsRaise());
+                json.put("isAnonymous",VoteInfo.getIsAnonymous());
+                json.put("voteFee",100.00);//VoteInfo.getVoteFee()
+                json.put("voteExpireTime","2017-11-16T03:52:17.106Z");
+                json.put("options",VoteInfo.getOptions());
+                json.put("voteTarget",voterList);//VoteInfo.getVoterList()
+                json.put("voteRewardRule",rewardRuleList);//VoteInfo.getVoteRewardRule()
+
+                System.out.print("json="+json);
+                HttpClient.post(this, Urls.MakeVote, json.toString(), new CallBack<JSONObject>() {
                     @Override
                     public void onSuccess(JSONObject data) {
                         Toast.makeText(StartActivity.this,"发起投票成功",Toast.LENGTH_SHORT).show();;

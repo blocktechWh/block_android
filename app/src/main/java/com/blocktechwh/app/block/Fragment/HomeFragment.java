@@ -19,6 +19,9 @@ import com.blocktechwh.app.block.R;
 import com.blocktechwh.app.block.Utils.CallBack;
 import com.blocktechwh.app.block.Utils.HttpClient;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class HomeFragment extends Fragment {
     private JSONArray mDatas = new JSONArray();
     private TextView tv_pray;
@@ -70,18 +73,94 @@ public class HomeFragment extends Fragment {
 
     private void getData(){
         System.out.print("token="+App.token);
-        HttpClient.get(this, Urls.GiftWaitRecieveList, null, new CallBack<JSONArray>() {
+        //查询红包
+//        HttpClient.get(this, Urls.GiftWaitRecieveList, null, new CallBack<JSONArray>() {
+//            @Override
+//            public void onSuccess(JSONArray data) {
+//
+//                mDatas = data;
+//                System.out.print("待接收的红包列表mDatas="+data);
+//                if(mDatas.size()>0){
+//                    operateGiftList(mDatas);
+//                }
+//
+//            }
+//        });
+
+
+
+        //查询投票
+        HttpClient.get(this, Urls.QueryVotesList, null, new CallBack<JSONArray>() {
             @Override
             public void onSuccess(JSONArray data) {
+                System.out.print("待投票列表mDatas="+data);
 
-                mDatas = data;
-                System.out.print("待接收的红包列表mDatas="+data);
-                if(mDatas.size()>0){
-                    operateGiftList(mDatas);
-                }
 
             }
         });
+
+        //查询投票是否已投
+        HttpClient.get(this, Urls.QueryHasVoted+8, null, new CallBack<JSONObject>() {
+            @Override
+            public void onSuccess(JSONObject data) {
+                System.out.print("是否已投返回值="+data);
+                if(data.getString("data")=="false"){
+                    //调http://111.231.146.57:20086/front/vote/overview/{voteId}
+                }else{
+                    //调http://111.231.146.57:20086/front/vote/statis/{voteId}
+                }
+
+
+            }
+        });
+
+        //查询投票详情
+        HttpClient.get(this, Urls.QueryVoteDetail+8, null, new CallBack<JSONObject>() {
+            @Override
+            public void onSuccess(JSONObject data) {
+                System.out.print("投票详情mDatas="+data);
+
+            }
+        });
+
+
+       //执行投票
+        JSONObject json_vote=new JSONObject();
+        List<String> optionId=new ArrayList<>();
+        optionId.add("9");//活动id
+        optionId.add("10");
+        json_vote.put("voteId","8");//投票id
+        json_vote.put("optionId",optionId);
+
+        HttpClient.post(this, Urls.MAKEVote, json_vote.toString(), new CallBack<JSONObject>() {
+            @Override
+            public void onSuccess(JSONObject data) {
+                System.out.print("投票返回="+data);
+            }
+        });
+//
+//
+//        //给投票加注
+//        JSONObject json_raise=new JSONObject();
+//        json_vote.put("voteId","8");//投票id
+//        json_vote.put("amount","100");//加注金额
+//
+//        HttpClient.post(this, Urls.MakeRaise, json_raise.toString(), new CallBack<JSONObject>() {
+//            @Override
+//            public void onSuccess(JSONObject data) {
+//                System.out.print("投票加注返回="+data);
+//            }
+//        });
+//
+//        //查询加注列表
+//        HttpClient.get(this, Urls.QueryRaiseLIst+8, null, new CallBack<JSONArray>() {
+//            @Override
+//            public void onSuccess(JSONArray data) {
+//                System.out.print("加注列表="+data);
+//
+//            }
+//        });
+
     }
 
     private void operateGiftList(JSONArray ja){
@@ -96,5 +175,9 @@ public class HomeFragment extends Fragment {
         for(int i=0;i<mDatas.size();i++){
 
         }
+    }
+
+    private void operateVoteList(){
+
     }
 }

@@ -277,11 +277,11 @@
                     android:text="是否可加注" />
 
                 <Switch
-                    android:id="@+id/switch_if_add"
+                    android:id="@+id/switchifAdd"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:text="关"
+                    android:text="开"
                     android:textOff="关"
                     android:textOn="开" />
 

@@ -118,7 +118,7 @@ public class AddPlayerActivity extends TitleActivity {
         @Override
         public void onBindViewHolder(final MyViewHolder holder, final int position){
             Map<String,Object> map=mDatas.get(position);
-            //holder.tv.setText(map.get("item").toString());
+            holder.tv.setText(map.get("item").toString());
             System.out.println("holder.tv="+holder.tv.getText());
 
             if(!imgUrls.isEmpty()){
