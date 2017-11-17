@@ -44,7 +44,7 @@ public class VotesListActivity extends TitleActivity {
     private void initView(){
 
         mDatas = new ArrayList<Map<String,Object>>();
-        for (int i = 'A'; i < 'z'; i++)
+        for (int i = 'A'; i < 'G'; i++)
         {
             Map<String,Object> hm=new HashMap<String, Object>();
             hm.put("text_action_title","周末洗厕所比赛");

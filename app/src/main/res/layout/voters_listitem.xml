@@ -16,12 +16,19 @@
         android:layout_height="50dp"
         app:srcCompat="@mipmap/icon21" />
 
-    <CheckBox
-        android:id="@+id/itemText"
+<!--    <CheckBox
+        android:id="@+id/itemText_player"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_weight="1"
-        android:text="CheckBox" />
+        android:text="CheckBox" />-->
+
+    <RadioButton
+        android:id="@+id/itemText_player"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:text="RadioButton" />
 
     <!--    <CheckedTextView
             android:id="@+id/itemText"
