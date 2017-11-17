@@ -23,14 +23,14 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Created by 跳跳蛙 on 2017/11/14.
+ * Created by eagune on 2017/11/16.
  */
 
-public class RedTiketSentFragment extends Fragment {
+public class RedTiketGetFragment extends Fragment {
 
     private View view;
     private RecyclerView mRecyclerView;
-    private RedTiketSentFragment.Adapter mAdapter;
+    private RedTiketGetFragment.Adapter mAdapter;
     private List<RedTicketSendData> mDatas = new ArrayList<RedTicketSendData>();
 
     @Override
@@ -47,11 +47,11 @@ public class RedTiketSentFragment extends Fragment {
     private void initView(){
         mRecyclerView = (RecyclerView)view.findViewById(R.id.id_send_recycler);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(App.getContext()));
-        mRecyclerView.setAdapter(mAdapter = new RedTiketSentFragment.Adapter());
+        mRecyclerView.setAdapter(mAdapter = new RedTiketGetFragment.Adapter());
     }
 
     private void getData(){
-        HttpClient.get(this, Urls.GiftSendList, null, new CallBack<JSONArray>() {
+        HttpClient.get(this, Urls.GiftGetList, null, new CallBack<JSONArray>() {
             @Override
             public void onSuccess(JSONArray data) {
                 mDatas = data.toJavaList(RedTicketSendData.class);
@@ -60,18 +60,18 @@ public class RedTiketSentFragment extends Fragment {
         });
     }
 
-    class Adapter extends RecyclerView.Adapter<Adapter.MyViewHolder>{
+    class Adapter extends RecyclerView.Adapter<RedTiketGetFragment.Adapter.MyViewHolder>{
 
         @Override
-        public MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType){
-            MyViewHolder holder = new MyViewHolder(LayoutInflater.from(
+        public RedTiketGetFragment.Adapter.MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType){
+            RedTiketGetFragment.Adapter.MyViewHolder holder = new RedTiketGetFragment.Adapter.MyViewHolder(LayoutInflater.from(
                     App.getContext()).inflate(R.layout.view_sended_item, parent,
                     false));
             return holder;
         }
 
         @Override
-        public void onBindViewHolder(final MyViewHolder holder, int position){
+        public void onBindViewHolder(final RedTiketGetFragment.Adapter.MyViewHolder holder, int position){
             holder.geter_name.setText(mDatas.get(position).getName());
             holder.get_time.setText(mDatas.get(position).getCreateTimeString());
             holder.amount.setText(mDatas.get(position).getAmount().toString());
