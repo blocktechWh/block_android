@@ -100,13 +100,13 @@ public class AddNewContactActivity extends TitleActivity {
             HttpClient.get(this, url, null, new CallBack<JSONObject>() {
                 @Override
                 public void onSuccess(JSONObject result) {
-                    setUser(JSONObject.toJavaObject(result,User.class));
+                    JSONObject userJson = result.getJSONObject("user");
+                    setUser(JSONObject.toJavaObject(userJson,User.class),result.getBoolean("isContact"));
                 }
             });
         }
 
-        private void setUser(final User user){
-            System.out.println(user);
+        private void setUser(final User user, final Boolean isFriend){
             userName_tv.setText(user.getName());
 
             String url = Urls.HOST + "staticImg" + user.getImg();
@@ -123,7 +123,7 @@ public class AddNewContactActivity extends TitleActivity {
                 public void onClick(View view){
                     Intent intent = new Intent(App.getContext(),ContactDetailActivity.class);
                     Bundle bundle = new Bundle();
-                    bundle.putBoolean("isFriend",false);
+                    bundle.putBoolean("isFriend",isFriend);
                     bundle.putString("name",user.getName());
                     bundle.putString("email",user.getEmail());
                     bundle.putString("phone",user.getPhone());

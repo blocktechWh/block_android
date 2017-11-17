@@ -32,7 +32,7 @@
         <activity android:name=".Activity.User.UpdateUserInfoActivity" />
         <activity android:name=".Activity.Contact.AddNewContactActivity" />
         <activity android:name=".Activity.Contact.AddNewContactActivity$AddContactByPhoneActivity" />
-        <activity android:name=".Activity.Actions.RedTicketDetailActivity" />
+        <activity android:name=".Activity.RedTicket.RedTicketDetailActivity" />
         <activity android:name=".Activity.Actions.VotesListActivity" />
         <activity android:name=".Activity.Actions.StartActivity" />
         <activity android:name=".Activity.Actions.AddPlayerActivity" />

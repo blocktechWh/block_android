@@ -1,13 +1,12 @@
-package com.blocktechwh.app.block.Activity.Actions;
+package com.blocktechwh.app.block.Activity.RedTicket;
 
+import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
-import android.support.v4.content.ContextCompat;
-import android.support.v4.view.ViewCompat;
 import android.support.v4.view.ViewPager;
 import android.view.Gravity;
 import android.view.View;
@@ -37,11 +36,13 @@ public class RedTicketDetailActivity extends TitleActivity {
     private Integer count_recive = 0;
     private Integer count_send = 0;
 
+    private ImageView mUserPhoto;
     private TextView tv_name;
     private TextView tv_recive;
     private TabLayout mTabLayout;
 
     private ViewPager mViewPager;
+    private Integer tabIndex;
     private List<Fragment>viewList = new ArrayList<Fragment>();
     private List<String>titleList= new ArrayList<String>();
 
@@ -57,11 +58,19 @@ public class RedTicketDetailActivity extends TitleActivity {
     }
 
     private void initView(){
-        tv_recive = (TextView)findViewById(R.id.tv_recive_total);
-        tv_name = (TextView)findViewById(R.id.tv_name);
+        tv_recive = (TextView) findViewById(R.id.tv_recive_total);
+        tv_name = (TextView) findViewById(R.id.tv_name);
         tv_name.setText(App.userInfo.getName()+"共发出");
         mViewPager = (ViewPager) findViewById(R.id.id_redPacket);
         mTabLayout = (TabLayout)findViewById(R.id.tabHost);
+        mUserPhoto = (ImageView) findViewById(R.id.id_user_photo);
+        String url = Urls.HOST + "staticImg" + App.userInfo.getImg();
+        HttpClient.getImage(this, url, new CallBack<Bitmap>() {
+            @Override
+            public void onSuccess(final Bitmap bmp) {
+                mUserPhoto.setImageBitmap(bmp);
+            }
+        });
 
         initViewPager();
         initTab();
@@ -79,11 +88,8 @@ public class RedTicketDetailActivity extends TitleActivity {
         view.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                for(int i=0;i<mTabLayout.getTabCount();i++){
-                    inactiveTab(mTabLayout.getTabAt(i).getCustomView());
-                }
-                activeTab(view);
                 mTabLayout.getTabAt(index).select();
+                activeTab(index);
             }
         });
         TextView textView = new TextView(this);
@@ -92,26 +98,38 @@ public class RedTicketDetailActivity extends TitleActivity {
         return view;
     }
 
-    private void activeTab(View view){
-        view.setBackgroundColor(Color.parseColor("#F6F6F6"));
-    }
-
-    private void inactiveTab(View view){
-        view.setBackgroundColor(Color.parseColor("#FFFFFF"));
+    private void activeTab(Integer index){
+        if(index == 0){
+            tv_name.setText(App.userInfo.getName()+"共发出");
+            tv_recive.setText("¥ "+count_send);
+        }else{
+            tv_name.setText(App.userInfo.getName()+"共收到");
+            tv_recive.setText("¥ "+count_recive);
+        }
+        mTabLayout.getTabAt(tabIndex).getCustomView().setBackgroundColor(Color.parseColor("#FFFFFF"));
+        mTabLayout.getTabAt(tabIndex = index).getCustomView().setBackgroundColor(Color.parseColor("#F6F6F6"));
     }
 
     private void initTab(){
         mTabLayout.setupWithViewPager(mViewPager);
         mTabLayout.getTabAt(0).setCustomView(getTextView(0,"我发出的"));
         mTabLayout.getTabAt(1).setCustomView(getTextView(1,"我收到的"));
-        activeTab(mTabLayout.getTabAt(0).getCustomView());
+        activeTab(tabIndex = 0);
     }
 
     private void initViewPager(){
-        viewList.add(new RedTiketGetFragment());
         viewList.add(new RedTiketSentFragment());
+        viewList.add(new RedTiketGetFragment());
         titleList.add("我收到的");
         titleList.add("我发出的");
+        mViewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+            @Override
+            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) { }
+            @Override
+            public void onPageSelected(int position) { activeTab(position); }
+            @Override
+            public void onPageScrollStateChanged(int state) { }
+        });
         mViewPager.setAdapter(new RedTicketDetailAdapter(getSupportFragmentManager()));
     }
 
@@ -158,7 +176,6 @@ public class RedTicketDetailActivity extends TitleActivity {
                 if(index==1){
                     tv_recive.setText("¥ "+count_recive);
                 }
-
             }
         });
 
