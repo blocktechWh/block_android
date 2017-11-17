@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/layout_main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/appBackground"
@@ -11,7 +12,7 @@
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/white">
+        android:background="@color/appBackground">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -34,11 +35,12 @@
                 android:paddingRight="@dimen/padding_right"
                 android:paddingStart="@dimen/padding_left">
 
+
                 <LinearLayout
                     android:layout_width="100dp"
                     android:layout_height="100dp"
                     android:layout_weight="1"
-                    android:background="@mipmap/icon12"
+                    android:background="@mipmap/upload_img"
                     android:gravity="center_vertical"
                     android:orientation="horizontal"
                     android:paddingLeft="@dimen/padding_left"
@@ -57,24 +59,20 @@
                     android:paddingRight="20dp"
                     android:paddingStart="10dp">
 
-                    <TextView
-                        android:id="@+id/textView93"
+                    <EditText
+                        android:id="@+id/etTheme"
                         android:layout_width="match_parent"
-                        android:layout_height="30dp"
-                        android:background="@drawable/lines_bg2"
-                        android:gravity="center_vertical"
-                        android:text="再次输入投票主题 2-80字，并" />
+                        android:layout_height="wrap_content"
+                        android:ems="10"
+                        android:hint="投票主题输入2-80个字"
+                        android:inputType="textPersonName"
+                        android:textSize="12sp" />
 
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="30dp"
-                        android:background="@drawable/lines_bg2"
-                        android:gravity="center_vertical"
-                        android:text="添加一张主题图片" />
                 </LinearLayout>
             </LinearLayout>
 
             <LinearLayout
+                android:id="@+id/ll_active_box"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/margin_top"
@@ -82,75 +80,163 @@
                 android:gravity="fill_horizontal"
                 android:orientation="vertical"
                 android:paddingBottom="10dp"
-                android:paddingEnd="@dimen/padding_left"
-                android:paddingLeft="@dimen/padding_left"
-                android:paddingRight="@dimen/padding_right"
-                android:paddingStart="@dimen/padding_left"
                 android:paddingTop="10dp">
 
-                <TextView
-                    android:id="@+id/textView14"
+                <LinearLayout
+                    android:id="@+id/ll_active_layout"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:gravity="center_horizontal"
-                    android:text="青山一日游" />
+                    android:layout_height="match_parent"
+                    android:orientation="vertical">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="20dp"
+                        android:gravity="left|center_horizontal"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:id="@+id/textView14"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:text="1.青山一日游" />
+
+                        <LinearLayout
+                            android:layout_width="40dp"
+                            android:layout_height="40dp"
+                            android:layout_marginTop="10dp"
+                            android:layout_weight="1"
+                            android:orientation="horizontal">
+
+                            <ImageView
+                                android:id="@+id/imageView5"
+                                android:layout_width="40dp"
+                                android:layout_height="40dp"
+                                android:layout_weight="1"
+                                android:contentDescription="1"
+                                app:srcCompat="@mipmap/icon21" />
+                        </LinearLayout>
+
+                    </LinearLayout>
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/tv_to_add"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:autoLink="all"
+                android:background="@color/white"
+                android:gravity="center_horizontal"
+                android:text="点击添加受益人"
+                android:textColor="@color/colorAccent" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/margin_top"
+                android:background="@color/white"
+                android:orientation="vertical"
+                android:paddingLeft="@dimen/padding_left"
+                android:paddingStart="@dimen/padding_left">
 
                 <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_marginTop="20dp"
-                    android:gravity="center_horizontal"
+                    android:layout_height="45dp"
+                    android:background="@drawable/lines_bg2"
                     android:orientation="horizontal">
 
-                    <LinearLayout
-                        android:layout_width="40dp"
-                        android:layout_height="40dp"
-                        android:layout_weight="1"
-                        android:orientation="horizontal">
-
-                        <ImageView
-                            android:id="@+id/imageView5"
-                            android:layout_width="40dp"
-                            android:layout_height="40dp"
-                            android:layout_weight="1"
-                            android:contentDescription="1"
-                            app:srcCompat="@mipmap/icon21" />
-                    </LinearLayout>
-
-                    <ImageView
-                        android:id="@+id/imageView8"
-                        android:layout_width="40dp"
-                        android:layout_height="40dp"
-                        android:layout_weight="1"
-                        android:contentDescription="2"
-                        app:srcCompat="@mipmap/icon22" />
-
-                    <ImageView
-                        android:id="@+id/imageView23"
+                    <TextView
+                        android:id="@+id/textView17"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        app:srcCompat="@mipmap/icon24" />
+                        android:text="投票可选" />
+
+                    <Switch
+                        android:id="@+id/switch_vote1"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="多选"
+                        android:textOff="单选"
+                        android:textOn="多选" />
+
                 </LinearLayout>
 
-                <TextView
-                    android:id="@+id/textView16"
+                <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="30dp"
-                    android:layout_marginTop="15dp"
+                    android:layout_height="45dp"
                     android:background="@drawable/lines_bg2"
-                    android:gravity="center_horizontal"
-                    android:text="执行人" />
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:id="@+id/textView23"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="结束时间" />
+
+                    <TextView
+                        android:id="@+id/tv_popup_time"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="选择时间" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="45dp"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:id="@+id/textView24"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="匿名投票" />
+
+                    <Switch
+                        android:id="@+id/switch_vote2"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="开"
+                        android:textOff="关"
+                        android:textOn="开" />
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/margin_top"
+                android:background="@color/white"
+                android:gravity="center_horizontal"
+                android:minHeight="60dp"
+                android:orientation="vertical">
 
                 <TextView
-                    android:id="@+id/textView17"
+                    android:id="@+id/textView44"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="5dp"
-                    android:autoLink="all"
                     android:gravity="center_horizontal"
-                    android:text="点击添加"
-                    android:textColor="@color/colorAccent" />
+                    android:text="奖励信息" />
+
+                <TextView
+                    android:id="@+id/tv_add_reward"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20dp"
+                    android:text="添加奖励" />
 
             </LinearLayout>
 
@@ -177,6 +263,29 @@
                     android:text="选择人员"
                     android:textColor="@color/colorAccent" />
             </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginTop="@dimen/margin_top"
+                android:background="@color/white"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="是否可加注" />
+
+                <Switch
+                    android:id="@+id/switch_if_add"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="关"
+                    android:textOff="关"
+                    android:textOn="开" />
+
+            </LinearLayout>
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -184,7 +293,7 @@
                 android:orientation="horizontal">
 
                 <Button
-                    android:id="@+id/button11"
+                    android:id="@+id/btnStartVote"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"

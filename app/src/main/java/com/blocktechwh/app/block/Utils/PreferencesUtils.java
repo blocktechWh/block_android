@@ -35,6 +35,7 @@ public class PreferencesUtils {
         return context.getSharedPreferences(Config.PREFERENCE_NAME, Context.MODE_PRIVATE).getString(key, defValue);
     }
 
+
     public static boolean putBoolean(Context context,String key, boolean value) {
         return context.getSharedPreferences(Config.PREFERENCE_NAME, Context.MODE_PRIVATE).edit().putBoolean(key, value).commit();
     }
