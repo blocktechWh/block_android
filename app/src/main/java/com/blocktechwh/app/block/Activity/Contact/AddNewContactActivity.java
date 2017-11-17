@@ -107,7 +107,6 @@ public class AddNewContactActivity extends TitleActivity {
         }
 
         private void setUser(final User user, final Boolean isFriend){
-            System.out.println(user);
             userName_tv.setText(user.getName());
 
             String url = Urls.HOST + "staticImg" + user.getImg();
