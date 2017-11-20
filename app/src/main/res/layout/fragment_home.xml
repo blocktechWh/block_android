@@ -40,132 +40,92 @@
             android:text="活动中心" />
     </LinearLayout>
 
-    <LinearLayout
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="4.8dp"
-        android:background="@color/gray"
-        android:layout_below="@+id/relativeLayout4"
-        android:layout_centerHorizontal="true"
-        android:orientation="vertical"
-        android:id="@+id/linearLayout2">
+        android:layout_height="match_parent">
 
         <LinearLayout
-            android:id="@+id/lo_gift_sure"
+            android:id="@+id/linearLayout2"
             android:layout_width="match_parent"
-            android:layout_height="60dp"
-            android:background="@color/white"
-            android:gravity="center_vertical"
-            android:orientation="horizontal">
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/relativeLayout4"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="4.8dp"
+            android:background="@color/gray"
+            android:orientation="vertical">
 
-            <ImageButton
-                android:id="@+id/id_wallet_image"
-                android:layout_width="40dp"
-                android:layout_height="40dp"
-                android:layout_margin="17.76dp"
-                android:background="@android:color/transparent"
-                android:src="@mipmap/icon9"
-                app:srcCompat="@mipmap/icon29" />
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/id_red_ticket_recive_wait_list"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal" />
 
-            <LinearLayout
-                android:layout_width="110dp"
-                android:layout_height="match_parent"
-                android:gravity="center_vertical"
-                android:orientation="vertical">
-
-                <TextView
-                    android:id="@+id/tv_pray"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:ems="13"
-                    android:text="红包祝福" />
-
-            </LinearLayout>
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_height="60dp"
+                android:layout_marginTop="@dimen/margin_top"
+                android:background="@color/white"
                 android:gravity="center_vertical"
-                android:orientation="vertical">
+                android:orientation="horizontal">
 
-                <TextView
-                    android:id="@+id/tv_maker_name"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
+                <ImageButton
+                    android:id="@+id/id_redPacket_image"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:layout_margin="17.76dp"
+                    android:background="@android:color/transparent"
+                    android:src="@mipmap/icon10"
+                    app:srcCompat="@mipmap/icon30" />
+
+                <LinearLayout
+                    android:layout_width="110dp"
+                    android:layout_height="match_parent"
                     android:gravity="center_vertical"
-                    android:text="发起人   许巍"
-                    android:textSize="12sp" />
+                    android:orientation="vertical">
 
-                <TextView
-                    android:id="@+id/tv_create_time"
+                    <TextView
+                        android:id="@+id/textView35"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="任务名称" />
+
+                </LinearLayout>
+
+                <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
+                    android:layout_height="match_parent"
                     android:gravity="center_vertical"
-                    android:text="发送时间   2010-10-10"
-                    android:textSize="12sp" />
-            </LinearLayout>
-        </LinearLayout>
+                    android:orientation="vertical">
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="60dp"
-            android:layout_marginTop="@dimen/margin_top"
-            android:background="@color/white"
-            android:gravity="center_vertical"
-            android:orientation="horizontal">
+                    <TextView
+                        android:id="@+id/textView45"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="center_vertical"
+                        android:text="发送时间   2010-10-10"
+                        android:textSize="12sp" />
 
-            <ImageButton
-                android:id="@+id/id_redPacket_image"
-                app:srcCompat="@mipmap/icon30"
-                android:layout_width="40dp"
-                android:layout_height="40dp"
-                android:layout_margin="17.76dp"
-                android:background="@android:color/transparent"
-                android:src="@mipmap/icon10" />
-
-            <LinearLayout
-                android:layout_width="110dp"
-                android:layout_height="match_parent"
-                android:gravity="center_vertical"
-                android:orientation="vertical">
-
-                <TextView
-                    android:id="@+id/textView35"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="任务名称" />
-
+                    <TextView
+                        android:id="@+id/textView46"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="center_vertical"
+                        android:text="发起人   许巍"
+                        android:textSize="12sp" />
+                </LinearLayout>
             </LinearLayout>
 
-            <LinearLayout
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/id_vote_wait_list"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:gravity="center_vertical"
-                android:orientation="vertical">
+                android:layout_height="wrap_content"
+                android:orientation="horizontal" />
 
-                <TextView
-                    android:id="@+id/textView45"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:gravity="center_vertical"
-                    android:text="发送时间   2010-10-10"
-                    android:textSize="12sp" />
 
-                <TextView
-                    android:id="@+id/textView46"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:gravity="center_vertical"
-                    android:text="发起人   许巍"
-                    android:textSize="12sp" />
-            </LinearLayout>
-        </LinearLayout>
-
-        <LinearLayout
+            <!--        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="60dp"
             android:layout_marginTop="@dimen/margin_top"
@@ -220,8 +180,9 @@
                     android:text="发起人   许巍"
                     android:textSize="12sp" />
             </LinearLayout>
-        </LinearLayout>
+        </LinearLayout>-->
 
-    </LinearLayout>
+        </LinearLayout>
+    </ScrollView>
 
 </LinearLayout>

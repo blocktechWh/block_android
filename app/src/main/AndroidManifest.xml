@@ -41,10 +41,14 @@
         <activity android:name=".Activity.Contact.ContactDetailForSendActivity" />
         <activity android:name=".Activity.RedTicket.SendRedTicket" />
         <activity android:name=".Activity.RedTicket.RedTicketForSentActivity" />
-
         <activity android:name=".Activity.Contact.ContactRequestActivity"></activity>
         <activity android:name=".Activity.RedTicket.GiftActivity" />
-        <activity android:name=".Activity.Actions.SetRewardsActivity" />
+        <activity android:name=".Activity.Actions.SetRewardActivity" />
+        <activity android:name=".Activity.Actions.FillInfoActivity" />
+        <activity android:name=".Activity.Actions.VotedDetailActivity" />
+        <activity android:name=".Activity.Actions.VoteDetailActivity" />
+        <activity android:name=".Activity.Actions.VoteFillActivity" />
+
 
     </application>
 

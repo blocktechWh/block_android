@@ -2,26 +2,25 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:orientation="vertical">
+    android:layout_height="wrap_content">
 
     <LinearLayout
-        android:id="@+id/lo_gift_sure"
+        android:id="@+id/ll_vote_detail"
         android:layout_width="match_parent"
         android:layout_height="60dp"
-        android:layout_marginBottom="8dp"
+        android:layout_marginTop="@dimen/margin_top"
         android:background="@color/white"
         android:gravity="center_vertical"
         android:orientation="horizontal">
 
         <ImageButton
-            android:id="@+id/id_sender_image"
+            android:id="@+id/id_vote_image"
             android:layout_width="40dp"
             android:layout_height="40dp"
             android:layout_margin="17.76dp"
             android:background="@android:color/transparent"
-            android:src="@mipmap/icon9"
-            app:srcCompat="@mipmap/icon29" />
+            android:src="@mipmap/icon11"
+            app:srcCompat="@mipmap/icon31" />
 
         <LinearLayout
             android:layout_width="110dp"
@@ -30,11 +29,10 @@
             android:orientation="vertical">
 
             <TextView
-                android:id="@+id/tv_pray"
+                android:id="@+id/tvVoteTheme"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:ems="13"
-                android:text="红包祝福"
+                android:text="投票主题"
                 android:textColor="#787878" />
 
         </LinearLayout>
@@ -46,17 +44,7 @@
             android:orientation="vertical">
 
             <TextView
-                android:id="@+id/tv_maker_name"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:gravity="center_vertical"
-                android:text="发起人   许巍"
-                android:textColor="#787878"
-                android:textSize="12sp" />
-
-            <TextView
-                android:id="@+id/tv_create_time"
+                android:id="@+id/tvCreateTime"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
@@ -64,7 +52,16 @@
                 android:text="发送时间   2010-10-10"
                 android:textColor="#787878"
                 android:textSize="12sp" />
+
+            <TextView
+                android:id="@+id/tvVoteMaker"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="center_vertical"
+                android:text="发起人   许巍"
+                android:textColor="#787878"
+                android:textSize="12sp" />
         </LinearLayout>
     </LinearLayout>
-
 </LinearLayout>

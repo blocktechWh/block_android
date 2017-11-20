@@ -1,5 +1,6 @@
 package com.blocktechwh.app.block.Activity.Actions;
 
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
@@ -9,9 +10,12 @@ import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.BaseAdapter;
 import android.widget.Button;
 import android.widget.CompoundButton;
 import android.widget.EditText;
+import android.widget.GridView;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.PopupWindow;
 import android.widget.Switch;
@@ -56,9 +60,9 @@ public class StartActivity extends AppCompatActivity {
     private boolean isFold=true;//判断是否显示
     private TextView tv_main=null;//遮罩层
     private PopupWindow taxWindow;// 弹出框  
-    private TextView tv_add_reward;
     private Button btnStartVote;
     private EditText etTheme;
+    private TextView tvAddReward;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -78,21 +82,28 @@ public class StartActivity extends AppCompatActivity {
         ll.addView(view);
         addPlayersButton=(TextView) findViewById(R.id.tv_to_add);
         tv_to_add=(TextView) findViewById(R.id.tv_to_add);
-        sIfSingle=(Switch) findViewById(R.id.switch_vote1);
+        sIfSingle=(Switch) findViewById(R.id.switch_vote);
         sIfNoSee=(Switch) findViewById(R.id.switch_vote2);
         switchifAdd=(Switch) findViewById(R.id.switchifAdd);
+        tvAddReward=(TextView) findViewById(R.id.tvAddReward);
         sIfSingle.setChecked(false);
         sIfNoSee.setChecked(true);
         switchifAdd.setChecked(true);
 
+
         tvPopupTime=(TextView) findViewById(R.id.tv_popup_time);
         layout=(LinearLayout) findViewById(R.id.layout_main);
-        tv_add_reward=(TextView) findViewById(R.id.tv_add_reward);
         btnStartVote=(Button) findViewById(R.id.btnStartVote);
         etTheme=(EditText) findViewById(R.id.etTheme);
         VoteInfo.setIsLimited(isLimited);
         VoteInfo.setIsAnonymous(isAnonymous);
         VoteInfo.setIsRaise(isRaise);
+
+        //投票人员头像
+        GridView gridview = (GridView) findViewById(R.id.gridview_voters);
+        gridview.setAdapter(new ImageAdapter(this));
+
+
 
         if(VoteInfo.getVoteTheme()!=null){
             etTheme.setText(VoteInfo.getVoteTheme().toString());
@@ -144,6 +155,16 @@ public class StartActivity extends AppCompatActivity {
                     taxWindow.dismiss();
                     layout.removeView(tv_main);
                 }
+            }
+        });
+
+        //点击跳转设置奖励资金页面
+        tvAddReward.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(StartActivity.this,SetRewardActivity.class);
+                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_EXCLUDE_FROM_RECENTS);
+                startActivity(intent);
             }
         });
 
@@ -202,17 +223,6 @@ public class StartActivity extends AppCompatActivity {
         });
 
 
-        //点击跳转设置奖励资金页面
-        tv_add_reward.setOnClickListener(new View.OnClickListener(){
-            @Override
-            public void onClick(View view) {
-                VoteInfo.setVoteTheme(etTheme.getText().toString());
-                Intent intent = new Intent(StartActivity.this,AddPlayerActivity.class);
-                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_EXCLUDE_FROM_RECENTS);
-                startActivity(intent);
-
-            }
-        });
 
         //点击提交发起投票
         btnStartVote.setOnClickListener(new View.OnClickListener(){
@@ -270,5 +280,47 @@ public class StartActivity extends AppCompatActivity {
         int taxWindowWidth=taxWindow.getContentView().getMeasuredWidth();
         int screenWidth = getWindowManager().getDefaultDisplay().getWidth();
         taxWindow.showAtLocation(tvPopupTime, Gravity.NO_GRAVITY,(screenWidth-taxWindowWidth)/2,location[1]+95);
+    }
+
+    class ImageAdapter extends BaseAdapter {
+        private Context mContext;
+
+        // Constructor
+        public ImageAdapter(Context c) {
+            mContext = c;
+        }
+
+        public int getCount() {
+            return mThumbIds.length;
+        }
+
+        public Object getItem(int position) {
+            return null;
+        }
+
+        public long getItemId(int position) {
+            return 0;
+        }
+
+        // create a new ImageView for each item referenced by the Adapter
+        public View getView(int position, View convertView, ViewGroup parent) {
+            ImageView imageView;
+            if (convertView == null) {
+                imageView = new ImageView(mContext);
+                imageView.setLayoutParams(new GridView.LayoutParams(85, 85));
+                imageView.setScaleType(ImageView.ScaleType.CENTER_CROP);
+                imageView.setPadding(8, 8, 8, 8);
+            } else {
+                imageView = (ImageView) convertView;
+            }
+
+            imageView.setImageResource(mThumbIds[position]);
+            return imageView;
+        }
+
+        // Keep all Images in array
+        public Integer[] mThumbIds = {
+                R.mipmap.icon25,R.mipmap.ic_launcher,R.mipmap.icon24,R.mipmap.icon25,R.mipmap.icon25,R.mipmap.ic_launcher,R.mipmap.icon24,R.mipmap.icon25,R.mipmap.icon25,R.mipmap.ic_launcher,R.mipmap.icon24,R.mipmap.icon25
+        };
     }
 }

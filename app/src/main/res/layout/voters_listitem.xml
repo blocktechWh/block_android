@@ -5,30 +5,66 @@
     android:layout_width="fill_parent"
     android:layout_height="wrap_content"
     android:gravity="center_vertical"
-    android:paddingBottom="10dp"
-    android:paddingLeft="@dimen/padding_left"
-    android:paddingStart="@dimen/padding_left"
-    android:paddingTop="10dp">
+    android:orientation="vertical">
 
-    <ImageView
-        android:id="@+id/itemImg"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
-        app:srcCompat="@mipmap/icon21" />
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+        android:paddingLeft="@dimen/padding_left"
+        android:paddingStart="@dimen/padding_left">
 
-<!--    <CheckBox
+        <RadioButton
+            android:id="@+id/itemText_player"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_centerVertical="true"
+            android:layout_weight="1" />
+
+        <RelativeLayout
+            android:id="@+id/relativeLayout3"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="40dp"
+            android:background="@drawable/lines_bg2"
+            android:paddingBottom="10dp"
+            android:paddingTop="10dp">
+
+            <ImageView
+                android:id="@+id/itemImg"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="11dp"
+                android:layout_marginStart="11dp"
+                android:layout_weight="1"
+                app:srcCompat="@mipmap/icon21" />
+
+        </RelativeLayout>
+
+        <TextView
+            android:id="@+id/textView87"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBottom="@+id/itemText_player"
+            android:layout_alignLeft="@+id/relativeLayout3"
+            android:layout_alignStart="@+id/relativeLayout3"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="72dp"
+            android:layout_marginStart="72dp"
+            android:text="TextView"
+            android:textColor="@color/itemTextColor" />
+
+    </RelativeLayout>
+
+    <!--    <CheckBox
         android:id="@+id/itemText_player"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_weight="1"
         android:text="CheckBox" />-->
-
-    <RadioButton
-        android:id="@+id/itemText_player"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_weight="1"
-        android:text="RadioButton" />
 
     <!--    <CheckedTextView
             android:id="@+id/itemText"
@@ -41,7 +77,6 @@
             android:checkMark="?android:attr/listChoiceIndicatorMultiple"
             android:textAppearance="?android:attr/textAppearanceLarge"
             android:text="CheckedTextView" />-->
-
 
 
     <!--<TextView-->

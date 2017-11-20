@@ -9,5 +9,6 @@
     <color name="tabActive">#428FDB</color>
     <color name="appBackground">#f1f1f1</color>
     <color name="btnColor">#1790e1</color>
+    <color name="itemTextColor">#787878</color>
 
 </resources>
