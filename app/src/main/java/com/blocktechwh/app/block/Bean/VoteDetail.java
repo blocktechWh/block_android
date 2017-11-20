@@ -8,22 +8,22 @@ import java.util.Map;
  */
 
 public class VoteDetail {
-    private static int voteImg;
+    private static String voteImg;
     private static String voteTheme;
     private static List<Map<String,Object>>voteOptionsList;
-    private static List<String>voteRewardsList;
+    private static List<Map<String,Object>>voteRewardsList;
     private static Double rewardTotal;
-    private static List<Integer> playersList;
+    private static List<String> playersList;
 
     public VoteDetail(){
 
     }
 
-    public static int getVoteImg() {
+    public static String getVoteImg() {
         return voteImg;
     }
 
-    public static void setVoteImg(int voteImg) {
+    public static void setVoteImg(String voteImg) {
         VoteDetail.voteImg = voteImg;
     }
 
@@ -35,11 +35,11 @@ public class VoteDetail {
         VoteDetail.voteOptionsList = voteOptionsList;
     }
 
-    public static List<String> getVoteRewardsList() {
+    public static List<Map<String, Object>> getVoteRewardsList() {
         return voteRewardsList;
     }
 
-    public static void setVoteRewardsList(List<String> voteRewardsList) {
+    public static void setVoteRewardsList(List<Map<String, Object>> voteRewardsList) {
         VoteDetail.voteRewardsList = voteRewardsList;
     }
 
@@ -51,11 +51,11 @@ public class VoteDetail {
         VoteDetail.rewardTotal = rewardTotal;
     }
 
-    public static List<Integer> getPlayersList() {
+    public static List<String> getPlayersList() {
         return playersList;
     }
 
-    public static void setPlayersList(List<Integer> playersList) {
+    public static void setPlayersList(List<String> playersList) {
         VoteDetail.playersList = playersList;
     }
 

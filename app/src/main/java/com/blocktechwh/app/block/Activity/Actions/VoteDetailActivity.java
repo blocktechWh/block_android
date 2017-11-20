@@ -2,6 +2,7 @@ package com.blocktechwh.app.block.Activity.Actions;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -45,6 +46,9 @@ public class VoteDetailActivity extends TitleActivity {
     private GridView gridview;
     private TextView tv_to_fill;
     private Button bt_vote;
+    private ImageView imageView;
+    private List<String>checkedOptionIds=new ArrayList<>();
+    private int checkedIndex;
 
 
     @Override
@@ -52,10 +56,10 @@ public class VoteDetailActivity extends TitleActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_vote_detail);
         Bundle bundle=this.getIntent().getExtras();
-        voteId=bundle.getInt("id");
-        Toast.makeText(VoteDetailActivity.this,"voteId="+voteId, Toast.LENGTH_SHORT).show();
+        voteId=bundle.getInt("voteId");
+        //Toast.makeText(VoteDetailActivity.this,"voteId="+voteId, Toast.LENGTH_SHORT).show();
         initData();
-        operateVoteDetailData();
+        getData();
         addEvent();
 
     }
@@ -69,47 +73,58 @@ public class VoteDetailActivity extends TitleActivity {
         tv_to_fill=(TextView) findViewById(R.id.tv_to_fill);
         bt_vote=(Button) findViewById(R.id.bt_vote);
 
+    }
 
-        VoteDetail.setVoteImg(R.mipmap.ic_launcher);
-        VoteDetail.setRewardTotal(1000.0);
-        VoteDetail.setVoteTheme("周末洗厕所比赛初赛");
+    private void getData(){
+        //查询投票详情
+        HttpClient.get(this, Urls.QueryVoteDetail+voteId, null, new CallBack<JSONObject>() {
+            @Override
+            public void onSuccess(JSONObject data) {
+                System.out.print("投票详情mDatas="+data);
 
-        List<Map<String,Object>>voteOptionsList=new ArrayList<>();
-        Map<String,Object> map_vote_option1=new HashMap();
-        map_vote_option1.put("voteId",1);
-        map_vote_option1.put("option","王二洗厕所比赛");
-        voteOptionsList.add(map_vote_option1);
-        Map<String,Object> map_vote_option2=new HashMap();
-        map_vote_option2.put("voteId",1);
-        map_vote_option2.put("option","王勤洗厕所比赛");
-        voteOptionsList.add(map_vote_option2);
-        Map<String,Object> map_vote_option3=new HashMap();
-        map_vote_option3.put("voteId",1);
-        map_vote_option3.put("option","胡艺瑾洗厕所比赛");
-        voteOptionsList.add(map_vote_option3);
-        VoteDetail.setVoteOptionsList(voteOptionsList);
+                VoteDetail.setVoteImg(data.getString("img"));
+                VoteDetail.setRewardTotal(Double.parseDouble(data.getString("voteFee")));
+                VoteDetail.setVoteTheme(data.getString("content"));
 
-        List<String>voteRewardsList=new ArrayList<>();
-        voteRewardsList.add("50"+"元");
-        voteRewardsList.add("30"+"元");
-        voteRewardsList.add("20"+"元");
-        VoteDetail.setVoteRewardsList(voteRewardsList);
+                List<Map<String,Object>>voteOptionsList=new ArrayList<>();
+                for(int i=0;i<data.getJSONArray("options").size();i++){
+                    Map<String,Object> map_vote_option1=new HashMap();
+                    map_vote_option1.put("optionId",data.getJSONArray("options").getJSONObject(i).getString("optionId"));
+                    map_vote_option1.put("option",data.getJSONArray("options").getJSONObject(i).getString("optionContent"));
+                    voteOptionsList.add(map_vote_option1);
+                }
+                VoteDetail.setVoteOptionsList(voteOptionsList);
 
-        List<Integer>playersList=new ArrayList<>();
-        playersList.add(R.mipmap.ic_launcher);
-        playersList.add(R.mipmap.ic_launcher);
-        playersList.add(R.mipmap.ic_launcher);
-        VoteDetail.setPlayersList(playersList);
 
-        //渲染用户头像
-        gridview=(GridView) findViewById(R.id.gridview_players);
-        gridview.setAdapter(new ImageAdapter(this));
+                List<Map<String,Object>>voteRewardsList=new ArrayList<>();//rewards
+                for(int i=0;i<data.getJSONArray("rewards").size();i++){
+                    Map<String,Object> map_vote_rewads=new HashMap();
+                    map_vote_rewads.put("amount",data.getJSONArray("rewards").getJSONObject(i).getString("amount"));
+                    map_vote_rewads.put("rank",data.getJSONArray("options").getJSONObject(i).getString("rank"));
+                    voteRewardsList.add(map_vote_rewads);
+                }
+                VoteDetail.setVoteRewardsList(voteRewardsList);
 
+
+                List<String>playersList=new ArrayList<>();//optionSupplier
+                for(int i=0;i<data.getJSONArray("optionSupplier").size();i++){
+                    playersList.add(data.getJSONArray("optionSupplier").getJSONObject(i).getString("img"));
+                }
+                VoteDetail.setPlayersList(playersList);
+                operateVoteDetailData();
+            }
+        });
     }
 
     private void operateVoteDetailData(){
         //渲染主题图片
-        im_vote_img.setImageResource(R.mipmap.ic_launcher);
+        String url =Urls.HOST + "staticImg" + VoteDetail.getVoteImg();
+        HttpClient.getImage(this, url, new CallBack<Bitmap>() {
+            @Override
+            public void onSuccess(final Bitmap bmp) {
+                im_vote_img.setImageBitmap(bmp);
+            }
+        });
 
         //渲染投票主题
         tv_vote_theme.setText(VoteDetail.getVoteTheme());
@@ -119,6 +134,7 @@ public class VoteDetailActivity extends TitleActivity {
 
         //渲染投票项
         for(int i=0;i<VoteDetail.getVoteOptionsList().size();i++){
+            checkedIndex=i;
             View item_vote_option_layout = LayoutInflater.from(getApplicationContext()).inflate(R.layout.item_vote_option,null);
             TextView tv_vote_option_text=item_vote_option_layout.findViewById(R.id.tv_vote_option_text);
             tv_vote_option_text.setText(VoteDetail.getVoteOptionsList().get(i).get("option").toString());
@@ -127,7 +143,7 @@ public class VoteDetailActivity extends TitleActivity {
                 @Override
                 public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                     if(isChecked){
-
+                        checkedOptionIds.add(VoteDetail.getVoteOptionsList().get(checkedIndex).get("optionId").toString());
                     }
                 }
             });
@@ -139,12 +155,16 @@ public class VoteDetailActivity extends TitleActivity {
         for(int i=0;i<VoteDetail.getVoteRewardsList().size();i++){
             View item_vote_reward = LayoutInflater.from(getApplicationContext()).inflate(R.layout.item_vote_reward,null);
             TextView tv_single_vote_reward=item_vote_reward.findViewById(R.id.tv_single_vote_reward);
-            tv_single_vote_reward.setText(VoteDetail.getVoteRewardsList().get(i));
+            tv_single_vote_reward.setText(VoteDetail.getVoteRewardsList().get(i).get("amount").toString());
             TextView tv_vote_rand=item_vote_reward.findViewById(R.id.tv_vote_rand);
-            tv_vote_rand.setText("第"+i+1+"名获得：");
+            tv_vote_rand.setText("第"+(i+1)+"名获得：");
             ll_vote_reward_list.addView(item_vote_reward);//将这一行加入表格中
 
         }
+
+        //渲染用户头像
+        gridview=(GridView) findViewById(R.id.gridview_players);
+        gridview.setAdapter(new ImageAdapter(this));
 
     }
 
@@ -157,6 +177,7 @@ public class VoteDetailActivity extends TitleActivity {
         }
 
         public int getCount() {
+            //Toast.makeText(VoteDetailActivity.this,"VoteDetail.getPlayersList().size()="+VoteDetail.getPlayersList().size(),Toast.LENGTH_SHORT).show();
             return VoteDetail.getPlayersList().size();
         }
 
@@ -170,7 +191,7 @@ public class VoteDetailActivity extends TitleActivity {
 
         // create a new ImageView for each item referenced by the Adapter
         public View getView(int position, View convertView, ViewGroup parent) {
-            ImageView imageView;
+            Toast.makeText(VoteDetailActivity.this,"position="+position, Toast.LENGTH_SHORT).show();
             if (convertView == null) {
                 imageView = new ImageView(mContext);
                 imageView.setLayoutParams(new GridView.LayoutParams(85, 85));
@@ -180,8 +201,14 @@ public class VoteDetailActivity extends TitleActivity {
                 imageView = (ImageView) convertView;
             }
 
-            imageView.setImageResource(VoteDetail.getPlayersList().get(position));
-
+            String url =Urls.HOST + "staticImg" + VoteDetail.getPlayersList().get(position);
+            HttpClient.getImage(this, url, new CallBack<Bitmap>() {
+                @Override
+                public void onSuccess(final Bitmap bmp) {
+                    imageView.setImageBitmap(bmp);
+                }
+            });
+            //imageView.setImageResource(R.mipmap.icon9);
             return imageView;
         }
 
@@ -212,16 +239,14 @@ public class VoteDetailActivity extends TitleActivity {
             @Override
             public void onClick(View v) {
             JSONObject json_vote=new JSONObject();
-            List<String> optionId=new ArrayList<>();
-            optionId.add("9");//活动id
-            optionId.add("10");
-            json_vote.put("voteId","8");//投票id
-            json_vote.put("optionId",optionId);
+            json_vote.put("voteId",voteId);//投票id
+            json_vote.put("optionId",checkedOptionIds);
 
         HttpClient.post(this, Urls.MAKEVote, json_vote.toString(), new CallBack<JSONObject>() {
             @Override
             public void onSuccess(JSONObject data) {
                 System.out.print("投票返回="+data);
+                Toast.makeText(VoteDetailActivity.this,"投票成功",Toast.LENGTH_SHORT).show();
             }
         });
             }

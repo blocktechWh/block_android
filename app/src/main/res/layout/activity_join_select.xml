@@ -16,6 +16,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_marginTop="@dimen/margin_top"
+            android:background="@color/white"
             android:orientation="vertical"
             android:paddingEnd="@dimen/padding_right"
             android:paddingLeft="@dimen/padding_left"
@@ -32,9 +33,12 @@
 
     <Button
         android:id="@+id/btn_add_sure"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="确定" />
+        android:layout_width="320dp"
+        android:layout_height="44dp"
+        android:layout_gravity="center_horizontal"
+        android:background="@drawable/coners_bg2"
+        android:text="确定"
+        android:textColor="@color/white" />
 
 
 </LinearLayout>

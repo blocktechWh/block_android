@@ -18,7 +18,6 @@ import android.widget.Toast;
 
 import com.blocktechwh.app.block.Bean.VoteInfo;
 import com.blocktechwh.app.block.Common.App;
-import com.blocktechwh.app.block.Common.Urls;
 import com.blocktechwh.app.block.CustomView.TitleActivity;
 import com.blocktechwh.app.block.R;
 import com.blocktechwh.app.block.Utils.CallBack;
@@ -46,12 +45,13 @@ public class AddPlayerActivity extends TitleActivity {
     private List<Integer>ids=new ArrayList<Integer>();
     private List<Map<String,Object>> mDatas = new ArrayList<Map<String,Object>>();
     private List<String> imgUrls = VoteInfo.getImgUrls();
-    private String url;
     private EditText et_action_input;
     private Switch sIfSingle;
     private Switch sIfNoSee;
     private boolean isLimited=false;
     private boolean isAnonymous=true;
+    private LinearLayout ll_option_add_button;
+    private Bundle bundle;
 
 
 
@@ -59,47 +59,55 @@ public class AddPlayerActivity extends TitleActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_vote_action_add);
-        Bundle bundle=this.getIntent().getExtras();
+        initData();
+
+        bundle=this.getIntent().getExtras();
         if(bundle!=null){
             id=bundle.getInt("id");
             imgUrl=bundle.getString("imgUrl");
             imgUrls.add(imgUrl);
             VoteInfo.setImgUrls(imgUrls);
+
+            imgUrl = imgUrl.toString();
+            //Toast.makeText(AddPlayerActivity.this,"imgUrl="+imgUrl,Toast.LENGTH_SHORT).show();
+            HttpClient.getImage(this, imgUrl, new CallBack<Bitmap>() {
+                @Override
+                public void onSuccess(final Bitmap bmp) {
+                    //Toast.makeText(AddPlayerActivity.this,"url="+url,Toast.LENGTH_SHORT).show();
+                    ll_player_img.setImageBitmap(bmp);
+                }
+            });
+            ll_option_add_button.setVisibility(View.GONE);
+            ll_player_img.setVisibility(View.VISIBLE);
         }
 
-
-        initData();
         addEvent();
-
     }
 
     private void initData(){
         //从VoteInfo中拿到mDatas
         mDatas=VoteInfo.getOptions();
 
+        ll_option_add_button=(LinearLayout) findViewById(R.id.ll_option_add_button);
         et_action_input=(EditText) findViewById(R.id.et_action_input);
         addSure=(Button) findViewById(R.id.btn_add_sure);
         addPlayer=(LinearLayout) findViewById(R.id.ll_to_add_player);
         ll_player_img=(ImageView) findViewById(R.id.ll_player_img);
+        ll_player_img.setVisibility(View.GONE);
         tvToAddAction=(TextView) findViewById(R.id.tv_to_add_action);
         btnAddSure=(Button) findViewById(R.id.btn_add_sure);
 
 
         //url = Urls.HOST + "staticImg" + imgUrl.toString();
-        if(imgUrl!=""){
-            url = imgUrl.toString();
-        }else{
-            url = Urls.HOST + "staticImg" + imgUrl.toString();
-        }
+//        if(imgUrl!=""){
+//            imgUrl = imgUrl.toString();
+//            Toast.makeText(AddPlayerActivity.this,"11imgUrl="+imgUrl,Toast.LENGTH_SHORT).show();
+//        }else{
+//            imgUrl = Urls.HOST + "staticImg" + imgUrl.toString();
+//            Toast.makeText(AddPlayerActivity.this,"false",Toast.LENGTH_SHORT).show();
+//        }
 
-        HttpClient.getImage(this, url, new CallBack<Bitmap>() {
-            @Override
-            public void onSuccess(final Bitmap bmp) {
-                //Toast.makeText(AddPlayerActivity.this,"url="+url,Toast.LENGTH_SHORT).show();
 
-                ll_player_img.setImageBitmap(bmp);
-            }
-        });
 
         mRecyclerView = (RecyclerView)findViewById(R.id.id_action_recycler);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(App.getContext()));

@@ -62,7 +62,8 @@
                     android:id="@+id/ll_player_img"
                     android:layout_width="55dp"
                     android:layout_height="55dp"
-                    android:visibility="gone" />
+                    android:visibility="visible"
+                    app:srcCompat="@mipmap/icon11" />
 
                 <LinearLayout
                     android:id="@+id/ll_to_add_player"
@@ -73,6 +74,7 @@
                     android:orientation="horizontal">
 
                     <LinearLayout
+                        android:id="@+id/ll_option_add_button"
                         android:layout_width="30dp"
                         android:layout_height="25dp"
                         android:layout_weight="1"

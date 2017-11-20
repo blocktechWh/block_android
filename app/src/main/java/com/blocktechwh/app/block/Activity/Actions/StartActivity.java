@@ -230,8 +230,8 @@ public class StartActivity extends AppCompatActivity {
             public void onClick(View view) {
                 JSONObject json = new JSONObject();
                 List<Integer>voterList=new ArrayList<>();
-                voterList.add(2);
-                voterList.add(1);
+                voterList.add(5);
+                voterList.add(6);
                 List<Integer>rewardRuleList=new ArrayList<>();
                 rewardRuleList.add(80);
                 rewardRuleList.add(20);
@@ -248,7 +248,7 @@ public class StartActivity extends AppCompatActivity {
                 json.put("isRaise",VoteInfo.getIsRaise());
                 json.put("isAnonymous",VoteInfo.getIsAnonymous());
                 json.put("voteFee",100.00);//VoteInfo.getVoteFee()
-                json.put("voteExpireTime","2017-11-16T03:52:17.106Z");
+                json.put("voteExpireTime","2017-11-25T03:52:17.106Z");
                 json.put("options",VoteInfo.getOptions());
                 json.put("voteTarget",voterList);//VoteInfo.getVoterList()
                 json.put("voteRewardRule",rewardRuleList);//VoteInfo.getVoteRewardRule()

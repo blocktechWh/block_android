@@ -15,9 +15,13 @@ import android.widget.TextView;
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import com.blocktechwh.app.block.Activity.Actions.VoteDetailActivity;
+import com.blocktechwh.app.block.Activity.Actions.VotedDetailActivity;
 import com.blocktechwh.app.block.Activity.RedTicket.GiftActivity;
 import com.blocktechwh.app.block.Common.App;
+import com.blocktechwh.app.block.Common.Urls;
 import com.blocktechwh.app.block.R;
+import com.blocktechwh.app.block.Utils.CallBack;
+import com.blocktechwh.app.block.Utils.HttpClient;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -41,6 +45,7 @@ public class HomeFragment extends Fragment {
     private List<Map<String,Object>> redTicketDatas = new ArrayList<Map<String,Object>>();//红包数据列表
     private RecyclerView redTicketRecyclerView;//投票列表对象
     private RedTicketListAdapter redTicketAdapter;
+    private int voteId;
 
 
 
@@ -63,23 +68,7 @@ public class HomeFragment extends Fragment {
         id_wallet_image=view.findViewById(R.id.id_wallet_image);
         lo_gift_sure=view.findViewById(R.id.lo_gift_sure);
 
-        //模拟投票列表数据
-        for(int i=0;i<3;i++){
-            Map<String,Object> map_vote=new HashMap();
-            map_vote.put("voteTheme","洗厕所比赛");
-            map_vote.put("voteMaker","发起人"+"   "+"陈奕迅");
-            map_vote.put("voteCreateTime","发起时间"+"   "+"2017-11-01");
-            map_vote.put("voteId",i);
 
-            voteDatas.add(map_vote);
-        }
-        System.out.print("voteDatas="+voteDatas);
-
-        //投票列表数据渲染
-        voteRecyclerView = (RecyclerView)view.findViewById(R.id.id_vote_wait_list);
-        voteRecyclerView.setLayoutManager(new LinearLayoutManager(App.getContext()));
-        voteRecyclerView.setAdapter(voteAdapter = new VoteListAdapter());
-        voteAdapter.notifyDataSetChanged();
 
 
         //模拟红包列表数据
@@ -118,13 +107,31 @@ public class HomeFragment extends Fragment {
             holder.ll_vote_detail.setOnClickListener(toGiftSure=new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    int voteId=Integer.parseInt(voteDatas.get(position).get("voteId").toString());
-                    Bundle bundle = new Bundle();
-                    bundle.putInt("id",voteId);
-                    bundle.putString("tv_active_name",tv_pray_text);
-                    Intent intent= new Intent(getActivity(), VoteDetailActivity.class);
-                    intent.putExtras(bundle);
-                    startActivity(intent);
+             voteId=Integer.parseInt(voteDatas.get(position).get("voteId").toString());
+
+            //查询投票是否已投
+            HttpClient.get(this, Urls.QueryHasVoted+voteId, null, new CallBack<JSONObject>() {
+                @Override
+                public void onSuccess(JSONObject data) {
+                    System.out.print("是否已投返回值="+data);
+                    if(data.getString("data")=="false"){
+                        //调http://111.231.146.57:20086/front/vote/overview/{voteId}
+                        Bundle bundle = new Bundle();
+                        bundle.putInt("voteId",voteId);
+                        bundle.putString("tv_active_name",tv_pray_text);
+                        Intent intent= new Intent(getActivity(), VoteDetailActivity.class);
+                        intent.putExtras(bundle);
+                        startActivity(intent);
+                    }else{
+                        //调http://111.231.146.57:20086/front/vote/statis/{voteId}
+                        Intent intent= new Intent(getActivity(), VotedDetailActivity.class);
+                        startActivity(intent);
+                    }
+
+
+                }
+            });
+
                 }
             });
 
@@ -209,54 +216,33 @@ public class HomeFragment extends Fragment {
     private void getData(){
         System.out.print("token="+App.token);
         //查询红包
-//        HttpClient.get(this, Urls.GiftWaitRecieveList, null, new CallBack<JSONArray>() {
-//            @Override
-//            public void onSuccess(JSONArray data) {
-//
-//                mDatas = data;
-//                System.out.print("待接收的红包列表mDatas="+data);
-//                if(mDatas.size()>0){
-//                    operateGiftList(mDatas);
-//                }
-//
-//            }
-//        });
+        HttpClient.get(this, Urls.GiftWaitRecieveList, null, new CallBack<JSONArray>() {
+            @Override
+            public void onSuccess(JSONArray data) {
+
+                System.out.print("待接收的红包列表mDatas="+data);
+                if(data.size()>0){
+                    operateGiftList(data);
+                }
+
+            }
+        });
 
 
 
-//        //查询投票
-//        HttpClient.get(this, Urls.QueryVotesList, null, new CallBack<JSONArray>() {
-//            @Override
-//            public void onSuccess(JSONArray data) {
-//                System.out.print("待投票列表mDatas="+data);
+        //查询投票
+        HttpClient.get(this, Urls.QueryVotesList, null, new CallBack<JSONArray>() {
+            @Override
+            public void onSuccess(JSONArray data) {
+                System.out.print("待投票列表mDatas="+data);
+
+                operateVotesWait(data);
+            }
+        });
 //
+
 //
-//            }
-//        });
-//
-//        //查询投票是否已投
-//        HttpClient.get(this, Urls.QueryHasVoted+8, null, new CallBack<JSONObject>() {
-//            @Override
-//            public void onSuccess(JSONObject data) {
-//                System.out.print("是否已投返回值="+data);
-//                if(data.getString("data")=="false"){
-//                    //调http://111.231.146.57:20086/front/vote/overview/{voteId}
-//                }else{
-//                    //调http://111.231.146.57:20086/front/vote/statis/{voteId}
-//                }
-//
-//
-//            }
-//        });
-//
-//        //查询投票详情
-//        HttpClient.get(this, Urls.QueryVoteDetail+8, null, new CallBack<JSONObject>() {
-//            @Override
-//            public void onSuccess(JSONObject data) {
-//                System.out.print("投票详情mDatas="+data);
-//
-//            }
-//        });
+
 //
 //
 //       //执行投票
@@ -298,19 +284,63 @@ public class HomeFragment extends Fragment {
 
     }
 
-    private void operateGiftList(JSONArray ja){
-        JSONObject jo=(JSONObject)ja.get(0);
-        id= (int) jo.get("id");
+    private void operateVotesWait(JSONArray data){
+        //模拟投票列表数据
+        for(int i=0;i<data.size();i++){
+            Map<String,Object> map_vote=new HashMap();
+            //Object obj=new Object();
+            System.out.print("object"+data.get(i));
+            map_vote.put("voteTheme",data.getJSONObject(i).getString("voteThrem"));
+            map_vote.put("voteMaker","发起人"+"   "+data.getJSONObject(i).getString("voteCreater"));
+            map_vote.put("voteCreateTime","发起时间"+"   "+data.getJSONObject(i).getString("createTime"));
+            map_vote.put("voteId",data.getJSONObject(i).getString("id"));
 
-        tv_pray.setText(jo.get("sendMsg").toString());
-        tv_create_time.setText(jo.get("createTime").toString());
-        tv_maker_name.setText(jo.get("sendName").toString());
-        tv_pray_text=jo.get("sendMsg").toString();
-
-        for(int i=0;i<mDatas.size();i++){
-
+            voteDatas.add(map_vote);
         }
+        System.out.print("voteDatas="+voteDatas);
+
+        //投票列表数据渲染
+        voteRecyclerView = (RecyclerView)view.findViewById(R.id.id_vote_wait_list);
+        voteRecyclerView.setLayoutManager(new LinearLayoutManager(App.getContext()));
+        voteRecyclerView.setAdapter(voteAdapter = new VoteListAdapter());
+        voteAdapter.notifyDataSetChanged();
     }
+
+    private void operateGiftList(JSONArray data){
+//        //模拟投票列表数据
+//        for(int i=0;i<data.size();i++){
+//            Map<String,Object> map_vote=new HashMap();
+//            //Object obj=new Object();
+//            System.out.print("object"+data.get(i));
+//            map_vote.put("voteTheme",data.getJSONObject(i).getString("voteThrem"));
+//            map_vote.put("voteMaker","发起人"+"   "+data.getJSONObject(i).getString("voteCreater"));
+//            map_vote.put("voteCreateTime","发起时间"+"   "+data.getJSONObject(i).getString("createTime"));
+//            map_vote.put("voteId",data.getJSONObject(i).getString("id"));
+//
+//            voteDatas.add(map_vote);
+//        }
+//        System.out.print("voteDatas="+voteDatas);
+//
+//        //投票列表数据渲染
+//        redTicketRecyclerView = (RecyclerView)view.findViewById(R.id.id_vote_wait_list);
+//        redTicketRecyclerView.setLayoutManager(new LinearLayoutManager(App.getContext()));
+//        redTicketRecyclerView.setAdapter(redTicketAdapter = new RedTicketListAdapter());
+//        redTicketAdapter.notifyDataSetChanged();
+    }
+
+//    private void operateGiftList(JSONArray ja){
+//        JSONObject jo=(JSONObject)ja.get(0);
+//        id= (int) jo.get("id");
+//
+//        tv_pray.setText(jo.get("sendMsg").toString());
+//        tv_create_time.setText(jo.get("createTime").toString());
+//        tv_maker_name.setText(jo.get("sendName").toString());
+//        tv_pray_text=jo.get("sendMsg").toString();
+//
+//        for(int i=0;i<mDatas.size();i++){
+//
+//        }
+//    }
 
     private void operateVoteList(){
 

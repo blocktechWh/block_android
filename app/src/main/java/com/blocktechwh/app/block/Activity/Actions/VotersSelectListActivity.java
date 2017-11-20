@@ -14,6 +14,7 @@ import android.widget.Button;
 import android.widget.CompoundButton;
 import android.widget.ImageView;
 import android.widget.RadioButton;
+import android.widget.TextView;
 
 import com.alibaba.fastjson.JSONArray;
 import com.blocktechwh.app.block.Bean.User;
@@ -90,13 +91,15 @@ public class VotersSelectListActivity extends TitleActivity {
                     holder.iv.setImageBitmap(bmp);
                 }
             });
-            holder.tv.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            holder.rb.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
                 @Override
                 public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                     if(isChecked){
                         //checkdeArray.add(holder.id);
                         id=holder.id;
                         img=Urls.HOST + "staticImg" + mDatas.get(position).getImg();
+                        //Toast.makeText(VotersSelectListActivity.this,mDatas.get(position).getImg(),Toast.LENGTH_SHORT).show();
+
                     }
                 }
             });
@@ -112,15 +115,17 @@ public class VotersSelectListActivity extends TitleActivity {
         }
 
         class MyViewHolder extends RecyclerView.ViewHolder{
-            RadioButton tv;
+            TextView tv;
+            RadioButton rb;
             ImageView iv;
             Integer id;
 
             public MyViewHolder(View view)
             {
                 super(view);
-                tv = (RadioButton) view.findViewById(R.id.itemText_player);
+                tv = (TextView) view.findViewById(R.id.itemText_player);
                 iv=(ImageView) view.findViewById(R.id.itemImg);
+                rb=(RadioButton) view.findViewById(R.id.rb_voter);
                 id=0;
             }
         }
