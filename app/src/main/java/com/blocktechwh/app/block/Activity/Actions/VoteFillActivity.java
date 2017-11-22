@@ -18,7 +18,7 @@ import com.blocktechwh.app.block.Utils.HttpClient;
  */
 
 public class VoteFillActivity extends TitleActivity {
-    private Integer voteId;
+    private int voteId;
     private Button btFillSure;
     private EditText et_fill_money;
 
@@ -30,6 +30,7 @@ public class VoteFillActivity extends TitleActivity {
 
         Bundle bundle=this.getIntent().getExtras();
         voteId=bundle.getInt("voteId");
+        //Toast.makeText(VoteFillActivity.this,"voteId="+voteId, Toast.LENGTH_SHORT).show();
 
         initData();
         addEvent();
@@ -38,6 +39,16 @@ public class VoteFillActivity extends TitleActivity {
     private void initData(){
         btFillSure=(Button) findViewById(R.id.btFillSure);
         et_fill_money=(EditText) findViewById(R.id.et_fill_money);
+
+//        userName.setText(App.userInfo.getName());
+//        userPhone.setText(App.userInfo.getPhone());
+//        String url = Urls.HOST + "staticImg" + App.userInfo.getImg();
+//        HttpClient.getImage(this, url, new CallBack<Bitmap>() {
+//            @Override
+//            public void onSuccess(final Bitmap bmp) {
+//                userPhoto.setImageBitmap(bmp);
+//            }
+//        });
     }
 
 
@@ -55,6 +66,11 @@ public class VoteFillActivity extends TitleActivity {
             public void onSuccess(JSONObject data) {
                 System.out.print("投票加注返回="+data);
                 Toast.makeText(VoteFillActivity.this,"加注成功",Toast.LENGTH_SHORT).show();
+                VoteFillActivity.this.finish();
+
+//                Intent intent = new Intent(VoteFillActivity.this,VoteDetailActivity.class);
+//                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_EXCLUDE_FROM_RECENTS);
+//                startActivity(intent);
             }
         });
             }

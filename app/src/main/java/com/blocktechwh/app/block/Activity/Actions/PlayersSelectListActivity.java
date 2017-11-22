@@ -11,13 +11,13 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.ImageView;
+import android.widget.RadioButton;
 import android.widget.TextView;
 
 import com.alibaba.fastjson.JSONArray;
-import com.blocktechwh.app.block.Bean.VoteInfo;
+import com.blocktechwh.app.block.Bean.User;
 import com.blocktechwh.app.block.Common.App;
 import com.blocktechwh.app.block.Common.Urls;
 import com.blocktechwh.app.block.CustomView.TitleActivity;
@@ -26,27 +26,28 @@ import com.blocktechwh.app.block.Utils.CallBack;
 import com.blocktechwh.app.block.Utils.HttpClient;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
-public class VotersSelectListActivity extends TitleActivity {
+public class PlayersSelectListActivity extends TitleActivity {
 
 
     private RecyclerView mRecyclerView;
     private PlayerListAdapter mAdapter;
-    private JSONArray mDatas;
+    //private List<Map<String,Object>> mDatas;
+    private List<User> mDatas = new ArrayList<User>();
     private ArrayList<Integer>checkdeArray;
-    private Button votersAddSure;
-    private static List<Map<String,Object>>playerList=new ArrayList<>();
-
+    private Integer id;
+    private Button playerAddSure;
+    private String img;
 
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-            setContentView(R.layout.activity_voters_select);
+            setContentView(R.layout.activity_player_select);
             initTitle("参与人员");
+
+
 
         initView();
         getData();
@@ -55,9 +56,9 @@ public class VotersSelectListActivity extends TitleActivity {
     }
 
     private void initView(){
-        mDatas=new JSONArray();
+
         checkdeArray=new ArrayList<Integer>();
-        votersAddSure=(Button) findViewById(R.id.btn_add_sure);
+        playerAddSure=(Button) findViewById(R.id.btn_add_sure);
         mRecyclerView = (RecyclerView)findViewById(R.id.id_players_recycler);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(App.getContext()));
         mRecyclerView.setAdapter(mAdapter = new PlayerListAdapter());
@@ -69,16 +70,16 @@ public class VotersSelectListActivity extends TitleActivity {
         @Override
         public MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType){
             MyViewHolder holder = new MyViewHolder(LayoutInflater.from(
-                    App.getContext()).inflate(R.layout.item_voters_contact, parent,
+                    App.getContext()).inflate(R.layout.item_player_contact, parent,
                     false));
             return holder;
         }
 
         @Override
         public void onBindViewHolder(final MyViewHolder holder, final int position){
-            holder.tv.setText(mDatas.getJSONObject(position).getString("name").toString());
-            holder.id=Integer.parseInt(mDatas.getJSONObject(position).getString("id"));
-            String url = Urls.HOST + "staticImg" + mDatas.getJSONObject(position).getString("img");
+            holder.tv.setText(mDatas.get(position).getName());
+            holder.id=mDatas.get(position).getId();
+            String url = Urls.HOST + "staticImg" + mDatas.get(position).getImg();
             HttpClient.getImage(this, url, new CallBack<Bitmap>() {
                 @Override
                 public void onSuccess(final Bitmap bmp) {
@@ -89,22 +90,10 @@ public class VotersSelectListActivity extends TitleActivity {
                 @Override
                 public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                     if(isChecked){
-                        Map<String,Object> map_player=new HashMap<>();
-                        map_player.put("id",Integer.parseInt(mDatas.getJSONObject(position).getString("id")));
-                        map_player.put("img",Urls.HOST + "staticImg" + mDatas.getJSONObject(position).getString("img"));
-                        playerList.add(map_player);
-                        VoteInfo.setPlayerList(playerList);
-                        //Toast.makeText(VotersSelectListActivity.this,mDatas.getJSONObject(position).getString("img").toString(), Toast.LENGTH_SHORT).show();
+                        id=holder.id;
+                        img=Urls.HOST + "staticImg" + mDatas.get(position).getImg();
+                        //Toast.makeText(PlayersSelectListActivity.this,mDatas.get(position).getImg(),Toast.LENGTH_SHORT).show();
 
-                        holder.rb.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-                            @Override
-                            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                                if(!isChecked){
-                                    playerList.remove(position);
-                                    VoteInfo.setPlayerList(playerList);
-                                }
-                            }
-                        });
                     }
                 }
             });
@@ -117,12 +106,11 @@ public class VotersSelectListActivity extends TitleActivity {
         @Override
         public int getItemCount(){
             return mDatas.size();
-
         }
 
         class MyViewHolder extends RecyclerView.ViewHolder{
             TextView tv;
-            CheckBox rb;
+            RadioButton rb;
             ImageView iv;
             Integer id;
 
@@ -131,19 +119,23 @@ public class VotersSelectListActivity extends TitleActivity {
                 super(view);
                 tv = (TextView) view.findViewById(R.id.itemText_player);
                 iv=(ImageView) view.findViewById(R.id.itemImg);
-                rb=(CheckBox) view.findViewById(R.id.rb_voter);
+                rb=(RadioButton) view.findViewById(R.id.rb_voter);
                 id=0;
             }
         }
     }
 
     private void addEvent(){
-        votersAddSure.setOnClickListener(addSure);
+        playerAddSure.setOnClickListener(addSure);
     }
     private View.OnClickListener addSure = new View.OnClickListener(){
         @Override
         public void onClick(View view){
-            Intent intent=new Intent(VotersSelectListActivity.this,StartActivity.class);
+            Bundle bundle=new Bundle();
+            bundle.putInt("id",id);
+            bundle.putString("imgUrl",img);
+            Intent intent=new Intent(PlayersSelectListActivity.this,AddPlayerActivity.class);
+            intent.putExtras(bundle);
             startActivity(intent);
         }
     };
@@ -153,7 +145,7 @@ public class VotersSelectListActivity extends TitleActivity {
         HttpClient.get(this, Urls.Contacts, null, new CallBack<JSONArray>() {
             @Override
             public void onSuccess(JSONArray data) {
-                mDatas = data;
+                mDatas = data.toJavaList(User.class);
                 mAdapter.notifyDataSetChanged();
             }
         });

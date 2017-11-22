@@ -7,6 +7,7 @@ import android.content.pm.PackageManager;
 
 import com.alibaba.fastjson.JSONObject;
 import com.blocktechwh.app.block.Bean.User;
+import com.blocktechwh.app.block.Bean.VoteInfo;
 import com.blocktechwh.app.block.Utils.PreferencesUtils;
 
 /**
@@ -19,6 +20,7 @@ public class App extends Application {
     public static String token = "";
     public static String phone = "";
     public static User userInfo;
+    public static VoteInfo voteInfo;
 
     @Override
     public void onCreate() {
@@ -51,5 +53,9 @@ public class App extends Application {
 
     public static Context getContext() {
         return context;
+    }
+
+    public static void resetVoteInfo(){
+        voteInfo=new VoteInfo();
     }
 }

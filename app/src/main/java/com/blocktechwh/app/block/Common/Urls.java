@@ -194,6 +194,12 @@ public class Urls {
      */
     public static final String QueryVotesList = HOST+"front/vote/tobe-lists/";
 
+    /**
+     * 查询所有投票列表GET
+     *
+     */
+    public static final String QueryTotalVotesList = HOST+"front/vote/list/";
+
 
     /**
      * 查询是否已投
@@ -204,10 +210,16 @@ public class Urls {
 
 
     /**
-     * 投票详情
+     * 未投票详情
      *
      */
     public static final String QueryVoteDetail = HOST+"front/vote/overview/";
+
+    /**
+     * 已投票详情
+     *
+     */
+    public static final String QueryVotedDetail = HOST+"front/vote/statis/";
 
 
     /**
@@ -237,6 +249,8 @@ public class Urls {
      *
      */
     public static final String QueryRaiseLIst = HOST+"front/vote/raise-list/";
+
+
 
 
 

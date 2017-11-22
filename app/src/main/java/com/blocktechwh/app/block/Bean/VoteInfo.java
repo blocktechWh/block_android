@@ -12,15 +12,18 @@ public class VoteInfo {
     private static List<String>imgUrls=new ArrayList<String>();
     private static String voteImg;
     private static String voteTheme;
-    private static boolean isLimited;
-    private static boolean isAnonymous;
-    private static boolean isRaise;
+    private static String isLimited="false";
+    private static String isAnonymous="true";
+    private static String isRaise="true";
     private static String voteExpireTime;
     private static List<Map<String,Object>>options=new ArrayList<>();
     private static List<Integer>voteTarget=new ArrayList<>();
     private static List<Integer>voteRewardRule=new ArrayList<>();
-    private static Float voteFee;
+    private static Double voteFee;
     private static List<Integer>voterList=new ArrayList<>();
+    private static List<Map<String,Object>>playerList=new ArrayList<>();
+
+
     public VoteInfo(){
 
     }
@@ -37,13 +40,7 @@ public class VoteInfo {
         return voteTheme;
     }
 
-    public static boolean getIsLimited() {
-        return isLimited;
-    }
 
-    public static boolean getIsAnonymous() {
-        return isAnonymous;
-    }
 
     public static String getVoteExpireTime() {
         return voteExpireTime;
@@ -73,13 +70,7 @@ public class VoteInfo {
         VoteInfo.voteTheme = voteTheme;
     }
 
-    public static void setIsLimited(boolean limited) {
-        VoteInfo.isLimited = limited;
-    }
 
-    public static void setIsAnonymous(boolean anonymous) {
-        VoteInfo.isAnonymous = anonymous;
-    }
 
     public static void setVoteExpireTime(String voteExpireTime) {
         VoteInfo.voteExpireTime = voteExpireTime;
@@ -97,18 +88,12 @@ public class VoteInfo {
         VoteInfo.voteRewardRule = voteRewardRule;
     }
 
-    public static boolean getIsRaise() {
-        return isRaise;
-    }
-    public static void setIsRaise(boolean isRaise) {
-        VoteInfo.isRaise=isRaise;
-    }
 
-    public static Float getVoteFee() {
+    public static Double getVoteFee() {
         return voteFee;
     }
 
-    public static void setVoteFee(Float voteFee) {
+    public static void setVoteFee(Double voteFee) {
         VoteInfo.voteFee = voteFee;
     }
 
@@ -118,5 +103,38 @@ public class VoteInfo {
 
     public static void setVoterList(List<Integer> voterList) {
         VoteInfo.voterList = voterList;
+    }
+
+
+    public static List<Map<String, Object>> getPlayerList() {
+        return playerList;
+    }
+
+    public static void setPlayerList(List<Map<String, Object>> playerList) {
+        VoteInfo.playerList = playerList;
+    }
+
+    public static String getIsLimited() {
+        return isLimited;
+    }
+
+    public static void setIsLimited(String isLimited) {
+        VoteInfo.isLimited = isLimited;
+    }
+
+    public static String getIsAnonymous() {
+        return isAnonymous;
+    }
+
+    public static void setIsAnonymous(String isAnonymous) {
+        VoteInfo.isAnonymous = isAnonymous;
+    }
+
+    public static String getIsRaise() {
+        return isRaise;
+    }
+
+    public static void setIsRaise(String isRaise) {
+        VoteInfo.isRaise = isRaise;
     }
 }

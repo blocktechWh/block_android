@@ -57,7 +57,8 @@ public class VoteDetailActivity extends TitleActivity {
         setContentView(R.layout.activity_vote_detail);
         Bundle bundle=this.getIntent().getExtras();
         voteId=bundle.getInt("voteId");
-        //Toast.makeText(VoteDetailActivity.this,"voteId="+voteId, Toast.LENGTH_SHORT).show();
+        VoteDetail.setVoteId(voteId);
+        Toast.makeText(VoteDetailActivity.this,"voteId="+voteId, Toast.LENGTH_SHORT).show();
         initData();
         getData();
         addEvent();
@@ -100,7 +101,7 @@ public class VoteDetailActivity extends TitleActivity {
                 for(int i=0;i<data.getJSONArray("rewards").size();i++){
                     Map<String,Object> map_vote_rewads=new HashMap();
                     map_vote_rewads.put("amount",data.getJSONArray("rewards").getJSONObject(i).getString("amount"));
-                    map_vote_rewads.put("rank",data.getJSONArray("options").getJSONObject(i).getString("rank"));
+                    map_vote_rewads.put("rank",data.getJSONArray("rewards").getJSONObject(i).getString("rank"));
                     voteRewardsList.add(map_vote_rewads);
                 }
                 VoteDetail.setVoteRewardsList(voteRewardsList);
@@ -138,17 +139,25 @@ public class VoteDetailActivity extends TitleActivity {
             View item_vote_option_layout = LayoutInflater.from(getApplicationContext()).inflate(R.layout.item_vote_option,null);
             TextView tv_vote_option_text=item_vote_option_layout.findViewById(R.id.tv_vote_option_text);
             tv_vote_option_text.setText(VoteDetail.getVoteOptionsList().get(i).get("option").toString());
-            CheckBox cb_vote_option=item_vote_option_layout.findViewById(R.id.cb_vote_option);
+            final CheckBox cb_vote_option=item_vote_option_layout.findViewById(R.id.cb_vote_option);
             cb_vote_option.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
                 @Override
                 public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                     if(isChecked){
                         checkedOptionIds.add(VoteDetail.getVoteOptionsList().get(checkedIndex).get("optionId").toString());
+                        VoteDetail.setCheckedOptionIds(checkedOptionIds);
+                        cb_vote_option.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+                            @Override
+                            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                                if(!isChecked){
+                                    VoteDetail.getCheckedOptionIds().remove(checkedIndex);
+                                }
+                            }
+                        });
                     }
                 }
             });
             ll_vote_options.addView(item_vote_option_layout);
-
         }
 
         //渲染奖励项
@@ -212,12 +221,6 @@ public class VoteDetailActivity extends TitleActivity {
             return imageView;
         }
 
-
-        // Keep all Images in array
-//        public Integer[] mThumbIds = {
-//                R.mipmap.icon25,R.mipmap.ic_launcher,R.mipmap.icon24,R.mipmap.icon25,R.mipmap.icon25,R.mipmap.ic_launcher,R.mipmap.icon24,R.mipmap.icon25,R.mipmap.icon25,R.mipmap.ic_launcher,R.mipmap.icon24,R.mipmap.icon25
-//        };
-
     }
 
     private void addEvent(){
@@ -227,11 +230,13 @@ public class VoteDetailActivity extends TitleActivity {
             public void onClick(View v) {
 
                 Bundle bundle=new Bundle();
-                bundle.putInt("voteId",2);
+                bundle.putInt("voteId",voteId);
                 Intent intent = new Intent(VoteDetailActivity.this,VoteFillActivity.class);
                 intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_EXCLUDE_FROM_RECENTS);
                 intent.putExtras(bundle);
-                startActivity(intent);            }
+                startActivity(intent);
+                finish();
+            }
         });
 
         //点击确认投票
@@ -241,16 +246,22 @@ public class VoteDetailActivity extends TitleActivity {
             JSONObject json_vote=new JSONObject();
             json_vote.put("voteId",voteId);//投票id
             json_vote.put("optionId",checkedOptionIds);
+                Toast.makeText(VoteDetailActivity.this,json_vote.toString(),Toast.LENGTH_SHORT).show();
 
-        HttpClient.post(this, Urls.MAKEVote, json_vote.toString(), new CallBack<JSONObject>() {
+
+                HttpClient.post(this, Urls.MAKEVote, json_vote.toString(), new CallBack<JSONObject>() {
             @Override
             public void onSuccess(JSONObject data) {
                 System.out.print("投票返回="+data);
                 Toast.makeText(VoteDetailActivity.this,"投票成功",Toast.LENGTH_SHORT).show();
+                VoteDetailActivity.this.finish();
+
             }
         });
+
             }
         });
+
     }
 
 }

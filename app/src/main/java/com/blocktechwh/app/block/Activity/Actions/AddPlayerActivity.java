@@ -59,6 +59,7 @@ public class AddPlayerActivity extends TitleActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_vote_action_add);
+        initTitle("添加投票项");
         initData();
 
         bundle=this.getIntent().getExtras();
@@ -85,6 +86,7 @@ public class AddPlayerActivity extends TitleActivity {
     }
 
     private void initData(){
+
         //从VoteInfo中拿到mDatas
         mDatas=VoteInfo.getOptions();
 
@@ -96,16 +98,6 @@ public class AddPlayerActivity extends TitleActivity {
         ll_player_img.setVisibility(View.GONE);
         tvToAddAction=(TextView) findViewById(R.id.tv_to_add_action);
         btnAddSure=(Button) findViewById(R.id.btn_add_sure);
-
-
-        //url = Urls.HOST + "staticImg" + imgUrl.toString();
-//        if(imgUrl!=""){
-//            imgUrl = imgUrl.toString();
-//            Toast.makeText(AddPlayerActivity.this,"11imgUrl="+imgUrl,Toast.LENGTH_SHORT).show();
-//        }else{
-//            imgUrl = Urls.HOST + "staticImg" + imgUrl.toString();
-//            Toast.makeText(AddPlayerActivity.this,"false",Toast.LENGTH_SHORT).show();
-//        }
 
 
 
@@ -126,7 +118,7 @@ public class AddPlayerActivity extends TitleActivity {
         @Override
         public void onBindViewHolder(final MyViewHolder holder, final int position){
             Map<String,Object> map=mDatas.get(position);
-            holder.tv.setText(map.get("item").toString());
+            holder.tv.setText((position+1)+"."+map.get("item").toString());
             System.out.println("holder.tv="+holder.tv.getText());
 
             if(!imgUrls.isEmpty()){
@@ -169,6 +161,7 @@ public class AddPlayerActivity extends TitleActivity {
     private void addEvent(){
 
 
+
         //添加活动项
         tvToAddAction.setOnClickListener(new View.OnClickListener(){
             @Override
@@ -178,11 +171,13 @@ public class AddPlayerActivity extends TitleActivity {
 
                 }else{
                     mDatas=VoteInfo.getOptions();
+                    ll_option_add_button.setVisibility(View.VISIBLE);
+                    ll_player_img.setVisibility(View.GONE);
 
-                    System.out.println("长度"+mDatas.size());
-                    System.out.println("item"+VoteInfo.getOptions());
-
-                    Toast.makeText(AddPlayerActivity.this,"OK",Toast.LENGTH_LONG).show();
+//                    System.out.println("长度"+mDatas.size());
+//                    System.out.println("item"+VoteInfo.getOptions());
+//
+//                    Toast.makeText(AddPlayerActivity.this,"OK",Toast.LENGTH_LONG).show();
 
                     String item=et_action_input.getText().toString();
                     Map<String,Object> map=new HashMap<String, Object>();
@@ -212,8 +207,12 @@ public class AddPlayerActivity extends TitleActivity {
         addPlayer.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(AddPlayerActivity.this,VotersSelectListActivity.class);
+
+                Bundle bundle=new Bundle();
+                bundle.putInt("stateIndex",1);
+                Intent intent = new Intent(AddPlayerActivity.this,PlayersSelectListActivity.class);
                 intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_EXCLUDE_FROM_RECENTS);
+                intent.putExtras(bundle);
                 startActivity(intent);
 
             }
@@ -243,5 +242,5 @@ public class AddPlayerActivity extends TitleActivity {
         });
 
     }
-    //button19
+
 }

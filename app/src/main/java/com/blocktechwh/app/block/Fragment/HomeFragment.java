@@ -46,6 +46,7 @@ public class HomeFragment extends Fragment {
     private RecyclerView redTicketRecyclerView;//投票列表对象
     private RedTicketListAdapter redTicketAdapter;
     private int voteId;
+    private boolean isRaise;
 
 
 
@@ -109,6 +110,8 @@ public class HomeFragment extends Fragment {
                 public void onClick(View v) {
              voteId=Integer.parseInt(voteDatas.get(position).get("voteId").toString());
 
+                    //isRaise=voteDatas.get(position).get("isRaise");
+
             //查询投票是否已投
             HttpClient.get(this, Urls.QueryHasVoted+voteId, null, new CallBack<JSONObject>() {
                 @Override
@@ -117,14 +120,18 @@ public class HomeFragment extends Fragment {
                     if(data.getString("data")=="false"){
                         //调http://111.231.146.57:20086/front/vote/overview/{voteId}
                         Bundle bundle = new Bundle();
-                        bundle.putInt("voteId",voteId);
+                        bundle.putInt("voteId",voteId);//isRaise
+                        bundle.putInt("isRaise",voteId);
                         bundle.putString("tv_active_name",tv_pray_text);
                         Intent intent= new Intent(getActivity(), VoteDetailActivity.class);
                         intent.putExtras(bundle);
                         startActivity(intent);
                     }else{
                         //调http://111.231.146.57:20086/front/vote/statis/{voteId}
+                        Bundle bundle = new Bundle();
+                        bundle.putInt("voteId",voteId);
                         Intent intent= new Intent(getActivity(), VotedDetailActivity.class);
+                        intent.putExtras(bundle);
                         startActivity(intent);
                     }
 
@@ -235,52 +242,11 @@ public class HomeFragment extends Fragment {
             @Override
             public void onSuccess(JSONArray data) {
                 System.out.print("待投票列表mDatas="+data);
-
+                //Toast.makeText(getContext(),data.toString(),Toast.LENGTH_LONG).show();
                 operateVotesWait(data);
             }
         });
-//
 
-//
-
-//
-//
-//       //执行投票
-//        JSONObject json_vote=new JSONObject();
-//        List<String> optionId=new ArrayList<>();
-//        optionId.add("9");//活动id
-//        optionId.add("10");
-//        json_vote.put("voteId","8");//投票id
-//        json_vote.put("optionId",optionId);
-//
-//        HttpClient.post(this, Urls.MAKEVote, json_vote.toString(), new CallBack<JSONObject>() {
-//            @Override
-//            public void onSuccess(JSONObject data) {
-//                System.out.print("投票返回="+data);
-//            }
-//        });
-//
-//
-//        //给投票加注
-//        JSONObject json_raise=new JSONObject();
-//        json_vote.put("voteId","8");//投票id
-//        json_vote.put("amount","100");//加注金额
-//
-//        HttpClient.post(this, Urls.MakeRaise, json_raise.toString(), new CallBack<JSONObject>() {
-//            @Override
-//            public void onSuccess(JSONObject data) {
-//                System.out.print("投票加注返回="+data);
-//            }
-//        });
-//
-//        //查询加注列表
-//        HttpClient.get(this, Urls.QueryRaiseLIst+8, null, new CallBack<JSONArray>() {
-//            @Override
-//            public void onSuccess(JSONArray data) {
-//                System.out.print("加注列表="+data);
-//
-//            }
-//        });
 
     }
 
@@ -294,7 +260,7 @@ public class HomeFragment extends Fragment {
             map_vote.put("voteMaker","发起人"+"   "+data.getJSONObject(i).getString("voteCreater"));
             map_vote.put("voteCreateTime","发起时间"+"   "+data.getJSONObject(i).getString("createTime"));
             map_vote.put("voteId",data.getJSONObject(i).getString("id"));
-
+            map_vote.put("isRaise",data.getJSONObject(i).getString("isRaise"));
             voteDatas.add(map_vote);
         }
         System.out.print("voteDatas="+voteDatas);

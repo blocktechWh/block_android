@@ -36,7 +36,7 @@
         <activity android:name=".Activity.Actions.VotesListActivity" />
         <activity android:name=".Activity.Actions.StartActivity" />
         <activity android:name=".Activity.Actions.AddPlayerActivity" />
-        <activity android:name=".Activity.Actions.VotersSelectListActivity" />
+        <activity android:name=".Activity.Actions.PlayersSelectListActivity" />
         <activity android:name=".Activity.Contact.ContactDetailActivity" />
         <activity android:name=".Activity.Contact.ContactDetailForSendActivity" />
         <activity android:name=".Activity.RedTicket.SendRedTicket" />
@@ -48,6 +48,7 @@
         <activity android:name=".Activity.Actions.VotedDetailActivity" />
         <activity android:name=".Activity.Actions.VoteDetailActivity" />
         <activity android:name=".Activity.Actions.VoteFillActivity" />
+        <activity android:name=".Activity.Actions.VotersSelectListActivity" />
 
 
     </application>
