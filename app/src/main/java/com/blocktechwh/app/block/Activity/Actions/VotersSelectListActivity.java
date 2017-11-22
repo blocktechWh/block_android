@@ -91,7 +91,7 @@ public class VotersSelectListActivity extends TitleActivity {
                     if(isChecked){
                         Map<String,Object> map_player=new HashMap<>();
                         map_player.put("id",Integer.parseInt(mDatas.getJSONObject(position).getString("id")));
-                        map_player.put("img",Urls.HOST + "staticImg" + mDatas.getJSONObject(position).getString("img"));
+                        //map_player.put("img",Urls.HOST + "staticImg" + mDatas.getJSONObject(position).getString("img"));
                         playerList.add(map_player);
                         VoteInfo.setPlayerList(playerList);
                         //Toast.makeText(VotersSelectListActivity.this,mDatas.getJSONObject(position).getString("img").toString(), Toast.LENGTH_SHORT).show();
@@ -108,9 +108,6 @@ public class VotersSelectListActivity extends TitleActivity {
                     }
                 }
             });
-
-
-
 
         }
 

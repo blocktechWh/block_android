@@ -15,13 +15,15 @@ public class VoteInfo {
     private static String isLimited="false";
     private static String isAnonymous="true";
     private static String isRaise="true";
+    private static String isReward="false";
     private static String voteExpireTime;
     private static List<Map<String,Object>>options=new ArrayList<>();
     private static List<Integer>voteTarget=new ArrayList<>();
-    private static List<Integer>voteRewardRule=new ArrayList<>();
+    private static List<Double>voteRewardRule=new ArrayList<>();
     private static Double voteFee;
     private static List<Integer>voterList=new ArrayList<>();
     private static List<Map<String,Object>>playerList=new ArrayList<>();
+    private static List<Map<String,Object>>voterTargetList=new ArrayList<>();
 
 
     public VoteInfo(){
@@ -54,9 +56,6 @@ public class VoteInfo {
         return voteTarget;
     }
 
-    public static List<Integer> getVoteRewardRule() {
-        return voteRewardRule;
-    }
 
     public static void setImgUrls(List<String> imgUrls) {
         VoteInfo.imgUrls = imgUrls;
@@ -84,10 +83,13 @@ public class VoteInfo {
         VoteInfo.voteTarget = voteTarget;
     }
 
-    public static void setVoteRewardRule(List<Integer> voteRewardRule) {
-        VoteInfo.voteRewardRule = voteRewardRule;
+    public static List<Double> getVoteRewardRule() {
+        return voteRewardRule;
     }
 
+    public static void setVoteRewardRule(List<Double> voteRewardRule) {
+        VoteInfo.voteRewardRule = voteRewardRule;
+    }
 
     public static Double getVoteFee() {
         return voteFee;
@@ -136,5 +138,13 @@ public class VoteInfo {
 
     public static void setIsRaise(String isRaise) {
         VoteInfo.isRaise = isRaise;
+    }
+
+    public static String getIsReward() {
+        return isReward;
+    }
+
+    public static void setIsReward(String isReward) {
+        VoteInfo.isReward = isReward;
     }
 }

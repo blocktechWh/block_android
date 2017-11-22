@@ -33,9 +33,6 @@ import com.blocktechwh.app.block.R;
 import com.blocktechwh.app.block.Utils.CallBack;
 import com.blocktechwh.app.block.Utils.HttpClient;
 
-import java.util.ArrayList;
-import java.util.List;
-
 /**
  * Created by Administrator on 2017/11/10.
  */
@@ -58,6 +55,7 @@ public class StartActivity extends TitleActivity {
     private String isLimited="false";
     private String isAnonymous="true";
     private String isRaise="true";
+    private String isReward="false";
     private RecyclerView mRecyclerView;
 
     private TextView tvPopupTime;
@@ -68,11 +66,10 @@ public class StartActivity extends TitleActivity {
     private Button btnStartVote;
     private EditText etTheme;
     private TextView tvAddReward;
-    private LinearLayout ll_active_layout;
     //private ImageView iv_optionimg;
     private TextView tv_select_voters;
-    private ImageView imageView;
     private VotesListAdapter mAdapter;
+    private Switch sIfReward;
 
 
     @Override
@@ -88,7 +85,6 @@ public class StartActivity extends TitleActivity {
     }
     private void initData(){
         tv_select_voters=(TextView)findViewById(R.id.tv_select_voters);
-        ll_active_layout=(LinearLayout) findViewById(R.id.ll_active_layout);
 
         //添加投票項
         if(VoteInfo.getOptions().size()>0) {
@@ -126,11 +122,12 @@ public class StartActivity extends TitleActivity {
         sIfSingle=(Switch) findViewById(R.id.switch_vote);
         sIfNoSee=(Switch) findViewById(R.id.switch_vote2);
         switchifAdd=(Switch) findViewById(R.id.switchifAdd);
+        sIfReward=(Switch) findViewById(R.id.sIfReward);
         tvAddReward=(TextView) findViewById(R.id.tvAddReward);
         sIfSingle.setChecked(false);
         sIfNoSee.setChecked(true);
         switchifAdd.setChecked(true);
-
+        sIfReward.setChecked(Boolean.parseBoolean(VoteInfo.getIsReward()));
 
         tvPopupTime=(TextView) findViewById(R.id.tv_popup_time);
         layout=(LinearLayout) findViewById(R.id.layout_main);
@@ -169,13 +166,14 @@ public class StartActivity extends TitleActivity {
         @Override
         public void onBindViewHolder(final MyViewHolder holder, int position){
             holder.tv_option_text.setText((position+1)+"."+VoteInfo.getOptions().get(position).get("item").toString());
-            String url = Urls.HOST + "staticImg" + VoteInfo.getImgUrls().get(position);
+            String url = VoteInfo.getImgUrls().get(position);
             HttpClient.getImage(this, url, new CallBack<Bitmap>() {
                 @Override
                 public void onSuccess(final Bitmap bmp) {
                     holder.iv_option_img.setImageBitmap(bmp);
                 }
             });
+            tv_to_add.setText("继续添加投票项");
 
         }
 
@@ -285,6 +283,25 @@ public class StartActivity extends TitleActivity {
             }
         });
 
+        //点击开关选择是否添加奖励
+        sIfReward.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if(isChecked){
+                    sIfReward.setText("开");
+                    isReward="true";
+                    Intent intent = new Intent(StartActivity.this,SetRewardActivity.class);
+                    intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_EXCLUDE_FROM_RECENTS);
+                    startActivity(intent);
+                }else{
+                    sIfReward.setText("关");
+                    isReward="false";
+                }
+                VoteInfo.setIsReward(isReward);
+
+            }
+        });
+
         //点击开关选择是否匿名
         switchifAdd.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
@@ -330,32 +347,18 @@ public class StartActivity extends TitleActivity {
             @Override
             public void onClick(View view) {
                 JSONObject json = new JSONObject();
-                List<Integer>voterList=new ArrayList<>();
-                voterList.add(1);
-                voterList.add(2);
-                List<Integer>rewardRuleList=new ArrayList<>();
-                rewardRuleList.add(80);
-                rewardRuleList.add(20);
 
                 json.put("voteImg","sduhfciusdaghhfi329485yhdbngiuvywiohf");
-//                if(VoteInfo.getVoteTheme().equals(null)){
-//                    json.put("voteTheme",etTheme.getText().toString());
-//                }else{
-//                    json.put("voteTheme",VoteInfo.getVoteTheme());
-//
-//                }
                 json.put("voteTheme",etTheme.getText().toString());
                 json.put("isLimited",VoteInfo.getIsLimited());
-                //json.put("isRaise",VoteInfo.getIsRaise());
-                json.put("isRaise","true");
+                json.put("isRaise",VoteInfo.getIsRaise());
                 json.put("isAnonymous",VoteInfo.getIsAnonymous());
-                json.put("voteFee",100.00);//VoteInfo.getVoteFee()
+                json.put("voteFee",VoteInfo.getVoteFee());//VoteInfo.getVoteFee()
                 json.put("voteExpireTime","2017-11-29T03:52:17.106Z");
                 json.put("options",VoteInfo.getOptions());
-                json.put("voteTarget",voterList);//VoteInfo.getVoterList()
-                json.put("voteRewardRule",rewardRuleList);//VoteInfo.getVoteRewardRule()
+                json.put("voteTarget",VoteInfo.getPlayerList());
+                json.put("voteRewardRule",VoteInfo.getVoteRewardRule());
 
-               // System.out.print("json="+json);
                 Toast.makeText(StartActivity.this,json.toString(),Toast.LENGTH_LONG).show();
 
                 HttpClient.post(this, Urls.MakeVote, json.toString(), new CallBack<JSONObject>() {
@@ -395,7 +398,7 @@ public class StartActivity extends TitleActivity {
         }
 
         public int getCount() {
-            return mThumbIds.length;
+            return VoteInfo.getPlayerList().size();
         }
 
         public Object getItem(int position) {
@@ -408,27 +411,27 @@ public class StartActivity extends TitleActivity {
 
         // create a new ImageView for each item referenced by the Adapter
         public View getView(int position, View convertView, ViewGroup parent) {
-            //ImageView imageView;
+            final ImageView imageView;
             if (convertView == null) {
                 imageView = new ImageView(mContext);
                 imageView.setLayoutParams(new GridView.LayoutParams(85, 85));
                 imageView.setScaleType(ImageView.ScaleType.CENTER_CROP);
-                imageView.setPadding(8, 8, 8, 8);
+                imageView.setPadding(0, 0, 0, 0);
             } else {
                 imageView = (ImageView) convertView;
             }
 
             if(VoteInfo.getPlayerList().size()>0){
-                Toast.makeText(StartActivity.this,"yes",Toast.LENGTH_SHORT).show();
+                //Toast.makeText(StartActivity.this,VoteInfo.getPlayerList().toString(),Toast.LENGTH_SHORT).show();
 
-                //String url = VoteInfo.getPlayerList().get(position).get("img").toString();
-                //Toast.makeText(StartActivity.this,"url="+url,Toast.LENGTH_SHORT).show();
-//                HttpClient.getImage(this, url, new CallBack<Bitmap>() {
-//                    @Override
-//                    public void onSuccess(final Bitmap bmp) {
-//                        imageView.setImageBitmap(bmp);
-//                    }
-//                });
+                String url = VoteInfo.getPlayerList().get(position).get("img").toString();
+              //Toast.makeText(StartActivity.this,"position="+position,Toast.LENGTH_SHORT).show();
+                HttpClient.getImage(this, url, new CallBack<Bitmap>() {
+                    @Override
+                    public void onSuccess(final Bitmap bmp) {
+                        imageView.setImageBitmap(bmp);
+                    }
+                });
             }else{
                 //Toast.makeText(StartActivity.this,"false",Toast.LENGTH_SHORT).show();
 

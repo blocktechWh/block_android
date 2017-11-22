@@ -6,7 +6,7 @@
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="40dp"
+        android:layout_height="45dp"
         android:paddingEnd="@dimen/padding_right"
         android:paddingLeft="@dimen/padding_left"
         android:paddingRight="@dimen/padding_right"
@@ -20,12 +20,13 @@
             android:layout_centerInParent="false"
             android:layout_centerVertical="true"
             android:layout_weight="1"
-            android:text="第1名" />
+            android:text="第1名"
+            android:textColor="@color/itemTextColor" />
 
         <EditText
             android:id="@+id/et_reward_percent"
-            android:layout_width="30dp"
-            android:layout_height="30dp"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
             android:layout_centerVertical="true"
             android:layout_marginLeft="20dp"
             android:layout_marginStart="20dp"
@@ -33,6 +34,7 @@
             android:layout_toRightOf="@+id/tv_rank_text"
             android:ems="10"
             android:inputType="textPersonName"
+            android:textColor="@color/itemTextColor"
             android:textSize="14sp" />
 
         <TextView
@@ -41,7 +43,8 @@
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
             android:layout_toRightOf="@+id/et_reward_percent"
-            android:text="%" />
+            android:text="%"
+            android:textColor="@color/itemTextColor" />
 
         <TextView
             android:id="@+id/textView23"
@@ -51,7 +54,8 @@
             android:layout_alignBottom="@+id/tv_reward_amount"
             android:layout_toLeftOf="@+id/tv_reward_amount"
             android:layout_toStartOf="@+id/tv_reward_amount"
-            android:text="约￥" />
+            android:text="约￥"
+            android:textColor="@color/itemTextColor" />
 
         <TextView
             android:id="@+id/tv_reward_amount"
@@ -59,7 +63,8 @@
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
             android:layout_centerVertical="true"
-            android:text="80.0" />
+            android:text="80.0"
+            android:textColor="@color/itemTextColor" />
 
     </RelativeLayout>
 </LinearLayout>
