@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.Color;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.LinearLayoutManager;
@@ -32,12 +33,16 @@ import com.blocktechwh.app.block.CustomView.TitleActivity;
 import com.blocktechwh.app.block.R;
 import com.blocktechwh.app.block.Utils.CallBack;
 import com.blocktechwh.app.block.Utils.HttpClient;
+import com.blocktechwh.app.block.Utils.ImageUtil;
 
 /**
  * Created by Administrator on 2017/11/10.
  */
 
 public class StartActivity extends TitleActivity {
+
+    private static final int PHOTO_REQUEST_GALLERY = 2;// 从相册中选择
+    private static final int PHOTO_REQUEST_CUT = 3;// 结果
 
     private String theme;//主题
     private String themeImg;//主题图片
@@ -70,6 +75,7 @@ public class StartActivity extends TitleActivity {
     private TextView tv_select_voters;
     private VotesListAdapter mAdapter;
     private Switch sIfReward;
+    private LinearLayout lladdImage;
 
 
     @Override
@@ -112,9 +118,6 @@ public class StartActivity extends TitleActivity {
   //           }
         }
 
-
-
-
        // LayoutInflater inflater = getLayoutInflater();
         //View view = inflater.inflate(R.layout.item_vote_active, null);
         addPlayersButton=(TextView) findViewById(R.id.tv_to_add);
@@ -124,6 +127,8 @@ public class StartActivity extends TitleActivity {
         switchifAdd=(Switch) findViewById(R.id.switchifAdd);
         sIfReward=(Switch) findViewById(R.id.sIfReward);
         tvAddReward=(TextView) findViewById(R.id.tvAddReward);
+        lladdImage=(LinearLayout) findViewById(R.id.id_add_image);
+
         sIfSingle.setChecked(false);
         sIfNoSee.setChecked(true);
         switchifAdd.setChecked(true);
@@ -318,7 +323,6 @@ public class StartActivity extends TitleActivity {
             }
         });
 
-
         addPlayersButton.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View view) {
@@ -330,17 +334,15 @@ public class StartActivity extends TitleActivity {
 
             }
         });
+
         tv_to_add.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(StartActivity.this,AddPlayerActivity.class);
                 intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_EXCLUDE_FROM_RECENTS);
                 startActivity(intent);
-
             }
         });
-
-
 
         //点击提交发起投票
         btnStartVote.setOnClickListener(new View.OnClickListener(){
@@ -368,6 +370,15 @@ public class StartActivity extends TitleActivity {
                     }
                 });
 
+            }
+        });
+
+        lladdImage.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(Intent.ACTION_PICK);
+                intent.setType("image/*");
+                startActivityForResult(intent, PHOTO_REQUEST_GALLERY);
             }
         });
 
@@ -446,4 +457,40 @@ public class StartActivity extends TitleActivity {
                 R.mipmap.icon25,R.mipmap.ic_launcher,R.mipmap.icon24,R.mipmap.icon25,R.mipmap.icon25
         };
     }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == PHOTO_REQUEST_GALLERY) {// 从相册返回的数据
+            if (data != null) {
+                Uri uri = data.getData();// 得到图片的全路径
+                System.out.println(uri);
+                crop(uri);
+            }
+        } else if (requestCode == PHOTO_REQUEST_CUT) {// 从剪切图片返回的数据
+            if (data != null && data.hasExtra("data")) {
+                Bitmap bitmap = data.getParcelableExtra("data");
+                String base64 = ImageUtil.bitmapToBase64(bitmap);
+                System.out.println(base64);
+//                mInputHandler(base64);
+            }
+        }
+    }
+
+    private void crop(Uri uri) {
+        Intent intent = new Intent("com.android.camera.action.CROP");
+        intent.setDataAndType(uri, "image/*");
+        intent.putExtra("crop", "true");
+        intent.putExtra("aspectX", 1);
+        intent.putExtra("aspectY", 1);
+        intent.putExtra("outputX", 250);
+        intent.putExtra("outputY", 250);
+
+        intent.putExtra("outputFormat", "JPEG");// 图片格式
+        intent.putExtra("noFaceDetection", true);// 取消人脸识别
+        intent.putExtra("return-data", true);
+
+        startActivityForResult(intent, PHOTO_REQUEST_CUT);
+    }
+
 }
