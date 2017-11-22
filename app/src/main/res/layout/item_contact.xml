@@ -24,5 +24,6 @@
         android:layout_marginLeft="20dp"
         android:layout_marginStart="20dp"
         android:layout_weight="0"
+        android:textColor="@color/btnColor"
         android:text="" />
 </LinearLayout>
