@@ -23,7 +23,7 @@ public class VoteInfo {
     private static Double voteFee;
     private static List<Integer>voterList=new ArrayList<>();
     private static List<Map<String,Object>>playerList=new ArrayList<>();
-    private static List<Map<String,Object>>voterTargetList=new ArrayList<>();
+    private static List<Integer>voterTargetList=new ArrayList<>();
 
 
     public VoteInfo(){
@@ -146,5 +146,13 @@ public class VoteInfo {
 
     public static void setIsReward(String isReward) {
         VoteInfo.isReward = isReward;
+    }
+
+    public static List<Integer> getVoterTargetList() {
+        return voterTargetList;
+    }
+
+    public static void setVoterTargetList(List<Integer> voterTargetList) {
+        VoteInfo.voterTargetList = voterTargetList;
     }
 }

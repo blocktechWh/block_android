@@ -82,6 +82,12 @@ public class VoteDetailActivity extends TitleActivity {
             @Override
             public void onSuccess(JSONObject data) {
                 System.out.print("投票详情mDatas="+data);
+                if(!Boolean.parseBoolean(data.getString("isRaise"))){
+                    //设置不可点击
+                    tv_to_fill.setAlpha((float)0.3);
+                    tv_to_fill.setVisibility(View.VISIBLE);
+                    tv_to_fill.setOnClickListener(null);
+                }
 
                 VoteDetail.setVoteImg(data.getString("img"));
                 VoteDetail.setRewardTotal(Double.parseDouble(data.getString("voteFee")));
@@ -263,5 +269,7 @@ public class VoteDetailActivity extends TitleActivity {
         });
 
     }
+
+
 
 }

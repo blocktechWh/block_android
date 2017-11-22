@@ -87,6 +87,7 @@
                     android:layout_weight="1"
                     android:ems="10"
                     android:inputType="number"
+                    android:text="0"
                     android:textSize="14sp" />
             </LinearLayout>
 
@@ -195,7 +196,7 @@
                             android:layout_height="wrap_content"
                             android:layout_alignParentRight="true"
                             android:layout_centerVertical="true"
-                            android:text="80.0" />
+                            android:text="0" />
 
                     </RelativeLayout>
 

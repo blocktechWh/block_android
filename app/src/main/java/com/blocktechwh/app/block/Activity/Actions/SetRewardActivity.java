@@ -36,6 +36,7 @@ public class SetRewardActivity extends TitleActivity {
     private EditText et_reward;
     private String isReward="false";
     private Button btn_add_reward_sure;
+    List<Double>rewardList=new ArrayList<>();
 
 
     @Override
@@ -58,6 +59,7 @@ public class SetRewardActivity extends TitleActivity {
         tv_rank_text=(TextView) findViewById(R.id.tv_rank_text);
         et_reward_percent=(EditText) findViewById(R.id.et_reward_percent);
         tv_reward_amount=(TextView) findViewById(R.id.tv_reward_amount);
+
     }
 
     private void setEvent(){
@@ -66,8 +68,29 @@ public class SetRewardActivity extends TitleActivity {
         btn_add_reward_sure.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                rewardTotalAmount=Double.parseDouble(et_reward.getText().toString());
+                if(rewardTotalAmount<=0){
+                    Toast.makeText(SetRewardActivity.this,"奖励资金必须大于0",Toast.LENGTH_SHORT).show();
+                    return;
+                }
+                Double totalAmount=Double.parseDouble(et_reward_percent.getText().toString());
+                for(int i=0;i<rewardList.size();i++){
+                    totalAmount+=rewardList.get(i);
+                }
+                if(totalAmount>rewardTotalAmount){
+                    Toast.makeText(SetRewardActivity.this,"添加奖励比例已满100%，无法添加",Toast.LENGTH_SHORT).show();
+                    return;
+                }
+                if(totalAmount<rewardTotalAmount){
+                    Toast.makeText(SetRewardActivity.this,"添加奖励比例还未满100%，请继续添加添加",Toast.LENGTH_SHORT).show();
+                    return;
+                }
                  VoteInfo.setVoteFee(rewardTotalAmount);
                 SetRewardActivity.this.finish();
+                if(Double.parseDouble(et_reward_percent.getText().toString())!=0){
+                    rewardList.add(Double.parseDouble(et_reward_percent.getText().toString()));
+                    VoteInfo.setVoteRewardRule(rewardList);
+                }
 
             }
         });
@@ -100,14 +123,30 @@ public class SetRewardActivity extends TitleActivity {
 //            }
 //        });
 
+        //点击添加奖励项
         tv_reward_add_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                List<Double>rewardList=new ArrayList<>();
+                rewardTotalAmount=Double.parseDouble(et_reward.getText().toString());
+                Double totalAmount=0.0;
+                for(int i=0;i<rewardList.size();i++){
+                    totalAmount+=rewardList.get(i);
+                }
+                totalAmount+=Double.parseDouble(et_reward_percent.getText().toString());
+
+                if(rewardTotalAmount<=0){
+                    Toast.makeText(SetRewardActivity.this,"奖励资金必须大于0",Toast.LENGTH_SHORT).show();
+                    return;
+                }
+                if(totalAmount>=rewardTotalAmount){
+                    Toast.makeText(SetRewardActivity.this,"添加奖励比例已满100%，无法添加",Toast.LENGTH_SHORT).show();
+                    return;
+                }
+
+
                 if(et_reward_percent.getText().toString()=="0"){
                     Toast.makeText(SetRewardActivity.this,"还未填写奖励比例，无法添加",Toast.LENGTH_SHORT).show();
                 }else{
-                    rewardTotalAmount=Double.parseDouble(et_reward.getText().toString());
                     Double amount=Double.parseDouble(et_reward_percent.getText().toString())/100*rewardTotalAmount;
                     Toast.makeText(SetRewardActivity.this,et_reward_percent.getText().toString(),Toast.LENGTH_LONG).show();
                     //tv_reward_amount.setText(amount.toString());
@@ -122,7 +161,7 @@ public class SetRewardActivity extends TitleActivity {
                     tv_rank_text.setText("第"+(rank_index+1)+"名");
 
                     ++rank_index;
-                    et_reward_percent.setText("");
+                    et_reward_percent.setText("0");
                     tv_reward_amount.setText("0");
                     rewardList.add(Double.parseDouble(tv_reward_amount.getText().toString()));
                     VoteInfo.setVoteRewardRule(rewardList);

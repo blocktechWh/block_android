@@ -39,7 +39,7 @@ public class VotersSelectListActivity extends TitleActivity {
     private ArrayList<Integer>checkdeArray;
     private Button votersAddSure;
     private static List<Map<String,Object>>playerList=new ArrayList<>();
-
+    List<Integer>votersTargetList=new ArrayList<>();
 
 
     @Override
@@ -89,9 +89,13 @@ public class VotersSelectListActivity extends TitleActivity {
                 @Override
                 public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                     if(isChecked){
+
+                        votersTargetList.add(Integer.parseInt(mDatas.getJSONObject(position).getString("id")));
+                        VoteInfo.setVoteTarget(votersTargetList);
+
                         Map<String,Object> map_player=new HashMap<>();
                         map_player.put("id",Integer.parseInt(mDatas.getJSONObject(position).getString("id")));
-                        //map_player.put("img",Urls.HOST + "staticImg" + mDatas.getJSONObject(position).getString("img"));
+                        map_player.put("img",Urls.HOST + "staticImg" + mDatas.getJSONObject(position).getString("img"));
                         playerList.add(map_player);
                         VoteInfo.setPlayerList(playerList);
                         //Toast.makeText(VotersSelectListActivity.this,mDatas.getJSONObject(position).getString("img").toString(), Toast.LENGTH_SHORT).show();
@@ -101,7 +105,9 @@ public class VotersSelectListActivity extends TitleActivity {
                             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                                 if(!isChecked){
                                     playerList.remove(position);
+                                    votersTargetList.remove(position);
                                     VoteInfo.setPlayerList(playerList);
+                                    VoteInfo.setVoteTarget(votersTargetList);
                                 }
                             }
                         });

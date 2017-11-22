@@ -90,7 +90,7 @@ public class VotesListActivity extends TitleActivity {
 //            hm.put("id_img",R.mipmap.image_test);
 //            mDatas.add(hm);
 //        }
-        ll_option_view=(ListView) findViewById(R.id.ll_option_view);
+       // ll_option_view=(ListView) findViewById(R.id.ll_option_view);
         mRecyclerView = (RecyclerView)findViewById(R.id.id_votes_recycler);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(App.getContext()));
         mRecyclerView.setAdapter(mAdapter = new VotesListAdapter());
@@ -174,17 +174,15 @@ public class VotesListActivity extends TitleActivity {
         }
 
         class MyViewHolder extends RecyclerView.ViewHolder{
-            TextView tv_title,tv_des1,tv_des2,tv_des3,tv_state,tv_no1,tv_no2;
+            TextView tv_title,tv_state,tv_no1,tv_no2;
             ImageView image_layout;
             LinearLayout ll_opton_button;
 
             public MyViewHolder(View view)
             {
                 super(view);
-                tv_title = (TextView) view.findViewById(R.id.textView70);
-                tv_des1 = (TextView) view.findViewById(R.id.textView53);
-                tv_des2 = (TextView) view.findViewById(R.id.textView52);
-                tv_des3 = (TextView) view.findViewById(R.id.textView50);
+                tv_title = (TextView) view.findViewById(R.id.tv_title);
+
                 tv_no1 = (TextView) view.findViewById(R.id.textView89);
                 tv_no2 = (TextView) view.findViewById(R.id.textView88);
                 tv_state = (TextView) view.findViewById(R.id.textView80);

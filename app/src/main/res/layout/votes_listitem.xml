@@ -43,9 +43,11 @@
                 android:weightSum="1">
 
                 <TextView
-                    android:id="@+id/textView70"
+                    android:id="@+id/tv_title"
                     android:layout_width="136dp"
-                    android:layout_height="20dp"
+                    android:layout_height="30dp"
+                    android:layout_marginBottom="10dp"
+                    android:layout_marginTop="10dp"
                     android:layout_weight="0.41"
                     android:gravity="center_vertical"
                     android:maxEms="8"
@@ -53,41 +55,6 @@
                     android:text="周末洗厕所比赛水水水水"
                     android:textColor="@color/itemTextColor" />
 
-                <ListView
-                    android:id="@+id/ll_option_view"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_weight="0.41" />
-
-                <TextView
-                    android:id="@+id/textView53"
-                    android:layout_width="match_parent"
-                    android:layout_height="18dp"
-                    android:gravity="center_vertical"
-                    android:maxEms="9"
-                    android:singleLine="true"
-                    android:text="王二洗厕所"
-                    android:textSize="12dp" />
-
-                <TextView
-                    android:id="@+id/textView52"
-                    android:layout_width="match_parent"
-                    android:layout_height="18dp"
-                    android:gravity="center_vertical"
-                    android:maxEms="9"
-                    android:singleLine="true"
-                    android:text="王勤洗厕所"
-                    android:textSize="12dp" />
-
-                <TextView
-                    android:id="@+id/textView50"
-                    android:layout_width="match_parent"
-                    android:layout_height="18dp"
-                    android:gravity="center_vertical"
-                    android:maxEms="9"
-                    android:singleLine="true"
-                    android:text="胡义晋洗厕所"
-                    android:textSize="12dp" />
             </LinearLayout>
 
         </LinearLayout>

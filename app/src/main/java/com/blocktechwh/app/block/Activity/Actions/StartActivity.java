@@ -356,7 +356,7 @@ public class StartActivity extends TitleActivity {
                 json.put("voteFee",VoteInfo.getVoteFee());//VoteInfo.getVoteFee()
                 json.put("voteExpireTime","2017-11-29T03:52:17.106Z");
                 json.put("options",VoteInfo.getOptions());
-                json.put("voteTarget",VoteInfo.getPlayerList());
+                json.put("voteTarget",VoteInfo.getVoterTargetList());
                 json.put("voteRewardRule",VoteInfo.getVoteRewardRule());
 
                 Toast.makeText(StartActivity.this,json.toString(),Toast.LENGTH_LONG).show();
