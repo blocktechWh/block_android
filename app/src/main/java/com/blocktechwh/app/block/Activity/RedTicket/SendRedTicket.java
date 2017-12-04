@@ -1,11 +1,13 @@
 package com.blocktechwh.app.block.Activity.RedTicket;
 
 import android.content.Intent;
+import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -29,6 +31,7 @@ public class SendRedTicket extends TitleActivity {
     private String name;
     private String img;
     private TextView btv_send_name;
+    private ImageView id_user_photo;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -51,8 +54,16 @@ public class SendRedTicket extends TitleActivity {
         et_amount=(EditText) findViewById(R.id.et_amount);
         et_text_pray=(EditText) findViewById(R.id.et_text_pray);
         btv_send_name=(TextView)findViewById(R.id.tv_send_name);
+        id_user_photo=(ImageView)findViewById(R.id.id_user_photo);
 
         btv_send_name.setText(name);
+        String url = Urls.HOST + "staticImg" + img;
+        HttpClient.getImage(this, url, new CallBack<Bitmap>() {
+            @Override
+            public void onSuccess(final Bitmap bmp) {
+                id_user_photo.setImageBitmap(bmp);
+            }
+        });
     }
 
     private void addEvent(){

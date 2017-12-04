@@ -19,7 +19,7 @@
             android:layout_width="320dp"
             android:layout_height="100dp"
             android:layout_weight="4"
-            android:background="@color/white"
+            android:background="@drawable/button_selector"
             android:gravity="center_vertical"
             android:measureWithLargestChild="true"
             android:orientation="horizontal"
@@ -100,7 +100,7 @@
 
                     <TextView
                         android:id="@+id/textView89"
-                        android:layout_width="wrap_content"
+                        android:layout_width="60dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:text="王二"
@@ -125,12 +125,12 @@
 
                     <TextView
                         android:id="@+id/textView88"
-                        android:layout_width="wrap_content"
+                        android:layout_width="60dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:text="王勤"
                         android:textColor="@color/white"
-                        android:textSize="12sp" />
+                        android:textSize="12dp" />
                 </LinearLayout>
             </LinearLayout>
 
@@ -145,7 +145,7 @@
             android:layout_width="20dp"
             android:layout_height="100dp"
             android:layout_weight="0.5"
-            android:background="@color/white"
+            android:background="@drawable/button_selector"
             android:orientation="horizontal"></LinearLayout>
     </LinearLayout>
 </LinearLayout>

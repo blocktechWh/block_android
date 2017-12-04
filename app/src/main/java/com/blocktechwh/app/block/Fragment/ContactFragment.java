@@ -9,7 +9,6 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -19,7 +18,6 @@ import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import com.blocktechwh.app.block.Activity.Contact.AddNewContactActivity;
 import com.blocktechwh.app.block.Activity.Contact.ContactDetailActivity;
-import com.blocktechwh.app.block.Activity.Contact.ContactDetailForSendActivity;
 import com.blocktechwh.app.block.Activity.Contact.ContactRequestActivity;
 import com.blocktechwh.app.block.Bean.User;
 import com.blocktechwh.app.block.Common.App;
@@ -28,6 +26,15 @@ import com.blocktechwh.app.block.R;
 import com.blocktechwh.app.block.Utils.CallBack;
 import com.blocktechwh.app.block.Utils.HttpClient;
 
+import org.java_websocket.client.WebSocketClient;
+import org.java_websocket.drafts.Draft_17;
+import org.java_websocket.handshake.ServerHandshake;
+
+import java.io.UnsupportedEncodingException;
+import java.net.URI;
+import java.net.URISyntaxException;
+import java.nio.ByteBuffer;
+import java.nio.channels.NotYetConnectedException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -41,6 +48,9 @@ public class ContactFragment extends Fragment {
     private RecyclerView mRecyclerView;
     private ContactAdapter mAdapter;
     private List<User> mDatas = new ArrayList<User>();
+    private static WebSocketClient client;
+    private static final int NO_1 = 0x1;
+    int num =1;//初始通知数量为1
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -49,6 +59,14 @@ public class ContactFragment extends Fragment {
         initView();
         addEvent();
         getData();
+        try
+        {
+            webSocketConnect();
+        }
+        catch(Exception e)
+        {
+            return view;
+        }
 
         return view;
     }
@@ -136,6 +154,85 @@ public class ContactFragment extends Fragment {
     };
 
     private void getData(){
+        //获得好友请求数量
+        qureyContactsCount();
+
+        //获得联系人列表
+        queryContactsList();
+
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        getData();
+    }
+
+    private void webSocketConnect()throws URISyntaxException, NotYetConnectedException, UnsupportedEncodingException {
+
+        System.out.println("new client.");
+        client = new WebSocketClient(new URI("ws://111.231.146.57:20086/ws?token="+App.token),new Draft_17()) {
+
+            @Override
+            public void onOpen(ServerHandshake arg0) {
+                System.out.println("打开链接");
+            }
+
+            @Override
+            public void onMessage(String arg0) {
+                System.out.println("收到消息"+arg0);
+                if(arg0.contains("contact")){
+                    //requestCount_tv.setText(Integer.parseInt(requestCount_tv.getText().toString())+1);
+                    qureyContactsCount();
+
+                }
+
+                showInfo();
+            }
+
+            @Override
+            public void onError(Exception arg0) {
+                arg0.printStackTrace();
+                System.out.println("发生错误已关闭");
+            }
+
+            @Override
+            public void onClose(int arg0, String arg1, boolean arg2) {
+                System.out.println(client.getURI());
+                System.out.println("链接已关闭");
+            }
+
+            @Override
+            public void onMessage(ByteBuffer bytes) {
+                try {
+                    System.out.println(new String(bytes.array(),"utf-8"));
+                } catch (UnsupportedEncodingException e) {
+                    e.printStackTrace();
+                }
+            }
+
+
+        };
+
+        client.connect();
+
+//        while(!client.getReadyState().equals(READYSTATE.OPEN)){
+//            System.out.println("还没有打开");
+//        }
+//        System.out.println("打开了");
+//        send("hello world".getBytes("utf-8"));
+        client.send("hello world");
+
+
+    }
+
+    public static void send(byte[] bytes){
+        client.send(bytes);
+    }
+
+
+    private void qureyContactsCount(){
+        //获得好友请求数量
         HttpClient.get(this, Urls.ContactRequestsCount, null, new CallBack<JSONObject>() {
             @Override
             public void onSuccess(JSONObject data) {
@@ -152,9 +249,12 @@ public class ContactFragment extends Fragment {
                 }else{
                     request_view.setVisibility(View.GONE);
                 }
+
             }
         });
+    }
 
+    private void queryContactsList(){
         HttpClient.get(this, Urls.Contacts, null, new CallBack<JSONArray>() {
             @Override
             public void onSuccess(JSONArray data) {
@@ -164,9 +264,24 @@ public class ContactFragment extends Fragment {
         });
     }
 
-    @Override
-    public void onResume() {
-        super.onResume();
-        getData();
+    //按钮点击事件（通知栏）
+    private void showInfo(){
+        System.out.println("调用了");
+//        NotificationCompat.Builder builder = new NotificationCompat.Builder(getContext());
+//        builder.setSmallIcon(R.mipmap.ic_launcher);
+//        builder.setContentTitle("新消息");
+//        builder.setContentText("你有一条新的消息");
+//        builder.setNumber(num++);
+        //设置点击通知跳转页面后，通知消失
+//        builder.setAutoCancel(true);
+//        Intent intent = new Intent(getContext(),ContactFragment.class);
+//        PendingIntent pi = PendingIntent.getActivity(getContext(), 0, intent, PendingIntent.FLAG_UPDATE_CURRENT);
+//        builder.setContentIntent(pi);
+//        Notification notification = builder.build();
+//        NotificationManager notificationManager = (NotificationManager)getActivity().getSystemService(Context.NOTIFICATION_SERVICE);
+//        notificationManager.notify(NO_1,notification);
     }
+
+
+
 }

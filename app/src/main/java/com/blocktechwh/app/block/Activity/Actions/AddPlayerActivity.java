@@ -5,11 +5,13 @@ import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.Switch;
@@ -52,7 +54,8 @@ public class AddPlayerActivity extends TitleActivity {
     private boolean isAnonymous=true;
     private LinearLayout ll_option_add_button;
     private Bundle bundle;
-
+    private ImageButton titlebar_button_back;
+    private TextView tv_clear;
 
 
     @Override
@@ -85,11 +88,28 @@ public class AddPlayerActivity extends TitleActivity {
         addEvent();
     }
 
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+
+        switch (keyCode){
+            case KeyEvent.KEYCODE_BACK:
+                goBack();
+                break;
+
+            case KeyEvent.KEYCODE_HOME:
+                break;
+            case KeyEvent.KEYCODE_MENU:
+                break;
+        }
+        return super.onKeyDown(keyCode,event);
+    }
+
     private void initData(){
 
         //从VoteInfo中拿到mDatas
         mDatas=VoteInfo.getOptions();
-
+        tv_clear=(TextView) findViewById(R.id.tv_clear);
+        titlebar_button_back=(ImageButton)findViewById(R.id.titlebar_button_back);
         ll_option_add_button=(LinearLayout) findViewById(R.id.ll_option_add_button);
         et_action_input=(EditText) findViewById(R.id.et_action_input);
         addSure=(Button) findViewById(R.id.btn_add_sure);
@@ -104,6 +124,12 @@ public class AddPlayerActivity extends TitleActivity {
         mRecyclerView = (RecyclerView)findViewById(R.id.id_action_recycler);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(App.getContext()));
         mRecyclerView.setAdapter(mAdapter = new PlayerListAdapter());
+    }
+    private void goBack(){
+        Intent intent = new Intent(AddPlayerActivity.this,StartActivity.class);
+        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_EXCLUDE_FROM_RECENTS);
+        startActivity(intent);
+        finish();
     }
 
 
@@ -159,25 +185,51 @@ public class AddPlayerActivity extends TitleActivity {
 
 
     private void addEvent(){
+        //返回
+        titlebar_button_back.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View view) {
+                goBack();
+            }
+        });
+        //清除内容
+        tv_clear.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View view) {
+                //清空输入框和图片
+                if(!et_action_input.getText().toString().trim().equals("")){
+                    et_action_input.setText("");
+                }
+                if(ll_player_img.getVisibility()==View.VISIBLE){
+                    ll_player_img.setImageResource(0);
+                    ll_option_add_button.setVisibility(View.VISIBLE);
+                    ll_player_img.setVisibility(View.GONE);
+
+                    //从checkedRadioButtonList删除所清除的对象
+                    List<Integer>checkedRadioButtonList=VoteInfo.getCheckedRadioButtonList();
+                    System.out.println("checkedRadioButtonList"+checkedRadioButtonList);
+                    checkedRadioButtonList.remove(checkedRadioButtonList.size()-1);
+                    VoteInfo.setCheckedRadioButtonList(checkedRadioButtonList);
+                }
 
 
+            }
+        });
 
         //添加活动项
         tvToAddAction.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View view) {
-                if(et_action_input.getText().toString().trim().equals("")||ll_player_img.getDrawable()==null){
-                    Toast.makeText(AddPlayerActivity.this,"还未填写或添加完整信息",Toast.LENGTH_SHORT).show();
+                if(et_action_input.getText().toString().trim().equals("")){
+                    Toast.makeText(AddPlayerActivity.this,"还未填写投票项描述",Toast.LENGTH_SHORT).show();
+
+                }else if(ll_player_img.getVisibility()==View.GONE){
+                    Toast.makeText(AddPlayerActivity.this,"还未选择受益人",Toast.LENGTH_SHORT).show();
 
                 }else{
                     mDatas=VoteInfo.getOptions();
                     ll_option_add_button.setVisibility(View.VISIBLE);
                     ll_player_img.setVisibility(View.GONE);
-
-//                    System.out.println("长度"+mDatas.size());
-//                    System.out.println("item"+VoteInfo.getOptions());
-//
-//                    Toast.makeText(AddPlayerActivity.this,"OK",Toast.LENGTH_LONG).show();
 
                     String item=et_action_input.getText().toString();
                     Map<String,Object> map=new HashMap<String, Object>();
@@ -195,8 +247,6 @@ public class AddPlayerActivity extends TitleActivity {
                     et_action_input.setText("");
                     ll_player_img.setImageResource(0);
                 }
-
-
             }
 
 
@@ -214,16 +264,17 @@ public class AddPlayerActivity extends TitleActivity {
                 intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_EXCLUDE_FROM_RECENTS);
                 intent.putExtras(bundle);
                 startActivity(intent);
-
             }
         });
 
+
+        //确定添加
         btnAddSure.setOnClickListener(new View.OnClickListener(){
 
             @Override
             public void onClick(View view) {
 
-                if(!et_action_input.getText().toString().trim().equals("")&&ll_player_img.getDrawable()!=null){
+                if(!et_action_input.getText().toString().trim().equals("")&&ll_player_img.getVisibility()==View.VISIBLE){
                     String item=et_action_input.getText().toString();
                     Map<String,Object> map=new HashMap<String, Object>();
                     map.put("item",item);
@@ -231,6 +282,13 @@ public class AddPlayerActivity extends TitleActivity {
                     mDatas.add(map);
                     //将活动信息存入VoteInfo
                     VoteInfo.setOptions(mDatas);
+                }else if(et_action_input.getText().toString().trim().equals("")&&ll_player_img.getVisibility()==View.VISIBLE){
+                    Toast.makeText(AddPlayerActivity.this,"还未填写投票项描述",Toast.LENGTH_SHORT).show();
+                    return;
+
+                }else if(!et_action_input.getText().toString().trim().equals("")&&ll_player_img.getVisibility()==View.GONE){
+                    Toast.makeText(AddPlayerActivity.this,"还未选择受益人",Toast.LENGTH_SHORT).show();
+                    return;
                 }
 
                 Bundle bundle=new Bundle();
@@ -238,6 +296,8 @@ public class AddPlayerActivity extends TitleActivity {
                 Intent intent=new Intent(AddPlayerActivity.this,StartActivity.class);
                 intent.putExtras(bundle);
                 startActivity(intent);
+                finish();
+
             }
         });
 

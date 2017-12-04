@@ -39,6 +39,7 @@ public class UpdateUserInfoActivity extends TitleActivity {
     private ImageView userPhoto;
 
     private String jsonKey;
+    private Bitmap userImageBitmap;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -84,9 +85,10 @@ public class UpdateUserInfoActivity extends TitleActivity {
         userAddress.setText(App.userInfo.getAddress());
         userSex.setText(App.userInfo.getSex());
         String url = Urls.HOST + "staticImg" + App.userInfo.getImg();
+        System.out.println("userUrl="+url);
         HttpClient.getImage(this, url, new CallBack<Bitmap>() {
             @Override
-            public void onSuccess(final Bitmap bmp) {
+            public void onSuccess(Bitmap bmp) {
                 userPhoto.setImageBitmap(bmp);
             }
         });
@@ -126,12 +128,13 @@ public class UpdateUserInfoActivity extends TitleActivity {
 
     private void mInputHandler(final String string){
         JSONObject json = new JSONObject();
+
         json.put(jsonKey, string);
         HttpClient.put(this, Urls.UpdateUserInfo, json.toString(), new CallBack<JSONObject>() {
             @Override
             public void onSuccess(JSONObject result) {
                 App.userInfo = result.toJavaObject(User.class);
-                setUserData();
+                //setUserData();
                 PreferencesUtils.putString(App.getContext(),"UserInfo", JSONObject.toJSONString(App.userInfo));
             }
         });
@@ -158,8 +161,9 @@ public class UpdateUserInfoActivity extends TitleActivity {
             }
         } else if (requestCode == PHOTO_REQUEST_CUT) {// 从剪切图片返回的数据
             if (data != null && data.hasExtra("data")) {
-                Bitmap bitmap = data.getParcelableExtra("data");
-                String base64 = ImageUtil.bitmapToBase64(bitmap);
+                userImageBitmap = data.getParcelableExtra("data");
+                userPhoto.setImageBitmap(userImageBitmap);
+                String base64 = ImageUtil.bitmapToBase64(userImageBitmap);
                 jsonKey = "img";
                 mInputHandler(base64);
             }
@@ -185,6 +189,7 @@ public class UpdateUserInfoActivity extends TitleActivity {
 //        intent.putExtra(MediaStore.EXTRA_OUTPUT, imageUri);//输出路径
 
         intent.putExtra("outputFormat", "JPEG");// 图片格式
+        intent.putExtra("outputFormat", "PNG");// 图片格式
         intent.putExtra("noFaceDetection", true);// 取消人脸识别
         intent.putExtra("return-data", true);
 

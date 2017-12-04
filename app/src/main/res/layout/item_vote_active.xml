@@ -10,7 +10,8 @@
         android:layout_marginTop="10dp"
         android:background="@drawable/lines_bg2"
         android:gravity="left|center_horizontal"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        android:paddingBottom="5dp">
 
         <TextView
             android:id="@+id/tv_option_text"
@@ -32,6 +33,7 @@
                 android:layout_width="40dp"
                 android:layout_height="40dp"
                 android:layout_weight="1"
+                android:background="@drawable/coners_bg4"
                 android:contentDescription="1"
                 app:srcCompat="@mipmap/icon21" />
         </LinearLayout>

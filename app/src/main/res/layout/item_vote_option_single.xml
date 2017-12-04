@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+    <FrameLayout
+        android:id="@+id/fl_vote_option"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="@dimen/margin_top"
+        android:background="@drawable/coners_bg4"
+        android:paddingLeft="10dp"
+        android:paddingStart="10dp">
+
+        <TextView
+            android:id="@+id/tv_vote_option_text"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center_vertical|center_horizontal"
+            android:text="王二洗厕所比赛"
+            android:textColor="@color/itemTextColor" />
+
+        <RadioButton
+            android:id="@+id/cb_vote_option"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:textColor="@color/itemTextColor" />
+    </FrameLayout>
+</LinearLayout>

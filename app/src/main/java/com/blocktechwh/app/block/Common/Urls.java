@@ -11,7 +11,9 @@ public class Urls {
     //private static  String HOST="http://10.0.0.7/";
     public static final String HOST="http://111.231.146.57:9997/";
 
-
+    /**
+     * 注册验证码
+     */
     public static final String RegistorActiveCode = HOST+"front/yzm-reg/";
 
     /**
@@ -53,7 +55,7 @@ public class Urls {
      * 忘记密码验证码POST
      * phone:String
      */
-    public static final String ForgetPasswordActiveCode = HOST+"front/forgetpwdcode/";
+    public static final String ForgetPasswordActiveCode = HOST+"front/yzm-forget/";
 
     /**
      * 忘记密码POST
@@ -61,14 +63,14 @@ public class Urls {
      * code:String
      * passWord:String
      */
-    public static final String ForgetPassword = HOST+"front/forgetpwd/";
+    public static final String ForgetPassword = HOST+"front/forget-pwd/";
 
     /**
-     * 修改密码POST
+     * 修改密码PUT
      * oldPassWord:String
      * newPassWord:String
      */
-    public static final String UpdatePassword = HOST+"front/updatepwd/";
+    public static final String UpdatePassword = HOST+"front/user/update-pwd/";
 
     /**
      * 获取用户联系人列表GET
@@ -249,6 +251,33 @@ public class Urls {
      *
      */
     public static final String QueryRaiseLIst = HOST+"front/vote/raise-list/";
+
+
+
+    /**
+     * 查询钱包数据
+     *
+     */
+    public static final String QueryWalleteData = HOST+"front/wallet/detail/";
+
+    /**
+     * 查询钱包地址列表
+     *
+     */
+    public static final String QueryWalleteAddressList = HOST+"front/account/list/";
+
+    /**
+     * 查询钱包地址列表
+     *
+     */
+    public static final String AddWalletAccount = HOST+"front/account/add/";
+
+
+    /**
+     * 查询钱包地址列表
+     *
+     */
+    public static final String Commit = HOST+"front/wallet/take-out";
 
 
 

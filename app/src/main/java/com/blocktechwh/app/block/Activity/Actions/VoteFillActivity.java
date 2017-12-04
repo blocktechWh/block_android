@@ -1,12 +1,16 @@
 package com.blocktechwh.app.block.Activity.Actions;
 
+import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.alibaba.fastjson.JSONObject;
+import com.blocktechwh.app.block.Common.App;
 import com.blocktechwh.app.block.Common.Urls;
 import com.blocktechwh.app.block.CustomView.TitleActivity;
 import com.blocktechwh.app.block.R;
@@ -21,6 +25,8 @@ public class VoteFillActivity extends TitleActivity {
     private int voteId;
     private Button btFillSure;
     private EditText et_fill_money;
+    private TextView tv_name;
+    private ImageView iv_img;
 
     @Override
     public void onCreate(Bundle savedInstanceState){
@@ -39,16 +45,18 @@ public class VoteFillActivity extends TitleActivity {
     private void initData(){
         btFillSure=(Button) findViewById(R.id.btFillSure);
         et_fill_money=(EditText) findViewById(R.id.et_fill_money);
+        tv_name=(TextView) findViewById(R.id.tv_name);
+        iv_img=(ImageView) findViewById(R.id.iv_img);
 
-//        userName.setText(App.userInfo.getName());
-//        userPhone.setText(App.userInfo.getPhone());
-//        String url = Urls.HOST + "staticImg" + App.userInfo.getImg();
-//        HttpClient.getImage(this, url, new CallBack<Bitmap>() {
-//            @Override
-//            public void onSuccess(final Bitmap bmp) {
-//                userPhoto.setImageBitmap(bmp);
-//            }
-//        });
+        tv_name.setText(App.userInfo.getName());
+        //userPhone.setText(App.userInfo.getPhone());
+        String url = Urls.HOST + "staticImg" + App.userInfo.getImg();
+        HttpClient.getImage(this, url, new CallBack<Bitmap>() {
+            @Override
+            public void onSuccess(final Bitmap bmp) {
+                iv_img.setImageBitmap(bmp);
+            }
+        });
     }
 
 

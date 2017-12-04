@@ -68,7 +68,7 @@ public class GiftActivity extends TitleActivity {
 
     private void operateGift(JSONObject jo){
 
-        tv_gift_amount.setText(jo.get("giftAmount").toString());
+        tv_gift_amount.setText("￥ "+jo.get("giftAmount").toString());
         tv_sender_name.setText(jo.getJSONObject("giftSenderInfo").getString("senderName"));
         tv_pray_text.setText(tv_pray);
         String url = Urls.HOST + "staticImg" + jo.getJSONObject("giftSenderInfo").getString("senderImg");

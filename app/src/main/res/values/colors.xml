@@ -10,5 +10,8 @@
     <color name="appBackground">#f1f1f1</color>
     <color name="btnColor">#1790e1</color>
     <color name="itemTextColor">#787878</color>
-
+    <color name="bacSelectColor">#b7b6b6</color>
+    <drawable name="textClickColor">#1790e1</drawable>
+    <color name="redTicketBackgroundColor">#E64929</color>
+    <color name="redTicketBorderColor">#DBBC86</color>
 </resources>

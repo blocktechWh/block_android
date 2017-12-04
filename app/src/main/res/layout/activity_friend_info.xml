@@ -150,11 +150,12 @@
         android:layout_width="match_parent"
         android:layout_height="40dp"
         android:layout_marginTop="20dp"
-        android:background="@drawable/lines_bg"
+        android:background="@drawable/button_selector"
         android:gravity="center_vertical"
         android:orientation="horizontal"
         android:paddingLeft="40dp"
         android:paddingStart="40dp">
+
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

@@ -43,14 +43,16 @@
                 android:id="@+id/textView_getter"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="" />
+                android:text=""
+                android:textColor="@color/itemTextColor" />
 
             <TextView
                 android:id="@+id/textView_time"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:paddingTop="10dp"
-                android:text="" />
+                android:text=""
+                android:textColor="@color/itemTextColor" />
         </LinearLayout>
 
         <LinearLayout
@@ -63,7 +65,8 @@
                 android:id="@+id/textView_amount"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="" />
+                android:text="￥ 200"
+                android:textColor="@color/itemTextColor" />
         </LinearLayout>
     </LinearLayout>
 </LinearLayout>

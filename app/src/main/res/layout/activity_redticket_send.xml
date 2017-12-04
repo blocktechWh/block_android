@@ -18,7 +18,7 @@
         android:orientation="vertical">
 
         <ImageView
-            android:id="@+id/imageView15"
+            android:id="@+id/id_user_photo"
             android:layout_width="80dp"
             android:layout_height="80dp"
             android:layout_marginTop="20dp"
@@ -63,12 +63,13 @@
             <EditText
                 android:id="@+id/et_amount"
                 android:layout_width="wrap_content"
-                android:layout_height="40dp"
-                android:layout_marginTop="5dp"
+                android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:background="@null"
                 android:ems="10"
-                android:inputType="number" />
+                android:inputType="textPersonName"
+                android:textSize="14sp" />
+
         </LinearLayout>
 
         <TextView
@@ -92,7 +93,8 @@
                 android:layout_marginTop="5dp"
                 android:background="@null"
                 android:ems="10"
-                android:inputType="textPersonName" />
+                android:inputType="textPersonName"
+                android:textSize="14sp" />
         </LinearLayout>
     </LinearLayout>
 

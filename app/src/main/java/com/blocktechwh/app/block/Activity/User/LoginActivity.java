@@ -41,7 +41,6 @@ public class LoginActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
-        btn_login = (Button) findViewById(R.id.button2);
         tv_register = (TextView) findViewById(R.id.textView5);
         et_phone = (EditText)findViewById(R.id.id_edit_phone);
         et_password = (EditText)findViewById(R.id.id_edit_password);
@@ -101,7 +100,6 @@ public class LoginActivity extends AppCompatActivity {
                     PreferencesUtils.putString(App.getContext(),"Phone",phone);
                     App.phone = phone;
                     IntoMainActivity(data.getString("token"), data.getString("userInfo"));
-                   System.out.print("1234");
                 }
             });
         }

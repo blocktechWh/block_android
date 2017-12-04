@@ -23,7 +23,7 @@
             android:id="@+id/id_edit_phone"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:layout_weight="2"
+            android:layout_weight="3"
             android:background="@null"
             android:ems="10"
             android:hint="输入手机号码"
@@ -36,7 +36,7 @@
             android:id="@+id/id_button_send"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:layout_weight="3"
+            android:layout_weight="2"
             android:background="@color/btnColor"
             android:text="发送验证码"
             android:textColor="@color/white" />

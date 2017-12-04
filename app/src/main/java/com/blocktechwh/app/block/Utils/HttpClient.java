@@ -166,6 +166,7 @@ public class HttpClient {
 
     private static void handleResponse(Response response, final CallBack callBack) throws IOException {
         int httpCode = response.code();
+        System.out.println("http code is "+httpCode);
         if ((httpCode/100) == 5){
             handler.post(new Runnable() {
                 @Override

@@ -1,5 +1,7 @@
 package com.blocktechwh.app.block.Bean;
 
+import android.graphics.Bitmap;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -10,20 +12,25 @@ import java.util.Map;
 
 public class VoteInfo {
     private static List<String>imgUrls=new ArrayList<String>();
-    private static String voteImg;
-    private static String voteTheme;
+    private static String voteImg="";
+    private static String voteTheme="";
     private static String isLimited="false";
     private static String isAnonymous="true";
     private static String isRaise="true";
     private static String isReward="false";
-    private static String voteExpireTime;
+    private static String voteExpireTime="";
     private static List<Map<String,Object>>options=new ArrayList<>();
     private static List<Integer>voteTarget=new ArrayList<>();
     private static List<Double>voteRewardRule=new ArrayList<>();
-    private static Double voteFee;
+    private static Double voteFee=0.0;
     private static List<Integer>voterList=new ArrayList<>();
     private static List<Map<String,Object>>playerList=new ArrayList<>();
     private static List<Integer>voterTargetList=new ArrayList<>();
+    private static Bitmap bitmap=null;
+    private static List<Integer>checkedRadioButtonList=new ArrayList<>();
+    private static List<Integer>checkedPositionList=new ArrayList<>();
+    private static boolean ifSetReward=false;
+
 
 
     public VoteInfo(){
@@ -154,5 +161,37 @@ public class VoteInfo {
 
     public static void setVoterTargetList(List<Integer> voterTargetList) {
         VoteInfo.voterTargetList = voterTargetList;
+    }
+
+    public static Bitmap getBitmap() {
+        return bitmap;
+    }
+
+    public static void setBitmap(Bitmap bitmap) {
+        VoteInfo.bitmap = bitmap;
+    }
+
+    public static List<Integer> getCheckedRadioButtonList() {
+        return checkedRadioButtonList;
+    }
+
+    public static void setCheckedRadioButtonList(List<Integer> checkedRadioButtonList) {
+        VoteInfo.checkedRadioButtonList = checkedRadioButtonList;
+    }
+
+    public static List<Integer> getCheckedPositionList() {
+        return checkedPositionList;
+    }
+
+    public static void setCheckedPositionList(List<Integer> checkedPositionList) {
+        VoteInfo.checkedPositionList = checkedPositionList;
+    }
+
+    public static boolean getIfSetReward() {
+        return ifSetReward;
+    }
+
+    public static void setIfSetReward(boolean ifSetReward) {
+        VoteInfo.ifSetReward = ifSetReward;
     }
 }

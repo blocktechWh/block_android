@@ -1,5 +1,7 @@
 package com.blocktechwh.app.block.Activity.User;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -18,6 +20,8 @@ public class SettingActivity extends TitleActivity {
 
     private LinearLayout logoutButton;
     private LinearLayout updateButton;
+    private LinearLayout id_show_versions;
+    private LinearLayout id_update_pwd;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,23 +32,66 @@ public class SettingActivity extends TitleActivity {
         initView();
     }
 
+
+
+
+    public void onBackPressed() {
+        new AlertDialog.Builder(this).setTitle("确认退出吗？")
+                .setIcon(android.R.drawable.ic_dialog_info)
+                .setPositiveButton("确定", new DialogInterface.OnClickListener() {
+
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        // 点击“确认”后的操作
+                        //SettingActivity.this.finish();
+                        logOut();
+
+                    }
+                })
+                .setNegativeButton("取消", new DialogInterface.OnClickListener() {
+
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        // 点击“返回”后的操作,这里不设置没有任何操作
+                    }
+                }).show();
+    }
+
+
     private void initView(){
 
         logoutButton = (LinearLayout)findViewById(R.id.id_logout_button);
+        id_update_pwd = (LinearLayout)findViewById(R.id.id_update_pwd);
+        id_show_versions = (LinearLayout)findViewById(R.id.id_show_versions);
+
+        updateButton = (LinearLayout)findViewById(R.id.id_update_button);
         logoutButton.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View view) {
-                logOut();
+                onBackPressed();
             }
         });
 
-        updateButton = (LinearLayout)findViewById(R.id.id_update_button);
+        id_show_versions.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(SettingActivity.this,VersionsActivity.class));
+            }
+        });
         updateButton.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View view) {
                 startActivity(new Intent(SettingActivity.this,UpdateUserInfoActivity.class));
             }
         });
+
+        id_update_pwd.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(SettingActivity.this,UpdatePasswardActivity.class));
+            }
+        });
+
     }
 
     private void logOut(){

@@ -8,39 +8,103 @@
 
     <include layout="@layout/titlebar_view" />
 
-    <ScrollView
+    <LinearLayout
+        android:id="@+id/ll_no_contact_container"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/margin_top"
+        android:orientation="vertical"
+        android:visibility="gone">
+
+        <LinearLayout
+            android:id="@+id/ll_war_container"
+            android:layout_width="match_parent"
+            android:layout_height="200dp"
+            android:background="@color/white"
+            android:gravity="center_vertical|center_horizontal"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/textView24"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="center_horizontal"
+                android:text="无可选好友,请添加好友！" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/ll_btn_container"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/appBackground"
+            android:orientation="horizontal"
+            android:paddingBottom="25dp"
+            android:paddingEnd="@dimen/padding_right"
+            android:paddingLeft="@dimen/padding_left"
+            android:paddingRight="@dimen/padding_right"
+            android:paddingStart="@dimen/padding_left"
+            android:paddingTop="15dp">
+
+            <Button
+                android:id="@+id/bt_back"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:background="@drawable/coners_bg2"
+                android:text="返回"
+                android:textColor="@color/white" />
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <ScrollView
+        android:id="@+id/scr_contact_container"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/margin_top">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_marginTop="@dimen/margin_top"
             android:background="@color/white"
-            android:orientation="vertical"
-            android:paddingEnd="@dimen/padding_right"
-            android:paddingLeft="@dimen/padding_left"
-            android:paddingRight="@dimen/padding_right"
-            android:paddingStart="@dimen/padding_left">
+            android:orientation="vertical">
 
             <android.support.v7.widget.RecyclerView
                 android:id="@+id/id_players_recycler"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent" />
+                android:layout_height="match_parent"
+                android:paddingEnd="@dimen/padding_right"
+                android:paddingLeft="@dimen/padding_left"
+                android:paddingRight="@dimen/padding_right"
+                android:paddingStart="@dimen/padding_left" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginTop="15dp"
+                android:background="@color/appBackground"
+                android:orientation="horizontal"
+                android:paddingBottom="25dp"
+                android:paddingEnd="@dimen/padding_right"
+                android:paddingLeft="@dimen/padding_left"
+                android:paddingRight="@dimen/padding_right"
+                android:paddingStart="@dimen/padding_left"
+                android:paddingTop="15dp">
+
+                <Button
+                    android:id="@+id/btn_add_sure"
+                    android:layout_width="320dp"
+                    android:layout_height="44dp"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_weight="1"
+                    android:background="@drawable/coners_bg2"
+                    android:text="确定"
+                    android:textColor="@color/white" />
+            </LinearLayout>
 
         </LinearLayout>
     </ScrollView>
-
-    <Button
-        android:id="@+id/btn_add_sure"
-        android:layout_width="320dp"
-        android:layout_height="44dp"
-        android:layout_gravity="center_horizontal"
-        android:layout_marginBottom="25dp"
-        android:layout_marginTop="15dp"
-        android:background="@drawable/coners_bg2"
-        android:text="确定"
-        android:textColor="@color/white" />
 
 
 </LinearLayout>

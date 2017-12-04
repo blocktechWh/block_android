@@ -19,7 +19,8 @@ android:orientation="vertical">
             android:layout_gravity="right|center_vertical"
             android:layout_marginEnd="20dp"
             android:layout_marginRight="20dp"
-            android:text="加注信息" />
+            android:text="加注信息"
+            android:textColor="@drawable/text_selector" />
 
     </FrameLayout>
 
@@ -137,12 +138,12 @@ android:orientation="vertical">
                     android:id="@+id/textView81"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="受益人：" />
+                    android:text="参与人：" />
 
                 <GridView xmlns:android="http://schemas.android.com/apk/res/android"
                     android:id="@+id/gridview_players"
                     android:layout_width="fill_parent"
-                    android:layout_height="match_parent"
+                    android:layout_height="wrap_content"
                     android:columnWidth="40dp"
                     android:gravity="center"
                     android:horizontalSpacing="5dp"
@@ -174,21 +175,20 @@ android:orientation="vertical">
             </LinearLayout>
         </LinearLayout>
 
-        <RelativeLayout
+        <FrameLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_marginTop="20dp"
-            android:gravity="center_vertical|center_horizontal">
+            android:layout_height="100dp"
+            android:layout_marginTop="20dp">
 
             <ImageView
-                android:id="@+id/imageView8"
-                android:layout_width="80dp"
-                android:layout_height="80dp"
+                android:id="@+id/imageView5"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
                 android:layout_centerHorizontal="false"
                 android:layout_centerInParent="false"
                 android:layout_centerVertical="false"
-                android:layout_marginRight="80dp"
-                app:srcCompat="@mipmap/ic_launcher" />
+                android:layout_gravity="center_vertical|center_horizontal"
+                app:srcCompat="@mipmap/person_speak" />
 
             <TextView
                 android:id="@+id/tv_to_fill"
@@ -198,13 +198,17 @@ android:orientation="vertical">
                 android:layout_centerHorizontal="false"
                 android:layout_centerInParent="false"
                 android:layout_centerVertical="true"
-                android:layout_marginLeft="80dp"
-                android:layout_marginStart="80dp"
+                android:layout_gravity="center_vertical|center_horizontal"
+                android:layout_marginBottom="18dp"
+                android:layout_marginLeft="38dp"
+                android:layout_marginStart="38dp"
                 android:autoLink="all"
                 android:gravity="center_vertical"
                 android:text="点这里加注哦"
                 android:textColor="@color/btnColor" />
-        </RelativeLayout>
+
+        </FrameLayout>
+
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -212,7 +216,8 @@ android:orientation="vertical">
             android:layout_marginBottom="20dp"
             android:layout_marginTop="30dp"
             android:gravity="center_horizontal"
-            android:orientation="horizontal">
+            android:orientation="horizontal"
+            android:visibility="gone">
 
             <Button
                 android:id="@+id/bt_vote"

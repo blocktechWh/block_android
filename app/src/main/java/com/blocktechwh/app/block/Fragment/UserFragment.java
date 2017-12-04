@@ -1,9 +1,11 @@
 package com.blocktechwh.app.block.Fragment;
 
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,9 +13,12 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.alibaba.fastjson.JSONObject;
+import com.blocktechwh.app.block.Activity.Actions.VotesListActivity;
+import com.blocktechwh.app.block.Activity.MainActivity;
 import com.blocktechwh.app.block.Activity.RedTicket.RedTicketDetailActivity;
 import com.blocktechwh.app.block.Activity.User.SettingActivity;
-import com.blocktechwh.app.block.Activity.Actions.VotesListActivity;
+import com.blocktechwh.app.block.Activity.Wallete.WalleteDetailActivity;
 import com.blocktechwh.app.block.Common.App;
 import com.blocktechwh.app.block.Common.Urls;
 import com.blocktechwh.app.block.R;
@@ -30,6 +35,8 @@ public class UserFragment extends Fragment {
     private LinearLayout settingButton;
     private LinearLayout redPacketButton;
     private LinearLayout voteButton;
+    private LinearLayout id_wallet;
+    private TextView tv_wallete_data;
 
 
     @Override
@@ -38,11 +45,25 @@ public class UserFragment extends Fragment {
         view = inflater.inflate(R.layout.fragment_user, container, false);
 
         initView();
+        getData();
         addEvent();
         return view;
     }
 
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if(requestCode==2&&resultCode==10){//判断响应码和请求码
+            MainActivity mainActivity=(MainActivity) getActivity();
+            FragmentManager fragmentManager=mainActivity.getSupportFragmentManager();
+            FragmentTransaction fragmentTransaction=fragmentManager.beginTransaction();
+            fragmentTransaction.replace(R.id.user_fragment_layout,new UserFragment());
+
+        }
+    }
+
     private void initView(){
+        tv_wallete_data = (TextView) view.findViewById(R.id.tv_wallete_data);
         userName = (TextView)view.findViewById(R.id.id_text_name);
         userPhone = (TextView)view.findViewById(R.id.id_phone);
         userPhoto = (ImageView) view.findViewById(R.id.id_user_photo);
@@ -50,6 +71,7 @@ public class UserFragment extends Fragment {
         settingButton = (LinearLayout)view.findViewById(R.id.id_setting_button);
         redPacketButton = (LinearLayout)view.findViewById(R.id.id_red_package);
         voteButton = (LinearLayout) view.findViewById(R.id.id_vote);
+        id_wallet = (LinearLayout) view.findViewById(R.id.id_wallet);
         setUserData();
     }
 
@@ -89,7 +111,18 @@ public class UserFragment extends Fragment {
             public void onClick(View view) {
                 Intent intent =new Intent(getActivity(),VotesListActivity.class);
                 intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_EXCLUDE_FROM_RECENTS);
-                startActivity(intent);
+                startActivityForResult(intent,2);
+
+            }
+        });
+
+        id_wallet.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View view) {
+                Intent intent =new Intent(getActivity(),WalleteDetailActivity.class);
+                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_EXCLUDE_FROM_RECENTS);
+                startActivityForResult(intent,2);
+
             }
         });
     }
@@ -99,5 +132,20 @@ public class UserFragment extends Fragment {
     public void onResume() {
         super.onResume();
         setUserData();
+    }
+
+
+    private void getData(){
+        //查询钱包余额
+        HttpClient.get(this, Urls.QueryWalleteData, null, new CallBack<JSONObject>() {
+            @Override
+            public void onSuccess(JSONObject data) {
+                tv_wallete_data.setText("余额："+data.getInteger("total").toString()+"Block");
+            }
+            @Override
+            public void onFailure(int errorType, String message){
+
+            }
+        });
     }
 }

@@ -74,7 +74,7 @@ public class RedTiketGetFragment extends Fragment {
         public void onBindViewHolder(final RedTiketGetFragment.Adapter.MyViewHolder holder, int position){
             holder.geter_name.setText(mDatas.get(position).getName());
             holder.get_time.setText(mDatas.get(position).getCreateTimeString());
-            holder.amount.setText(mDatas.get(position).getAmount().toString());
+            holder.amount.setText("￥ "+mDatas.get(position).getAmount().toString());
             String url = Urls.HOST + "staticImg" + mDatas.get(position).getImg();
             HttpClient.getImage(this, url, new CallBack<Bitmap>() {
                 @Override

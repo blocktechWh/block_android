@@ -32,18 +32,12 @@
                 android:paddingStart="@dimen/padding_left">
 
 
-                <LinearLayout
+                <ImageView
                     android:id="@+id/id_add_image"
-                    android:layout_width="100dp"
-                    android:layout_height="100dp"
+                    android:layout_width="40dp"
+                    android:layout_height="90dp"
                     android:layout_weight="1"
-                    android:background="@mipmap/upload_img"
-                    android:gravity="center_vertical"
-                    android:orientation="horizontal"
-                    android:paddingLeft="@dimen/padding_left"
-                    android:paddingStart="@dimen/padding_left">
-
-                </LinearLayout>
+                    android:background="@mipmap/upload_img" />
 
                 <LinearLayout
                     android:layout_width="wrap_content"
@@ -74,9 +68,7 @@
                 android:layout_marginTop="@dimen/margin_top"
                 android:background="@color/white"
                 android:gravity="fill_horizontal"
-                android:orientation="vertical"
-                android:paddingBottom="10dp"
-                android:paddingTop="5dp">
+                android:orientation="vertical">
 
                 <android.support.v7.widget.RecyclerView
                     android:id="@+id/id_votes_option_recycler"
@@ -86,18 +78,17 @@
                     android:paddingEnd="@dimen/padding_left"
                     android:paddingLeft="@dimen/padding_left"
                     android:paddingRight="@dimen/padding_right"
-                    android:paddingStart="@dimen/padding_left" />
+                    android:paddingStart="@dimen/padding_left"
+                    android:paddingTop="5dp" />
 
                 <TextView
                     android:id="@+id/tv_to_add"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="15dp"
+                    android:layout_height="35dp"
                     android:autoLink="all"
-                    android:background="@color/white"
-                    android:paddingLeft="20dp"
-                    android:paddingStart="20dp"
-                    android:text="添加投票项"
+                    android:background="@drawable/button_selector"
+                    android:gravity="center_vertical|center_horizontal"
+                    android:text="添加投票项+"
                     android:textColor="@color/colorAccent" />
 
             </LinearLayout>
@@ -105,6 +96,7 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginBottom="8dp"
                 android:layout_marginTop="@dimen/margin_top"
                 android:background="@color/white"
                 android:orientation="vertical"
@@ -171,7 +163,7 @@
                         android:layout_marginLeft="10dp"
                         android:layout_marginStart="10dp"
                         android:layout_weight="1"
-                        app:srcCompat="@mipmap/icon11" />
+                        app:srcCompat="@mipmap/icon_time_end" />
 
                     <TextView
                         android:layout_width="wrap_content"
@@ -184,8 +176,35 @@
                         android:gravity="center_vertical"
                         android:text="选择时间" />
 
-                    <TextView
-                        android:id="@+id/tv_popup_time"
+                    <LinearLayout
+                        android:id="@+id/LinearLayout01"
+                        android:layout_width="wrap_content"
+                        android:layout_height="fill_parent"
+                        android:layout_alignParentEnd="true"
+                        android:layout_alignParentRight="true"
+                        android:layout_centerVertical="true"
+                        android:layout_marginEnd="20dp"
+                        android:layout_marginRight="20dp"
+                        android:gravity="center_vertical"
+                        android:orientation="horizontal">
+
+                        <!--                        <EditText
+                            android:id="@+id/et_data"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:cursorVisible="false"
+                            android:editable="false" />-->
+
+                        <TextView
+                            android:id="@+id/btn_date"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="点击选择"
+                            android:textColor="@color/btnColor" />
+
+                    </LinearLayout>
+
+                    <!--            <LinearLayout
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_alignParentEnd="true"
@@ -193,7 +212,52 @@
                         android:layout_centerVertical="true"
                         android:layout_marginEnd="20dp"
                         android:layout_marginRight="20dp"
-                        android:text="2017-10-18" />
+                        android:orientation="horizontal">
+
+                        <Spinner
+                            android:id="@+id/sp_year"
+                            android:layout_width="60dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1" />
+
+                        <TextView
+                            android:id="@+id/textView11"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:text="年" />
+
+                        <Spinner
+                            android:id="@+id/sp_month"
+                            android:layout_width="30dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="10dp"
+                            android:layout_marginStart="10dp"
+                            android:layout_weight="1" />
+
+                        <TextView
+                            android:id="@+id/textView19"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:text="月" />
+
+                        <Spinner
+                            android:id="@+id/sp_day"
+                            android:layout_width="30dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="10dp"
+                            android:layout_marginStart="10dp"
+                            android:layout_weight="1" />
+
+                        <TextView
+                            android:id="@+id/textView20"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:text="日" />
+
+                    </LinearLayout>-->
 
                 </RelativeLayout>
 
@@ -212,7 +276,7 @@
                         android:layout_marginLeft="10dp"
                         android:layout_marginStart="10dp"
                         android:layout_weight="1"
-                        app:srcCompat="@mipmap/icon11" />
+                        app:srcCompat="@mipmap/icon_no_see" />
 
                     <TextView
                         android:layout_width="wrap_content"
@@ -245,17 +309,11 @@
             </LinearLayout>
 
             <LinearLayout
+                android:id="@+id/ll_voters_container"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/margin_top"
-                android:background="@color/white"
-                android:orientation="vertical"
-                android:paddingBottom="10dp"
-                android:paddingEnd="@dimen/padding_right"
-                android:paddingLeft="@dimen/padding_left"
-                android:paddingRight="@dimen/padding_right"
-                android:paddingStart="@dimen/padding_left"
-                android:paddingTop="10dp">
+                android:background="@drawable/lines_bg2"
+                android:orientation="vertical">
 
 
                 <GridView xmlns:android="http://schemas.android.com/apk/res/android"
@@ -269,14 +327,22 @@
                     android:stretchMode="columnWidth"
                     android:verticalSpacing="5dp" />
 
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
                 <TextView
                     android:id="@+id/tv_select_voters"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="20dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="35dp"
                     android:layout_weight="1"
                     android:autoLink="all"
-                    android:text="选择人员"
+                    android:background="@drawable/button_selector1"
+                    android:gravity="center_vertical|center_horizontal"
+                    android:text="添加投票人员+"
                     android:textColor="@color/colorAccent" />
             </LinearLayout>
 
@@ -286,24 +352,49 @@
                 android:layout_marginTop="@dimen/margin_top"
                 android:background="@color/white"
                 android:gravity="center_horizontal"
-                android:minHeight="60dp"
                 android:orientation="vertical">
 
                 <TextView
-                    android:id="@+id/textView44"
+                    android:id="@+id/tv_reward_info"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:gravity="center_horizontal"
+                    android:layout_height="30dp"
+                    android:background="@drawable/lines_bg2"
+                    android:gravity="center_vertical|center_horizontal"
                     android:text="奖励信息" />
 
-                <TextView
-                    android:id="@+id/tvAddReward"
-                    android:layout_width="wrap_content"
+                <LinearLayout
+                    android:id="@+id/reward_container_layout"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="10dp"
-                    android:autoLink="all"
-                    android:text="添加奖励"
-                    android:textColor="@color/colorAccent" />
+                    android:background="@drawable/lines_bg2"
+                    android:orientation="vertical"
+                    android:paddingBottom="5dp"
+                    android:paddingEnd="@dimen/padding_right"
+                    android:paddingLeft="@dimen/padding_left"
+                    android:paddingRight="@dimen/padding_right"
+                    android:paddingStart="@dimen/padding_left"
+                    android:paddingTop="5dp">
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/ll_reward_container"
+                    android:layout_width="match_parent"
+                    android:layout_height="35dp"
+                    android:background="@drawable/button_selector"
+                    android:gravity="center_vertical|center_horizontal"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:id="@+id/tvAddReward"
+                        android:layout_width="wrap_content"
+                        android:layout_height="30dp"
+                        android:layout_weight="1"
+                        android:autoLink="all"
+                        android:gravity="center_vertical|center_horizontal"
+                        android:text="添加奖励+"
+                        android:textColor="@color/colorAccent" />
+                </LinearLayout>
 
             </LinearLayout>
 
@@ -324,7 +415,7 @@
                     android:layout_marginLeft="10dp"
                     android:layout_marginStart="10dp"
                     android:layout_weight="1"
-                    app:srcCompat="@mipmap/icon11" />
+                    app:srcCompat="@mipmap/icon_raise" />
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -394,7 +485,7 @@
                     android:layout_alignParentEnd="true"
                     android:layout_alignParentRight="true"
                     android:layout_weight="1"
-                    android:text="开"
+                    android:text="关"
                     android:textOff="关"
                     android:textOn="开" />
 
@@ -405,7 +496,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:gravity="center_horizontal"
-                android:orientation="horizontal"
+                android:orientation="vertical"
                 android:paddingBottom="20dp"
                 android:paddingLeft="20dp"
                 android:paddingRight="20dp"
@@ -419,265 +510,12 @@
                     android:background="@drawable/coners_bg2"
                     android:text="发起投票"
                     android:textColor="@color/white" />
-            </LinearLayout>
-
-            <!--          <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/margin_top"
-                android:background="@color/white"
-                android:orientation="vertical"
-                android:paddingBottom="15dp"
-                android:paddingEnd="@dimen/padding_right"
-                android:paddingLeft="@dimen/padding_left"
-                android:paddingRight="@dimen/padding_right"
-                android:paddingStart="@dimen/padding_left"
-                android:paddingTop="15dp">
-
-                <TextView
-                    android:id="@+id/textView95"
-                    android:layout_width="match_parent"
-                    android:layout_height="22dp"
-                    android:text="1、王二洗厕所" />
-
-                <TextView
-                    android:id="@+id/textView94"
-                    android:layout_width="match_parent"
-                    android:layout_height="22dp"
-                    android:text="2、胡义晋洗厕所" />
-
-                <TextView
-                    android:id="@+id/textView96"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="10dp"
-                    android:autoLink="all"
-                    android:text="电此添加"
-                    android:textColor="@color/colorAccent" />
-
-                <TextView
-                    android:id="@+id/textView97"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="30dp"
-                    android:text="注：添加内容不超过20字"
-                    android:textSize="12dp" />
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/margin_top"
-                android:background="@color/white"
-                android:minHeight="130dp"
-                android:orientation="vertical"
-                android:paddingBottom="5dp"
-                android:paddingLeft="@dimen/padding_left"
-                android:paddingStart="@dimen/padding_left"
-                android:paddingTop="5dp">
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="50dp"
-                    android:background="@drawable/lines_bg2"
-                    android:gravity="center_vertical"
-                    android:orientation="horizontal"
-                    android:paddingEnd="@dimen/padding_right"
-                    android:paddingRight="@dimen/padding_right"
-                    android:weightSum="8">
-
-                    <LinearLayout
-                        android:layout_width="40dp"
-                        android:layout_height="40dp"
-                        android:background="@mipmap/icon25"
-                        android:orientation="horizontal">
-
-                    </LinearLayout>
-
-                    <LinearLayout
-                        android:layout_width="220dp"
-                        android:layout_height="match_parent"
-                        android:layout_weight="1"
-                        android:gravity="center_vertical"
-                        android:orientation="horizontal">
-
-                        <TextView
-                            android:id="@+id/textView98"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="1"
-                            android:paddingLeft="@dimen/padding_left"
-                            android:paddingStart="@dimen/padding_left"
-                            android:text="投票可选" />
-                    </LinearLayout>
-
-                    <LinearLayout
-                        android:layout_width="60dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:orientation="horizontal">
-
-                        <Spinner
-                            android:id="@+id/spinner"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="1" />
-                    </LinearLayout>
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="50dp"
-                    android:background="@drawable/lines_bg2"
-                    android:gravity="center_vertical"
-                    android:orientation="horizontal"
-                    android:paddingEnd="@dimen/padding_right"
-                    android:paddingRight="@dimen/padding_right"
-                    android:weightSum="8">
-
-                    <LinearLayout
-                        android:layout_width="40dp"
-                        android:layout_height="40dp"
-                        android:background="@mipmap/icon25"
-                        android:orientation="horizontal">
-
-                    </LinearLayout>
-
-                    <LinearLayout
-                        android:layout_width="190dp"
-                        android:layout_height="match_parent"
-                        android:layout_weight="1"
-                        android:gravity="center_vertical"
-                        android:orientation="horizontal">
-
-                        <TextView
-                            android:id="@+id/textView99"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="1"
-                            android:paddingLeft="@dimen/padding_left"
-                            android:paddingStart="@dimen/padding_left"
-                            android:text="结束时间" />
-                    </LinearLayout>
-
-                    <LinearLayout
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:gravity="right"
-                        android:orientation="horizontal">
-
-                        <TextView
-                            android:id="@+id/textView100"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="1"
-                            android:gravity="right"
-                            android:text="2017-10-18" />
-                    </LinearLayout>
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="50dp"
-                    android:gravity="center_vertical"
-                    android:orientation="horizontal"
-                    android:paddingEnd="@dimen/padding_right"
-                    android:paddingRight="@dimen/padding_right"
-                    android:weightSum="8">
-
-                    <LinearLayout
-                        android:layout_width="40dp"
-                        android:layout_height="40dp"
-                        android:background="@mipmap/icon25"
-                        android:orientation="horizontal">
-
-                    </LinearLayout>
-
-                    <LinearLayout
-                        android:layout_width="190dp"
-                        android:layout_height="match_parent"
-                        android:layout_weight="1"
-                        android:gravity="center_vertical"
-                        android:orientation="horizontal">
-
-                        <TextView
-                            android:id="@+id/textView101"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="1"
-                            android:paddingLeft="@dimen/padding_left"
-                            android:paddingStart="@dimen/padding_left"
-                            android:text="投票可选" />
-                    </LinearLayout>
-
-                    <LinearLayout
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:gravity="right"
-                        android:orientation="horizontal">
-
-                        <Switch
-                            android:id="@+id/switch1"
-                            android:layout_width="60dp"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="1"
-                            android:text="关" />
-                    </LinearLayout>
-                </LinearLayout>
 
             </LinearLayout>
-
-            <HorizontalScrollView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/margin_top"
-                android:background="@color/white">
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:background="@color/white"
-                    android:gravity="center_vertical"
-                    android:orientation="horizontal"
-                    android:paddingBottom="10dp"
-                    android:paddingEnd="@dimen/padding_right"
-                    android:paddingLeft="@dimen/padding_left"
-                    android:paddingRight="@dimen/padding_right"
-                    android:paddingStart="@dimen/padding_left"
-                    android:paddingTop="10dp">
-
-                    <ImageView
-                        android:id="@+id/imageView29"
-                        android:layout_width="45dp"
-                        android:layout_height="45dp"
-                        android:layout_marginEnd="10dp"
-                        android:layout_marginLeft="10dp"
-                        android:layout_marginRight="10dp"
-                        android:layout_marginStart="10dp"
-                        app:srcCompat="@mipmap/icon21" />
-
-                    <ImageView
-                        android:id="@+id/imageView30"
-                        android:layout_width="45dp"
-                        android:layout_height="45dp"
-                        android:layout_marginEnd="10dp"
-                        android:layout_marginRight="10dp"
-                        app:srcCompat="@mipmap/icon21" />
-
-                    <TextView
-                        android:id="@+id/textView87"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:autoLink="all"
-                        android:text="选择成员"
-                        android:textColor="@color/colorAccent" />
-
-                </LinearLayout>
-            </HorizontalScrollView>-->
 
         </LinearLayout>
 
     </ScrollView>
+
 
 </LinearLayout>

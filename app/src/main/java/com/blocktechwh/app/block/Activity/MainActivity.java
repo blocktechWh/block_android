@@ -1,5 +1,8 @@
 package com.blocktechwh.app.block.Activity;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
@@ -8,15 +11,23 @@ import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.view.ViewCompat;
 import android.support.v4.view.ViewPager;
+import android.view.KeyEvent;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.alibaba.fastjson.JSONObject;
+import com.blocktechwh.app.block.Activity.User.LoginActivity;
+import com.blocktechwh.app.block.Common.App;
+import com.blocktechwh.app.block.Common.Urls;
 import com.blocktechwh.app.block.CustomView.BaseActivity;
 import com.blocktechwh.app.block.Fragment.ContactFragment;
 import com.blocktechwh.app.block.Fragment.HomeFragment;
 import com.blocktechwh.app.block.Fragment.UserFragment;
 import com.blocktechwh.app.block.R;
+import com.blocktechwh.app.block.Utils.CallBack;
+import com.blocktechwh.app.block.Utils.HttpClient;
+import com.blocktechwh.app.block.Utils.PreferencesUtils;
 import com.blocktechwh.app.block.Utils.SupportMultipleScreensUtil;
 
 import java.util.ArrayList;
@@ -41,6 +52,54 @@ public class MainActivity extends BaseActivity{
 
         initView();
     }
+    // 在onKeyDown(int keyCode, KeyEvent event)方法中调用此方法
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+        if (keyCode == KeyEvent.KEYCODE_BACK && event.getRepeatCount() == 0) {
+            onBackPressed();
+        }
+        return false;
+    }
+
+    public void onBackPressed() {
+        new AlertDialog.Builder(this).setTitle("确认退出吗？")
+                .setIcon(android.R.drawable.ic_dialog_info)
+                .setPositiveButton("确定", new DialogInterface.OnClickListener() {
+
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        // 点击“确认”后的操作
+                        //SettingActivity.this.finish();
+                        logOut();
+
+                    }
+                })
+                .setNegativeButton("取消", new DialogInterface.OnClickListener() {
+
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        // 点击“返回”后的操作,这里不设置没有任何操作
+                    }
+                }).show();
+    }
+
+    private void logOut(){
+        String url = Urls.Logout;
+        HttpClient.get(this, url, null, new CallBack<JSONObject>() {
+            @Override
+            public void onSuccess(JSONObject data) {
+            }
+            @Override
+            public void onFailure(int errorType, String message){
+            }
+        });
+        App.token = "";
+        PreferencesUtils.putString(App.getContext(),"Token","");
+
+        Intent intent = new Intent(MainActivity.this,LoginActivity.class);
+        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_EXCLUDE_FROM_RECENTS);
+        startActivity(intent);
+    }
 
     private void initView() {
         lists_fragment.add(new HomeFragment());
@@ -61,6 +120,8 @@ public class MainActivity extends BaseActivity{
         mTabHost.setTabMode(TabLayout.MODE_SCROLLABLE);
         ViewCompat.setElevation(mTabHost,10);
         mTabHost.setupWithViewPager(mViewPager);
+
+
         for(int i=0;i<mTabHost.getTabCount();i++){
             mTabHost.getTabAt(i).setCustomView(getTabItemView(i));
         }

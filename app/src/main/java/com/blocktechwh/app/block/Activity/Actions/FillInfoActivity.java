@@ -60,7 +60,7 @@ public class FillInfoActivity extends TitleActivity {
               TextView tv_fill_time = (TextView) rowLayout.findViewById(R.id.tv_fill_time);
               tv_filler_name.setText(fillInfoList.getJSONObject(i).getString("userName"));
               tv_fill_amount.setText(fillInfoList.getJSONObject(i).getString("amount"));
-              tv_fill_time.setText(fillInfoList.getJSONObject(i).getString("cerateTime"));
+              tv_fill_time.setText(fillInfoList.getJSONObject(i).getString("cerateTime").substring(5,fillInfoList.getJSONObject(i).getString("cerateTime").length()));
                tableLayout.addView(rowLayout);//将这一行加入表格中
 
 //            value.setText(item.show_value);

@@ -9,9 +9,10 @@
     android:orientation="vertical">
 
     <RelativeLayout
+        android:id="@+id/rl_radio_contaner"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/white">
+        android:background="@drawable/button_selector">
 
         <CheckBox
             android:id="@+id/rb_voter"

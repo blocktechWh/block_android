@@ -7,6 +7,8 @@
     <uses-permission android:name="android.permission.READ_PROFILE" />
     <uses-permission android:name="android.permission.READ_CONTACTS" />
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW" />
 
     <application
         android:name=".Common.App"
@@ -30,6 +32,8 @@
         <activity android:name=".Activity.User.SettingActivity" />
         <activity android:name=".Activity.User.ForgetActivity" />
         <activity android:name=".Activity.User.UpdateUserInfoActivity" />
+        <activity android:name=".Activity.User.VersionsActivity" />
+        <activity android:name=".Activity.User.UpdatePasswardActivity" />
         <activity android:name=".Activity.Contact.AddNewContactActivity" />
         <activity android:name=".Activity.Contact.AddNewContactActivity$AddContactByPhoneActivity" />
         <activity android:name=".Activity.RedTicket.RedTicketDetailActivity" />
@@ -49,6 +53,9 @@
         <activity android:name=".Activity.Actions.VoteDetailActivity" />
         <activity android:name=".Activity.Actions.VoteFillActivity" />
         <activity android:name=".Activity.Actions.VotersSelectListActivity" />
+        <activity android:name=".Activity.Wallete.WalleteDetailActivity" />
+        <activity android:name=".Activity.Wallete.ImpotActivity" />
+        <activity android:name=".Activity.Wallete.ExportActivity" />
 
 
     </application>

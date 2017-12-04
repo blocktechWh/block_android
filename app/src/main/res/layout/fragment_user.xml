@@ -1,6 +1,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/user_fragment_layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/gray"
@@ -8,12 +9,13 @@
     tools:context="com.blocktechwh.app.block.Fragment.UserFragment">
 
     <LinearLayout
+        android:id="@+id/linearLayout"
         android:layout_width="match_parent"
         android:layout_height="45.12dp"
         android:background="@color/white"
         android:gravity="center_vertical"
-        android:orientation="horizontal"
-        android:id="@+id/linearLayout">
+        android:orientation="horizontal">
+
         <TextView
             android:id="@+id/textView"
             android:layout_width="0dp"
@@ -24,106 +26,144 @@
     </LinearLayout>
 
     <RelativeLayout
+        android:id="@+id/relativeLayout2"
         android:layout_width="match_parent"
         android:layout_height="82.56dp"
         android:layout_marginTop="4.8dp"
         android:background="@color/white"
-        android:orientation="horizontal"
-        android:id="@+id/relativeLayout2">
+        android:orientation="horizontal">
+
         <TextView
             android:id="@+id/id_text_name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="28.8dp"
             android:layout_marginLeft="28.8dp"
             android:layout_marginStart="28.8dp"
+            android:layout_marginTop="28.8dp"
             android:text="" />
+
         <TextView
             android:id="@+id/id_text_phone_tip"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="电话："
             android:layout_alignLeft="@id/id_text_name"
             android:layout_alignStart="@id/id_text_name"
-            android:layout_below="@+id/id_text_name" />
+            android:layout_below="@+id/id_text_name"
+            android:text="电话：" />
+
         <TextView
             android:id="@+id/id_phone"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text=""
-            android:layout_toRightOf="@+id/id_text_phone_tip"
             android:layout_alignBottom="@id/id_text_phone_tip"
-            android:layout_toEndOf="@+id/id_text_phone_tip" />
+            android:layout_toEndOf="@+id/id_text_phone_tip"
+            android:layout_toRightOf="@+id/id_text_phone_tip"
+            android:text="" />
+
         <ImageView
             android:id="@+id/id_user_photo"
             android:layout_width="62.4dp"
             android:layout_height="62.4dp"
-            android:layout_alignParentRight="true"
             android:layout_alignParentEnd="true"
-            android:layout_marginRight="23.04dp"
+            android:layout_alignParentRight="true"
             android:layout_marginEnd="23.04dp"
-            android:layout_marginTop="10.08dp"/>
+            android:layout_marginRight="23.04dp"
+            android:layout_marginTop="10.08dp" />
     </RelativeLayout>
 
     <!--<RelativeLayout-->
-        <!--android:layout_width="match_parent"-->
-        <!--android:layout_height="45.12dp"-->
-        <!--android:layout_marginTop="4.8dp"-->
-        <!--android:background="@color/white"-->
-        <!--android:gravity="center_vertical|center_horizontal"-->
-        <!--android:orientation="horizontal"-->
-        <!--android:id="@+id/relativeLayout4">-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="45.12dp"-->
+    <!--android:layout_marginTop="4.8dp"-->
+    <!--android:background="@color/white"-->
+    <!--android:gravity="center_vertical|center_horizontal"-->
+    <!--android:orientation="horizontal"-->
+    <!--android:id="@+id/relativeLayout4">-->
 
-        <!--<TextView-->
-            <!--android:id="@+id/textView8"-->
-            <!--android:layout_width="wrap_content"-->
-            <!--android:layout_height="wrap_content"-->
-            <!--android:textSize="@dimen/text_size1"-->
-            <!--android:text="钱包地址：" />-->
-        <!--<TextView-->
-            <!--android:id="@+id/textView9"-->
-            <!--android:layout_width="wrap_content"-->
-            <!--android:layout_height="wrap_content"-->
-            <!--android:layout_toRightOf="@id/textView8"-->
-            <!--android:layout_toEndOf="@id/textView8"-->
-            <!--android:textSize="@dimen/text_size1"-->
-            <!--android:text="1DQe9F3agsDcr4qoTZ3Sush4e88Nv9tNxa" />-->
+    <!--<TextView-->
+    <!--android:id="@+id/textView8"-->
+    <!--android:layout_width="wrap_content"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--android:textSize="@dimen/text_size1"-->
+    <!--android:text="钱包地址：" />-->
+    <!--<TextView-->
+    <!--android:id="@+id/textView9"-->
+    <!--android:layout_width="wrap_content"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--android:layout_toRightOf="@id/textView8"-->
+    <!--android:layout_toEndOf="@id/textView8"-->
+    <!--android:textSize="@dimen/text_size1"-->
+    <!--android:text="1DQe9F3agsDcr4qoTZ3Sush4e88Nv9tNxa" />-->
     <!--</RelativeLayout>-->
 
     <LinearLayout
+        android:id="@+id/linearLayout2"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="4.8dp"
         android:background="@color/gray"
-        android:orientation="vertical"
-        android:id="@+id/linearLayout2">
+        android:orientation="vertical">
         <!--<LinearLayout-->
-            <!--android:layout_width="match_parent"-->
-            <!--android:layout_height="54.72dp"-->
-            <!--android:gravity="center_vertical"-->
-            <!--android:background="@color/white"-->
-            <!--android:orientation="horizontal">-->
-            <!--<ImageButton-->
-                <!--android:id="@+id/id_wallet_image"-->
-                <!--android:layout_width="28.8dp"-->
-                <!--android:layout_height="28.8dp"-->
-                <!--android:layout_margin="17.76dp"-->
-                <!--android:background="@android:color/transparent"-->
-                <!--app:srcCompat="@mipmap/icon_wallet" />-->
-            <!--<TextView-->
-                <!--android:id="@+id/id_wallet_text"-->
-                <!--android:layout_width="wrap_content"-->
-                <!--android:layout_height="wrap_content"-->
-                <!--android:text="钱包" />-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="54.72dp"-->
+        <!--android:gravity="center_vertical"-->
+        <!--android:background="@color/white"-->
+        <!--android:orientation="horizontal">-->
+        <!--<ImageButton-->
+        <!--android:id="@+id/id_wallet_image"-->
+        <!--android:layout_width="28.8dp"-->
+        <!--android:layout_height="28.8dp"-->
+        <!--android:layout_margin="17.76dp"-->
+        <!--android:background="@android:color/transparent"-->
+        <!--app:srcCompat="@mipmap/icon_wallet" />-->
+        <!--<TextView-->
+        <!--android:id="@+id/id_wallet_text"-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:text="钱包" />-->
         <!--</LinearLayout>-->
+        <LinearLayout
+            android:id="@+id/id_wallet"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="1dp"
+            android:background="@drawable/button_selector"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+
+            <ImageButton
+                android:id="@+id/id_wallet_image"
+                android:layout_width="28.8dp"
+                android:layout_height="28.8dp"
+                android:layout_margin="17.76dp"
+                android:background="@android:color/transparent"
+                app:srcCompat="@mipmap/icon_wallet" />
+
+            <TextView
+                android:id="@+id/id_wallet_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="钱包" />
+
+            <TextView
+                android:id="@+id/tv_wallete_data"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="right"
+                android:paddingRight="20dp"
+                android:text="余额：￥ 100" />
+        </LinearLayout>
+
         <LinearLayout
             android:id="@+id/id_red_package"
             android:layout_width="match_parent"
             android:layout_height="54.72dp"
-            android:gravity="center_vertical"
-            android:background="@color/white"
             android:layout_marginTop="1dp"
+            android:background="@drawable/button_selector"
+            android:gravity="center_vertical"
             android:orientation="horizontal">
+
             <ImageButton
                 android:id="@+id/id_redPacket_image"
                 android:layout_width="28.8dp"
@@ -131,20 +171,23 @@
                 android:layout_margin="17.76dp"
                 android:background="@android:color/transparent"
                 app:srcCompat="@mipmap/icon_red_packet" />
+
             <TextView
                 android:id="@+id/id_redPacket_text"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="红包" />
         </LinearLayout>
+
         <LinearLayout
             android:id="@+id/id_vote"
             android:layout_width="match_parent"
             android:layout_height="54.72dp"
-            android:gravity="center_vertical"
-            android:background="@color/white"
             android:layout_marginTop="1dp"
+            android:background="@drawable/button_selector"
+            android:gravity="center_vertical"
             android:orientation="horizontal">
+
             <ImageButton
                 android:id="@+id/id_vote_image"
                 android:layout_width="28.8dp"
@@ -152,6 +195,7 @@
                 android:layout_margin="17.76dp"
                 android:background="@android:color/transparent"
                 app:srcCompat="@mipmap/icon_vote" />
+
             <TextView
                 android:id="@+id/id_vote_text"
                 android:layout_width="wrap_content"
@@ -159,24 +203,24 @@
                 android:text="投票" />
         </LinearLayout>
         <!--<LinearLayout-->
-            <!--android:layout_width="match_parent"-->
-            <!--android:layout_height="54.72dp"-->
-            <!--android:gravity="center_vertical"-->
-            <!--android:background="@color/white"-->
-            <!--android:layout_marginTop="1dp"-->
-            <!--android:orientation="horizontal">-->
-            <!--<ImageButton-->
-                <!--android:id="@+id/id_event_image"-->
-                <!--android:layout_width="28.8dp"-->
-                <!--android:layout_height="28.8dp"-->
-                <!--android:layout_margin="17.76dp"-->
-                <!--android:background="@android:color/transparent"-->
-                <!--app:srcCompat="@mipmap/icon_event" />-->
-            <!--<TextView-->
-                <!--android:id="@+id/id_event_text"-->
-                <!--android:layout_width="wrap_content"-->
-                <!--android:layout_height="wrap_content"-->
-                <!--android:text="活动" />-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="54.72dp"-->
+        <!--android:gravity="center_vertical"-->
+        <!--android:background="@color/white"-->
+        <!--android:layout_marginTop="1dp"-->
+        <!--android:orientation="horizontal">-->
+        <!--<ImageButton-->
+        <!--android:id="@+id/id_event_image"-->
+        <!--android:layout_width="28.8dp"-->
+        <!--android:layout_height="28.8dp"-->
+        <!--android:layout_margin="17.76dp"-->
+        <!--android:background="@android:color/transparent"-->
+        <!--app:srcCompat="@mipmap/icon_event" />-->
+        <!--<TextView-->
+        <!--android:id="@+id/id_event_text"-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:text="活动" />-->
         <!--</LinearLayout>-->
     </LinearLayout>
 
@@ -184,10 +228,11 @@
         android:id="@+id/id_setting_button"
         android:layout_width="match_parent"
         android:layout_height="54.72dp"
+        android:layout_marginTop="4.8dp"
+        android:background="@drawable/button_selector"
         android:gravity="center_vertical"
-        android:background="@color/white"
-        android:orientation="horizontal"
-        android:layout_marginTop="4.8dp">
+        android:orientation="horizontal">
+
         <ImageButton
             android:id="@+id/id_setting_image"
             android:layout_width="28.8dp"
@@ -195,6 +240,7 @@
             android:layout_margin="17.76dp"
             android:background="@android:color/transparent"
             app:srcCompat="@mipmap/icon_setting" />
+
         <TextView
             android:id="@+id/id_setting_text"
             android:layout_width="wrap_content"

@@ -46,7 +46,6 @@ public class VotedDetailActivity extends TitleActivity {
     private GridView gridview;
     private TextView tv_to_fill;
     private Button bt_vote;
-    private ImageView imageView;
     private List<String>checkedOptionIds=new ArrayList<>();
     private int checkedIndex;
     private TextView tv_fill_info;
@@ -60,7 +59,6 @@ public class VotedDetailActivity extends TitleActivity {
         initTitle("投票列表");
         Bundle bundle=this.getIntent().getExtras();
         voteId=bundle.getInt("voteId");
-        Toast.makeText(VotedDetailActivity.this,"voteId="+voteId, Toast.LENGTH_SHORT).show();
         initData();
         getData();
         addEvent();
@@ -85,6 +83,12 @@ public class VotedDetailActivity extends TitleActivity {
             @Override
             public void onSuccess(JSONObject data) {
                 System.out.print("投票详情mDatas="+data);
+                if(!Boolean.parseBoolean(data.getString("isRaise"))){
+                    //设置不可点击
+                    tv_to_fill.setAlpha((float)0.3);
+                    tv_to_fill.setVisibility(View.VISIBLE);
+                    tv_to_fill.setOnClickListener(null);
+                }
 
                 VotedDetail.setVoteImg(data.getString("img"));
                 VotedDetail.setRewardTotal(Double.parseDouble(data.getString("voteTotalFee")));
@@ -94,7 +98,7 @@ public class VotedDetailActivity extends TitleActivity {
                 List<Map<String,Object>>voteOptionsList=new ArrayList<>();
                 for(int i=0;i<data.getJSONArray("options").size();i++){
                     Map<String,Object> map_vote_option1=new HashMap();
-                    map_vote_option1.put("optionCount",data.getJSONArray("options").getJSONObject(i).getString("optionCount"));
+                    map_vote_option1.put("optionCount",Integer.parseInt(data.getJSONArray("options").getJSONObject(i).getString("optionCount")));
                     map_vote_option1.put("optionContent",data.getJSONArray("options").getJSONObject(i).getString("optionContent"));
                     voteOptionsList.add(map_vote_option1);
                 }
@@ -139,23 +143,37 @@ public class VotedDetailActivity extends TitleActivity {
 
 
         //渲染投票项
-        for(int i=0;i<VotedDetail.getVoteOptionsList().size();i++){
-            checkedIndex=i;
-            View item_vote_option_layout = LayoutInflater.from(getApplicationContext()).inflate(R.layout.item_voted_option,null);
-            TextView tv_vote_option_text=item_vote_option_layout.findViewById(R.id.tv_vote_option_text);
-            tv_vote_option_text.setText(VotedDetail.getVoteOptionsList().get(i).get("optionContent").toString());
-            Integer percent=(Integer.parseInt(VotedDetail.getVoteOptionsList().get(i).get("optionCount").toString())/VotedDetail.getTotalCount())*100;
-            ProgressBar pbVoteCountProgress=item_vote_option_layout.findViewById(R.id.pbVoteCountProgress);
-            pbVoteCountProgress.setProgress(percent);
-            ll_vote_options.addView(item_vote_option_layout);
+        if(VotedDetail.getVoteOptionsList().size()>0){
+            for(int i=0;i<VotedDetail.getVoteOptionsList().size();i++){
+                checkedIndex=i;
+                View item_vote_option_layout = LayoutInflater.from(getApplicationContext()).inflate(R.layout.item_voted_option,null);
+                TextView tv_vote_option_text=item_vote_option_layout.findViewById(R.id.tv_vote_option_text);
+                tv_vote_option_text.setText(VotedDetail.getVoteOptionsList().get(i).get("optionContent").toString());
 
+                TextView tv_number_percetage=item_vote_option_layout.findViewById(R.id.tv_number_percetage);
+
+                Integer percent=0;
+                if(VotedDetail.getTotalCount()==0){
+                    percent=0;
+                }else{
+                    percent=Integer.parseInt(VotedDetail.getVoteOptionsList().get(i).get("optionCount").toString())*100/VotedDetail.getTotalCount();
+
+                }
+                tv_number_percetage.setText(percent+"%"+"("+VotedDetail.getVoteOptionsList().get(i).get("optionCount").toString()+"人)");
+                ProgressBar pbVoteCountProgress=item_vote_option_layout.findViewById(R.id.pbVoteCountProgress);
+                pbVoteCountProgress.setProgress(percent);
+
+                ll_vote_options.addView(item_vote_option_layout);
+
+            }
         }
+
 
         //渲染奖励项
         for(int i=0;i<VotedDetail.getVoteRewardsList().size();i++){
             View item_vote_reward = LayoutInflater.from(getApplicationContext()).inflate(R.layout.item_vote_reward,null);
             TextView tv_single_vote_reward=item_vote_reward.findViewById(R.id.tv_single_vote_reward);
-            tv_single_vote_reward.setText(VotedDetail.getVoteRewardsList().get(i).get("amount").toString());
+            tv_single_vote_reward.setText(VotedDetail.getVoteRewardsList().get(i).get("amount").toString()+"元");
             TextView tv_vote_rand=item_vote_reward.findViewById(R.id.tv_vote_rand);
             tv_vote_rand.setText("第"+(i+1)+"名获得：");
             ll_vote_reward_list.addView(item_vote_reward);//将这一行加入表格中
@@ -191,7 +209,7 @@ public class VotedDetailActivity extends TitleActivity {
 
         // create a new ImageView for each item referenced by the Adapter
         public View getView(int position, View convertView, ViewGroup parent) {
-            Toast.makeText(VotedDetailActivity.this,"position="+position, Toast.LENGTH_SHORT).show();
+            final ImageView imageView;
             if (convertView == null) {
                 imageView = new ImageView(mContext);
                 imageView.setLayoutParams(new GridView.LayoutParams(85, 85));
