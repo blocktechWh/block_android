@@ -56,14 +56,18 @@ public class UpdatePasswardActivity extends TitleActivity {
             String passWord=et_new_pwd.getText().toString();
             String passWord1=et_new_pwd_sure.getText().toString();
             String oldPwd=et_old_pwd.getText().toString();
+            String tel_regex_pwd = "[a-zA-Z0-9]{8,20}";
 
-
+            if(oldPwd.equals("")){
+                Toast.makeText(App.getContext(),"请输入原密码",Toast.LENGTH_SHORT).show();
+                return;
+            }
             if(passWord.equals("")){
                 Toast.makeText(App.getContext(),"请输入新密码",Toast.LENGTH_SHORT).show();
                 return;
             }
-            if(passWord.length()<6||passWord.length()>20){
-                Toast.makeText(App.getContext(),"密码由6-20字母数字组成",Toast.LENGTH_SHORT).show();
+            if(!passWord.matches( tel_regex_pwd )){
+                Toast.makeText(App.getContext(),"密码由8-20字母和数字组成",Toast.LENGTH_SHORT).show();
                 return;
             }
 

@@ -78,6 +78,25 @@ public class SendRedTicket extends TitleActivity {
             String s_amount=et_amount.getText().toString();
             String s_pray=et_text_pray.getText().toString();
 
+            if(s_amount.equals("")){
+                Toast.makeText(SendRedTicket.this,"请输入金额",Toast.LENGTH_SHORT).show();
+                return;
+            }
+            String telRegex = "^-?[0-9]+" ;
+            if (!s_amount.matches( telRegex )){
+                Toast.makeText(SendRedTicket.this,"请输入有效金额",Toast.LENGTH_SHORT).show();
+                return;
+            }
+            if (Double.parseDouble(s_amount)<=0){
+                Toast.makeText(SendRedTicket.this,"请输入有效金额",Toast.LENGTH_SHORT).show();
+                return;
+            }
+            if(s_pray.equals("")){
+                s_pray="恭喜发财，大吉大利";
+            }
+
+
+
             JSONObject json = new JSONObject();
             json.put("receiveId",id);
             json.put("amount",s_amount);

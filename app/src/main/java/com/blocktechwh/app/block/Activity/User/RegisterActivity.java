@@ -59,8 +59,12 @@ public class RegisterActivity extends TitleActivity {
 
     private void mSendVerifyCode(){
         String phone = editPhone.getText().toString();
+        String telRegex = "[1][34578]\\d{9}" ;
+
         if("".equals(phone)){
             Toast.makeText(App.getContext(), "手机号不能为空", Toast.LENGTH_SHORT).show();
+        }else if(!phone.matches( telRegex )){
+            Toast.makeText(App.getContext(),"无效手机号",Toast.LENGTH_SHORT).show();
         }else {
             String url = Urls.RegistorActiveCode + phone;
             HttpClient.get(this, url, null, new CallBack<JSONObject>() {
@@ -78,12 +82,22 @@ public class RegisterActivity extends TitleActivity {
         final String phone = editPhone.getText().toString();
         String code = editCode.getText().toString();
         String password = editPassword.getText().toString();
+
+        String telRegex = "[1][34578]\\d{9}" ;
+        String tel_regex_pwd = "[a-zA-Z0-9]{8,20}" ;
+       //[a-zA-Z0-9]{8,15}
+
         if("".equals(phone)){
             Toast.makeText(App.getContext(), "手机号不能为空", Toast.LENGTH_SHORT).show();
+        }else if(!phone.matches( telRegex )){
+            Toast.makeText(App.getContext(),"无效手机号",Toast.LENGTH_SHORT).show();
         }else if("".equals(code)){
             Toast.makeText(App.getContext(), "验证码不能为空", Toast.LENGTH_SHORT).show();
         }else if("".equals(password)){
             Toast.makeText(App.getContext(), "密码不能为空", Toast.LENGTH_SHORT).show();
+        }else if(!password.matches( tel_regex_pwd )){
+            Toast.makeText(App.getContext(), "密码由8-20字母和数字组成", Toast.LENGTH_SHORT).show();
+
         }else {
             JSONObject json = new JSONObject();
             json.put("phone",phone);

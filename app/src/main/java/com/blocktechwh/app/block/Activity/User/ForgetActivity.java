@@ -95,7 +95,8 @@ public class ForgetActivity extends TitleActivity {
             }
 
             //"[1]"代表第1位为数字1，"[358]"代表第二位可以为3、5、8中的一个，"\\d{9}"代表后面是可以是0～9的数字，有9位。
-            String telRegex = "[1][34578]\\d{9}" ;
+            String telRegex = "[1][34578]\\d{9}";
+            String tel_regex_pwd = "[a-zA-Z0-9]{8,20}";
             if (!phone.matches( telRegex )){
                 Toast.makeText(App.getContext(),"无效手机号",Toast.LENGTH_SHORT).show();
                 return;
@@ -110,8 +111,8 @@ public class ForgetActivity extends TitleActivity {
                 Toast.makeText(App.getContext(),"请输入新密码",Toast.LENGTH_SHORT).show();
                 return;
             }
-            if(passWord.length()<6||passWord.length()>20){
-                Toast.makeText(App.getContext(),"密码由6-20字母数字组成",Toast.LENGTH_SHORT).show();
+            if(!passWord.matches( tel_regex_pwd )){
+                Toast.makeText(App.getContext(),"密码由8-20字母和数字组成",Toast.LENGTH_SHORT).show();
                 return;
             }
 
