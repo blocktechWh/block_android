@@ -20,6 +20,7 @@ import android.widget.Toast;
 import com.alibaba.fastjson.JSONObject;
 import com.blocktechwh.app.block.Bean.VotedDetail;
 import com.blocktechwh.app.block.Common.Urls;
+import com.blocktechwh.app.block.CustomView.ImageViewPlus;
 import com.blocktechwh.app.block.CustomView.TitleActivity;
 import com.blocktechwh.app.block.Fragment.HomeFragment;
 import com.blocktechwh.app.block.R;
@@ -211,7 +212,7 @@ public class VotedDetailActivity extends TitleActivity {
         public View getView(int position, View convertView, ViewGroup parent) {
             final ImageView imageView;
             if (convertView == null) {
-                imageView = new ImageView(mContext);
+                imageView = new ImageViewPlus(mContext);
                 imageView.setLayoutParams(new GridView.LayoutParams(85, 85));
                 imageView.setScaleType(ImageView.ScaleType.CENTER_CROP);
                 imageView.setPadding(8, 8, 8, 8);

@@ -25,10 +25,13 @@ import com.blocktechwh.app.block.Fragment.ContactFragment;
 import com.blocktechwh.app.block.Fragment.HomeFragment;
 import com.blocktechwh.app.block.Fragment.UserFragment;
 import com.blocktechwh.app.block.R;
+import com.blocktechwh.app.block.Service.NotifyService;
 import com.blocktechwh.app.block.Utils.CallBack;
 import com.blocktechwh.app.block.Utils.HttpClient;
 import com.blocktechwh.app.block.Utils.PreferencesUtils;
 import com.blocktechwh.app.block.Utils.SupportMultipleScreensUtil;
+
+import org.java_websocket.client.WebSocketClient;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -44,13 +47,20 @@ public class MainActivity extends BaseActivity{
     private List<Fragment> lists_fragment = new ArrayList<>();
     private ViewPager mViewPager;
     private ContentPagerAdapter contentAdapter;
+    private static WebSocketClient client;
+    private int new_contact_count=0;
+    private boolean isBackground = true;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        initView();
+        //打开服务
+        startService(new Intent(MainActivity.this,NotifyService.class));
+        getData();
+
     }
     // 在onKeyDown(int keyCode, KeyEvent event)方法中调用此方法
     @Override
@@ -61,6 +71,42 @@ public class MainActivity extends BaseActivity{
         return false;
     }
 
+
+//    @Override
+//    protected void onResume() {
+//        super.onResume();
+//        isBackground = false;
+//        notifyForeground();
+//        System.out.println("回到前台");
+//
+//        //停止服务
+//        stopService(new Intent(MainActivity.this,NotifyService.class));
+//    }
+//
+//    @Override
+//    protected void onStop() {
+//        super.onStop();
+//        isBackground = true;
+//        notifyBackground();
+//        System.out.println("退出到后台");
+//
+//        //打开服务
+//        startService(new Intent(MainActivity.this,NotifyService.class));
+//    }
+
+    private void notifyForeground() {
+        // This is where you can notify listeners, handle session tracking, etc
+    }
+    private void notifyBackground() {
+        // This is where you can notify listeners, handle session tracking, etc
+    }
+
+    //刷新
+    private void refesh(){
+        onCreate(null);
+    }
+
+    //退出
     public void onBackPressed() {
         new AlertDialog.Builder(this).setTitle("确认退出吗？")
                 .setIcon(android.R.drawable.ic_dialog_info)
@@ -83,6 +129,16 @@ public class MainActivity extends BaseActivity{
                 }).show();
     }
 
+    private void getData(){
+        //获得好友请求数量
+        HttpClient.get(this, Urls.ContactRequestsCount, null, new CallBack<JSONObject>() {
+            @Override
+            public void onSuccess(JSONObject data) {
+                new_contact_count=Integer.parseInt(data.getString("data"));
+                initView();
+            }
+        });
+    }
     private void logOut(){
         String url = Urls.Logout;
         HttpClient.get(this, url, null, new CallBack<JSONObject>() {
@@ -112,6 +168,7 @@ public class MainActivity extends BaseActivity{
         SupportMultipleScreensUtil.init(getApplicationContext());
         SupportMultipleScreensUtil.scale(mTabHost);
         setContent();
+
     }
 
     private void setContent() {
@@ -167,6 +224,18 @@ public class MainActivity extends BaseActivity{
 
     private View getTabItemView(int index) {
         View view = getLayoutInflater().inflate(R.layout.item_tab_view, null);
+        TextView tv_count=view.findViewById(R.id.tv_count);
+        if(index==0||index==2||new_contact_count==0){
+            tv_count.setVisibility(View.GONE);
+        }
+
+        if(new_contact_count>0){
+            tv_count.setText(new_contact_count+"");
+        }
+
+        if(new_contact_count>99){
+            tv_count.setText("99+");
+        }
         ImageView imageView = (ImageView) view.findViewById(R.id.item_icon);
         TextView textView=(TextView)view.findViewById(R.id.item_text);
         textView.setText(tab_texts.get(index));

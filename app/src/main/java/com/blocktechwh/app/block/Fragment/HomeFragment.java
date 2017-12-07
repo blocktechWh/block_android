@@ -73,14 +73,14 @@ public class HomeFragment extends Fragment {
         getData();
         addEvent();
 
-        try
-        {
-            webSocketConnect();
-        }
-        catch(Exception e)
-        {
-            return view;
-        }
+//        try
+//        {
+//            webSocketConnect();
+//        }
+//        catch(Exception e)
+//        {
+//            return view;
+//        }
         return view;
     }
 

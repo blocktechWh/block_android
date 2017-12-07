@@ -59,7 +59,7 @@ public class GiftActivity extends TitleActivity {
             @Override
             public void onSuccess(JSONObject data) {
 
-                System.out.print("待接收的红包详情="+data);
+                System.out.println("待接收的红包详情="+data);
                 operateGift(data);
 
             }

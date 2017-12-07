@@ -16,14 +16,19 @@
         android:background="@color/white"
         android:gravity="center_vertical|center_horizontal"
         android:orientation="vertical">
-
-        <ImageView
+        <com.blocktechwh.app.block.CustomView.ImageViewPlus
+            android:id="@+id/id_user_photo"
+            android:layout_weight="1"
+            android:layout_width="80dp"
+            android:layout_marginTop="20dp"
+            android:layout_height="80dp" />
+<!--        <ImageView
             android:id="@+id/id_user_photo"
             android:layout_width="80dp"
             android:layout_height="80dp"
             android:layout_marginTop="20dp"
             android:layout_weight="1"
-            app:srcCompat="@mipmap/icon21" />
+            app:srcCompat="@mipmap/icon21" />-->
 
         <TextView
             android:id="@+id/tv_send_name"

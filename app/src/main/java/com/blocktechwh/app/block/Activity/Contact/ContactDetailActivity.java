@@ -1,6 +1,8 @@
 package com.blocktechwh.app.block.Activity.Contact;
 
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.os.Bundle;
@@ -124,14 +126,36 @@ public class ContactDetailActivity extends TitleActivity {
     }
 
     private void mDeleteFriend(){
-        String urls = Urls.DeleteContact + id;
-        System.out.println(urls);
-        HttpClient.delete(this, urls, new JSONObject().toString(), new CallBack() {
-            @Override
-            public void onSuccess(Object result) {
-                Toast.makeText(App.getContext(),"已解除好友关系",Toast.LENGTH_SHORT).show();
-            }
-        });
+
+        new AlertDialog.Builder(this).setTitle("确定删除好友吗？")
+                .setIcon(android.R.drawable.ic_dialog_info)
+                .setPositiveButton("确定", new DialogInterface.OnClickListener() {
+
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        // 点击“确认”后的操作
+                        //SettingActivity.this.finish();
+                        String urls = Urls.DeleteContact + id;
+                        System.out.println(urls);
+
+                        HttpClient.delete(this, urls, new JSONObject().toString(), new CallBack() {
+                            @Override
+                            public void onSuccess(Object result) {
+                                Toast.makeText(App.getContext(),"已解除好友关系",Toast.LENGTH_SHORT).show();
+                                finish();
+                            }
+                        });
+
+                    }
+                })
+                .setNegativeButton("取消", new DialogInterface.OnClickListener() {
+
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        // 点击“返回”后的操作,这里不设置没有任何操作
+                    }
+                }).show();
+
     }
 
 }

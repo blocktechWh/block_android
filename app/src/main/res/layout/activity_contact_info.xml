@@ -15,13 +15,17 @@
         android:background="@color/white"
         android:gravity="center_vertical"
         android:orientation="horizontal">
-
-        <ImageView
+        <com.blocktechwh.app.block.CustomView.ImageViewPlus
+            android:id="@+id/imageView15"
+            android:layout_weight="1"
+            android:layout_width="100dp"
+            android:layout_height="100dp" />
+<!--        <ImageView
             android:id="@+id/imageView15"
             android:layout_width="100dp"
             android:layout_height="100dp"
             android:layout_weight="1"
-            app:srcCompat="@mipmap/icon21" />
+            app:srcCompat="@mipmap/icon21" />-->
     </LinearLayout>
 
     <LinearLayout
@@ -51,8 +55,7 @@
                 android:id="@+id/textView2"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="张三" />
+                android:layout_weight="1" />
         </LinearLayout>
 
         <LinearLayout
@@ -73,8 +76,7 @@
                 android:id="@+id/textView4"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="男" />
+                android:layout_weight="1" />
         </LinearLayout>
 
         <LinearLayout
@@ -95,8 +97,7 @@
                 android:id="@+id/textView6"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="13333333333" />
+                android:layout_weight="1" />
         </LinearLayout>
         <LinearLayout
             android:layout_width="match_parent"
@@ -116,8 +117,7 @@
                 android:id="@+id/textView8"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="1157679239@qq.com" />
+                android:layout_weight="1" />
         </LinearLayout>
         <LinearLayout
             android:layout_width="match_parent"
@@ -137,8 +137,7 @@
                 android:id="@+id/textView10"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="宾夕法尼亚" />
+                android:layout_weight="1" />
         </LinearLayout>
     </LinearLayout>
 

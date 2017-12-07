@@ -51,7 +51,7 @@
         android:paddingLeft="@dimen/padding_left"
         android:paddingStart="@dimen/padding_left">
 
-        <ImageView
+        <com.blocktechwh.app.block.CustomView.ImageViewPlus
             android:id="@+id/imageView9"
             android:layout_width="50dp"
             android:layout_height="50dp"

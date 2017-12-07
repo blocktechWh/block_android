@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <shape xmlns:android="http://schemas.android.com/apk/res/android">
     <solid
-        android:color="@color/gray" />
+        android:color="@color/btnColor" />
     <!--<size android:width="320dp" android:height="44dp"/>-->
     <corners
-        android:topLeftRadius="45dp"
-        android:topRightRadius="45dp"
-        android:bottomRightRadius="45dp"
-        android:bottomLeftRadius="45dp"/>
+        android:topLeftRadius="22.5px"
+        android:topRightRadius="22.5px"
+        android:bottomRightRadius="22.5px"
+        android:bottomLeftRadius="22.5px"/>
 </shape>

@@ -300,7 +300,7 @@
                         android:layout_marginEnd="20dp"
                         android:layout_marginRight="20dp"
                         android:layout_weight="1"
-                        android:text="开"
+                        android:text="关"
                         android:textOff="关"
                         android:textOn="开" />
 

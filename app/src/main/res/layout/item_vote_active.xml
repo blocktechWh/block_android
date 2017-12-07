@@ -28,7 +28,7 @@
             android:layout_weight="1"
             android:orientation="horizontal">
 
-            <ImageView
+            <com.blocktechwh.app.block.CustomView.ImageViewPlus
                 android:id="@+id/iv_option_img"
                 android:layout_width="40dp"
                 android:layout_height="40dp"

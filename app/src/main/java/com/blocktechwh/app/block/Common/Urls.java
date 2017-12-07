@@ -99,7 +99,7 @@ public class Urls {
      *
      * 返回值:{userName:Sring,sex:Int,phone:String,email:String,address:String}
      */
-    public static final String GetUserInfoById = HOST+"front/getuserbyid/";
+    public static final String GetUserInfoById = HOST+"front/user/id/";
 
     /**
      * 根据用户信息二维码串获取用户信息GET

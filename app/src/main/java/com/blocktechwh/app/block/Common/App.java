@@ -2,16 +2,14 @@ package com.blocktechwh.app.block.Common;
 
 import android.app.Application;
 import android.content.Context;
+import android.content.Intent;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.os.Handler;
 
-import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import com.blocktechwh.app.block.Bean.User;
 import com.blocktechwh.app.block.Bean.VoteInfo;
-import com.blocktechwh.app.block.Utils.CallBack;
-import com.blocktechwh.app.block.Utils.HttpClient;
 import com.blocktechwh.app.block.Utils.PreferencesUtils;
 
 import org.java_websocket.client.WebSocketClient;
@@ -37,6 +35,7 @@ public class App extends Application{
     public static VoteInfo voteInfo;
     private static WebSocketClient client;
     private Handler mHandler = null;
+    private boolean isBackground = true;
 
     @Override
     public void onCreate() {
@@ -48,11 +47,24 @@ public class App extends Application{
         mHandler = new Handler();
         //System.setProperty("jsse.enableSNIExtension", "false");
         System.out.println("versionName : "+versionName);
-        try {
-            webSocketConnect();
-        }
-        catch(Exception e) {
-        }
+//        try {
+//            webSocketConnect();
+//        }
+//        catch(Exception e) {
+//        }
+    }
+
+    @Override
+    public void onTerminate() {
+        super.onTerminate();
+
+    }
+
+    private void notifyForeground() {
+        // This is where you can notify listeners, handle session tracking, etc
+    }
+    private void notifyBackground() {
+        // This is where you can notify listeners, handle session tracking, etc
     }
 
     private void setPrepare() {
@@ -77,17 +89,28 @@ public class App extends Application{
             @Override
             public void onMessage(String arg0) {
                 System.out.println("收到消息"+arg0);
+                JSONObject busiId=JSONObject.parseObject(arg0);
                 if(arg0.contains("gift")){
-//                    mHandler.postDelayed(new Runnable() {
-//
-//                        @Override
-//                        public void run() {
-//                            WindowUtils.showPopupWindow(App.this);
-//
-//                        }
-//                    }, 1000 * 3);
-                    //showPopupWindow(getContext());
-                    //queryGifts();
+
+                    Intent intent = new Intent();
+                    intent.putExtra("id",Integer.parseInt(busiId.getString("busiId")));
+                    intent.putExtra("type","gift");
+                    //对应BroadcastReceiver中intentFilter的action
+                    intent.setAction("BROADCAST_ACTION");
+                    //发送广播
+                    sendBroadcast(intent);
+
+                }
+                if(arg0.contains("contact")){
+                    Intent intent = new Intent();
+                    intent.putExtra("fromId",Integer.parseInt(busiId.getString("from")));
+                    intent.putExtra("busiId",Integer.parseInt(busiId.getString("busiId")));
+                    intent.putExtra("type","contact");
+                    //对应BroadcastReceiver中intentFilter的action
+                    intent.setAction("BROADCAST_ACTION");
+                    //发送广播
+                    sendBroadcast(intent);
+
                 }
 
             }
@@ -113,8 +136,8 @@ public class App extends Application{
                 }
             }
 
-
         };
+
 
         client.connect();
 
@@ -127,20 +150,7 @@ public class App extends Application{
 
 
     }
-    private void queryGifts(){
-        //查询红包
-        HttpClient.get(this, Urls.GiftWaitRecieveList, null, new CallBack<JSONArray>() {
-            @Override
-            public void onSuccess(JSONArray data) {
 
-                System.out.print("待接收的红包列表="+data);
-                if(data.size()>0){
-                    //operateGiftList(data);
-                }
-
-            }
-        });
-    }
     private void setVersionName() {
         try {
             PackageInfo pi=context.getPackageManager().getPackageInfo(context.getPackageName(), 0);

@@ -1,8 +1,8 @@
 package com.blocktechwh.app.block.Activity.User;
 
 import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -11,17 +11,15 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.alibaba.fastjson.JSONObject;
 import com.blocktechwh.app.block.Activity.MainActivity;
 import com.blocktechwh.app.block.Bean.User;
 import com.blocktechwh.app.block.Common.App;
 import com.blocktechwh.app.block.Common.Urls;
+import com.blocktechwh.app.block.R;
 import com.blocktechwh.app.block.Utils.CallBack;
 import com.blocktechwh.app.block.Utils.HttpClient;
-
-import com.blocktechwh.app.block.R;
 import com.blocktechwh.app.block.Utils.PreferencesUtils;
-
-import com.alibaba.fastjson.JSONObject;
 
 
 public class LoginActivity extends AppCompatActivity {
@@ -35,6 +33,7 @@ public class LoginActivity extends AppCompatActivity {
     private ImageView iv_more;
     private TextView tv_text;
     private RelativeLayout rl;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -82,6 +81,8 @@ public class LoginActivity extends AppCompatActivity {
             startActivity(intent);
         }
     };
+
+
 
     private void mLocalLogin(){
         final String phone = et_phone.getText().toString();

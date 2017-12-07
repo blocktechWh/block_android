@@ -52,6 +52,7 @@ public class ContactFragment extends Fragment {
     private static final int NO_1 = 0x1;
     int num =1;//初始通知数量为1
 
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -59,19 +60,20 @@ public class ContactFragment extends Fragment {
         initView();
         addEvent();
         getData();
-        try
-        {
-            webSocketConnect();
-        }
-        catch(Exception e)
-        {
-            return view;
-        }
+//        try
+//        {
+//            webSocketConnect();
+//        }
+//        catch(Exception e)
+//        {
+//            return view;
+//        }
 
         return view;
     }
 
     private void initView(){
+
         request_view = (LinearLayout)view.findViewById(R.id.id_text_request_layout);
         requestCount_tv = (TextView)view.findViewById(R.id.id_text_request_count);
         addNewContact_btn = (ImageButton)view.findViewById(R.id.id_add_new);
@@ -80,6 +82,7 @@ public class ContactFragment extends Fragment {
         mRecyclerView = (RecyclerView)view.findViewById(R.id.id_recycler);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(App.getContext()));
         mRecyclerView.setAdapter(mAdapter = new ContactAdapter());
+
     }
 
     class ContactAdapter extends RecyclerView.Adapter<ContactAdapter.MyViewHolder>{
@@ -236,7 +239,7 @@ public class ContactFragment extends Fragment {
         HttpClient.get(this, Urls.ContactRequestsCount, null, new CallBack<JSONObject>() {
             @Override
             public void onSuccess(JSONObject data) {
-                int requestCount = data.getInteger("data");
+                Integer requestCount = data.getInteger("data");
                 if(requestCount != 0){
                     requestCount_tv.setText(data.getString("data"));
                     request_view.setVisibility(View.VISIBLE);

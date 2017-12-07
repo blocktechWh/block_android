@@ -11,6 +11,7 @@
         android:layout_marginTop="@dimen/margin_top"
         android:background="@color/white"
         android:orientation="vertical"
+        android:paddingBottom="5dp"
         android:paddingEnd="@dimen/padding_right"
         android:paddingLeft="@dimen/padding_left"
         android:paddingRight="@dimen/padding_right">
@@ -38,7 +39,7 @@
             android:layout_weight="1"
             android:orientation="vertical">
 
-            <ImageView
+            <com.blocktechwh.app.block.CustomView.ImageViewPlus
                 android:id="@+id/ll_player_img1"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent" />

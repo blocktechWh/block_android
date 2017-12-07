@@ -11,11 +11,12 @@
     android:orientation="horizontal"
     android:paddingLeft="@dimen/padding_left"
     android:paddingStart="@dimen/padding_left">
-        <ImageView
+        <com.blocktechwh.app.block.CustomView.ImageViewPlus
             android:id="@+id/id_user_photo"
             android:layout_width="50dp"
             android:layout_height="50dp"
             android:layout_weight="0.00"/>
+
         <TextView
             android:id="@+id/id_user_name"
             android:layout_width="180dp"
@@ -23,7 +24,8 @@
             android:layout_marginLeft="20dp"
             android:layout_marginStart="20dp"
             android:layout_weight="0.00"
-            android:text="" />
+            android:text=""
+            android:textColor="@color/btnColor" />
         <Button
             android:id="@+id/id_accept_btn"
             android:layout_width="70dp"
