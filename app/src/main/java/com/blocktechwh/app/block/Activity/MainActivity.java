@@ -25,7 +25,7 @@ import com.blocktechwh.app.block.Fragment.ContactFragment;
 import com.blocktechwh.app.block.Fragment.HomeFragment;
 import com.blocktechwh.app.block.Fragment.UserFragment;
 import com.blocktechwh.app.block.R;
-import com.blocktechwh.app.block.Service.NotifyService;
+import com.blocktechwh.app.block.Service.DownloadService;
 import com.blocktechwh.app.block.Utils.CallBack;
 import com.blocktechwh.app.block.Utils.HttpClient;
 import com.blocktechwh.app.block.Utils.PreferencesUtils;
@@ -58,9 +58,13 @@ public class MainActivity extends BaseActivity{
         setContentView(R.layout.activity_main);
 
         //打开服务
-        startService(new Intent(MainActivity.this,NotifyService.class));
-        getData();
+        //startService(new Intent(MainActivity.this,NotifyService.class));
 
+        //打开下载更新服务
+        Intent intent = new Intent(MainActivity.this, DownloadService.class);
+        intent.putExtra("apkUrl", "http://blocktechwh.com/bk.apk");
+        startService(intent);
+        getData();
     }
     // 在onKeyDown(int keyCode, KeyEvent event)方法中调用此方法
     @Override
@@ -71,28 +75,6 @@ public class MainActivity extends BaseActivity{
         return false;
     }
 
-
-//    @Override
-//    protected void onResume() {
-//        super.onResume();
-//        isBackground = false;
-//        notifyForeground();
-//        System.out.println("回到前台");
-//
-//        //停止服务
-//        stopService(new Intent(MainActivity.this,NotifyService.class));
-//    }
-//
-//    @Override
-//    protected void onStop() {
-//        super.onStop();
-//        isBackground = true;
-//        notifyBackground();
-//        System.out.println("退出到后台");
-//
-//        //打开服务
-//        startService(new Intent(MainActivity.this,NotifyService.class));
-//    }
 
     private void notifyForeground() {
         // This is where you can notify listeners, handle session tracking, etc

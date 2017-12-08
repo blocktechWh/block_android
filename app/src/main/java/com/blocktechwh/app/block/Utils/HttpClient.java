@@ -5,6 +5,7 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Handler;
 import android.os.Looper;
+import android.widget.Toast;
 
 import com.alibaba.fastjson.JSONObject;
 import com.blocktechwh.app.block.Activity.User.LoginActivity;
@@ -181,6 +182,7 @@ public class HttpClient {
                     callBack.onFailure(2, "网络请求错误");
                 }
             });
+
         }else if((httpCode/100) == 2){
             String json = response.body().string();
             json = json.replace("null", "\"\"");
@@ -219,7 +221,17 @@ public class HttpClient {
                     }
                 }
             }else if(statusCode.equals("403")){
-                App.getContext().startActivity(new Intent(App.getContext(), LoginActivity.class));
+                System.out.println("您未登录，请重新登录！");
+                handler.post(new Runnable() {
+                    @Override
+                    public void run() {
+                        Toast.makeText(App.getContext(),"登陆异常，请重新登录！",Toast.LENGTH_SHORT).show();
+                        Intent intent = new Intent(App.getContext(),LoginActivity.class);
+                        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_EXCLUDE_FROM_RECENTS);
+                        App.getContext().startActivity(intent);
+                    }
+                });
+
             }else{
                 handler.post(new Runnable() {
                     @Override

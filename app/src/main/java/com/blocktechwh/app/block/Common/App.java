@@ -42,16 +42,13 @@ public class App extends Application{
         super.onCreate();
         context=getApplicationContext();
 
-        setVersionName();
+        setVersionName();//设置版本号
         setPrepare();
         mHandler = new Handler();
         //System.setProperty("jsse.enableSNIExtension", "false");
         System.out.println("versionName : "+versionName);
-//        try {
-//            webSocketConnect();
-//        }
-//        catch(Exception e) {
-//        }
+
+
     }
 
     @Override
