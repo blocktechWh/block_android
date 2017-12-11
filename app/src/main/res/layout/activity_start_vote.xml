@@ -174,7 +174,7 @@
                         android:layout_toRightOf="@+id/imageView4_end"
                         android:layout_weight="1"
                         android:gravity="center_vertical"
-                        android:text="选择时间" />
+                        android:text="结束时间" />
 
                     <LinearLayout
                         android:id="@+id/LinearLayout01"

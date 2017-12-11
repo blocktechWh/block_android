@@ -15,7 +15,6 @@ import android.os.IBinder;
 import android.os.Message;
 import android.support.v7.app.NotificationCompat;
 import android.text.TextUtils;
-import android.widget.Toast;
 
 import com.alibaba.fastjson.JSONObject;
 import com.blocktechwh.app.block.Activity.Contact.ContactRequestActivity;
@@ -269,7 +268,6 @@ public class NotifyService extends Service {
             if (action.equals(Intent.ACTION_CLOSE_SYSTEM_DIALOGS)) {
                 String reason = intent.getStringExtra(SYSTEM_DIALOG_REASON_KEY);
                 if (SYSTEM_DIALOG_REASON_HOME_KEY.equals(reason)) {
-                    Toast.makeText(context, "Home按键", Toast.LENGTH_SHORT).show();
                     hasPressHome=true;
                 }
             }

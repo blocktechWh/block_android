@@ -24,6 +24,7 @@ import com.blocktechwh.app.block.CustomView.TitleActivity;
 import com.blocktechwh.app.block.R;
 import com.blocktechwh.app.block.Utils.CallBack;
 import com.blocktechwh.app.block.Utils.HttpClient;
+import com.blocktechwh.app.block.Utils.PreferencesUtils;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -57,7 +58,6 @@ public class AddPlayerActivity extends TitleActivity {
     private ImageButton titlebar_button_back;
     private TextView tv_clear;
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -82,7 +82,10 @@ public class AddPlayerActivity extends TitleActivity {
                 }
             });
             ll_option_add_button.setVisibility(View.GONE);
+            addPlayer.setOnClickListener(null);
             ll_player_img.setVisibility(View.VISIBLE);
+        }else{
+            addPlayer.setOnClickListener(getPlayer);
         }
 
         addEvent();
@@ -112,6 +115,7 @@ public class AddPlayerActivity extends TitleActivity {
         titlebar_button_back=(ImageButton)findViewById(R.id.titlebar_button_back);
         ll_option_add_button=(LinearLayout) findViewById(R.id.ll_option_add_button);
         et_action_input=(EditText) findViewById(R.id.et_action_input);
+        et_action_input.setText(PreferencesUtils.getString(this,"optionName",""));
         addSure=(Button) findViewById(R.id.btn_add_sure);
         addPlayer=(LinearLayout) findViewById(R.id.ll_to_add_player);
         ll_player_img=(ImageView) findViewById(R.id.ll_player_img);
@@ -254,18 +258,7 @@ public class AddPlayerActivity extends TitleActivity {
 
 
         //跳转到选择受益者页面
-        addPlayer.setOnClickListener(new View.OnClickListener(){
-            @Override
-            public void onClick(View view) {
-
-                Bundle bundle=new Bundle();
-                bundle.putInt("stateIndex",1);
-                Intent intent = new Intent(AddPlayerActivity.this,PlayersSelectListActivity.class);
-                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_EXCLUDE_FROM_RECENTS);
-                intent.putExtras(bundle);
-                startActivity(intent);
-            }
-        });
+        addPlayer.setOnClickListener(getPlayer);
 
 
         //确定添加
@@ -302,5 +295,20 @@ public class AddPlayerActivity extends TitleActivity {
         });
 
     }
+
+    private View.OnClickListener getPlayer = new View.OnClickListener(){
+        @Override
+        public void onClick(View view) {
+            String etActionInput=et_action_input.getText().toString();
+            PreferencesUtils.putString(App.getContext(),"optionName",etActionInput);
+
+            Bundle bundle=new Bundle();
+            bundle.putInt("stateIndex",1);
+            Intent intent = new Intent(AddPlayerActivity.this,PlayersSelectListActivity.class);
+            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_EXCLUDE_FROM_RECENTS);
+            intent.putExtras(bundle);
+            startActivity(intent);
+        }
+    };
 
 }

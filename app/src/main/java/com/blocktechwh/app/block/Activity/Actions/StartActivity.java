@@ -298,6 +298,8 @@ public class StartActivity extends TitleActivity {
         tv_select_voters.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View view) {
+                String theme=etTheme.getText().toString();
+                VoteInfo.setVoteTheme(theme);
                 Bundle bundle=new Bundle();
                 bundle.putInt("stateIndex",2);
                 Intent intent = new Intent(StartActivity.this,VotersSelectListActivity.class);
@@ -372,6 +374,9 @@ public class StartActivity extends TitleActivity {
                     linear.setVisibility(View.VISIBLE);
                     tv_reward_info.setVisibility(View.VISIBLE);
 
+                    String theme=etTheme.getText().toString();
+                    VoteInfo.setVoteTheme(theme);
+
                     Intent intent = new Intent(StartActivity.this,SetRewardActivity.class);
                     intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_EXCLUDE_FROM_RECENTS);
                     startActivity(intent);
@@ -439,6 +444,8 @@ public class StartActivity extends TitleActivity {
         tv_to_add.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View view) {
+                String theme=etTheme.getText().toString();
+                VoteInfo.setVoteTheme(theme);
                 Intent intent = new Intent(StartActivity.this,AddPlayerActivity.class);
                 intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_EXCLUDE_FROM_RECENTS);
                 startActivity(intent);
@@ -524,6 +531,8 @@ public class StartActivity extends TitleActivity {
                 return;
             }
             isReward="true";
+            String theme=etTheme.getText().toString();
+            VoteInfo.setVoteTheme(theme);
             VoteInfo.setIsReward(isReward);
             Intent intent = new Intent(StartActivity.this,SetRewardActivity.class);
             intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_EXCLUDE_FROM_RECENTS);

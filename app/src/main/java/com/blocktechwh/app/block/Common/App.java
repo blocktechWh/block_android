@@ -41,7 +41,7 @@ public class App extends Application{
     public void onCreate() {
         super.onCreate();
         context=getApplicationContext();
-
+        PreferencesUtils.putString(App.getContext(),"optionName","");//清空投票项缓存内容
         setVersionName();//设置版本号
         setPrepare();
         mHandler = new Handler();
