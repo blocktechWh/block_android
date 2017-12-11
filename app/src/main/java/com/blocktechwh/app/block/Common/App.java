@@ -11,6 +11,7 @@ import com.alibaba.fastjson.JSONObject;
 import com.blocktechwh.app.block.Bean.User;
 import com.blocktechwh.app.block.Bean.VoteInfo;
 import com.blocktechwh.app.block.Utils.PreferencesUtils;
+import com.blocktechwh.app.block.Utils.PropertiesUtil;
 
 import org.java_websocket.client.WebSocketClient;
 import org.java_websocket.drafts.Draft_17;
@@ -76,7 +77,10 @@ public class App extends Application{
     private void webSocketConnect()throws URISyntaxException, NotYetConnectedException, UnsupportedEncodingException {
 
         System.out.println("new client.");
-        client = new WebSocketClient(new URI("ws://111.231.146.57:20086/ws?token="+App.token),new Draft_17()) {
+
+        String wsUrl = PropertiesUtil.getProperty("wsUrl");
+
+        client = new WebSocketClient(new URI(wsUrl+App.token),new Draft_17()) {
 
             @Override
             public void onOpen(ServerHandshake arg0) {
