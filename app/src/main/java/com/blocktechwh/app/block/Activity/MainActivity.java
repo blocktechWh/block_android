@@ -26,6 +26,7 @@ import com.blocktechwh.app.block.Fragment.HomeFragment;
 import com.blocktechwh.app.block.Fragment.UserFragment;
 import com.blocktechwh.app.block.R;
 import com.blocktechwh.app.block.Service.DownloadService;
+import com.blocktechwh.app.block.Service.NotifyService;
 import com.blocktechwh.app.block.Utils.CallBack;
 import com.blocktechwh.app.block.Utils.HttpClient;
 import com.blocktechwh.app.block.Utils.PreferencesUtils;
@@ -56,15 +57,16 @@ public class MainActivity extends BaseActivity{
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
+        getData();
         //打开服务
-        //startService(new Intent(MainActivity.this,NotifyService.class));
+        startService(new Intent(MainActivity.this,NotifyService.class));
 
         //打开下载更新服务
         Intent intent = new Intent(MainActivity.this, DownloadService.class);
         intent.putExtra("apkUrl", "http://blocktechwh.com/bk.apk");
+        intent.putExtra("jsonUrl", "http://blocktechwh.com/json");
         startService(intent);
-        getData();
+
     }
     // 在onKeyDown(int keyCode, KeyEvent event)方法中调用此方法
     @Override

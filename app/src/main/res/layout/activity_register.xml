@@ -51,11 +51,12 @@
         android:layout_below="@+id/LinearLayout1"
         android:background="@color/gray"
         android:orientation="vertical">
+
         <EditText
             android:id="@+id/id_edit_code"
-            android:layout_marginTop="8dp"
             android:layout_width="match_parent"
             android:layout_height="50dp"
+            android:layout_marginTop="8dp"
             android:background="@color/white"
             android:ems="10"
             android:hint="输入验证码"
@@ -63,11 +64,12 @@
             android:paddingLeft="10dp"
             android:textSize="14sp"
             tools:ignore="RtlSymmetry" />
+
         <EditText
             android:id="@+id/id_edit_password"
-            android:layout_marginTop="8dp"
             android:layout_width="match_parent"
             android:layout_height="50dp"
+            android:layout_marginTop="8dp"
             android:background="@color/white"
             android:ems="10"
             android:hint="输入密码"
@@ -75,6 +77,20 @@
             android:paddingLeft="10dp"
             android:textSize="14sp"
             tools:ignore="RtlSymmetry" />
+
+        <EditText
+            android:id="@+id/id_edit_password2"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_marginTop="8dp"
+            android:background="@color/white"
+            android:ems="10"
+            android:hint="输入确认密码"
+            android:inputType="textPassword"
+            android:paddingLeft="10dp"
+            android:textSize="14sp"
+            tools:ignore="RtlSymmetry" />
+
     </LinearLayout>
 
     <LinearLayout

@@ -111,8 +111,9 @@ public class ForgetActivity extends TitleActivity {
                 Toast.makeText(App.getContext(),"请输入新密码",Toast.LENGTH_SHORT).show();
                 return;
             }
-            if(!passWord.matches( tel_regex_pwd )){
-                Toast.makeText(App.getContext(),"密码由8-20字母和数字组成",Toast.LENGTH_SHORT).show();
+
+            if(passWord.length()<6||passWord.length()>20){
+                Toast.makeText(App.getContext(), "密码长度为6-20位", Toast.LENGTH_SHORT).show();
                 return;
             }
 

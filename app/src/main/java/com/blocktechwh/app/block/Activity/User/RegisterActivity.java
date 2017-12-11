@@ -23,7 +23,8 @@ public class RegisterActivity extends TitleActivity {
 
     private EditText editPhone;
     private EditText editCode;
-    private EditText editPassword;
+    private EditText id_edit_password;
+    private EditText id_edit_password2;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,7 +38,8 @@ public class RegisterActivity extends TitleActivity {
     private void initView() {
         editPhone = (EditText)findViewById(R.id.id_edit_phone);
         editCode = (EditText)findViewById(R.id.id_edit_code);
-        editPassword = (EditText)findViewById(R.id.id_edit_password);
+        id_edit_password = (EditText)findViewById(R.id.id_edit_password);
+        id_edit_password2 = (EditText)findViewById(R.id.id_edit_password2);
 
         ((Button)findViewById(R.id.id_button_send)).setOnClickListener(mSendVerifyCodeClick);
         ((Button)findViewById(R.id.id_button_submit)).setOnClickListener(mRegisterClick);
@@ -81,7 +83,8 @@ public class RegisterActivity extends TitleActivity {
     private void mRegister(){
         final String phone = editPhone.getText().toString();
         String code = editCode.getText().toString();
-        String password = editPassword.getText().toString();
+        String password = id_edit_password.getText().toString();
+        String password1 = id_edit_password2.getText().toString();
 
         String telRegex = "[1][34578]\\d{9}" ;
         String tel_regex_pwd = "[a-zA-Z0-9]{8,20}" ;
@@ -95,8 +98,14 @@ public class RegisterActivity extends TitleActivity {
             Toast.makeText(App.getContext(), "验证码不能为空", Toast.LENGTH_SHORT).show();
         }else if("".equals(password)){
             Toast.makeText(App.getContext(), "密码不能为空", Toast.LENGTH_SHORT).show();
-        }else if(!password.matches( tel_regex_pwd )){
-            Toast.makeText(App.getContext(), "密码由8-20字母和数字组成", Toast.LENGTH_SHORT).show();
+        }else if(password.length()<6||password.length()>20){
+            Toast.makeText(App.getContext(), "密码长度为6-20位", Toast.LENGTH_SHORT).show();
+
+        }else if(password1.equals("")){
+            Toast.makeText(App.getContext(), "请输入确认密码", Toast.LENGTH_SHORT).show();
+
+        }else if(!password1.equals(password)){
+            Toast.makeText(App.getContext(), "两次密码输入不一致", Toast.LENGTH_SHORT).show();
 
         }else {
             JSONObject json = new JSONObject();

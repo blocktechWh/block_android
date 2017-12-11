@@ -143,7 +143,9 @@ public class App extends Application{
 //        }
 //        System.out.println("打开了");
 //        send("hello world".getBytes("utf-8"));
-        client.send("hello world");
+
+        //Timer timer = new Timer();
+        client.send("{type:ping,fromName:"+App.token+"}");
 
 
     }

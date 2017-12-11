@@ -1,11 +1,10 @@
 package com.blocktechwh.app.block.Activity.Contact;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-import android.graphics.drawable.Drawable;
-import android.net.Uri;
 import android.os.Bundle;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.view.KeyEvent;
 import android.view.View;
@@ -14,6 +13,7 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.alibaba.fastjson.JSONObject;
 import com.blocktechwh.app.block.Bean.User;
@@ -23,11 +23,6 @@ import com.blocktechwh.app.block.CustomView.TitleActivity;
 import com.blocktechwh.app.block.R;
 import com.blocktechwh.app.block.Utils.CallBack;
 import com.blocktechwh.app.block.Utils.HttpClient;
-
-import java.io.IOException;
-import java.io.InputStream;
-import java.net.HttpURLConnection;
-import java.net.URL;
 
 /**
  * Created by eagune on 2017/11/7.
@@ -47,7 +42,22 @@ public class AddNewContactActivity extends TitleActivity {
         ((LinearLayout)findViewById(R.id.id_add_by_phone)).setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(AddNewContactActivity.this, AddContactByPhoneActivity.class));
+                final EditText inputServer = new EditText(AddNewContactActivity.this);
+                AlertDialog.Builder builder = new AlertDialog.Builder(AddNewContactActivity.this);
+                 builder.setTitle("搜索联系人").setIcon(android.R.drawable.ic_dialog_info).setView(inputServer).setNegativeButton("Cancel", null);
+                builder.setPositiveButton("查找", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int which) {
+                         inputServer.getText().toString();
+                    }
+                });
+
+                builder.setNegativeButton("取消", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int which) {
+                        inputServer.getText().toString();
+                    }
+                });
+            builder.show();
+                //startActivity(new Intent(AddNewContactActivity.this, AddContactByPhoneActivity.class));
             }
         });
     }
@@ -96,6 +106,14 @@ public class AddNewContactActivity extends TitleActivity {
 
         private void queryUser(){
             String phone = textInput.getText().toString();
+            if(!phone.matches( "[1][34578]\\d{9}" )){
+                Toast.makeText(App.getContext(),"无效手机号",Toast.LENGTH_SHORT).show();
+                return;
+            }
+            if(phone.equals(App.userInfo.getPhone())){
+                Toast.makeText(App.getContext(),"不允许添加本人手机号",Toast.LENGTH_SHORT).show();
+                return;
+            }
             String url = Urls.SearchContact + phone + '/';
             HttpClient.get(this, url, null, new CallBack<JSONObject>() {
                 @Override

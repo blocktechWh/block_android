@@ -25,6 +25,7 @@
             </intent-filter>
         </receiver>
         <service android:name=".Service.NotifyService"></service><!-- 注册NotifyService这个Service --> 
+        <service android:name=".Service.DownloadService"></service>
         <activity
             android:name=".Activity.SplashActivity"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar.FullScreen">
