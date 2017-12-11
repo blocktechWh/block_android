@@ -1,10 +1,8 @@
 package com.blocktechwh.app.block.Activity.Contact;
 
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.os.Bundle;
-import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.view.KeyEvent;
 import android.view.View;
@@ -42,22 +40,22 @@ public class AddNewContactActivity extends TitleActivity {
         ((LinearLayout)findViewById(R.id.id_add_by_phone)).setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View view) {
-                final EditText inputServer = new EditText(AddNewContactActivity.this);
-                AlertDialog.Builder builder = new AlertDialog.Builder(AddNewContactActivity.this);
-                 builder.setTitle("搜索联系人").setIcon(android.R.drawable.ic_dialog_info).setView(inputServer).setNegativeButton("Cancel", null);
-                builder.setPositiveButton("查找", new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int which) {
-                         inputServer.getText().toString();
-                    }
-                });
-
-                builder.setNegativeButton("取消", new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int which) {
-                        inputServer.getText().toString();
-                    }
-                });
-            builder.show();
-                //startActivity(new Intent(AddNewContactActivity.this, AddContactByPhoneActivity.class));
+//                final EditText inputServer = new EditText(AddNewContactActivity.this);
+//                AlertDialog.Builder builder = new AlertDialog.Builder(AddNewContactActivity.this);
+//                 builder.setTitle("搜索联系人").setIcon(android.R.drawable.ic_dialog_info).setView(inputServer).setNegativeButton("Cancel", null);
+//                builder.setPositiveButton("查找", new DialogInterface.OnClickListener() {
+//                    public void onClick(DialogInterface dialog, int which) {
+//                         inputServer.getText().toString();
+//                    }
+//                });
+//
+//                builder.setNegativeButton("取消", new DialogInterface.OnClickListener() {
+//                    public void onClick(DialogInterface dialog, int which) {
+//                        inputServer.getText().toString();
+//                    }
+//                });
+//            builder.show();
+                startActivity(new Intent(AddNewContactActivity.this, AddContactByPhoneActivity.class));
             }
         });
     }
