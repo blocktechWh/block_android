@@ -104,10 +104,11 @@
                 android:paddingStart="@dimen/padding_left">
 
                 <RelativeLayout
+                    android:id="@+id/rl_limit"
                     android:layout_width="match_parent"
                     android:layout_height="45dp"
                     android:layout_weight="1"
-                    android:background="@drawable/lines_bg2"
+                    android:background="@drawable/button_selector"
                     android:gravity="center_vertical">
 
                     <ImageView
@@ -138,9 +139,9 @@
                         android:layout_height="match_parent"
                         android:layout_alignParentEnd="true"
                         android:layout_alignParentRight="true"
-                        android:layout_centerVertical="true"
-                        android:layout_marginEnd="20dp"
-                        android:layout_marginRight="20dp"
+                        android:layout_alignParentTop="true"
+                        android:layout_marginEnd="18dp"
+                        android:layout_marginRight="18dp"
                         android:layout_weight="1"
                         android:text="多选"
                         android:textOff="单选"
@@ -152,7 +153,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="45dp"
                     android:layout_weight="1"
-                    android:background="@drawable/lines_bg2"
+                    android:background="@drawable/button_selector"
                     android:gravity="center_vertical">
 
                     <ImageView
@@ -262,10 +263,11 @@
                 </RelativeLayout>
 
                 <RelativeLayout
+                    android:id="@+id/rl_no_see"
                     android:layout_width="match_parent"
                     android:layout_height="45dp"
                     android:layout_weight="1"
-                    android:background="@drawable/lines_bg2"
+                    android:background="@drawable/button_selector"
                     android:gravity="center_vertical">
 
                     <ImageView
@@ -300,7 +302,7 @@
                         android:layout_marginEnd="20dp"
                         android:layout_marginRight="20dp"
                         android:layout_weight="1"
-                        android:text="关"
+                        android:text="开"
                         android:textOff="关"
                         android:textOn="开" />
 
@@ -399,11 +401,12 @@
             </LinearLayout>
 
             <RelativeLayout
+                android:id="@+id/rl_fill"
                 android:layout_width="match_parent"
                 android:layout_height="40dp"
                 android:layout_marginTop="@dimen/margin_top"
                 android:layout_weight="1"
-                android:background="@drawable/lines_bg2"
+                android:background="@drawable/button_selector"
                 android:gravity="center_vertical"
                 android:paddingLeft="@dimen/padding_left">
 
@@ -439,17 +442,18 @@
                     android:layout_marginEnd="18dp"
                     android:layout_marginRight="18dp"
                     android:layout_weight="1"
-                    android:text="开"
+                    android:text="关"
                     android:textOff="关"
                     android:textOn="开" />
 
             </RelativeLayout>
 
             <RelativeLayout
+                android:id="@+id/rl_reward"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_marginTop="@dimen/margin_top"
-                android:background="@color/white"
+                android:background="@drawable/button_selector1"
                 android:gravity="center_vertical"
                 android:paddingBottom="5dp"
                 android:paddingEnd="@dimen/padding_right"

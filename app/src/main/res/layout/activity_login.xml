@@ -47,8 +47,10 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
         android:autoLink="all"
+        android:padding="5dp"
         android:text="@string/forget"
-        android:textSize="13sp" />
+        android:textColor="@color/btnColor"
+        android:textSize="14sp" />
 
     <Button
         android:id="@+id/id_button_login"
@@ -66,7 +68,9 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="18dp"
         android:autoLink="all"
+        android:padding="5dp"
         android:text="@string/newUser"
+        android:textColor="@color/btnColor"
         android:textSize="15sp" />
 
     <TextView

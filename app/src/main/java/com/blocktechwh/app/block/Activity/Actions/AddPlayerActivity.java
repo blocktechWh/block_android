@@ -11,14 +11,12 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.blocktechwh.app.block.Bean.VoteInfo;
 import com.blocktechwh.app.block.Common.App;
 import com.blocktechwh.app.block.CustomView.TitleActivity;
 import com.blocktechwh.app.block.R;
@@ -47,7 +45,7 @@ public class AddPlayerActivity extends TitleActivity {
     private TextView tvToAddAction;
     private List<Integer>ids=new ArrayList<Integer>();
     private List<Map<String,Object>> mDatas = new ArrayList<Map<String,Object>>();
-    private List<String> imgUrls = VoteInfo.getImgUrls();
+    private List<String> imgUrls = App.voteInfo.getImgUrls();
     private EditText et_action_input;
     private Switch sIfSingle;
     private Switch sIfNoSee;
@@ -55,7 +53,7 @@ public class AddPlayerActivity extends TitleActivity {
     private boolean isAnonymous=true;
     private LinearLayout ll_option_add_button;
     private Bundle bundle;
-    private ImageButton titlebar_button_back;
+    private LinearLayout titlebar_button_back;
     private TextView tv_clear;
 
     @Override
@@ -70,7 +68,7 @@ public class AddPlayerActivity extends TitleActivity {
             id=bundle.getInt("id");
             imgUrl=bundle.getString("imgUrl");
             imgUrls.add(imgUrl);
-            VoteInfo.setImgUrls(imgUrls);
+            App.voteInfo.setImgUrls(imgUrls);
 
             imgUrl = imgUrl.toString();
             //Toast.makeText(AddPlayerActivity.this,"imgUrl="+imgUrl,Toast.LENGTH_SHORT).show();
@@ -110,9 +108,9 @@ public class AddPlayerActivity extends TitleActivity {
     private void initData(){
 
         //从VoteInfo中拿到mDatas
-        mDatas=VoteInfo.getOptions();
+        mDatas=App.voteInfo.getOptions();
         tv_clear=(TextView) findViewById(R.id.tv_clear);
-        titlebar_button_back=(ImageButton)findViewById(R.id.titlebar_button_back);
+        titlebar_button_back=(LinearLayout)findViewById(R.id.titlebar_button_back);
         ll_option_add_button=(LinearLayout) findViewById(R.id.ll_option_add_button);
         et_action_input=(EditText) findViewById(R.id.et_action_input);
         et_action_input.setText(PreferencesUtils.getString(this,"optionName",""));
@@ -210,10 +208,10 @@ public class AddPlayerActivity extends TitleActivity {
                     ll_player_img.setVisibility(View.GONE);
 
                     //从checkedRadioButtonList删除所清除的对象
-                    List<Integer>checkedRadioButtonList=VoteInfo.getCheckedRadioButtonList();
+                    List<Integer>checkedRadioButtonList=App.voteInfo.getCheckedRadioButtonList();
                     System.out.println("checkedRadioButtonList"+checkedRadioButtonList);
                     checkedRadioButtonList.remove(checkedRadioButtonList.size()-1);
-                    VoteInfo.setCheckedRadioButtonList(checkedRadioButtonList);
+                    App.voteInfo.setCheckedRadioButtonList(checkedRadioButtonList);
                 }
 
 
@@ -231,7 +229,7 @@ public class AddPlayerActivity extends TitleActivity {
                     Toast.makeText(AddPlayerActivity.this,"还未选择受益人",Toast.LENGTH_SHORT).show();
 
                 }else{
-                    mDatas=VoteInfo.getOptions();
+                    mDatas=App.voteInfo.getOptions();
                     ll_option_add_button.setVisibility(View.VISIBLE);
                     ll_player_img.setVisibility(View.GONE);
 
@@ -242,7 +240,7 @@ public class AddPlayerActivity extends TitleActivity {
                     mDatas.add(map);
 
                     //将活动信息存入VoteInfo
-                    VoteInfo.setOptions(mDatas);
+                    App.voteInfo.setOptions(mDatas);
 
                     //重新配置列表
                     mAdapter.notifyDataSetChanged();
@@ -274,7 +272,7 @@ public class AddPlayerActivity extends TitleActivity {
                     map.put("suppler",id);
                     mDatas.add(map);
                     //将活动信息存入VoteInfo
-                    VoteInfo.setOptions(mDatas);
+                    App.voteInfo.setOptions(mDatas);
                 }else if(et_action_input.getText().toString().trim().equals("")&&ll_player_img.getVisibility()==View.VISIBLE){
                     Toast.makeText(AddPlayerActivity.this,"还未填写投票项描述",Toast.LENGTH_SHORT).show();
                     return;

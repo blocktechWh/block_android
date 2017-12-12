@@ -10,7 +10,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
@@ -18,7 +17,6 @@ import android.widget.TextView;
 
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
-import com.blocktechwh.app.block.Bean.VoteInfo;
 import com.blocktechwh.app.block.Common.App;
 import com.blocktechwh.app.block.Common.Urls;
 import com.blocktechwh.app.block.CustomView.TitleActivity;
@@ -43,7 +41,7 @@ public class VotesListActivity extends TitleActivity {
     private ListView ll_option_view;
     private int voteId=2;
     private boolean isRaise;
-    private ImageButton titlebar_button_back;
+    private LinearLayout titlebar_button_back;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -80,7 +78,7 @@ public class VotesListActivity extends TitleActivity {
     }
 
     private void initView(){
-        titlebar_button_back=(ImageButton)findViewById(R.id.titlebar_button_back);
+        titlebar_button_back=(LinearLayout)findViewById(R.id.titlebar_button_back);
 
         mRecyclerView = (RecyclerView)findViewById(R.id.id_votes_recycler);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(App.getContext()));
@@ -235,23 +233,23 @@ public class VotesListActivity extends TitleActivity {
     }
 
     private void clearVoteInfo(){
-        VoteInfo.setIsAnonymous("true");
-        VoteInfo.setBitmap(null);
-        VoteInfo.getVoteRewardRule().clear();
-        VoteInfo.setIsReward("false");
-        VoteInfo.getPlayerList().clear();
-        VoteInfo.setVoteExpireTime("");
-        VoteInfo.getVoteTarget().clear();
-        VoteInfo.getImgUrls().clear();
-        VoteInfo.setVoteTheme("");
-        VoteInfo.getOptions().clear();
-        VoteInfo.setIsLimited("false");
-        VoteInfo.getVoterTargetList().clear();
-        VoteInfo.setIsRaise("true");
-        VoteInfo.getCheckedRadioButtonList().clear();
-        VoteInfo.setVoteExpireTime("");
-        VoteInfo.getCheckedPositionList().clear();
-        VoteInfo.setIfSetReward(false);
+        App.voteInfo.setIsAnonymous("true");
+        App.voteInfo.setBitmap(null);
+        App.voteInfo.getVoteRewardRule().clear();
+        App.voteInfo.setIsReward("false");
+        App.voteInfo.getPlayerList().clear();
+        App.voteInfo.setVoteExpireTime("");
+        App.voteInfo.getVoteTarget().clear();
+        App.voteInfo.getImgUrls().clear();
+        App.voteInfo.setVoteTheme("");
+        App.voteInfo.getOptions().clear();
+        App.voteInfo.setIsLimited("false");
+        App.voteInfo.getVoterTargetList().clear();
+        App.voteInfo.setIsRaise("true");
+        App.voteInfo.getCheckedRadioButtonList().clear();
+        App.voteInfo.setVoteExpireTime("");
+        App.voteInfo.getCheckedPositionList().clear();
+        App.voteInfo.setIfSetReward(false);
     }
 
 }

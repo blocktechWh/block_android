@@ -14,13 +14,12 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
-import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.alibaba.fastjson.JSONArray;
-import com.blocktechwh.app.block.Bean.VoteInfo;
 import com.blocktechwh.app.block.Common.App;
 import com.blocktechwh.app.block.Common.Urls;
 import com.blocktechwh.app.block.CustomView.TitleActivity;
@@ -44,7 +43,7 @@ public class VotersSelectListActivity extends TitleActivity {
     private static List<Map<String,Object>>playerList;
     private List<Integer>votersTargetList;
     private List<Integer>checkedPositionList;
-    private ImageButton titlebar_button_back;
+    private LinearLayout titlebar_button_back;
 
 
 
@@ -92,7 +91,7 @@ public class VotersSelectListActivity extends TitleActivity {
         mRecyclerView = (RecyclerView)findViewById(R.id.id_players_recycler);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(App.getContext()));
         mRecyclerView.setAdapter(mAdapter = new PlayerListAdapter());
-        titlebar_button_back=(ImageButton)findViewById(R.id.titlebar_button_back);
+        titlebar_button_back=(LinearLayout)findViewById(R.id.titlebar_button_back);
 
     }
 
@@ -119,8 +118,8 @@ public class VotersSelectListActivity extends TitleActivity {
             });
 
             //去掉已被选择的项
-            for(int i=0;i<VoteInfo.getCheckedPositionList().size();i++){
-                if(VoteInfo.getCheckedPositionList().get(i)==position){
+            for(int i=0;i<App.voteInfo.getCheckedPositionList().size();i++){
+                if(App.voteInfo.getCheckedPositionList().get(i)==position){
                     holder.rl_radio_contaner.setVisibility(View.GONE);
                 }
             }
@@ -143,7 +142,7 @@ public class VotersSelectListActivity extends TitleActivity {
                                     votersTargetList.remove(votersTargetList.size()-1);
                                     checkedPositionList.remove(checkedPositionList.size()-1);
                                     playerList.remove(playerList.size()-1);
-                                    //VoteInfo.getVoteTarget().remove(VoteInfo.getVoteTarget().size()-1);
+                                    //App.voteInfo.getVoteTarget().remove(App.voteInfo.getVoteTarget().size()-1);
                                 }
                             }
                         });
@@ -195,25 +194,25 @@ public class VotersSelectListActivity extends TitleActivity {
         public void onClick(View view){
             if(playerList.size()>0){
                 //选取投票者渲染列表
-                List<Map<String,Object>>pList=VoteInfo.getPlayerList();
+                List<Map<String,Object>>pList=App.voteInfo.getPlayerList();
                 for(int i=0;i<playerList.size();i++){
                     pList.add(playerList.get(i));
                 }
-                VoteInfo.setPlayerList(pList);
+                App.voteInfo.setPlayerList(pList);
 
                 //更新选取checkBox列表
-                List<Integer>cpList=VoteInfo.getCheckedPositionList();
+                List<Integer>cpList=App.voteInfo.getCheckedPositionList();
                 for(int i=0;i<checkedPositionList.size();i++){
                     cpList.add(checkedPositionList.get(i));
                 }
-                VoteInfo.setCheckedPositionList(cpList);
+                App.voteInfo.setCheckedPositionList(cpList);
 
                 //更新投票者列表
-                List<Integer>vtList=VoteInfo.getVoteTarget();
+                List<Integer>vtList=App.voteInfo.getVoteTarget();
                 for(int j=0;j<votersTargetList.size();j++){
                     vtList.add(votersTargetList.get(j));
                 }
-                VoteInfo.setVoteTarget(vtList);
+                App.voteInfo.setVoteTarget(vtList);
             }
 
 

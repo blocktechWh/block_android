@@ -57,7 +57,7 @@ public class VotedDetailActivity extends TitleActivity {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_voted_detail);
-        initTitle("投票列表");
+        initTitle("投票详情");
         Bundle bundle=this.getIntent().getExtras();
         voteId=bundle.getInt("voteId");
         initData();

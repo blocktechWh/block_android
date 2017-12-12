@@ -93,6 +93,7 @@ public class HttpClient {
     public static void put(Object tag, String url, String json, final CallBack callBack) {
         System.out.println("urlkizi = " + url);
         RequestBody requestBody = RequestBody.create(JSON, json);
+        System.out.println("url = " + url);
 
         String Cookie_token = PreferencesUtils.getString(App.getContext(), "Cookie_token", UUID.randomUUID().toString());
 
@@ -119,6 +120,7 @@ public class HttpClient {
         RequestBody requestBody = RequestBody.create(JSON, json);
 
         String Cookie_token = PreferencesUtils.getString(App.getContext(), "Cookie_token", UUID.randomUUID().toString());
+        System.out.println("url = " + url);
 
         Request request = new Request.Builder()
                 .addHeader("Cookie_token", Cookie_token)
@@ -146,7 +148,7 @@ public class HttpClient {
                 url += s + "=" + map.get(s) + "&";
             }
         }
-        System.out.println("urlkizi = " + url);
+        System.out.println("url = " + url);
 
         String Cookie_token = PreferencesUtils.getString(App.getContext(), "Cookie_token", UUID.randomUUID().toString());
 

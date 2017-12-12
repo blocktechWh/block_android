@@ -209,6 +209,8 @@
                     android:layout_marginStart="38dp"
                     android:autoLink="all"
                     android:gravity="center_vertical"
+                    android:paddingBottom="20dp"
+                    android:paddingTop="20dp"
                     android:text="点这里加注哦"
                     android:textColor="@color/btnColor" />
 

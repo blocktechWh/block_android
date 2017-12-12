@@ -19,7 +19,6 @@ import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.blocktechwh.app.block.Bean.VoteInfo;
 import com.blocktechwh.app.block.Common.App;
 import com.blocktechwh.app.block.CustomView.TitleActivity;
 import com.blocktechwh.app.block.R;
@@ -67,12 +66,13 @@ public class SetRewardActivity extends TitleActivity {
     }
 
     private void initData(){
+
         tv_icon_add=(ImageView) findViewById(R.id.tv_icon_add);
         reward_input_container=(RelativeLayout) findViewById(R.id.reward_input_container);
         btn_add_reward_sure=(Button) findViewById(R.id.btn_add_reward_sure);
         et_reward=(EditText) findViewById(R.id.et_reward);
         sIfReward=(Switch) findViewById(R.id.sIfReward);
-        sIfReward.setChecked(Boolean.parseBoolean(VoteInfo.getIsReward()));
+        sIfReward.setChecked(true);
         ll_rewards_container=(LinearLayout) findViewById(R.id.ll_rewards_container);
         tv_reward_add_btn=(TextView) findViewById(R.id.tv_reward_add_btn);
         tv_rank_text=(TextView) findViewById(R.id.tv_rank_text);
@@ -95,7 +95,7 @@ public class SetRewardActivity extends TitleActivity {
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 if(!isChecked){
                     sIfReward.setText("关");
-                    VoteInfo.setIfSetReward(false);
+                    App.voteInfo.setIfSetReward(false);
                     btn_add_reward_sure.setOnClickListener(null);
                     btn_add_reward_sure.setBackgroundColor(Color.argb(255,120,120,120));
 //                    Intent intent = new Intent(SetRewardActivity.this,StartActivity.class);
@@ -103,13 +103,13 @@ public class SetRewardActivity extends TitleActivity {
 //                    startActivity(intent);
                 }else{
                     sIfReward.setText("开");
-                    if(VoteInfo.getVoteRewardRule().size()>0){
-                        VoteInfo.setIfSetReward(true);
+                    if(App.voteInfo.getVoteRewardRule().size()>0){
+                        App.voteInfo.setIfSetReward(true);
                     }
                     btn_add_reward_sure.setBackgroundColor(Color.argb(255,23,144,225));
                     btn_add_reward_sure.setOnClickListener(addRewardOptions);//点击提交按钮确认添加奖励
                 }
-                VoteInfo.setIsReward(isReward);
+                App.voteInfo.setIsReward(isReward);
 
             }
         });
@@ -130,13 +130,13 @@ public class SetRewardActivity extends TitleActivity {
 
                 //计算已添加奖励总比例并判断
                 hasRewardAmountPercent+=Double.parseDouble(et_reward_percent.getText().toString());
-                if(rewardList.size()+1<VoteInfo.getOptions().size()&&100-hasRewardAmountPercent==0){
+                if(rewardList.size()+1<App.voteInfo.getOptions().size()&&100-hasRewardAmountPercent==0){
                     Toast.makeText(SetRewardActivity.this,"奖励金额配置数小于投票项目数",Toast.LENGTH_SHORT).show();
 
-                }else if(rewardList.size()+1==VoteInfo.getOptions().size()&&100-hasRewardAmountPercent>0){
+                }else if(rewardList.size()+1==App.voteInfo.getOptions().size()&&100-hasRewardAmountPercent>0){
                     Toast.makeText(SetRewardActivity.this,"奖励金额配置未达到100%",Toast.LENGTH_SHORT).show();
 
-                }else if(rewardList.size()+1==VoteInfo.getOptions().size()&&100-hasRewardAmountPercent<0){
+                }else if(rewardList.size()+1==App.voteInfo.getOptions().size()&&100-hasRewardAmountPercent<0){
                     Toast.makeText(SetRewardActivity.this,"奖励金额配置超过100%",Toast.LENGTH_SHORT).show();
 
                 }else if(100-hasRewardAmountPercent<0){
@@ -163,8 +163,8 @@ public class SetRewardActivity extends TitleActivity {
                     ++rank_index;
                     et_reward_percent.setText((100-hasRewardAmountPercent)+"");
                     tv_reward_amount.setText(rewardTotalAmount*(100.0-hasRewardAmountPercent)/100+"");
-                    VoteInfo.setVoteRewardRule(rewardList);
-                    //Toast.makeText(SetRewardActivity.this,VoteInfo.getVoteRewardRule().toString(),Toast.LENGTH_SHORT).show();
+                    App.voteInfo.setVoteRewardRule(rewardList);
+                    //Toast.makeText(SetRewardActivity.this,App.voteInfo.getVoteRewardRule().toString(),Toast.LENGTH_SHORT).show();
 
                 }else if(100-hasRewardAmountPercent==0){
                     //Toast.makeText(SetRewardActivity.this,"奖励金额已配置完",Toast.LENGTH_SHORT).show();
@@ -185,7 +185,7 @@ public class SetRewardActivity extends TitleActivity {
                     //添加数据到list
                     rewardList.add(Double.parseDouble(et_reward_percent.getText().toString())*rewardTotalAmount/100);
 
-                    VoteInfo.setVoteRewardRule(rewardList);
+                    App.voteInfo.setVoteRewardRule(rewardList);
 
                     //隐藏
                     reward_input_container.setVisibility(View.GONE);
@@ -210,8 +210,8 @@ public class SetRewardActivity extends TitleActivity {
 
         @Override
         public void onBindViewHolder(final MyViewHolder holder, int position){
-            holder.tv_option_text.setText((position+1)+"."+VoteInfo.getOptions().get(position).get("item").toString());
-            String url = VoteInfo.getImgUrls().get(position);
+            holder.tv_option_text.setText((position+1)+"."+App.voteInfo.getOptions().get(position).get("item").toString());
+            String url = App.voteInfo.getImgUrls().get(position);
             HttpClient.getImage(this, url, new CallBack<Bitmap>() {
                 @Override
                 public void onSuccess(final Bitmap bmp) {
@@ -223,7 +223,7 @@ public class SetRewardActivity extends TitleActivity {
 
         @Override
         public int getItemCount(){
-            return VoteInfo.getOptions().size();
+            return App.voteInfo.getOptions().size();
         }
 
         class MyViewHolder extends RecyclerView.ViewHolder{
@@ -245,7 +245,7 @@ public class SetRewardActivity extends TitleActivity {
         @Override
         public void onClick(View view) {
             rewardTotalAmount=Double.parseDouble(et_reward.getText().toString());
-            VoteInfo.setVoteFee(rewardTotalAmount);
+            App.voteInfo.setVoteFee(rewardTotalAmount);
 
             Double totalAmount=0.0;
             Double hasRewardAmountPercent=0.0;
@@ -259,13 +259,13 @@ public class SetRewardActivity extends TitleActivity {
                 hasRewardAmountPercent+=Double.parseDouble(et_reward_percent.getText().toString());
             }
 
-            if(rewardList.size()+1!=VoteInfo.getOptions().size()&&reward_input_container.isShown()){
+            if(rewardList.size()+1!=App.voteInfo.getOptions().size()&&reward_input_container.isShown()){
                 Toast.makeText(SetRewardActivity.this,"奖励金额配置数与投票项数量不一致",Toast.LENGTH_SHORT).show();
 
-            } else if(rewardList.size()+1==VoteInfo.getOptions().size()&&100-hasRewardAmountPercent>0){
+            } else if(rewardList.size()+1==App.voteInfo.getOptions().size()&&100-hasRewardAmountPercent>0){
                 Toast.makeText(SetRewardActivity.this,"奖励金额配置未达到100%",Toast.LENGTH_SHORT).show();
 
-            }else if(rewardList.size()+1==VoteInfo.getOptions().size()&&100-hasRewardAmountPercent<0){
+            }else if(rewardList.size()+1==App.voteInfo.getOptions().size()&&100-hasRewardAmountPercent<0){
                 Toast.makeText(SetRewardActivity.this,"奖励金额配置超过100%",Toast.LENGTH_SHORT).show();
 
             }else if(100-hasRewardAmountPercent<0){
@@ -275,7 +275,7 @@ public class SetRewardActivity extends TitleActivity {
 
                 //添加数据到list
                 Toast.makeText(SetRewardActivity.this,"奖励金额配置还未完成，请继续配置",Toast.LENGTH_SHORT).show();
-                VoteInfo.setVoteRewardRule(rewardList);
+                App.voteInfo.setVoteRewardRule(rewardList);
                 return;
 
             }else if(100-hasRewardAmountPercent==0){
@@ -283,9 +283,9 @@ public class SetRewardActivity extends TitleActivity {
                 if(reward_input_container.isShown()){
                     rewardList.add(Double.parseDouble(et_reward_percent.getText().toString())*rewardTotalAmount/100);
                 }
-                VoteInfo.setVoteRewardRule(rewardList);
 
-                VoteInfo.setIfSetReward(true);
+                App.voteInfo.setVoteRewardRule(rewardList);
+                App.voteInfo.setIfSetReward(true);
                 Intent intent = new Intent(SetRewardActivity.this,StartActivity.class);
                 intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_EXCLUDE_FROM_RECENTS);
                 startActivity(intent);

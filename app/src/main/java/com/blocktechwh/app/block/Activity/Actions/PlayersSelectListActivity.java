@@ -13,7 +13,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.CompoundButton;
-import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RadioButton;
@@ -24,7 +23,6 @@ import android.widget.Toast;
 
 import com.alibaba.fastjson.JSONArray;
 import com.blocktechwh.app.block.Bean.User;
-import com.blocktechwh.app.block.Bean.VoteInfo;
 import com.blocktechwh.app.block.Common.App;
 import com.blocktechwh.app.block.Common.Urls;
 import com.blocktechwh.app.block.CustomView.TitleActivity;
@@ -47,7 +45,7 @@ public class PlayersSelectListActivity extends TitleActivity {
     private Button playerAddSure;
     private String img;
     private int checkedPosition;
-    private ImageButton titlebar_button_back;
+    private LinearLayout titlebar_button_back;
     private LinearLayout ll_no_contact_container;
     private Button bt_back;
     private ScrollView scr_contact_container;
@@ -85,7 +83,7 @@ public class PlayersSelectListActivity extends TitleActivity {
         scr_contact_container=(ScrollView) findViewById(R.id.scr_contact_container);
         ll_no_contact_container=(LinearLayout) findViewById(R.id.ll_no_contact_container);
         bt_back=(Button) findViewById(R.id.bt_back);
-        titlebar_button_back=(ImageButton)findViewById(R.id.titlebar_button_back);
+        titlebar_button_back=(LinearLayout)findViewById(R.id.titlebar_button_back);
         mDatas= new ArrayList<User>();
         checkdeArray=new ArrayList<Integer>();
         playerAddSure=(Button) findViewById(R.id.btn_add_sure);
@@ -133,8 +131,8 @@ public class PlayersSelectListActivity extends TitleActivity {
 //            }
 
             //去掉已被选择的项
-            for(int i=0;i<VoteInfo.getCheckedRadioButtonList().size();i++){
-                if(VoteInfo.getCheckedRadioButtonList().get(i)==position){
+            for(int i=0;i<App.voteInfo.getCheckedRadioButtonList().size();i++){
+                if(App.voteInfo.getCheckedRadioButtonList().get(i)==position){
                     holder.rl_radio_contaner.setVisibility(View.GONE);
                 }
             }
@@ -212,7 +210,7 @@ public class PlayersSelectListActivity extends TitleActivity {
         public void onClick(View view){
             if(id>0){
                 System.out.println("id="+id);
-                VoteInfo.getCheckedRadioButtonList().add(checkedPosition);
+                App.voteInfo.getCheckedRadioButtonList().add(checkedPosition);
                 Bundle bundle=new Bundle();
                 bundle.putInt("id",id);
                 bundle.putString("imgUrl",img);
@@ -234,17 +232,17 @@ public class PlayersSelectListActivity extends TitleActivity {
             public void onSuccess(JSONArray data) {
                 mDatas = data.toJavaList(User.class);
 
-                System.out.println("getCheckedRadioButtonList="+VoteInfo.getCheckedRadioButtonList());
+                System.out.println("getCheckedRadioButtonList="+App.voteInfo.getCheckedRadioButtonList());
                 //去点之前选中的收益人
-                for(int i=0;i< VoteInfo.getCheckedRadioButtonList().size();i++){
-                    mAdapter.notifyItemRemoved(VoteInfo.getCheckedRadioButtonList().get(i));
+                for(int i=0;i< App.voteInfo.getCheckedRadioButtonList().size();i++){
+                    mAdapter.notifyItemRemoved(App.voteInfo.getCheckedRadioButtonList().get(i));
 
-                    //mDatas.remove(VoteInfo.getCheckedRadioButtonList().get(i));
+                    //mDatas.remove(App.voteInfo.getCheckedRadioButtonList().get(i));
                 }
                 mAdapter.notifyDataSetChanged();
 
                 //判断已选列表长度是否与好友列表长度相等
-                if(VoteInfo.getCheckedRadioButtonList().size()==mDatas.size()){
+                if(App.voteInfo.getCheckedRadioButtonList().size()==mDatas.size()){
                     ll_no_contact_container.setVisibility(View.VISIBLE);
                     scr_contact_container.setVisibility(View.GONE);
                 }else{

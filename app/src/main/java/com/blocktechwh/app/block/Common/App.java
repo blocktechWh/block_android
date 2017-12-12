@@ -33,7 +33,7 @@ public class App extends Application{
     public static String token = "";
     public static String phone = "";
     public static User userInfo;
-    public static VoteInfo voteInfo;
+    public static VoteInfo voteInfo=new VoteInfo();
     private static WebSocketClient client;
     private Handler mHandler = null;
     private boolean isBackground = true;
@@ -41,6 +41,7 @@ public class App extends Application{
     @Override
     public void onCreate() {
         super.onCreate();
+
         context=getApplicationContext();
         PreferencesUtils.putString(App.getContext(),"optionName","");//清空投票项缓存内容
         setVersionName();//设置版本号
@@ -169,9 +170,6 @@ public class App extends Application{
         return context;
     }
 
-    public static void resetVoteInfo(){
-        voteInfo=new VoteInfo();
-    }
 
 
 }

@@ -104,7 +104,7 @@ public class mBroadcastReceiver extends BroadcastReceiver {
                 params.height = 600 ;
                 alertDialog.getWindow().setAttributes(params);
 
-                img1.setOnClickListener(new View.OnClickListener() {
+                img.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
 

@@ -2,6 +2,7 @@ package com.blocktechwh.app.block.Bean;
 
 import android.graphics.Bitmap;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -10,188 +11,204 @@ import java.util.Map;
  * Created by 跳跳蛙 on 2017/11/17.
  */
 
-public class VoteInfo {
-    private static List<String>imgUrls=new ArrayList<String>();
-    private static String voteImg="";
-    private static String voteTheme="";
-    private static String isLimited="false";
-    private static String isAnonymous="true";
-    private static String isRaise="true";
-    private static String isReward="false";
-    private static String voteExpireTime="";
-    private static List<Map<String,Object>>options=new ArrayList<>();
-    private static List<Integer>voteTarget=new ArrayList<>();
-    private static List<Double>voteRewardRule=new ArrayList<>();
-    private static Double voteFee=0.0;
-    private static List<Integer>voterList=new ArrayList<>();
-    private static List<Map<String,Object>>playerList=new ArrayList<>();
-    private static List<Integer>voterTargetList=new ArrayList<>();
-    private static Bitmap bitmap=null;
-    private static List<Integer>checkedRadioButtonList=new ArrayList<>();
-    private static List<Integer>checkedPositionList=new ArrayList<>();
-    private static boolean ifSetReward=false;
+public class VoteInfo implements Serializable{
+    private  List<String>imgUrls=new ArrayList<String>();
+    private  String voteImg;
+    private  String voteTheme;
+    private  String isLimited;
+    private  String isAnonymous;
+    private  String isRaise;
+    private  String isReward;
+    private  String voteExpireTime;
+    private  List<Map<String,Object>>options;
+    private  List<Integer>voteTarget;
+    private  List<Double>voteRewardRule;
+    private  Double voteFee;
+    private  List<Integer>voterList;
+    private  List<Map<String,Object>>playerList;
+    private  List<Integer>voterTargetList;
+    private  Bitmap bitmap;
+    private  List<Integer>checkedRadioButtonList;
+    private  List<Integer>checkedPositionList;
+    private  boolean ifSetReward;
 
 
 
     public VoteInfo(){
-
+        this.isLimited="false";
+        this.isAnonymous="true";
+        this.isRaise="false";
+        this.isReward="false";
+        this.ifSetReward=false;
+        this.voteFee=0.0;
+        this.bitmap=null;
+        this.ifSetReward=false;
+        this.options=new ArrayList<>();
+        this.voteTarget=new ArrayList<>();
+        this.voteRewardRule=new ArrayList<>();
+        this.voterList=new ArrayList<>();
+        this.playerList=new ArrayList<>();
+        this.voterTargetList=new ArrayList<>();
+        this.checkedRadioButtonList=new ArrayList<>();
+        this.checkedPositionList=new ArrayList<>();
+        this.imgUrls=new ArrayList<>();
     }
 
-    public static List<String> getImgUrls() {
+    public  List<String> getImgUrls() {
         return imgUrls;
     }
 
-    public static String getVoteImg() {
+    public  String getVoteImg() {
         return voteImg;
     }
 
-    public static String getVoteTheme() {
+    public  String getVoteTheme() {
         return voteTheme;
     }
 
 
 
-    public static String getVoteExpireTime() {
+    public  String getVoteExpireTime() {
         return voteExpireTime;
     }
 
-    public static List<Map<String, Object>> getOptions() {
+    public  List<Map<String, Object>> getOptions() {
         return options;
     }
 
-    public static List<Integer> getVoteTarget() {
+    public  List<Integer> getVoteTarget() {
         return voteTarget;
     }
 
 
-    public static void setImgUrls(List<String> imgUrls) {
-        VoteInfo.imgUrls = imgUrls;
+    public  void setImgUrls(List<String> imgUrls) {
+        this.imgUrls = imgUrls;
     }
 
-    public static void setVoteImg(String voteImg) {
-        VoteInfo.voteImg = voteImg;
+    public  void setVoteImg(String voteImg) {
+        this.voteImg = voteImg;
     }
 
-    public static void setVoteTheme(String voteTheme) {
-        VoteInfo.voteTheme = voteTheme;
+    public  void setVoteTheme(String voteTheme) {
+        this.voteTheme = voteTheme;
     }
 
 
 
-    public static void setVoteExpireTime(String voteExpireTime) {
-        VoteInfo.voteExpireTime = voteExpireTime;
+    public  void setVoteExpireTime(String voteExpireTime) {
+        this.voteExpireTime = voteExpireTime;
     }
 
-    public static void setOptions(List<Map<String, Object>> options) {
-        VoteInfo.options = options;
+    public  void setOptions(List<Map<String, Object>> options) {
+        this.options = options;
     }
 
-    public static void setVoteTarget(List<Integer> voteTarget) {
-        VoteInfo.voteTarget = voteTarget;
+    public  void setVoteTarget(List<Integer> voteTarget) {
+        this.voteTarget = voteTarget;
     }
 
-    public static List<Double> getVoteRewardRule() {
+    public  List<Double> getVoteRewardRule() {
         return voteRewardRule;
     }
 
-    public static void setVoteRewardRule(List<Double> voteRewardRule) {
-        VoteInfo.voteRewardRule = voteRewardRule;
+    public  void setVoteRewardRule(List<Double> voteRewardRule) {
+        this.voteRewardRule = voteRewardRule;
     }
 
-    public static Double getVoteFee() {
+    public  Double getVoteFee() {
         return voteFee;
     }
 
-    public static void setVoteFee(Double voteFee) {
-        VoteInfo.voteFee = voteFee;
+    public  void setVoteFee(Double voteFee) {
+        this.voteFee = voteFee;
     }
 
-    public static List<Integer> getVoterList() {
+    public  List<Integer> getVoterList() {
         return voterList;
     }
 
-    public static void setVoterList(List<Integer> voterList) {
-        VoteInfo.voterList = voterList;
+    public  void setVoterList(List<Integer> voterList) {
+        this.voterList = voterList;
     }
 
 
-    public static List<Map<String, Object>> getPlayerList() {
+    public  List<Map<String, Object>> getPlayerList() {
         return playerList;
     }
 
-    public static void setPlayerList(List<Map<String, Object>> playerList) {
-        VoteInfo.playerList = playerList;
+    public  void setPlayerList(List<Map<String, Object>> playerList) {
+        this.playerList = playerList;
     }
 
-    public static String getIsLimited() {
+    public  String getIsLimited() {
         return isLimited;
     }
 
-    public static void setIsLimited(String isLimited) {
-        VoteInfo.isLimited = isLimited;
+    public  void setIsLimited(String isLimited) {
+        this.isLimited = isLimited;
     }
 
-    public static String getIsAnonymous() {
+    public  String getIsAnonymous() {
         return isAnonymous;
     }
 
-    public static void setIsAnonymous(String isAnonymous) {
-        VoteInfo.isAnonymous = isAnonymous;
+    public  void setIsAnonymous(String isAnonymous) {
+        this.isAnonymous = isAnonymous;
     }
 
-    public static String getIsRaise() {
+    public  String getIsRaise() {
         return isRaise;
     }
 
-    public static void setIsRaise(String isRaise) {
-        VoteInfo.isRaise = isRaise;
+    public  void setIsRaise(String isRaise) {
+        this.isRaise = isRaise;
     }
 
-    public static String getIsReward() {
+    public  String getIsReward() {
         return isReward;
     }
 
-    public static void setIsReward(String isReward) {
-        VoteInfo.isReward = isReward;
+    public  void setIsReward(String isReward) {
+        this.isReward = isReward;
     }
 
-    public static List<Integer> getVoterTargetList() {
+    public  List<Integer> getVoterTargetList() {
         return voterTargetList;
     }
 
-    public static void setVoterTargetList(List<Integer> voterTargetList) {
-        VoteInfo.voterTargetList = voterTargetList;
+    public  void setVoterTargetList(List<Integer> voterTargetList) {
+        this.voterTargetList = voterTargetList;
     }
 
-    public static Bitmap getBitmap() {
+    public  Bitmap getBitmap() {
         return bitmap;
     }
 
-    public static void setBitmap(Bitmap bitmap) {
-        VoteInfo.bitmap = bitmap;
+    public  void setBitmap(Bitmap bitmap) {
+        this.bitmap = bitmap;
     }
 
-    public static List<Integer> getCheckedRadioButtonList() {
+    public  List<Integer> getCheckedRadioButtonList() {
         return checkedRadioButtonList;
     }
 
-    public static void setCheckedRadioButtonList(List<Integer> checkedRadioButtonList) {
-        VoteInfo.checkedRadioButtonList = checkedRadioButtonList;
+    public  void setCheckedRadioButtonList(List<Integer> checkedRadioButtonList) {
+        this.checkedRadioButtonList = checkedRadioButtonList;
     }
 
-    public static List<Integer> getCheckedPositionList() {
+    public  List<Integer> getCheckedPositionList() {
         return checkedPositionList;
     }
 
-    public static void setCheckedPositionList(List<Integer> checkedPositionList) {
-        VoteInfo.checkedPositionList = checkedPositionList;
+    public  void setCheckedPositionList(List<Integer> checkedPositionList) {
+        this.checkedPositionList = checkedPositionList;
     }
 
-    public static boolean getIfSetReward() {
+    public  boolean getIfSetReward() {
         return ifSetReward;
     }
 
-    public static void setIfSetReward(boolean ifSetReward) {
-        VoteInfo.ifSetReward = ifSetReward;
+    public  void setIfSetReward(boolean ifSetReward) {
+        this.ifSetReward = ifSetReward;
     }
 }
