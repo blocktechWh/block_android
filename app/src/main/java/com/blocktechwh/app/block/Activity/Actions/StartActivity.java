@@ -516,10 +516,6 @@ public class StartActivity extends TitleActivity {
             public void onClick(View view) {
                 final  JSONObject json = new JSONObject();
 
-                if(App.voteInfo.getVoteImg()==""){
-                    Toast.makeText(StartActivity.this,"还未添加主题图片",Toast.LENGTH_SHORT).show();
-                    return;
-                }
                 if(etTheme.getText().toString().length()<2){
                     Toast.makeText(StartActivity.this,"主题描述字数在2-80个字之间",Toast.LENGTH_SHORT).show();
                     return;
