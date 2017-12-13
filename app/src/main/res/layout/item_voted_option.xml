@@ -18,7 +18,6 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
-            android:text="王二洗厕所"
             android:textColor="@color/itemTextColor" />
 
         <ProgressBar
@@ -27,7 +26,7 @@
             android:layout_width="100dp"
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical|center_horizontal"
-            android:progress="60"
+            android:progress="0"
             android:progressBackgroundTint="@android:color/darker_gray" />
 
         <TextView
@@ -35,7 +34,6 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="right|center_vertical"
-            android:text="4%(2人)"
             android:textColor="@color/itemTextColor" />
 
     </FrameLayout>

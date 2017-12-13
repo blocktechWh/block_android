@@ -28,6 +28,7 @@ import android.widget.Toast;
 
 import com.alibaba.fastjson.JSONObject;
 import com.blocktechwh.app.block.Common.App;
+import com.blocktechwh.app.block.Common.EditChangedListener;
 import com.blocktechwh.app.block.Common.Urls;
 import com.blocktechwh.app.block.CustomView.DoubleDatePickerDialog;
 import com.blocktechwh.app.block.CustomView.ImageViewPlus;
@@ -144,6 +145,7 @@ public class StartActivity extends TitleActivity {
         btnStartVote=(Button) findViewById(R.id.btnStartVote);
 
         etTheme=(EditText) findViewById(R.id.etTheme);
+        etTheme.setSingleLine(false);
         etTheme.setText(App.voteInfo.getVoteTheme());
 
         reward_container_layout=(LinearLayout)findViewById(R.id.reward_container_layout);
@@ -300,6 +302,11 @@ public class StartActivity extends TitleActivity {
 
             }
         });
+
+        //监听主题输入框输入
+        etTheme.addTextChangedListener(new EditChangedListener(80));
+
+
         //点击开关外层控件选择是否单选
         rl_limit.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -513,8 +520,8 @@ public class StartActivity extends TitleActivity {
                     Toast.makeText(StartActivity.this,"还未添加主题图片",Toast.LENGTH_SHORT).show();
                     return;
                 }
-                if(etTheme.getText().toString().length()<=0){
-                    Toast.makeText(StartActivity.this,"还未填写主题",Toast.LENGTH_SHORT).show();
+                if(etTheme.getText().toString().length()<2){
+                    Toast.makeText(StartActivity.this,"主题描述字数在2-80个字之间",Toast.LENGTH_SHORT).show();
                     return;
                 }
                 if(App.voteInfo.getVoteExpireTime().length()<=0){
@@ -533,8 +540,7 @@ public class StartActivity extends TitleActivity {
                     Toast.makeText(StartActivity.this,"还未添加投票参与者",Toast.LENGTH_SHORT).show();
                     return;
                 }
-//                json.put("voteImg",App.voteInfo.getVoteImg());
-                json.put("voteImg","333");
+                json.put("voteImg",App.voteInfo.getVoteImg());
                 json.put("voteTheme",etTheme.getText().toString());
                 json.put("isLimited",App.voteInfo.getIsLimited());
                 json.put("isRaise",App.voteInfo.getIsRaise());
@@ -552,10 +558,10 @@ public class StartActivity extends TitleActivity {
                     @Override
                     public void onSuccess(JSONObject data) {
                         Toast.makeText(StartActivity.this,"发起投票成功",Toast.LENGTH_SHORT).show();
-//                        Intent intent = new Intent(StartActivity.this,VotesListActivity.class);
-//                        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_EXCLUDE_FROM_RECENTS);
-//                        startActivity(intent);
-//                        finish();
+                        Intent intent = new Intent(StartActivity.this,VotesListActivity.class);
+                        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_EXCLUDE_FROM_RECENTS);
+                        startActivity(intent);
+                        finish();
 
                     }
                 });

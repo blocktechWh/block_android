@@ -20,16 +20,14 @@
             android:id="@+id/id_user_photo"
             android:layout_width="80dp"
             android:layout_height="80dp"
-            android:layout_marginTop="20dp"
-            app:srcCompat="@mipmap/icon21" />
+            android:layout_marginTop="20dp" />
 
         <TextView
             android:id="@+id/tv_name"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="20dp"
-            android:gravity="center_horizontal"
-            android:text="王二共收到" />
+            android:gravity="center_horizontal" />
 
         <TextView
             android:id="@+id/tv_recive_total"
@@ -38,7 +36,6 @@
             android:layout_marginBottom="20dp"
             android:layout_marginTop="8dp"
             android:gravity="center_horizontal"
-            android:text="¥  200.00"
             android:textSize="24dp" />
     </LinearLayout>
 

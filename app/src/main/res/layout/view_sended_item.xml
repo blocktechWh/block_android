@@ -71,7 +71,6 @@
                 android:id="@+id/textView_amount"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="￥ 200"
                 android:textColor="@color/itemTextColor" />
         </LinearLayout>
     </LinearLayout>

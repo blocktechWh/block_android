@@ -10,6 +10,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.Button;
+import android.widget.FrameLayout;
 import android.widget.GridView;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -50,6 +51,10 @@ public class VotedDetailActivity extends TitleActivity {
     private List<String>checkedOptionIds=new ArrayList<>();
     private int checkedIndex;
     private TextView tv_fill_info;
+    private LinearLayout ll_reward_amount_info;
+    private TextView tv_reward_title;
+    private FrameLayout fl_fill_click_container;
+    private boolean isOver;
 
 
 
@@ -60,6 +65,7 @@ public class VotedDetailActivity extends TitleActivity {
         initTitle("投票详情");
         Bundle bundle=this.getIntent().getExtras();
         voteId=bundle.getInt("voteId");
+        isOver=bundle.getBoolean("isOver");
         initData();
         getData();
         addEvent();
@@ -67,6 +73,14 @@ public class VotedDetailActivity extends TitleActivity {
     }
 
     private void initData(){
+        //已结束隐藏
+        if(isOver){
+            fl_fill_click_container.setVisibility(View.GONE);
+        }
+
+        tv_reward_title= (TextView) findViewById(R.id.tv_reward_title);
+        ll_reward_amount_info=(LinearLayout) findViewById(R.id.ll_reward_amount_info);
+        fl_fill_click_container=(FrameLayout) findViewById(R.id.fl_fill_click_container);
         tv_fill_info= (TextView) findViewById(R.id.tv_fill_info);
         ll_vote_options=(LinearLayout) findViewById(R.id.ll_vote_options);
         tv_reward_total=(TextView) findViewById(R.id.tv_reward_total);
@@ -169,7 +183,10 @@ public class VotedDetailActivity extends TitleActivity {
             }
         }
 
-
+        if(VotedDetail.getVoteRewardsList().size()<=0){
+            tv_reward_title.setVisibility(View.GONE);
+            ll_reward_amount_info.setVisibility(View.GONE);
+        }
         //渲染奖励项
         for(int i=0;i<VotedDetail.getVoteRewardsList().size();i++){
             View item_vote_reward = LayoutInflater.from(getApplicationContext()).inflate(R.layout.item_vote_reward,null);

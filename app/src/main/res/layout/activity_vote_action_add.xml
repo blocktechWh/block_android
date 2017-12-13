@@ -102,8 +102,7 @@
                             android:layout_height="55dp"
                             android:layout_alignParentRight="false"
                             android:layout_centerVertical="true"
-                            android:visibility="visible"
-                            app:srcCompat="@mipmap/icon11" />
+                            android:visibility="visible" />
                     </RelativeLayout>
 
                 </LinearLayout>

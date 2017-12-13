@@ -83,16 +83,14 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="25dp"
-            android:gravity="center_horizontal"
-            android:text="Hebe" />
+            android:gravity="center_horizontal" />
 
         <TextView
             android:id="@+id/tv_pray_text"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
-            android:gravity="center_horizontal"
-            android:text="祝王二生日快乐" />
+            android:gravity="center_horizontal" />
 
         <RelativeLayout
             android:layout_width="match_parent"
@@ -117,7 +115,6 @@
                 android:layout_toEndOf="@+id/textView53"
                 android:layout_toRightOf="@+id/textView53"
                 android:gravity="center_horizontal"
-                android:text="888.88"
                 android:textColor="@color/redTicketBorderColor"
                 android:textSize="30sp" />
         </RelativeLayout>

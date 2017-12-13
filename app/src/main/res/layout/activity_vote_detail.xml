@@ -59,7 +59,6 @@
                     android:layout_marginBottom="15dp"
                     android:layout_marginTop="20dp"
                     android:gravity="center_horizontal"
-                    android:text="周末洗厕所比赛初赛第一轮"
                     android:textSize="18sp" />
 
                 <LinearLayout
@@ -91,7 +90,7 @@
                 android:paddingTop="10dp">
 
                 <TextView
-                    android:id="@+id/textView75"
+                    android:id="@+id/tv_reward_title"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
@@ -100,6 +99,7 @@
                     android:textSize="18dp" />
 
                 <LinearLayout
+                    android:id="@+id/ll_reward_amount_info"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:gravity="center_vertical"
@@ -118,8 +118,7 @@
                         android:id="@+id/tv_reward_total"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_weight="12"
-                        android:text="15元" />
+                        android:layout_weight="12" />
 
                 </LinearLayout>
 

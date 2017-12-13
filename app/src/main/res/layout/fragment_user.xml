@@ -151,8 +151,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:gravity="right"
-                android:paddingRight="20dp"
-                android:text="余额：￥ 100" />
+                android:paddingRight="20dp" />
         </LinearLayout>
 
         <LinearLayout

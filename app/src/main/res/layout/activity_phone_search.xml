@@ -55,8 +55,7 @@
             android:id="@+id/imageView9"
             android:layout_width="50dp"
             android:layout_height="50dp"
-            android:layout_weight="0.00"
-            app:srcCompat="@mipmap/icon22" />
+            android:layout_weight="0.00" />
 
         <TextView
             android:id="@+id/textView51"
@@ -64,8 +63,7 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="20dp"
             android:layout_marginStart="20dp"
-            android:layout_weight="0.00"
-            android:text="张三" />
+            android:layout_weight="0.00" />
     </LinearLayout>
 
 </LinearLayout>

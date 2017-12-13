@@ -48,8 +48,10 @@ public class VoteDetailActivity extends TitleActivity {
     private TextView tv_reward_total;
     private LinearLayout ll_vote_options;
     private LinearLayout ll_vote_reward_list;
+    private LinearLayout ll_reward_amount_info;
     private GridView gridview;
     private TextView tv_to_fill;
+    private TextView tv_reward_title;
     private Button bt_vote;
     private List<String>checkedOptionIds=new ArrayList<>();
     private int checkedIndex;
@@ -78,7 +80,9 @@ public class VoteDetailActivity extends TitleActivity {
 
     private void initData(){
         tv_fill_info= (TextView) findViewById(R.id.tv_fill_info);
+        tv_reward_title= (TextView) findViewById(R.id.tv_reward_title);
         ll_vote_options=(LinearLayout) findViewById(R.id.ll_vote_options);
+        ll_reward_amount_info=(LinearLayout) findViewById(R.id.ll_reward_amount_info);
         tv_reward_total=(TextView) findViewById(R.id.tv_reward_total);
         ll_vote_reward_list=(LinearLayout) findViewById(R.id.ll_vote_reward_list);
         tv_vote_theme=(TextView) findViewById(R.id.tv_vote_theme);
@@ -255,6 +259,10 @@ public class VoteDetailActivity extends TitleActivity {
         tv_reward_total.setText(VoteDetail.getRewardTotal().toString()+"元");
 
 
+        if(VoteDetail.getVoteRewardsList().size()<=0){
+            tv_reward_title.setVisibility(View.GONE);
+            ll_reward_amount_info.setVisibility(View.GONE);
+        }
         //渲染奖励项
         System.out.println("VoteDetail.getVoteRewardsList().size()="+VoteDetail.getVoteRewardsList().size());
         for(int i=0;i<VoteDetail.getVoteRewardsList().size();i++){

@@ -11,7 +11,7 @@ import com.alibaba.fastjson.JSONObject;
 import com.blocktechwh.app.block.Bean.User;
 import com.blocktechwh.app.block.Bean.VoteInfo;
 import com.blocktechwh.app.block.Utils.PreferencesUtils;
-import com.blocktechwh.app.block.Utils.PropertiesUtil;
+import com.blocktechwh.app.block.Utils.ConfigPropertiesUtil;
 
 import org.java_websocket.client.WebSocketClient;
 import org.java_websocket.drafts.Draft_17;
@@ -47,10 +47,7 @@ public class App extends Application{
         setVersionName();//设置版本号
         setPrepare();
         mHandler = new Handler();
-        //System.setProperty("jsse.enableSNIExtension", "false");
         System.out.println("versionName : "+versionName);
-
-
     }
 
     @Override
@@ -79,7 +76,7 @@ public class App extends Application{
 
         System.out.println("new client.");
 
-        String wsUrl = PropertiesUtil.getProperty("wsUrl");
+        String wsUrl = ConfigPropertiesUtil.getProperty("wsUrl");
 
         client = new WebSocketClient(new URI(wsUrl+App.token),new Draft_17()) {
 

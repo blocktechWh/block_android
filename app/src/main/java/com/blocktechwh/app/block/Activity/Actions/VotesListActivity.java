@@ -120,7 +120,7 @@ public class VotesListActivity extends TitleActivity {
                         holder.tv_state.setText("已结束");
                         Bundle bundle = new Bundle();
                         bundle.putInt("voteId",voteId);
-                        bundle.putInt("isOver",voteId);
+                        bundle.putBoolean("isOver",true);
                         Intent intent= new Intent(VotesListActivity.this, VotedDetailActivity.class);
                         intent.putExtras(bundle);
                         startActivity(intent);

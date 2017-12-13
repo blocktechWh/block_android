@@ -4,7 +4,6 @@ import android.text.TextUtils;
 import android.widget.Toast;
 
 import com.blocktechwh.app.block.Common.App;
-import com.blocktechwh.app.block.Common.ErrorTip;
 
 /**
  * Created by eagune on 2017/11/1.
@@ -25,7 +24,8 @@ public abstract class CallBack<T>{
     }
 
     public void ErrorHandler(String statusCode, String msg){
-        String errMsg =  "".equals(ErrorTip.getReason(statusCode))?msg:ErrorTip.getReason(statusCode);
+        ErrorPromptPropertiesUtil eppu=new ErrorPromptPropertiesUtil();
+        String errMsg =  "".equals(eppu.getProperty(statusCode))?msg:eppu.getProperty(statusCode);
         this.onFailure(2, errMsg);
     }
 }

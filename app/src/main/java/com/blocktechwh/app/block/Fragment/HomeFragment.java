@@ -187,6 +187,7 @@ public class HomeFragment extends Fragment {
                         //调http://111.231.146.57:20086/front/vote/statis/{voteId}
                         Bundle bundle = new Bundle();
                         bundle.putInt("voteId",voteId);
+                        bundle.putBoolean("isOver",false);
                         Intent intent= new Intent(getActivity(), VotedDetailActivity.class);
                         intent.putExtras(bundle);
                         startActivity(intent);

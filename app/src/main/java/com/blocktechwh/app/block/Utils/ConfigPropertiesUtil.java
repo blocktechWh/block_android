@@ -10,11 +10,11 @@ import java.util.Properties;
  * Created by Arix on 2017-12-11.
  */
 
-public class PropertiesUtil {
+public class ConfigPropertiesUtil {
 
     private static Properties properties;
 
-    public PropertiesUtil() {
+    public ConfigPropertiesUtil() {
         properties = new Properties();
         InputStream in = null;
         try {
