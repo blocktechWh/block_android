@@ -30,8 +30,10 @@ public class RegisterActivity extends TitleActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
-
         initTitle("用户注册");
+
+        App.getInstance().addActivity(this);
+
         initView();
     }
 
@@ -60,12 +62,12 @@ public class RegisterActivity extends TitleActivity {
     };
 
     private void mSendVerifyCode(){
-        String phone = editPhone.getText().toString();
+        String phone = editPhone.getText().toString().trim();
         String telRegex = "[1][34578]\\d{9}" ;
 
         if("".equals(phone)){
             Toast.makeText(App.getContext(), "手机号不能为空", Toast.LENGTH_SHORT).show();
-        }else if(!phone.matches( telRegex )){
+        }else if(phone.length()!=11){
             Toast.makeText(App.getContext(),"无效手机号",Toast.LENGTH_SHORT).show();
         }else {
             String url = Urls.RegistorActiveCode + phone;
@@ -81,10 +83,10 @@ public class RegisterActivity extends TitleActivity {
     }
 
     private void mRegister(){
-        final String phone = editPhone.getText().toString();
-        String code = editCode.getText().toString();
-        String password = id_edit_password.getText().toString();
-        String password1 = id_edit_password2.getText().toString();
+        final String phone = editPhone.getText().toString().trim();
+        String code = editCode.getText().toString().trim();
+        String password = id_edit_password.getText().toString().trim();
+        String password1 = id_edit_password2.getText().toString().trim();
 
         String telRegex = "[1][34578]\\d{9}" ;
         String tel_regex_pwd = "[a-zA-Z0-9]{8,20}" ;
@@ -92,7 +94,7 @@ public class RegisterActivity extends TitleActivity {
 
         if("".equals(phone)){
             Toast.makeText(App.getContext(), "手机号不能为空", Toast.LENGTH_SHORT).show();
-        }else if(!phone.matches( telRegex )){
+        }else if(phone.length()!=11){
             Toast.makeText(App.getContext(),"无效手机号",Toast.LENGTH_SHORT).show();
         }else if("".equals(code)){
             Toast.makeText(App.getContext(), "验证码不能为空", Toast.LENGTH_SHORT).show();

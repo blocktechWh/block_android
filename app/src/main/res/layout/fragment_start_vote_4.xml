@@ -1,0 +1,298 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/appBackground"
+    android:orientation="vertical">
+
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/white">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/appBackground"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="@color/white"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/textView85"
+                    android:layout_width="match_parent"
+                    android:layout_height="30dp"
+                    android:layout_marginTop="5dp"
+                    android:layout_weight="1"
+                    android:background="@color/bacSelectColor"
+                    android:gravity="center_vertical"
+                    android:paddingLeft="5dp"
+                    android:paddingStart="5dp"
+                    android:text="设置奖励"
+                    android:textColor="@color/white"
+                    android:textSize="16sp" />
+
+                <RelativeLayout
+                    android:id="@+id/rl_fill"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginBottom="10dp"
+                    android:layout_marginTop="@dimen/margin_top"
+                    android:layout_weight="1"
+                    android:background="@drawable/button_selector2"
+                    android:gravity="center_vertical"
+                    android:paddingBottom="8dp"
+                    android:paddingLeft="@dimen/padding_left"
+                    android:paddingTop="8dp">
+
+                    <ImageView
+                        android:id="@+id/imageView_add"
+                        android:layout_width="30dp"
+                        android:layout_height="30dp"
+                        android:layout_centerVertical="true"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginStart="10dp"
+                        android:layout_weight="1"
+                        app:srcCompat="@mipmap/icon_raise" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:layout_centerVertical="true"
+                        android:layout_marginLeft="15dp"
+                        android:layout_marginStart="15dp"
+                        android:layout_toEndOf="@+id/imageView_add"
+                        android:layout_toRightOf="@+id/imageView_add"
+                        android:layout_weight="1"
+                        android:gravity="center_vertical"
+                        android:text="是否可加注" />
+
+                    <Switch
+                        android:id="@+id/switchifAdd"
+                        android:layout_width="60dp"
+                        android:layout_height="match_parent"
+                        android:layout_alignParentEnd="true"
+                        android:layout_alignParentRight="true"
+                        android:layout_alignParentTop="true"
+                        android:layout_marginEnd="18dp"
+                        android:layout_marginRight="18dp"
+                        android:layout_weight="1"
+                        android:text="关"
+                        android:textOff="关"
+                        android:textOn="开" />
+
+                </RelativeLayout>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginTop="4dp"
+                android:background="@color/white"
+                android:orientation="vertical"
+                android:paddingEnd="@dimen/padding_right"
+                android:paddingLeft="@dimen/padding_left"
+                android:paddingRight="@dimen/padding_right"
+                android:paddingStart="@dimen/padding_left"
+                android:paddingTop="15dp">
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <TextView
+                        android:id="@+id/textView82"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:gravity="center_vertical"
+                        android:text="＊"
+                        android:textColor="@color/btnColor"
+                        android:textSize="18sp" />
+
+                    <TextView
+                        android:id="@+id/textView78"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:layout_toEndOf="@+id/textView82"
+                        android:layout_toRightOf="@+id/textView82"
+                        android:text="输入总奖励资金" />
+                </RelativeLayout>
+
+                <EditText
+                    android:id="@+id/et_reward"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:ems="10"
+                    android:inputType="number"
+                    android:text="0"
+                    android:textSize="14sp" />
+
+                <TextView
+                    android:id="@+id/tv_option_amount_info"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="10dp"
+                    android:layout_weight="1"
+                    android:text="共有5个候选项" />
+            </LinearLayout>
+
+
+            <LinearLayout
+                android:id="@+id/ll_reward_container"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
+                android:background="@color/white"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:id="@+id/ll_rewards_container"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@color/white"
+                    android:orientation="vertical"></LinearLayout>
+
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:gravity="center_vertical"
+                    android:orientation="vertical">
+
+                    <RelativeLayout
+                        android:id="@+id/tv_reward_inptut"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_marginTop="10dp"
+                        android:paddingLeft="20dp"
+                        android:paddingStart="20dp">
+
+                        <TextView
+                            android:id="@+id/textView83"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_centerVertical="true"
+                            android:gravity="center_vertical"
+                            android:text="＊"
+                            android:textColor="@color/btnColor"
+                            android:textSize="18sp" />
+
+                        <TextView
+                            android:id="@+id/textView84"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_centerVertical="true"
+                            android:layout_toEndOf="@+id/textView83"
+                            android:layout_toRightOf="@+id/textView83"
+                            android:text="输入名次奖励金额" />
+                    </RelativeLayout>
+
+                    <RelativeLayout
+                        android:id="@+id/reward_input_container"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_marginBottom="10dp"
+                        android:paddingEnd="@dimen/padding_right"
+                        android:paddingLeft="@dimen/padding_right"
+                        android:paddingRight="@dimen/padding_right"
+                        android:paddingStart="@dimen/padding_right">
+
+                        <TextView
+                            android:id="@+id/tv_rank_text"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentTop="false"
+                            android:layout_centerInParent="false"
+                            android:layout_centerVertical="true"
+                            android:layout_weight="1"
+                            android:text="第1名" />
+
+                        <EditText
+                            android:id="@+id/et_reward_percent"
+                            android:layout_width="match_parent"
+                            android:layout_height="40dp"
+                            android:layout_centerVertical="true"
+                            android:layout_marginLeft="20dp"
+                            android:layout_marginStart="20dp"
+                            android:layout_toEndOf="@+id/tv_rank_text"
+                            android:layout_toRightOf="@+id/tv_rank_text"
+                            android:ems="10"
+                            android:inputType="number"
+                            android:text="0"
+                            android:textSize="14sp" />
+
+                    </RelativeLayout>
+
+                    <RelativeLayout
+                        android:id="@+id/rl_reward_add_btn"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_marginBottom="10dp"
+                        android:layout_marginTop="10dp"
+                        android:background="@color/appBackground"
+                        android:gravity="center_vertical|center_horizontal"
+                        android:paddingBottom="10dp"
+                        android:paddingTop="10dp">
+
+                        <ImageView
+                            android:id="@+id/tv_icon_add"
+                            android:layout_width="18dp"
+                            android:layout_height="18dp"
+                            android:layout_centerHorizontal="true"
+                            android:layout_weight="1"
+                            app:srcCompat="@mipmap/icon_add" />
+
+                        <TextView
+                            android:id="@+id/tv_reward_add_btn"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_centerHorizontal="true"
+                            android:layout_gravity="center_horizontal"
+                            android:layout_toLeftOf="@+id/tv_icon_add"
+                            android:layout_toStartOf="@+id/tv_icon_add"
+                            android:layout_weight="1"
+                            android:autoLink="all"
+                            android:text="点此添加 "
+                            android:textColor="@color/colorAccent" />
+                    </RelativeLayout>
+
+                </LinearLayout>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="@color/white"
+                android:orientation="vertical">
+
+                <Button
+                    android:id="@+id/btn_add_reward_sure"
+                    android:layout_width="match_parent"
+                    android:layout_height="44dp"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginBottom="20dp"
+                    android:layout_marginEnd="20dp"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginRight="20dp"
+                    android:layout_marginStart="20dp"
+                    android:layout_marginTop="20dp"
+                    android:background="@drawable/coners_bg2"
+                    android:text="发起投票"
+                    android:textColor="@color/white" />
+            </LinearLayout>
+        </LinearLayout>
+    </ScrollView>
+
+
+</LinearLayout>

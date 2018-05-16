@@ -1,5 +1,6 @@
 package com.blocktechwh.app.block.Activity.Wallete;
 
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.LinearLayoutManager;
@@ -10,12 +11,14 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.CompoundButton;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.RadioButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
+import com.blocktechwh.app.block.Activity.RedTicket.SendRedTicketActivity;
 import com.blocktechwh.app.block.Common.App;
 import com.blocktechwh.app.block.Common.Urls;
 import com.blocktechwh.app.block.CustomView.TitleActivity;
@@ -46,6 +49,8 @@ public class ExportActivity extends TitleActivity {
         setContentView(R.layout.activity_export);
         initTitle("钱包");
 
+        App.getInstance().addActivity(this);
+
         initView();
         getData();
         setEvent();
@@ -60,13 +65,13 @@ public class ExportActivity extends TitleActivity {
         et_new_account = (EditText) findViewById(R.id.et_new_account);
         et_amount = (EditText) findViewById(R.id.et_amount);
         btn_commit = (Button) findViewById(R.id.btn_commit);
-        btn_bind_commit = (Button) findViewById(R.id.btn_bind_commit);
+        //btn_bind_commit = (Button) findViewById(R.id.btn_bind_commit);
         btn_amount_add = (Button) findViewById(R.id.btn_amount_add);
 
     }
 
     private void setEvent(){
-        btn_bind_commit.setOnClickListener(new View.OnClickListener(){
+/*        btn_bind_commit.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View view) {
                 String newAccount=et_new_account.getText().toString().toUpperCase();
@@ -97,13 +102,23 @@ public class ExportActivity extends TitleActivity {
                 });
 
             }
-        });
+        });*/
 
 
         btn_amount_add.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View view) {
                 String amount=et_amount.getText().toString();
+                if(amount.equals("")){
+                    Toast.makeText(ExportActivity.this,"请输入金额",Toast.LENGTH_SHORT).show();
+                    return;
+                }
+                String telRegex = "^-?[0-9]+" ;
+                if (!amount.matches( telRegex )||Double.parseDouble(amount)<=0){
+                    Toast.makeText(ExportActivity.this,"请输入有效金额",Toast.LENGTH_SHORT).show();
+                    return;
+                }
+
                 JSONObject json = new JSONObject();
                 json.put("amount",amount);
                 json.put("recipientId",recipientId);
@@ -159,10 +174,12 @@ public class ExportActivity extends TitleActivity {
                         RecyclerView.ViewHolder viewHolder=accountRecyclerView.findViewHolderForAdapterPosition(checkedPosition);
                         RadioButton rbChecked=viewHolder.itemView.findViewById(R.id.tv_wallet_account);
                         rbChecked.setChecked(false);
-
+                        holder.ll_wallet_account_contaimer.setBackgroundColor(Color.WHITE);
                         checkedPosition=position;//将新的被选中的RadioButton位置赋值给checkedPosition
                         recipientId=accountArray.getJSONObject(position).getString("mebAccount");
 
+                    }else{
+                        holder.ll_wallet_account_contaimer.setBackgroundColor(Color.argb(255,241,241,241));
                     }
                 }
             });
@@ -177,10 +194,13 @@ public class ExportActivity extends TitleActivity {
         class MyViewHolder extends RecyclerView.ViewHolder{
             RadioButton tv_wallet_account;
 
+            LinearLayout ll_wallet_account_contaimer;
+
             public MyViewHolder(View view)
             {
                 super(view);
                 tv_wallet_account = (RadioButton) view.findViewById(R.id.tv_wallet_account);
+                ll_wallet_account_contaimer = (LinearLayout) view.findViewById(R.id.ll_wallet_account_contaimer);
             }
         }
     }

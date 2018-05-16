@@ -31,6 +31,7 @@ public class WalleteDetailActivity extends TitleActivity {
     private AccountAdapter mAdapter;
     private JSONArray accountArray;
     private TextView tv_wallete_data;
+    private TextView tv_bind_num;
     private EditText et_new_account;
     private Button btn_commit;
     private Button btn_import;
@@ -42,6 +43,8 @@ public class WalleteDetailActivity extends TitleActivity {
         setContentView(R.layout.activity_wallete_detail);
         initTitle("钱包");
 
+        App.getInstance().addActivity(this);
+
         initView();
         getData();
         setEvent();
@@ -51,6 +54,7 @@ public class WalleteDetailActivity extends TitleActivity {
     private void initView(){
         accountArray=new JSONArray();
         tv_wallete_data = (TextView) findViewById(R.id.tv_wallete_data);
+        tv_bind_num = (TextView) findViewById(R.id.tv_bind_num);
         accountRecyclerView = (RecyclerView)findViewById(R.id.id_acount_list);
         et_new_account = (EditText) findViewById(R.id.et_new_account);
         btn_commit = (Button) findViewById(R.id.btn_commit);
@@ -63,7 +67,7 @@ public class WalleteDetailActivity extends TitleActivity {
         btn_commit.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View view) {
-                String newAccount=et_new_account.getText().toString().toUpperCase();
+                String newAccount=et_new_account.getText().toString().trim().toUpperCase();
                 JSONObject json = new JSONObject();
                 json.put("account",newAccount);
                 String telRegex = "\\d+L" ;
@@ -85,6 +89,7 @@ public class WalleteDetailActivity extends TitleActivity {
                                 accountRecyclerView.setLayoutManager(new LinearLayoutManager(App.getContext()));
                                 accountRecyclerView.setAdapter(mAdapter = new AccountAdapter());
                                 mAdapter.notifyDataSetChanged();
+                                tv_bind_num.setText(accountArray.size()+1+"");
                             }
                         });
                     }
@@ -106,7 +111,6 @@ public class WalleteDetailActivity extends TitleActivity {
             public void onClick(View view) {
                 Intent intent = new Intent(WalleteDetailActivity.this,ExportActivity.class);
                 startActivity(intent);
-                //Toast.makeText(WalleteDetailActivity.this,"开发中。。。",Toast.LENGTH_SHORT).show();
 
             }
         });
@@ -123,7 +127,7 @@ public class WalleteDetailActivity extends TitleActivity {
         @Override
         public void onBindViewHolder(final MyViewHolder holder, int position){
             holder.tv_wallet_account.setText(accountArray.getJSONObject(position).getString("mebAccount"));
-
+            holder.tv_num.setText(position+1+"");
         }
 
         @Override
@@ -133,11 +137,13 @@ public class WalleteDetailActivity extends TitleActivity {
 
         class MyViewHolder extends RecyclerView.ViewHolder{
             TextView tv_wallet_account;
+            TextView tv_num;
 
             public MyViewHolder(View view)
             {
                 super(view);
                 tv_wallet_account = (TextView) view.findViewById(R.id.tv_wallet_account);
+                tv_num = (TextView) view.findViewById(R.id.tv_num);
 
             }
         }
@@ -150,7 +156,7 @@ public class WalleteDetailActivity extends TitleActivity {
         HttpClient.get(this, Urls.QueryWalleteData, null, new CallBack<JSONObject>() {
             @Override
             public void onSuccess(JSONObject data) {
-                tv_wallete_data.setText(data.getInteger("total").toString()+"Block");
+                tv_wallete_data.setText(data.getInteger("total").toString()+" ");
             }
             @Override
             public void onFailure(int errorType, String message){
@@ -166,6 +172,7 @@ public class WalleteDetailActivity extends TitleActivity {
                 accountRecyclerView.setLayoutManager(new LinearLayoutManager(App.getContext()));
                 accountRecyclerView.setAdapter(mAdapter = new AccountAdapter());
                 mAdapter.notifyDataSetChanged();
+                tv_bind_num.setText(accountArray.size()+1+"");
             }
         });
     }

@@ -58,30 +58,40 @@
 
     </LinearLayout>
 
-    <ScrollView
+    <LinearLayout
         android:id="@+id/scr_contact_container"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/margin_top">
+        android:layout_height="match_parent"
+        android:background="@color/white"
+        android:orientation="vertical">
 
-        <LinearLayout
+        <FrameLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:background="@color/white"
-            android:orientation="vertical">
+            android:layout_height="match_parent">
 
-            <android.support.v7.widget.RecyclerView
-                android:id="@+id/id_players_recycler"
+
+            <android.support.v4.widget.SwipeRefreshLayout
+                android:id="@+id/srl_main"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:paddingEnd="@dimen/padding_right"
-                android:paddingLeft="@dimen/padding_left"
-                android:paddingRight="@dimen/padding_right"
-                android:paddingStart="@dimen/padding_left" />
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="100dp">
+
+
+                <android.support.v7.widget.RecyclerView
+                    android:id="@+id/id_players_recycler"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:paddingEnd="@dimen/padding_right"
+                    android:paddingLeft="@dimen/padding_left"
+                    android:paddingRight="@dimen/padding_right"
+                    android:paddingStart="@dimen/padding_left" />
+
+            </android.support.v4.widget.SwipeRefreshLayout>
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="bottom"
                 android:layout_marginTop="15dp"
                 android:background="@color/appBackground"
                 android:orientation="horizontal"
@@ -103,8 +113,23 @@
                     android:textColor="@color/white" />
             </LinearLayout>
 
-        </LinearLayout>
-    </ScrollView>
+            <TextView
+                android:id="@+id/tv_to_top"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_gravity="bottom|right"
+                android:layout_marginBottom="120dp"
+                android:layout_marginRight="25dp"
+                android:background="@drawable/coners_bg10"
+                android:gravity="center_vertical|center_horizontal"
+                android:text="回到        顶部"
+                android:textColor="@color/white"
+                android:textSize="12sp"
+                android:visibility="gone" />
+        </FrameLayout>
+
+
+    </LinearLayout>
 
 
 </LinearLayout>

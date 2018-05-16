@@ -15,9 +15,20 @@ public class VotedDetail {
     private static Double rewardTotal;
     private static List<String> playersList;
     private static int totalCount;
+    private static String voteTotalData;
+    private static boolean isAnonymous;
+    private static String creater;
 
     public VotedDetail(){
 
+    }
+
+    public static String getVoteTotalData() {
+        return voteTotalData;
+    }
+
+    public static void setVoteTotalData(String voteTotalData) {
+        VotedDetail.voteTotalData = voteTotalData;
     }
 
     public static String getVoteImg() {
@@ -74,5 +85,21 @@ public class VotedDetail {
 
     public static void setTotalCount(int totalCount) {
         VotedDetail.totalCount = totalCount;
+    }
+
+    public static boolean isIsAnonymous() {
+        return isAnonymous;
+    }
+
+    public static void setIsAnonymous(boolean isAnonymous) {
+        VotedDetail.isAnonymous = isAnonymous;
+    }
+
+    public static String getCreater() {
+        return creater;
+    }
+
+    public static void setCreater(String creater) {
+        VotedDetail.creater = creater;
     }
 }

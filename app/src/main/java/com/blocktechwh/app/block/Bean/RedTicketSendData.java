@@ -13,6 +13,8 @@ public class RedTicketSendData{
     private String _img;
     private Integer _amount;
     private Date createTime;
+    private String totalCount;
+    private String receivedCount;
 
     public void setName(String name){this._name=name;}
     public String getName(){return this._name;}
@@ -31,5 +33,21 @@ public class RedTicketSendData{
     }
     public Date getCreateTime() {
         return this.createTime;
+    }
+
+    public String getTotalCount() {
+        return totalCount;
+    }
+
+    public void setTotalCount(String totalCount) {
+        this.totalCount = totalCount;
+    }
+
+    public String getReceivedCount() {
+        return receivedCount;
+    }
+
+    public void setReceivedCount(String receivedCount) {
+        this.receivedCount = receivedCount;
     }
 }

@@ -26,7 +26,7 @@
     </LinearLayout>
 
     <RelativeLayout
-        android:id="@+id/relativeLayout2"
+        android:id="@+id/rl_qr_code"
         android:layout_width="match_parent"
         android:layout_height="82.56dp"
         android:layout_marginTop="4.8dp"
@@ -131,27 +131,55 @@
             android:gravity="center_vertical"
             android:orientation="horizontal">
 
-            <ImageButton
-                android:id="@+id/id_wallet_image"
-                android:layout_width="28.8dp"
-                android:layout_height="28.8dp"
-                android:layout_margin="17.76dp"
-                android:background="@android:color/transparent"
-                app:srcCompat="@mipmap/icon_wallet" />
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
 
-            <TextView
-                android:id="@+id/id_wallet_text"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="钱包" />
+                <ImageButton
+                    android:id="@+id/id_wallet_image"
+                    android:layout_width="28.8dp"
+                    android:layout_height="28.8dp"
+                    android:layout_margin="17.76dp"
+                    android:background="@android:color/transparent"
+                    app:srcCompat="@mipmap/icon_wallet" />
 
-            <TextView
-                android:id="@+id/tv_wallete_data"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:gravity="right"
-                android:paddingRight="20dp" />
+                <TextView
+                    android:id="@+id/id_wallet_text"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_toEndOf="@+id/id_wallet_image"
+                    android:layout_toRightOf="@+id/id_wallet_image"
+                    android:text="钱包" />
+
+                <TextView
+                    android:id="@+id/tv_wallete_data"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginEnd="40dp"
+                    android:layout_marginRight="40dp"
+                    android:layout_toEndOf="@+id/id_wallet_text"
+                    android:layout_toRightOf="@+id/id_wallet_text"
+                    android:gravity="right"
+                    android:paddingEnd="5dp"
+                    android:paddingRight="5dp" />
+
+                <ImageView
+                    android:id="@+id/imageView6"
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:layout_alignBottom="@+id/tv_wallete_data"
+                    android:layout_alignParentEnd="true"
+                    android:layout_alignParentRight="true"
+                    android:layout_marginEnd="20dp"
+                    android:layout_marginRight="20dp"
+                    android:layout_weight="1"
+                    android:src="@mipmap/icon_coin" />
+
+            </RelativeLayout>
+
         </LinearLayout>
 
         <LinearLayout

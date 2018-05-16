@@ -6,7 +6,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
 
-import com.blocktechwh.app.block.Activity.RedTicket.SendRedTicket;
+import com.blocktechwh.app.block.Activity.RedTicket.SendRedTicketActivity;
 import com.blocktechwh.app.block.Common.App;
 import com.blocktechwh.app.block.CustomView.TitleActivity;
 import com.blocktechwh.app.block.R;
@@ -25,6 +25,9 @@ public class ContactDetailForSendActivity extends TitleActivity {
         Toast.makeText(App.getContext(),"被加载了",Toast.LENGTH_SHORT).show();
 
         initTitle("详细资料");
+
+        App.getInstance().addActivity(this);
+
         initData();
         addEvent();
     }
@@ -43,7 +46,7 @@ public class ContactDetailForSendActivity extends TitleActivity {
         @Override
         public void onClick(View view) {
             Toast.makeText(App.getContext(),"被点击了",Toast.LENGTH_SHORT).show();
-            startActivity(new Intent(ContactDetailForSendActivity.this, SendRedTicket.class));
+            startActivity(new Intent(ContactDetailForSendActivity.this, SendRedTicketActivity.class));
             finish();
         }
     };

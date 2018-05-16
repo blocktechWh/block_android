@@ -34,19 +34,20 @@
 
     </LinearLayout>
 
-    <ScrollView
+    <LinearLayout
+        android:id="@+id/sv_data_list"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="match_parent"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="4.8dp"
+        android:background="@color/gray"
+        android:orientation="vertical">
 
-        <LinearLayout
-            android:id="@+id/linearLayout2"
+        <android.support.v4.widget.SwipeRefreshLayout
+            android:id="@+id/srl_main"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/relativeLayout4"
-            android:layout_centerHorizontal="true"
-            android:layout_marginTop="4.8dp"
-            android:background="@color/gray"
-            android:orientation="vertical">
+            android:layout_height="match_parent">
+
 
             <android.support.v7.widget.RecyclerView
                 android:id="@+id/id_red_ticket_recive_wait_list"
@@ -54,14 +55,17 @@
                 android:layout_height="match_parent"
                 android:orientation="horizontal" />
 
-            <android.support.v7.widget.RecyclerView
+        </android.support.v4.widget.SwipeRefreshLayout>
+
+
+        <!--            <android.support.v7.widget.RecyclerView
                 android:id="@+id/id_vote_wait_list"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal" />
+                android:orientation="horizontal" />-->
 
 
-            <!--
+        <!--
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="60dp"
@@ -118,10 +122,10 @@
                         android:textSize="12sp" />
                 </LinearLayout>
             </LinearLayout>
--->
+    -->
 
 
-            <!--        <LinearLayout
+        <!--        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="60dp"
             android:layout_marginTop="@dimen/margin_top"
@@ -178,7 +182,79 @@
             </LinearLayout>
         </LinearLayout>-->
 
-        </LinearLayout>
-    </ScrollView>
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/ll_no_data"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center_vertical|center_horizontal"
+        android:orientation="vertical"
+        android:visibility="gone">
+
+        <TextView
+            android:id="@+id/textView28"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical|center_horizontal"
+            android:text="暂时没有待投票活动或待收红包，您可以"
+            android:textColor="@color/itemTextColor" />
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:gravity="center_vertical|center_horizontal">
+
+            <TextView
+                android:id="@+id/textView50"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_weight="1"
+                android:gravity="center_horizontal"
+                android:text="去" />
+
+            <TextView
+                android:id="@+id/tv_start_vote"
+                android:layout_width="wrap_content"
+                android:layout_height="25dp"
+                android:layout_marginLeft="3dp"
+                android:layout_marginStart="3dp"
+                android:layout_toRightOf="@+id/textView50"
+                android:gravity="center_vertical"
+                android:text="发起投票"
+                android:textColor="@color/btnColor"
+                android:textSize="16sp" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:gravity="center_horizontal">
+
+            <TextView
+                android:id="@+id/textView53"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:text="或" />
+
+            <TextView
+                android:id="@+id/tv_send_gift"
+                android:layout_width="wrap_content"
+                android:layout_height="25dp"
+                android:layout_marginLeft="3dp"
+                android:layout_marginStart="3dp"
+                android:layout_toEndOf="@+id/textView53"
+                android:layout_toRightOf="@+id/textView53"
+                android:gravity="center_vertical"
+                android:text="发红包"
+                android:textColor="@color/btnColor"
+                android:textSize="16sp" />
+        </RelativeLayout>
+
+    </LinearLayout>
 
 </LinearLayout>

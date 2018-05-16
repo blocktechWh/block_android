@@ -44,8 +44,7 @@ public class VotersSelectListActivity extends TitleActivity {
     private List<Integer>votersTargetList;
     private List<Integer>checkedPositionList;
     private LinearLayout titlebar_button_back;
-
-
+    private CheckBox cb_select_all;
 
 
     @Override
@@ -53,6 +52,8 @@ public class VotersSelectListActivity extends TitleActivity {
         super.onCreate(savedInstanceState);
             setContentView(R.layout.activity_voters_select);
             initTitle("参与人员");
+
+        App.getInstance().addActivity(this);
 
         initView();
         getData();
@@ -92,6 +93,7 @@ public class VotersSelectListActivity extends TitleActivity {
         mRecyclerView.setLayoutManager(new LinearLayoutManager(App.getContext()));
         mRecyclerView.setAdapter(mAdapter = new PlayerListAdapter());
         titlebar_button_back=(LinearLayout)findViewById(R.id.titlebar_button_back);
+        cb_select_all=(CheckBox) findViewById(R.id.cb_select_all);
 
     }
 
@@ -150,6 +152,13 @@ public class VotersSelectListActivity extends TitleActivity {
                 }
             });
 
+            holder.myListItem.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    holder.rb.setChecked(true);
+                }
+            });
+
         }
 
         @Override
@@ -163,6 +172,7 @@ public class VotersSelectListActivity extends TitleActivity {
             CheckBox rb;
             ImageView iv;
             RelativeLayout rl_radio_contaner;
+            RelativeLayout myListItem;
             Integer id;
 
             public MyViewHolder(View view)
@@ -172,6 +182,7 @@ public class VotersSelectListActivity extends TitleActivity {
                 iv=(ImageView) view.findViewById(R.id.itemImg);
                 rb=(CheckBox) view.findViewById(R.id.rb_voter);
                 rl_radio_contaner=(RelativeLayout) view.findViewById(R.id.rl_radio_contaner);
+                myListItem=(RelativeLayout) view.findViewById(R.id.myListItem);
                 id=0;
             }
         }
@@ -188,6 +199,9 @@ public class VotersSelectListActivity extends TitleActivity {
 
         //确定添加
         votersAddSure.setOnClickListener(addSure);
+
+        //全选
+        cb_select_all.setOnClickListener(selectAll);
     }
     private View.OnClickListener addSure = new View.OnClickListener(){
         @Override
@@ -219,6 +233,12 @@ public class VotersSelectListActivity extends TitleActivity {
             Intent intent=new Intent(VotersSelectListActivity.this,StartActivity.class);
             startActivity(intent);
             finish();
+
+        }
+    };
+    private View.OnClickListener selectAll = new View.OnClickListener(){
+        @Override
+        public void onClick(View view){
 
         }
     };

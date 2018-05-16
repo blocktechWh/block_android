@@ -20,7 +20,8 @@
             android:layout_marginEnd="20dp"
             android:layout_marginRight="20dp"
             android:text="加注信息"
-            android:textColor="@drawable/text_selector" />
+            android:textColor="@drawable/text_selector"
+            android:visibility="gone" />
 
     </FrameLayout>
 
@@ -49,17 +50,24 @@
                 <ImageView
                     android:id="@+id/im_vote_img"
                     android:layout_width="match_parent"
-                    android:layout_height="90dp"
-                    app:srcCompat="@mipmap/image_test" />
+                    android:layout_height="90dp" />
 
                 <TextView
                     android:id="@+id/tv_vote_theme"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginBottom="15dp"
+                    android:layout_marginBottom="10dp"
                     android:layout_marginTop="20dp"
                     android:gravity="center_horizontal"
                     android:textSize="18sp" />
+
+                <TextView
+                    android:id="@+id/tv_vote_creater"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="15dp"
+                    android:gravity="center_horizontal"
+                    android:text="发起人" />
 
                 <LinearLayout
                     android:id="@+id/ll_vote_options"
@@ -76,6 +84,153 @@
 
             </LinearLayout>
 
+            <RelativeLayout
+                android:id="@+id/rl_reward_title"
+                android:layout_width="match_parent"
+                android:layout_height="45dp"
+                android:layout_marginTop="@dimen/margin_top"
+                android:background="@drawable/button_selector"
+                android:gravity="center_vertical|center_horizontal">
+
+                <TextView
+                    android:id="@+id/tv_reward_title"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerHorizontal="false"
+                    android:layout_centerVertical="true"
+                    android:layout_weight="1"
+                    android:gravity="right|end"
+                    android:text="奖励信息"
+                    android:textColor="@color/itemTextColor" />
+
+                <ImageView
+                    android:id="@+id/iv_array"
+                    android:layout_width="20dp"
+                    android:layout_height="10dp"
+                    android:layout_centerVertical="true"
+                    android:layout_toRightOf="@+id/tv_reward_title"
+                    android:layout_weight="1"
+                    android:background="@mipmap/icon5" />
+            </RelativeLayout>
+
+            <LinearLayout
+                android:id="@+id/ll_reward_container"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginTop="1dp"
+                android:background="@color/white"
+                android:orientation="vertical"
+                android:paddingBottom="15dp"
+                android:paddingEnd="@dimen/padding_right"
+                android:paddingLeft="@dimen/padding_left"
+                android:paddingRight="@dimen/padding_right"
+                android:paddingStart="@dimen/padding_left"
+                android:paddingTop="10dp"
+                android:visibility="gone">
+
+                <LinearLayout
+                    android:id="@+id/ll_reward_amount_info"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal">
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:gravity="center_vertical">
+
+                        <TextView
+                            android:id="@+id/textView76"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginBottom="10dp"
+                            android:layout_marginTop="10dp"
+                            android:layout_weight="1"
+                            android:text="奖励资金：" />
+
+                        <TextView
+                            android:id="@+id/tv_reward_total"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_centerVertical="true"
+                            android:layout_marginEnd="5dp"
+                            android:layout_marginRight="5dp"
+                            android:layout_toEndOf="@+id/textView76"
+                            android:layout_toRightOf="@+id/textView76"
+                            android:layout_weight="12" />
+
+                        <ImageView
+                            android:id="@+id/imageView21"
+                            android:layout_width="20dp"
+                            android:layout_height="20dp"
+                            android:layout_centerVertical="true"
+                            android:layout_toEndOf="@+id/tv_reward_total"
+                            android:layout_toRightOf="@+id/tv_reward_total"
+                            android:background="@mipmap/icon_coin" />
+                    </RelativeLayout>
+
+                </LinearLayout>
+
+
+                <LinearLayout
+                    android:id="@+id/ll_vote_reward_list"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/ll_voters"
+                    android:layout_width="match_parent"
+                    android:layout_height="45dp"
+                    android:gravity="left|center_vertical|start"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:id="@+id/textView81"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="参与人：" />
+
+                    <GridView xmlns:android="http://schemas.android.com/apk/res/android"
+                        android:id="@+id/gridview_players"
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"
+                        android:columnWidth="40dp"
+                        android:gravity="center"
+                        android:horizontalSpacing="5dp"
+                        android:numColumns="auto_fit"
+                        android:stretchMode="columnWidth"
+                        android:verticalSpacing="5dp" />
+
+                    <!--                    <ImageView
+                        android:id="@+id/imageView20"
+                        android:layout_width="45dp"
+                        android:layout_height="45dp"
+                        android:layout_weight="1"
+                        app:srcCompat="@mipmap/icon21" />
+
+                    <ImageView
+                        android:id="@+id/imageView21"
+                        android:layout_width="45dp"
+                        android:layout_height="45dp"
+                        android:layout_weight="1"
+                        app:srcCompat="@mipmap/icon22" />
+
+                    <ImageView
+                        android:id="@+id/imageView22"
+                        android:layout_width="45dp"
+                        android:layout_height="45dp"
+                        android:layout_marginRight="100dp"
+                        android:layout_weight="1"
+                        app:srcCompat="@mipmap/icon21" />-->
+                </LinearLayout>
+            </LinearLayout>
+<!--
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
@@ -155,7 +310,7 @@
                         android:stretchMode="columnWidth"
                         android:verticalSpacing="5dp" />
 
-                    <!--                    <ImageView
+                    &lt;!&ndash;                    <ImageView
                         android:id="@+id/imageView20"
                         android:layout_width="45dp"
                         android:layout_height="45dp"
@@ -175,14 +330,17 @@
                         android:layout_height="45dp"
                         android:layout_marginRight="100dp"
                         android:layout_weight="1"
-                        app:srcCompat="@mipmap/icon21" />-->
+                        app:srcCompat="@mipmap/icon21" />&ndash;&gt;
                 </LinearLayout>
             </LinearLayout>
+-->
 
             <FrameLayout
+                android:id="@+id/fl_fill_container"
                 android:layout_width="match_parent"
                 android:layout_height="100dp"
-                android:layout_marginTop="20dp">
+                android:layout_marginTop="20dp"
+                android:visibility="gone">
 
                 <ImageView
                     android:id="@+id/imageView5"
@@ -217,11 +375,11 @@
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_height="wrap_content"
                 android:layout_marginBottom="20dp"
                 android:layout_marginTop="20dp"
                 android:gravity="center_horizontal"
-                android:orientation="horizontal">
+                android:orientation="vertical">
 
                 <Button
                     android:id="@+id/bt_vote"
@@ -230,6 +388,19 @@
                     android:background="@drawable/coners_bg2"
                     android:text="投票"
                     android:textColor="@color/white" />
+
+                <TextView
+                    android:id="@+id/bt_start_vote"
+                    android:layout_width="match_parent"
+                    android:layout_height="30dp"
+                    android:layout_marginBottom="20dp"
+                    android:layout_marginTop="15dp"
+                    android:autoLink="all"
+                    android:gravity="center_vertical"
+                    android:paddingStart="20dp"
+                    android:text="去发起一个投票"
+                    android:textColor="@color/btnColor" />
+
             </LinearLayout>
         </LinearLayout>
     </ScrollView>

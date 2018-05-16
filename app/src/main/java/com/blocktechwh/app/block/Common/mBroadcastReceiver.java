@@ -7,6 +7,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
@@ -30,7 +31,7 @@ import com.blocktechwh.app.block.Utils.HttpClient;
 public class mBroadcastReceiver extends BroadcastReceiver {
     private PopupWindow mPopupWindow;
     private String name="";
-
+    private int new_contact_count=0;
     //接收到广播后自动调用该方法
     @Override
     public void onReceive(final Context context, Intent intent) {
@@ -68,24 +69,33 @@ public class mBroadcastReceiver extends BroadcastReceiver {
 
                 ImageView img=new ImageView(context);
                 ImageView img1=new ImageView(context);
+                ImageView img_close=new ImageView(context);
                 TextView tv=new TextView(context);
                 tv.setText("来自"+data.getJSONObject("giftSenderInfo").getString("senderName"));
-                tv.setGravity(Gravity.CENTER_VERTICAL);
+                tv.setGravity(Gravity.CENTER_HORIZONTAL);
+                tv.setMaxEms(8);
                 TextView tv1=new TextView(context);
                 tv1.setText(data.getJSONObject("giftSenderInfo").getString("msg"));
-//        tv1.setGravity(Gravity.CENTER_VERTICAL);
-                tv1.setTextSize(18);
-
+                tv1.setGravity(Gravity.CENTER_HORIZONTAL);
+                tv1.setTextSize(17);
+                tv1.setMaxEms(9);
+                tv1.setSingleLine(true);
+                tv1.setEllipsize(TextUtils.TruncateAt.MARQUEE);
+                tv1.setMarqueeRepeatLimit(5);
 
                 fl.addView(img);
                 fl.addView(img1);
+                fl.addView(img_close);
                 fl.addView(tv);
                 fl.addView(tv1);
                 img.setImageResource(R.mipmap.img_gift_poup);
                 img1.setImageResource(R.mipmap.icon_open);
+                img_close.setImageResource(R.mipmap.icon41);
                 img.setBackgroundColor(Color.TRANSPARENT);
                 img1.setX(240);
                 img1.setY(250);
+                img_close.setX(550);
+                img_close.setY(10);
                 tv.setY(290);
                 tv1.setY(330);
 
@@ -93,10 +103,17 @@ public class mBroadcastReceiver extends BroadcastReceiver {
                 ViewGroup.LayoutParams lp = img1.getLayoutParams();
                 lp.width=120;
                 lp.height=400;
-
                 img1.setLayoutParams(lp);
 
+                //设定img_close尺寸
+                ViewGroup.LayoutParams lp_close = img_close.getLayoutParams();
+                lp_close.width=35;
+                lp_close.height=35;
+                img_close.setLayoutParams(lp_close);
+
+
                 alertDialog.setView(fl);
+                alertDialog.setCanceledOnTouchOutside(false);
                 alertDialog.show();
 
                 WindowManager.LayoutParams params = alertDialog.getWindow().getAttributes();
@@ -104,7 +121,7 @@ public class mBroadcastReceiver extends BroadcastReceiver {
                 params.height = 600 ;
                 alertDialog.getWindow().setAttributes(params);
 
-                img.setOnClickListener(new View.OnClickListener() {
+                img1.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
 
@@ -126,11 +143,40 @@ public class mBroadcastReceiver extends BroadcastReceiver {
 
                     }
                 });
+                img_close.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        alertDialog.cancel();
+
+                    }
+                });
             }
         });
     }
 
     private void popupContactRequest(final Context context,final int busiId,int fromId){
+
+
+/*        //查询好友数量
+        HttpClient.get(this, Urls.ContactRequestsCount, null, new CallBack<JSONObject>() {
+            @Override
+            public void onSuccess(JSONObject data) {
+                new_contact_count=Integer.parseInt(data.getString("data"));
+                View view = getLayoutInflater().inflate(R.layout.item_tab_view, null);
+                TextView tv_count=view.findViewById(R.id.tv_count);
+                if(index==0||index==2||new_contact_count==0){
+                    tv_count.setVisibility(View.GONE);
+                }
+
+                if(new_contact_count>0){
+                    tv_count.setText(new_contact_count+"");
+                }
+
+                if(new_contact_count>99){
+                    tv_count.setText("99+");
+                }
+            }
+        });*/
 
         //根据id查询详细信息
         HttpClient.get(this, Urls.GetUserInfoById+fromId, null, new CallBack<JSONObject>() {

@@ -8,11 +8,13 @@ import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.view.ViewCompat;
 import android.support.v4.view.ViewPager;
 import android.view.KeyEvent;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -51,12 +53,19 @@ public class MainActivity extends BaseActivity{
     private static WebSocketClient client;
     private int new_contact_count=0;
     private boolean isBackground = true;
-
-
+    private Bundle bundle;
+    private boolean[] fragmentsUpdateFlag = { false, false, false, false };
+    private Bundle savedInstanceState1;
+    private String fromString="";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        this.savedInstanceState1=savedInstanceState;
         setContentView(R.layout.activity_main);
+        App.getInstance().addActivity(this);
+
+        bundle=this.getIntent().getExtras();
+
         getData();
         //打开服务
         startService(new Intent(MainActivity.this,NotifyService.class));
@@ -65,7 +74,13 @@ public class MainActivity extends BaseActivity{
         Intent intent = new Intent(MainActivity.this, DownloadService.class);
         intent.putExtra("apkUrl", "http://blocktechwh.com/bk.apk");
         intent.putExtra("jsonUrl", "http://blocktechwh.com/json");
-        startService(intent);
+        if(bundle!=null) {
+            fromString=bundle.getString("from");
+
+        }else{
+            startService(intent);
+        }
+
 
     }
     // 在onKeyDown(int keyCode, KeyEvent event)方法中调用此方法
@@ -77,7 +92,11 @@ public class MainActivity extends BaseActivity{
         return false;
     }
 
-
+    private void selectUserFragment(){
+        ViewPager mViewPager1;
+        mViewPager1=(ViewPager)findViewById(R.id.container1);
+        mViewPager1.setCurrentItem(2);
+    }
     private void notifyForeground() {
         // This is where you can notify listeners, handle session tracking, etc
     }
@@ -85,9 +104,17 @@ public class MainActivity extends BaseActivity{
         // This is where you can notify listeners, handle session tracking, etc
     }
 
-    //刷新
-    private void refesh(){
-        onCreate(null);
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if(requestCode==0&&resultCode==1){//判断响应码和请求码
+
+            //MainActivity mainActivity=(MainActivity) getActivity();
+            FragmentManager fragmentManager=MainActivity.this.getSupportFragmentManager();
+            FragmentTransaction fragmentTransaction=fragmentManager.beginTransaction();
+            fragmentTransaction.replace(R.id.container1,new UserFragment());
+
+        }
     }
 
     //退出
@@ -149,6 +176,7 @@ public class MainActivity extends BaseActivity{
         mViewPager=(ViewPager) findViewById(R.id.container1);
         mTabHost=(TabLayout)findViewById(R.id.tabHost);
 
+
         SupportMultipleScreensUtil.init(getApplicationContext());
         SupportMultipleScreensUtil.scale(mTabHost);
         setContent();
@@ -161,8 +189,16 @@ public class MainActivity extends BaseActivity{
         mTabHost.setTabMode(TabLayout.MODE_SCROLLABLE);
         ViewCompat.setElevation(mTabHost,10);
         mTabHost.setupWithViewPager(mViewPager);
+        if(fromString.equals("VotesListActivity")){
+            mViewPager.setCurrentItem(2);
+        }else if(fromString.equals("AcceptNewActivity")||fromString.equals("ContactRequestActivity")||fromString.equals("ContactDetailActivity")||fromString.equals("SendRedTicketActivity")
+                ||fromString.equals("HomeFragment")||fromString.equals("RedTiketSentFragment")){
 
+            mViewPager.setCurrentItem(1);
+        }else if(fromString.equals("VoteDetailActivity")||fromString.equals("GiftActivity")||fromString.equals("RedTiketGetFragment")){
 
+            mViewPager.setCurrentItem(0);
+        }
         for(int i=0;i<mTabHost.getTabCount();i++){
             mTabHost.getTabAt(i).setCustomView(getTabItemView(i));
         }
@@ -171,9 +207,10 @@ public class MainActivity extends BaseActivity{
     }
 
     class ContentPagerAdapter extends FragmentPagerAdapter {
-
+        FragmentManager fm;
         public ContentPagerAdapter(FragmentManager fm) {
             super(fm);
+            this.fm = fm;
         }
 
         @Override
@@ -183,28 +220,61 @@ public class MainActivity extends BaseActivity{
 
         @Override
         public int getCount() {
-            return 3;
+            return lists_fragment.size();
         }
 
         @Override
         public CharSequence getPageTitle(int position) {
             return lists_indicators.get(position);
-
         }
+        @Override
+        public Object instantiateItem(ViewGroup container, int position) {
+            //得到缓存的fragment
+            Fragment fragment = (Fragment) super.instantiateItem(container,position);
+            //得到tag，这点很重要
+            String fragmentTag = fragment.getTag();
+
+
+            if (fragmentsUpdateFlag[position % fragmentsUpdateFlag.length]) {
+                //如果这个fragment需要更新
+
+                FragmentTransaction ft = fm.beginTransaction();
+                //移除旧的fragment
+                ft.remove(fragment);
+                //换成新的fragment
+                fragment = lists_fragment.get(position % lists_fragment.size());
+                //添加新fragment时必须用前面获得的tag，这点很重要
+                ft.add(container.getId(), fragment, fragmentTag);
+                ft.attach(fragment);
+                ft.commit();
+
+                //复位更新标志
+                fragmentsUpdateFlag[position % fragmentsUpdateFlag.length] = false;
+            }
+
+
+            return fragment;
+        }
+
     }
 
     private View.OnClickListener mTabOnClickListener = new View.OnClickListener(){
         @Override
         public void onClick(View view){
+
             for(int i=0;i<mTabHost.getTabCount();i++){
                 inactiveTab(mTabHost.getTabAt(i).getCustomView());
             }
             activeTab(view);
             int pos = (int) view.getTag();
+            System.out.println("pos="+pos);
             TabLayout.Tab tab = mTabHost.getTabAt(pos);
             tab.select();
+
         }
     };
+
+
 
     private View getTabItemView(int index) {
         View view = getLayoutInflater().inflate(R.layout.item_tab_view, null);

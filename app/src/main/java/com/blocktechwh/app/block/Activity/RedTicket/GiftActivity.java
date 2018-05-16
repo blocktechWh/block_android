@@ -10,6 +10,7 @@ import android.widget.TextView;
 
 import com.alibaba.fastjson.JSONObject;
 import com.blocktechwh.app.block.Activity.MainActivity;
+import com.blocktechwh.app.block.Common.App;
 import com.blocktechwh.app.block.Common.Urls;
 import com.blocktechwh.app.block.CustomView.TitleActivity;
 import com.blocktechwh.app.block.R;
@@ -35,6 +36,9 @@ public class GiftActivity extends TitleActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_send_sure);
         initTitle("接受朋友红包");
+
+        App.getInstance().addActivity(this);
+
         initData();
         getData();
         addEvent();
@@ -68,7 +72,7 @@ public class GiftActivity extends TitleActivity {
 
     private void operateGift(JSONObject jo){
 
-        tv_gift_amount.setText("￥ "+jo.get("giftAmount").toString());
+        tv_gift_amount.setText(jo.get("giftAmount").toString());
         tv_sender_name.setText(jo.getJSONObject("giftSenderInfo").getString("senderName"));
         tv_pray_text.setText(tv_pray);
         String url = Urls.HOST + "staticImg" + jo.getJSONObject("giftSenderInfo").getString("senderImg");
@@ -94,7 +98,10 @@ public class GiftActivity extends TitleActivity {
             HttpClient.post(this, Urls.RecieveGift+id, "", new CallBack<JSONObject>() {
                 @Override
                 public void onSuccess(JSONObject data) {
+                    Bundle bundle = new Bundle();
+                    bundle.putString("from","GiftActivity");
                     Intent intent= new Intent(GiftActivity.this, MainActivity.class);
+                    intent.putExtras(bundle);
                     startActivity(intent);
                 }
             });

@@ -2,6 +2,7 @@ package com.blocktechwh.app.block.CustomView;
 
 import android.app.Dialog;
 import android.content.Context;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -85,6 +86,7 @@ public class SelectDialog extends Dialog {
             RadioGroup.LayoutParams lp = new RadioGroup.LayoutParams(RadioGroup.LayoutParams.WRAP_CONTENT, RadioGroup.LayoutParams.WRAP_CONTENT);
             radioButton.setLayoutParams(lp);
             radioButton.setText(entry.getValue().toString());
+            radioButton.setTextColor(Color.argb(255,120,120,120));
             radioButton.setTag(entry.getKey());
             radioGroup.addView(radioButton);
         }

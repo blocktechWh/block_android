@@ -32,6 +32,7 @@
                 android:id="@+id/tvVoteTheme"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:maxEms="13"
                 android:textColor="#787878" />
 
         </LinearLayout>

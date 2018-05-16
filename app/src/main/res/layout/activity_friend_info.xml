@@ -28,8 +28,7 @@
             android:layout_width="100dp"
             android:layout_height="100dp"
             android:layout_gravity="center_vertical"
-            android:layout_weight="0.01"
-            app:srcCompat="@mipmap/icon21" />
+            android:layout_weight="0.01" />
 
         <LinearLayout
             android:layout_width="wrap_content"

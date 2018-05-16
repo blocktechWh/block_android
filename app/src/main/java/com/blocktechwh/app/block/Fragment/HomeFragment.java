@@ -2,38 +2,39 @@ package com.blocktechwh.app.block.Fragment;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Paint;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
+import com.blocktechwh.app.block.Activity.Actions.StartActivity;
 import com.blocktechwh.app.block.Activity.Actions.VoteDetailActivity;
 import com.blocktechwh.app.block.Activity.Actions.VotedDetailActivity;
+import com.blocktechwh.app.block.Activity.MainActivity;
 import com.blocktechwh.app.block.Activity.RedTicket.GiftActivity;
+import com.blocktechwh.app.block.Bean.User;
 import com.blocktechwh.app.block.Common.App;
 import com.blocktechwh.app.block.Common.Urls;
 import com.blocktechwh.app.block.CustomView.MaxRecyclerView;
 import com.blocktechwh.app.block.R;
 import com.blocktechwh.app.block.Utils.CallBack;
 import com.blocktechwh.app.block.Utils.HttpClient;
+import com.blocktechwh.app.block.Utils.PreferencesUtils;
 
 import org.java_websocket.client.WebSocketClient;
-import org.java_websocket.drafts.Draft_17;
-import org.java_websocket.handshake.ServerHandshake;
 
-import java.io.UnsupportedEncodingException;
-import java.net.URI;
-import java.net.URISyntaxException;
-import java.nio.ByteBuffer;
-import java.nio.channels.NotYetConnectedException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -46,7 +47,6 @@ public class HomeFragment extends Fragment {
     private TextView tv_create_time;
     private ImageButton id_wallet_image;
     private View view;
-    private LinearLayout lo_gift_sure;
     private int id;
     private String tv_pray_text;
     private List<Map<String,Object>> voteDatas = new ArrayList<Map<String,Object>>();//投票数据列表
@@ -57,12 +57,16 @@ public class HomeFragment extends Fragment {
     private RecyclerView redTicketRecyclerView=new MaxRecyclerView(App.getContext());//投票列表对象
     private RedTicketListAdapter redTicketAdapter;
     private int voteId;
+    private String creater;
     private boolean isRaise;
     private static WebSocketClient client;
-
-
-
-
+    private JSONArray voteWaitData;
+    private JSONArray giftWaiteData;
+    private TextView tv_start_vote;
+    private TextView tv_send_gift;
+    private LinearLayout sv_data_list;
+    private LinearLayout ll_no_data;
+    private SwipeRefreshLayout swipeRefreshLayout ;
 
 
     @Override
@@ -73,79 +77,37 @@ public class HomeFragment extends Fragment {
         getData();
         addEvent();
 
-//        try
-//        {
-//            webSocketConnect();
-//        }
-//        catch(Exception e)
-//        {
-//            return view;
-//        }
         return view;
     }
 
     private void initData(){
         tv_pray=view.findViewById(R.id.tv_pray);
+        sv_data_list=view.findViewById(R.id.sv_data_list);
+        ll_no_data=view.findViewById(R.id.ll_no_data);
+        tv_start_vote=view.findViewById(R.id.tv_start_vote);
+        tv_send_gift=view.findViewById(R.id.tv_send_gift);
+        tv_start_vote.getPaint().setFlags(Paint.UNDERLINE_TEXT_FLAG); //下划线
+        tv_start_vote.getPaint().setAntiAlias(true);//抗锯齿
+        tv_send_gift.getPaint().setFlags(Paint.UNDERLINE_TEXT_FLAG); //下划线
+        tv_send_gift.getPaint().setAntiAlias(true);//抗锯齿
         tv_maker_name=view.findViewById(R.id.tv_maker_name);
         tv_create_time=view.findViewById(R.id.tv_create_time);
         id_wallet_image=view.findViewById(R.id.id_wallet_image);
-        lo_gift_sure=view.findViewById(R.id.lo_gift_sure);
+        swipeRefreshLayout = (SwipeRefreshLayout) view.findViewById(R.id.srl_main);
+        swipeRefreshLayout.setRefreshing(true);
     }
 
-    private void webSocketConnect()throws URISyntaxException, NotYetConnectedException, UnsupportedEncodingException {
+    @Override
+    public void setUserVisibleHint(boolean isVisibleToUser) {
+        super.setUserVisibleHint(isVisibleToUser);
+        if (isVisibleToUser) {
+            getData();
+        } else {
+            // 相当于Fragment的onPause
 
-        System.out.println("new client.");
-        client = new WebSocketClient(new URI("ws://111.231.146.57:20086/ws?token="+App.token),new Draft_17()) {
-
-            @Override
-            public void onOpen(ServerHandshake arg0) {
-                System.out.println("打开链接");
-            }
-
-            @Override
-            public void onMessage(String arg0) {
-                System.out.println("收到消息"+arg0);
-                if(arg0.contains("gift")){
-                    queryGifts();
-                }
-
-            }
-
-            @Override
-            public void onError(Exception arg0) {
-                arg0.printStackTrace();
-                System.out.println("发生错误已关闭");
-            }
-
-            @Override
-            public void onClose(int arg0, String arg1, boolean arg2) {
-                System.out.println(client.getURI());
-                System.out.println("链接已关闭");
-            }
-
-            @Override
-            public void onMessage(ByteBuffer bytes) {
-                try {
-                    System.out.println(new String(bytes.array(),"utf-8"));
-                } catch (UnsupportedEncodingException e) {
-                    e.printStackTrace();
-                }
-            }
-
-
-        };
-
-        client.connect();
-
-//        while(!client.getReadyState().equals(READYSTATE.OPEN)){
-//            System.out.println("还没有打开");
-//        }
-//        System.out.println("打开了");
-//        send("hello world".getBytes("utf-8"));
-        client.send("hello world");
-
-
+        }
     }
+
 
 
     class VoteListAdapter extends RecyclerView.Adapter<VoteListAdapter.MyViewHolder>{
@@ -161,8 +123,6 @@ public class HomeFragment extends Fragment {
             holder.tvVoteTheme.setText(voteDatas.get(position).get("voteTheme").toString());
             holder.tvCreateTime.setText(voteDatas.get(position).get("voteCreateTime").toString());
             holder.tvVoteMaker.setText(voteDatas.get(position).get("voteMaker").toString());
-
-
 
             //点击投票列表项
             holder.ll_vote_detail.setOnClickListener(toGiftSure=new View.OnClickListener() {
@@ -180,6 +140,7 @@ public class HomeFragment extends Fragment {
                         Bundle bundle = new Bundle();
                         bundle.putInt("voteId",voteId);//isRaise
                         bundle.putString("tv_active_name",tv_pray_text);
+                        bundle.putString("from","homeFragment");
                         Intent intent= new Intent(getActivity(), VoteDetailActivity.class);
                         intent.putExtras(bundle);
                         startActivity(intent);
@@ -192,8 +153,6 @@ public class HomeFragment extends Fragment {
                         intent.putExtras(bundle);
                         startActivity(intent);
                     }
-
-
                 }
             });
 
@@ -233,25 +192,85 @@ public class HomeFragment extends Fragment {
 
         @Override
         public void onBindViewHolder(MyViewHolder holder, final int position){
-            holder.redTicketTheme.setText(redTicketDatas.get(position).get("redTicketTheme").toString());
-            holder.redTicketMaker.setText(redTicketDatas.get(position).get("redTicketMaker").toString());
-            holder.redTicketTime.setText(redTicketDatas.get(position).get("redTicketTime").toString());
+            if(position<giftWaiteData.size()){
+                holder.redTicketTheme.setText(redTicketDatas.get(position).get("redTicketTheme").toString());
+                holder.redTicketMaker.setText(redTicketDatas.get(position).get("redTicketMaker").toString());
+                holder.redTicketTime.setText(redTicketDatas.get(position).get("redTicketTime").toString());
+                holder.id_sender_image.setImageResource(R.mipmap.icon24);
 
-            holder.lo_gift_sure.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    //GiftDetail
-                    int ticketId=Integer.parseInt(redTicketDatas.get(position).get("ticketId").toString());
-                    String tv_pray=redTicketDatas.get(position).get("redTicketTheme").toString();
-                    Bundle bundle=new Bundle();
-                    bundle.putInt("id",ticketId);
-                    bundle.putString("tv_pray",tv_pray);
+                holder.lo_gift_sure.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        //GiftDetail
+                        int ticketId=Integer.parseInt(redTicketDatas.get(position).get("ticketId").toString());
+                        String tv_pray=redTicketDatas.get(position).get("redTicketTheme").toString();
+                        Bundle bundle=new Bundle();
+                        bundle.putInt("id",ticketId);
+                        bundle.putString("tv_pray",tv_pray);
 
-                    Intent intent=new Intent(getContext(),GiftActivity.class);
-                    intent.putExtras(bundle);
-                    startActivity(intent);
+                        Intent intent=new Intent(getContext(),GiftActivity.class);
+                        intent.putExtras(bundle);
+                        startActivity(intent);
+                    }
+                });
+            }else{
+                holder.redTicketTheme.setText(redTicketDatas.get(position).get("voteTheme").toString());
+                holder.redTicketMaker.setText(redTicketDatas.get(position).get("voteMaker").toString());
+                holder.redTicketTime.setText(redTicketDatas.get(position).get("voteCreateTime").toString());
+                holder.id_sender_image.setImageResource(R.mipmap.icon25);
+
+                String myName=JSONObject.parseObject(PreferencesUtils.getString(getActivity(),"UserInfo",""), User.class).getName();
+                String voteMaker=redTicketDatas.get(position).get("creater").toString();
+                if(myName.equals(voteMaker)){
+                    holder.tv_my_self.setVisibility(View.VISIBLE);
+                }else{
+                    holder.tv_my_self.setVisibility(View.GONE);
                 }
-            });
+
+                holder.lo_gift_sure.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        voteId=Integer.parseInt(redTicketDatas.get(position).get("voteId").toString());
+                        creater=redTicketDatas.get(position).get("creater").toString();
+
+                        //查询投票是否已投
+                        HttpClient.get(this, Urls.QueryHasVoted+voteId, null, new CallBack<JSONObject>() {
+                            @Override
+                            public void onSuccess(JSONObject data) {
+                                System.out.println("是否已投返回值="+data);
+                                if(data.getString("data")=="false"){
+                                    //调http://111.231.146.57:20086/front/vote/overview/{voteId}
+                                    Bundle bundle = new Bundle();
+                                    bundle.putInt("voteId",voteId);//isRaise
+                                    bundle.putString("tv_active_name",tv_pray_text);
+                                    bundle.putString("creater",creater);
+                                    bundle.putString("from","homeFragment");
+                                    Intent intent= new Intent(getActivity(), VoteDetailActivity.class);
+                                    intent.putExtras(bundle);
+                                    startActivity(intent);
+                                }else{
+                                    //调http://111.231.146.57:20086/front/vote/statis/{voteId}
+                                    Bundle bundle = new Bundle();
+                                    bundle.putInt("voteId",voteId);
+                                    bundle.putBoolean("isOver",false);
+                                    bundle.putString("creater",creater);
+                                    Intent intent= new Intent(getActivity(), VotedDetailActivity.class);
+                                    intent.putExtras(bundle);
+                                    startActivity(intent);
+                                }
+                            }
+                        });
+                    }
+                });
+
+
+//                map_vote.put("voteTheme",voteWaitData.getJSONObject(i).getString("voteThrem"));
+//                map_vote.put("voteMaker","发起人"+"   "+voteWaitData.getJSONObject(i).getString("voteCreater"));
+//                map_vote.put("voteCreateTime","发起时间"+"   "+voteWaitData.getJSONObject(i).getString("createTime").substring(0,11));
+//                map_vote.put("voteId",voteWaitData.getJSONObject(i).getString("id"));
+//                map_vote.put("isRaise",voteWaitData.getJSONObject(i).getString("isRaise"));
+            }
+
         }
 
         @Override
@@ -260,15 +279,18 @@ public class HomeFragment extends Fragment {
         }
 
         class MyViewHolder extends RecyclerView.ViewHolder{
-            TextView redTicketTheme,redTicketTime,redTicketMaker;
-            LinearLayout lo_gift_sure;
+            TextView redTicketTheme,redTicketTime,redTicketMaker,tv_my_self;
+            RelativeLayout lo_gift_sure;
+            ImageView id_sender_image;
             public MyViewHolder(View view)
             {
                 super(view);
                 redTicketTheme = (TextView) view.findViewById(R.id.tv_pray);
-                redTicketTime = (TextView) view.findViewById(R.id.tv_maker_name);
-                redTicketMaker = (TextView) view.findViewById(R.id.tv_create_time);
-                lo_gift_sure= (LinearLayout) view.findViewById(R.id.lo_gift_sure);
+                redTicketTime = (TextView) view.findViewById(R.id.tv_create_time);
+                tv_my_self = (TextView) view.findViewById(R.id.tv_my_self);
+                redTicketMaker = (TextView) view.findViewById(R.id.tv_maker_name);
+                lo_gift_sure= (RelativeLayout) view.findViewById(R.id.lo_gift_sure);
+                id_sender_image= (ImageView) view.findViewById(R.id.id_sender_image);
             }
         }
     }
@@ -276,8 +298,17 @@ public class HomeFragment extends Fragment {
 
     private void addEvent(){
         //lo_gift_sure.setOnClickListener(toGiftSure);
+        tv_start_vote.setOnClickListener(startVote);
+        tv_send_gift.setOnClickListener(sendGift);
+        swipeRefreshLayout.setOnRefreshListener(reFreshData);
 
     }
+    private SwipeRefreshLayout.OnRefreshListener reFreshData = new SwipeRefreshLayout.OnRefreshListener(){
+        @Override
+        public void onRefresh(){
+            getData();
+        }
+    };
 
     private View.OnClickListener toGiftSure = new View.OnClickListener(){
         @Override
@@ -292,6 +323,29 @@ public class HomeFragment extends Fragment {
         }
     };
 
+    private View.OnClickListener startVote = new View.OnClickListener(){
+        @Override
+        public void onClick(View view){
+            clearVoteInfo();
+            Intent intent = new Intent(getActivity(),StartActivity.class);
+            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_EXCLUDE_FROM_RECENTS);
+            startActivity(intent);
+
+        }
+    };
+
+    private View.OnClickListener sendGift = new View.OnClickListener(){
+        @Override
+        public void onClick(View view){
+            Bundle bundle = new Bundle();
+            bundle.putString("from","HomeFragment");
+            Intent intent= new Intent(getActivity(), MainActivity.class);
+            intent.putExtras(bundle);
+            startActivity(intent);
+
+        }
+    };
+
     private void queryGifts(){
         //查询红包
         HttpClient.get(this, Urls.GiftWaitRecieveList, null, new CallBack<JSONArray>() {
@@ -299,12 +353,56 @@ public class HomeFragment extends Fragment {
             public void onSuccess(JSONArray data) {
 
                 System.out.print("待接收的红包列表="+data);
-                if(data.size()>0){
-                    operateGiftList(data);
-                }
+                giftWaiteData=data;
+                //查询投票列表
+                HttpClient.get(this, Urls.QueryVotesList, null, new CallBack<JSONArray>() {
+                    @Override
+                    public void onSuccess(JSONArray data) {
+                        System.out.println("待投票列表="+data);
+                        swipeRefreshLayout.setRefreshing(false);//取消刷新效果
+                        voteWaitData=data;
+                        if(giftWaiteData.size()>0||voteWaitData.size()>0){
+                            sv_data_list.setVisibility(View.VISIBLE);
+                            ll_no_data.setVisibility(View.GONE);
+                            operateGiftList(giftWaiteData);
+                        }else{
+
+                            sv_data_list.setVisibility(View.GONE);
+                            ll_no_data.setVisibility(View.VISIBLE);
+                        }
+
+
+                    }
+                });
+
 
             }
         });
+    }
+
+    private void clearVoteInfo(){
+        App.voteInfo.setIsAnonymous("true");
+        App.voteInfo.setBitmap(null);
+        App.voteInfo.getVoteRewardRule().clear();
+        App.voteInfo.setIsReward("false");
+        App.voteInfo.getPlayerList().clear();
+        App.voteInfo.setVoteExpireTime("");
+        App.voteInfo.getVoteTarget().clear();
+        App.voteInfo.getImgUrls().clear();
+        App.voteInfo.setVoteTheme("");
+        App.voteInfo.getOptions().clear();
+        App.voteInfo.setIsLimited("false");
+        App.voteInfo.getVoterTargetList().clear();
+        App.voteInfo.setIsRaise("true");
+        App.voteInfo.getCheckedRadioButtonList().clear();
+        App.voteInfo.setVoteExpireTime("");
+        App.voteInfo.getCheckedPositionList().clear();
+        App.voteInfo.setIfSetReward(false);
+        App.voteInfo.setFirstStepFinished(false);
+        App.voteInfo.setSecondStepFinished(false);
+        App.voteInfo.setThirdStepFinished(false);
+        App.voteInfo.setFouthStepFinished(false);
+        PreferencesUtils.putString(App.getContext(),"optionName","");
     }
 
 
@@ -314,18 +412,18 @@ public class HomeFragment extends Fragment {
 
 
         //查询投票
-        HttpClient.get(this, Urls.QueryVotesList, null, new CallBack<JSONArray>() {
-            @Override
-            public void onSuccess(JSONArray data) {
-                System.out.println("待投票列表="+data);
-                //Toast.makeText(getContext(),data.toString(),Toast.LENGTH_LONG).show();
-                operateVotesWait(data);
-            }
-        });
+//        HttpClient.get(this, Urls.QueryVotesList, null, new CallBack<JSONArray>() {
+//            @Override
+//            public void onSuccess(JSONArray data) {
+//                System.out.println("待投票列表="+data);
+//                operateVotesWait(data);
+//            }
+//        });
 
 
     }
 
+    //处理代投票列表
     private void operateVotesWait(JSONArray data){
         voteDatas.clear();
         //模拟投票列表数据
@@ -340,8 +438,9 @@ public class HomeFragment extends Fragment {
             voteDatas.add(map_vote);
         }
 
+
         //投票列表数据渲染
-        voteRecyclerView = (RecyclerView)view.findViewById(R.id.id_vote_wait_list);
+        //voteRecyclerView = (RecyclerView)view.findViewById(R.id.id_vote_wait_list);
         //voteRecyclerView.setNestedScrollingEnabled(false);
         voteRecyclerView.setLayoutManager(new LinearLayoutManager(App.getContext()));
         voteRecyclerView.setAdapter(voteAdapter = new VoteListAdapter());
@@ -354,7 +453,6 @@ public class HomeFragment extends Fragment {
         for(int i=0;i<data.size();i++){
             Map<String,Object> map_ticket=new HashMap();
             //Object obj=new Object();
-            System.out.print("object"+data.get(i));
             map_ticket.put("redTicketTheme",data.getJSONObject(i).getString("sendMsg"));
             map_ticket.put("redTicketMaker","发起人"+"   "+data.getJSONObject(i).getString("sendName"));
             map_ticket.put("redTicketTime","发起时间"+"   "+data.getJSONObject(i).getString("createTime").substring(0,11));
@@ -362,7 +460,18 @@ public class HomeFragment extends Fragment {
             redTicketDatas.add(map_ticket);
 
         }
-        //Toast.makeText(getContext(),redTicketDatas.toString(), Toast.LENGTH_LONG).show();
+
+        for(int i=0;i<voteWaitData.size();i++){
+            Map<String,Object> map_vote=new HashMap();
+            //Object obj=new Object();
+            map_vote.put("voteTheme",voteWaitData.getJSONObject(i).getString("voteThrem"));
+            map_vote.put("voteMaker","发起人"+"   "+voteWaitData.getJSONObject(i).getString("voteCreater"));
+            map_vote.put("voteCreateTime","发起时间"+"   "+voteWaitData.getJSONObject(i).getString("createTime").substring(0,11));
+            map_vote.put("voteId",voteWaitData.getJSONObject(i).getString("id"));
+            map_vote.put("isRaise",voteWaitData.getJSONObject(i).getString("isRaise"));
+            map_vote.put("creater",voteWaitData.getJSONObject(i).getString("voteCreater"));
+            redTicketDatas.add(map_vote);
+        }
 
         //投票列表数据渲染
         redTicketRecyclerView = (RecyclerView)view.findViewById(R.id.id_red_ticket_recive_wait_list);

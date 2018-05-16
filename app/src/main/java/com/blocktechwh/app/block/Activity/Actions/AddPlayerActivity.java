@@ -61,6 +61,7 @@ public class AddPlayerActivity extends TitleActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_vote_action_add);
         initTitle("添加投票项");
+        App.getInstance().addActivity(this);
         initData();
 
         bundle=this.getIntent().getExtras();
@@ -120,8 +121,6 @@ public class AddPlayerActivity extends TitleActivity {
         ll_player_img.setVisibility(View.GONE);
         tvToAddAction=(TextView) findViewById(R.id.tv_to_add_action);
         btnAddSure=(Button) findViewById(R.id.btn_add_sure);
-
-
 
         mRecyclerView = (RecyclerView)findViewById(R.id.id_action_recycler);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(App.getContext()));
@@ -233,7 +232,7 @@ public class AddPlayerActivity extends TitleActivity {
                     ll_option_add_button.setVisibility(View.VISIBLE);
                     ll_player_img.setVisibility(View.GONE);
 
-                    String item=et_action_input.getText().toString();
+                    String item=et_action_input.getText().toString().trim();
                     Map<String,Object> map=new HashMap<String, Object>();
                     map.put("item",item);
                     map.put("suppler",id);
@@ -266,7 +265,7 @@ public class AddPlayerActivity extends TitleActivity {
             public void onClick(View view) {
 
                 if(!et_action_input.getText().toString().trim().equals("")&&ll_player_img.getVisibility()==View.VISIBLE){
-                    String item=et_action_input.getText().toString();
+                    String item=et_action_input.getText().toString().trim();
                     Map<String,Object> map=new HashMap<String, Object>();
                     map.put("item",item);
                     map.put("suppler",id);
@@ -281,6 +280,8 @@ public class AddPlayerActivity extends TitleActivity {
                     Toast.makeText(AddPlayerActivity.this,"还未选择受益人",Toast.LENGTH_SHORT).show();
                     return;
                 }
+                //清空
+                PreferencesUtils.putString(AddPlayerActivity.this,"optionName","");
 
                 Bundle bundle=new Bundle();
                 bundle.putInt("id",id);
@@ -297,7 +298,7 @@ public class AddPlayerActivity extends TitleActivity {
     private View.OnClickListener getPlayer = new View.OnClickListener(){
         @Override
         public void onClick(View view) {
-            String etActionInput=et_action_input.getText().toString();
+            String etActionInput=et_action_input.getText().toString().trim();
             PreferencesUtils.putString(App.getContext(),"optionName",etActionInput);
 
             Bundle bundle=new Bundle();

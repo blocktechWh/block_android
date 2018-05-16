@@ -34,6 +34,8 @@ public class VoteFillActivity extends TitleActivity {
         setContentView(R.layout.activity_fill);
         initTitle("加注");
 
+        App.getInstance().addActivity(this);
+
         Bundle bundle=this.getIntent().getExtras();
         voteId=bundle.getInt("voteId");
         //Toast.makeText(VoteFillActivity.this,"voteId="+voteId, Toast.LENGTH_SHORT).show();
@@ -64,23 +66,26 @@ public class VoteFillActivity extends TitleActivity {
         btFillSure.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-         //给投票加注
-        JSONObject json_raise=new JSONObject();
-         json_raise.put("voteId",voteId);//投票id
-         json_raise.put("amount",et_fill_money.getText());//加注金额
 
-        HttpClient.post(this, Urls.MakeRaise, json_raise.toString(), new CallBack<JSONObject>() {
-            @Override
-            public void onSuccess(JSONObject data) {
-                System.out.print("投票加注返回="+data);
-                Toast.makeText(VoteFillActivity.this,"加注成功",Toast.LENGTH_SHORT).show();
-                VoteFillActivity.this.finish();
+                String amountRegex = "^\\d+$" ;
+                if(!et_fill_money.getText().toString().trim().matches(amountRegex)||Integer.parseInt(et_fill_money.getText().toString().trim())<=0){
+                    Toast.makeText(VoteFillActivity.this,"请输入有效金额",Toast.LENGTH_SHORT).show();
+                    return;
+                }
+                 //给投票加注
+                 JSONObject json_raise=new JSONObject();
+                 json_raise.put("voteId",voteId);//投票id
+                 json_raise.put("amount",et_fill_money.getText().toString().trim());//加注金额
 
-//                Intent intent = new Intent(VoteFillActivity.this,VoteDetailActivity.class);
-//                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_EXCLUDE_FROM_RECENTS);
-//                startActivity(intent);
-            }
-        });
+                 HttpClient.post(this, Urls.MakeRaise, json_raise.toString(), new CallBack<JSONObject>() {
+                    @Override
+                    public void onSuccess(JSONObject data) {
+                        System.out.print("投票加注返回="+data);
+                        Toast.makeText(VoteFillActivity.this,"加注成功",Toast.LENGTH_SHORT).show();
+                        VoteFillActivity.this.finish();
+
+                    }
+                });
             }
         });
     }

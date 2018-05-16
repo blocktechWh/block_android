@@ -36,4 +36,12 @@
         <item name="android:windowIsTranslucent">true</item>
         <item name="android:windowAnimationStyle">@style/Base.AlertDialog.AppCompat.Light</item>
     </style>
+
+    <style name="tallerBarStyle" parent="@android:style/Widget.ProgressBar.Horizontal">
+        <item name="android:minWidth">35dip</item>
+        <item name="android:maxWidth">35dip</item>
+        <item name="android:minHeight">35dip</item>
+        <item name="android:maxHeight">35dip</item>
+        <item name="android:progressDrawable">@drawable/progress_horizontal1</item>
+    </style>
 </resources>

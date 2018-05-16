@@ -34,6 +34,8 @@ public class RedTicketForSentActivity extends TitleActivity {
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.view_sended);
+        App.getInstance().addActivity(this);
+
         Toast.makeText(RedTicketForSentActivity.this,"该页面被加载了",Toast.LENGTH_SHORT).show();
         initView();
     }

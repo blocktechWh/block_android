@@ -9,8 +9,10 @@
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW" />
-
-
+    <!--调用相机-->
+    <uses-permission android:name="android.permission.CAMERA" />
+    <!--访问网络信息-->
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <application
         android:name=".Common.App"
         android:allowBackup="true"
@@ -43,16 +45,18 @@
         <activity android:name=".Activity.User.UpdateUserInfoActivity" />
         <activity android:name=".Activity.User.VersionsActivity" />
         <activity android:name=".Activity.User.UpdatePasswardActivity" />
+        <activity android:name=".Activity.User.QrCodeActivity" />
         <activity android:name=".Activity.Contact.AddNewContactActivity" />
         <activity android:name=".Activity.Contact.AddNewContactActivity$AddContactByPhoneActivity" />
-        <activity android:name=".Activity.RedTicket.RedTicketDetailActivity" />
+        <activity android:name=".Activity.Contact.AcceptNewActivity" />
         <activity android:name=".Activity.Actions.VotesListActivity" />
         <activity android:name=".Activity.Actions.StartActivity" />
         <activity android:name=".Activity.Actions.AddPlayerActivity" />
         <activity android:name=".Activity.Actions.PlayersSelectListActivity" />
         <activity android:name=".Activity.Contact.ContactDetailActivity" />
         <activity android:name=".Activity.Contact.ContactDetailForSendActivity" />
-        <activity android:name=".Activity.RedTicket.SendRedTicket" />
+        <activity android:name=".Activity.RedTicket.SendRedTicketActivity" />
+        <activity android:name=".Activity.RedTicket.RedTicketDetailActivity" />
         <activity android:name=".Activity.RedTicket.RedTicketForSentActivity" />
         <activity android:name=".Activity.RedTicket.RedTicketResultActivity" />
         <activity android:name=".Activity.Contact.ContactRequestActivity"></activity>

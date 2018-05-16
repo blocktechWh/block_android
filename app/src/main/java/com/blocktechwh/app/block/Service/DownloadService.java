@@ -85,12 +85,10 @@ public class DownloadService extends Service {
         builder.setContentText(content);
         if (progress >= 100) {
             //下载完成
-
             builder.setContentIntent(getInstallIntent());
         }
         mNotification = builder.build();
         mNotificationManager.notify(0, mNotification);
-
 
     }
 
@@ -120,14 +118,15 @@ public class DownloadService extends Service {
         OkHttpUtils.get().url(url).build().execute(new FileCallBack(Environment.getExternalStorageDirectory().getAbsolutePath(), "block_android") {
             @Override
             public void onError(Call call, Exception e, int id) {
-                notifyMsg("温馨提醒", "文件下载失败", 0);
+                notifyMsg("温馨提醒", "文件下载失败，请尝试重新下载", 0);
+
                 stopSelf();
             }
 
             @Override
             public void onResponse(File response, int id) {
                 //当文件下载完成后回调
-                notifyMsg("温馨提醒", "文件下载已完成", 100);
+                notifyMsg("温馨提醒", "文件下载已完成，点击安装", 100);
 
                 stopSelf();
             }
@@ -169,8 +168,10 @@ public class DownloadService extends Service {
                     JSONObject jsonObject=JSON.parseObject(sb.toString());
 
                     versionName=jsonObject.getString("version");
+                    App.newVersionName=versionName;
 
                     if(!versionName.equals(App.versionName)){
+                        //
                         //    通过AlertDialog.Builder这个类来实例化我们的一个AlertDialog的对象
                         AlertDialog.Builder builder = new AlertDialog.Builder(getApplicationContext());
                         final AlertDialog alertDialog = builder.create();
@@ -185,7 +186,7 @@ public class DownloadService extends Service {
                         alertDialog.setCancelable(false);
 
                         //设置Content来显示一个信息
-                        alertDialog.setMessage("系统检测到一个最新版本("+versionName+")，是否更新?");
+                        alertDialog.setMessage("系统检测到一个最新版本("+versionName+")，是否更新?"+"\n\n"+"若更新，请在通知栏查看下载情况");
 
                         //设置一个PositiveButton
                         alertDialog.setButton("现在更新", new DialogInterface.OnClickListener() {
@@ -219,6 +220,7 @@ public class DownloadService extends Service {
 //                String id=response.getS
 
                 stopSelf();
+
             }
 
             @Override

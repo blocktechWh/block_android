@@ -13,7 +13,9 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.blocktechwh.app.block.Activity.RedTicket.SendRedTicket;
+import com.alibaba.fastjson.JSONObject;
+import com.blocktechwh.app.block.Activity.MainActivity;
+import com.blocktechwh.app.block.Activity.RedTicket.SendRedTicketActivity;
 import com.blocktechwh.app.block.Common.App;
 import com.blocktechwh.app.block.Common.Urls;
 import com.blocktechwh.app.block.CustomView.TitleActivity;
@@ -21,7 +23,6 @@ import com.blocktechwh.app.block.R;
 import com.blocktechwh.app.block.Utils.CallBack;
 import com.blocktechwh.app.block.Utils.HttpClient;
 
-import org.json.JSONObject;
 
 /**
  * Created by eagune on 2017/11/13.
@@ -50,17 +51,16 @@ public class ContactDetailActivity extends TitleActivity {
 
         Bundle bundle = this.getIntent().getExtras();
 
-        isFriend = bundle.getBoolean("isFriend");
-        name = bundle.getString("name");
-        email = bundle.getString("email");
-        phone = bundle.getString("phone");
-        address = bundle.getString("address");
-        sex = bundle.getString("sex");
-        img = bundle.getString("img");
         id = bundle.getString("id");
+        isFriend = bundle.getBoolean("isFriend");
+        img = bundle.getString("img");
 
         initTitle("详细资料");
+
+        App.getInstance().addActivity(this);
+
         initView();
+        getDta();
     }
 
     private void initView(){
@@ -83,8 +83,7 @@ public class ContactDetailActivity extends TitleActivity {
                     bundle.putString("name",name);
                     bundle.putString("img",img);
 
-
-                    Intent intent= new Intent(ContactDetailActivity.this, SendRedTicket.class);
+                    Intent intent= new Intent(ContactDetailActivity.this, SendRedTicketActivity.class);
                     intent.putExtras(bundle);
                     startActivity(intent);
                 }
@@ -100,11 +99,6 @@ public class ContactDetailActivity extends TitleActivity {
             });
         }
 
-        ((TextView)findViewById(R.id.id_user_name)).setText(name);
-        ((TextView)findViewById(R.id.id_text_email)).setText(email);
-        ((TextView)findViewById(R.id.id_text_phone)).setText(phone);
-        ((TextView)findViewById(R.id.id_user_address)).setText(address);
-        ((TextView)findViewById(R.id.id_text_sex)).setText(sex);
 
         String url = Urls.HOST + "staticImg" + img;
         HttpClient.getImage(this, url, new CallBack<Bitmap>() {
@@ -121,6 +115,11 @@ public class ContactDetailActivity extends TitleActivity {
             @Override
             public void onSuccess(Object result) {
                 Toast.makeText(App.getContext(),"已发送",Toast.LENGTH_SHORT).show();
+                Bundle bundle = new Bundle();
+                bundle.putString("from","ContactDetailActivity");
+                Intent intent= new Intent(ContactDetailActivity.this, MainActivity.class);
+                intent.putExtras(bundle);
+                startActivity(intent);
             }
         });
     }
@@ -142,7 +141,11 @@ public class ContactDetailActivity extends TitleActivity {
                             @Override
                             public void onSuccess(Object result) {
                                 Toast.makeText(App.getContext(),"已解除好友关系",Toast.LENGTH_SHORT).show();
-                                finish();
+                                Bundle bundle = new Bundle();
+                                bundle.putString("from","ContactDetailActivity");
+                                Intent intent= new Intent(ContactDetailActivity.this, MainActivity.class);
+                                intent.putExtras(bundle);
+                                startActivity(intent);
                             }
                         });
 
@@ -155,6 +158,26 @@ public class ContactDetailActivity extends TitleActivity {
                         // 点击“返回”后的操作,这里不设置没有任何操作
                     }
                 }).show();
+
+    }
+
+    private void getDta(){
+        //获取联系人详情
+        HttpClient.get(this, Urls.GetUserInfoById+id, null, new CallBack<JSONObject>() {
+            @Override
+            public void onSuccess(JSONObject data) {
+                System.out.println("联系人详情="+data);
+                operateContactDetail(data);
+            }
+        });
+    }
+
+    private void operateContactDetail(JSONObject data){
+        ((TextView)findViewById(R.id.id_user_name)).setText(data.getString("name"));
+        ((TextView)findViewById(R.id.id_text_email)).setText(data.getString("email"));
+        ((TextView)findViewById(R.id.id_text_phone)).setText(data.getString("phone"));
+        ((TextView)findViewById(R.id.id_user_address)).setText(data.getString("address"));
+        ((TextView)findViewById(R.id.id_text_sex)).setText(data.getInteger("sex")==1?"男":"女");
 
     }
 

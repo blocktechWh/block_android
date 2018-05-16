@@ -61,14 +61,14 @@
             android:layout_marginBottom="25dp"
             android:layout_marginTop="5dp">
 
-            <TextView
-                android:id="@+id/textView86"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+            <ImageView
+                android:id="@+id/imageView30"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
                 android:layout_gravity="center_vertical"
-                android:layout_marginLeft="15dp"
-                android:layout_marginStart="15dp"
-                android:text="￥" />
+                android:layout_marginLeft="10dp"
+                android:layout_marginStart="10dp"
+                app:srcCompat="@mipmap/icon_coin" />
 
             <EditText
                 android:id="@+id/et_fill_money"
@@ -76,8 +76,9 @@
                 android:layout_height="wrap_content"
                 android:ems="10"
                 android:inputType="number"
-                android:paddingLeft="30dp"
-                android:paddingStart="30dp" />
+                android:paddingLeft="35dp"
+                android:paddingStart="35dp" />
+
         </FrameLayout>
     </LinearLayout>
 

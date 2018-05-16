@@ -2,7 +2,9 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/appBackground"
     android:orientation="vertical">
+
     <include
         android:id="@+id/include"
         layout="@layout/titlebar_view" />
@@ -10,18 +12,51 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical">
+        android:layout_marginTop="1dp"
+        android:background="@color/white"
+        android:orientation="vertical"
+        android:paddingEnd="@dimen/padding_right"
+        android:paddingLeft="@dimen/padding_left"
+        android:paddingRight="@dimen/padding_right"
+        android:paddingStart="@dimen/padding_left"
+        android:paddingTop="19dp">
 
         <TextView
             android:id="@+id/textView64"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="请在部落客钱包中转账至一下账户：" />
+            android:layout_height="30dp"
+            android:gravity="center_vertical"
+            android:text="请在部落客钱包中转账至以下账户："
+            android:textSize="16sp" />
 
         <TextView
             android:id="@+id/textView66"
+            android:layout_width="wrap_content"
+            android:layout_height="35dp"
+            android:background="@color/appBackground"
+            android:gravity="center_vertical"
+            android:paddingLeft="8dp"
+            android:paddingRight="8dp"
+            android:text="18418899588703790989L" />
+
+        <TextView
+            android:id="@+id/textView15"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="983757495794075L" />
+            android:layout_marginBottom="5dp"
+            android:layout_marginTop="5dp"
+            android:text="或" />
+
+        <TextView
+            android:id="@+id/textView19"
+            android:layout_width="wrap_content"
+            android:layout_height="35dp"
+            android:background="@color/appBackground"
+            android:gravity="center_vertical"
+            android:paddingEnd="8dp"
+            android:paddingLeft="8dp"
+            android:paddingRight="8dp"
+            android:paddingStart="8dp"
+            android:text="SUP" />
     </LinearLayout>
 </LinearLayout>

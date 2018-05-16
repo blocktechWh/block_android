@@ -14,11 +14,5 @@
             <solid android:color="#FFFFFF" />
         </shape>
     </item>
-    <!--<item android:top="2dp">-->
-        <!--<shape>-->
-            <!--&lt;!&ndash;     View填充颜色 &ndash;&gt;-->
-            <!--<solid android:color="#FFFFFF" />-->
-        <!--</shape>-->
-    <!--</item>-->
 
 </layer-list>

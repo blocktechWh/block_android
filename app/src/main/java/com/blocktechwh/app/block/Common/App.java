@@ -1,5 +1,6 @@
 package com.blocktechwh.app.block.Common;
 
+import android.app.Activity;
 import android.app.Application;
 import android.content.Context;
 import android.content.Intent;
@@ -10,8 +11,8 @@ import android.os.Handler;
 import com.alibaba.fastjson.JSONObject;
 import com.blocktechwh.app.block.Bean.User;
 import com.blocktechwh.app.block.Bean.VoteInfo;
-import com.blocktechwh.app.block.Utils.PreferencesUtils;
 import com.blocktechwh.app.block.Utils.ConfigPropertiesUtil;
+import com.blocktechwh.app.block.Utils.PreferencesUtils;
 
 import org.java_websocket.client.WebSocketClient;
 import org.java_websocket.drafts.Draft_17;
@@ -22,6 +23,9 @@ import java.net.URI;
 import java.net.URISyntaxException;
 import java.nio.ByteBuffer;
 import java.nio.channels.NotYetConnectedException;
+import java.util.ArrayList;
+import java.util.LinkedList;
+import java.util.List;
 
 /**
  * Created by eagune on 2017/11/1.
@@ -30,18 +34,22 @@ public class App extends Application{
 
     public static Context context;
     public static String versionName;
+    public static String newVersionName;
     public static String token = "";
     public static String phone = "";
     public static User userInfo;
+    public static List<Integer>contactIdList;
     public static VoteInfo voteInfo=new VoteInfo();
     private static WebSocketClient client;
     private Handler mHandler = null;
     private boolean isBackground = true;
+    private static App instance;
+    private List<Activity> activityList = new LinkedList();
 
     @Override
     public void onCreate() {
         super.onCreate();
-
+        contactIdList=new ArrayList<>();
         context=getApplicationContext();
         PreferencesUtils.putString(App.getContext(),"optionName","");//清空投票项缓存内容
         setVersionName();//设置版本号
@@ -55,6 +63,31 @@ public class App extends Application{
         super.onTerminate();
 
     }
+
+    //单例模式中获取唯一的ExitApplication实例
+    public static App getInstance()
+    {
+        if(null == instance)
+        {
+            instance = new App();
+        }
+        return instance;
+    }
+    //添加Activity到容器中
+    public void addActivity(Activity activity)
+    {
+        activityList.add(activity);
+    }
+    //遍历所有Activity并finish
+    public void exit()
+    {
+        for(Activity activity:activityList)
+        {
+            activity.finish();
+        }
+        System.exit(0);
+    }
+
 
     private void notifyForeground() {
         // This is where you can notify listeners, handle session tracking, etc

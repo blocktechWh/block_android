@@ -16,6 +16,7 @@ public class VoteDetail {
     private static Double rewardTotal;
     private static List<String> playersList;
     private static List<String> checkedOptionIds;
+    private static String creater;
 
     public VoteDetail(){
 
@@ -83,5 +84,13 @@ public class VoteDetail {
 
     public static void setCheckedOptionIds(List<String> checkedOptionIds) {
         VoteDetail.checkedOptionIds = checkedOptionIds;
+    }
+
+    public static String getCreater() {
+        return creater;
+    }
+
+    public static void setCreater(String creater) {
+        VoteDetail.creater = creater;
     }
 }

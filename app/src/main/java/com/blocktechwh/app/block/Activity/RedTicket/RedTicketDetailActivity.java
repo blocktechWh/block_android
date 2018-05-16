@@ -50,8 +50,10 @@ public class RedTicketDetailActivity extends TitleActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_redticket_detail);
-
         initTitle("红包");
+
+        App.getInstance().addActivity(this);
+
         initView();
 
         getData();
@@ -101,10 +103,10 @@ public class RedTicketDetailActivity extends TitleActivity {
     private void activeTab(Integer index){
         if(index == 0){
             tv_name.setText(App.userInfo.getName()+"共发出");
-            tv_recive.setText("¥ "+count_send);
+            tv_recive.setText(" "+count_send);
         }else{
             tv_name.setText(App.userInfo.getName()+"共收到");
-            tv_recive.setText("¥ "+count_recive);
+            tv_recive.setText(" "+count_recive);
         }
         mTabLayout.getTabAt(tabIndex).getCustomView().setBackgroundColor(Color.parseColor("#FFFFFF"));
         mTabLayout.getTabAt(tabIndex = index).getCustomView().setBackgroundColor(Color.parseColor("#F6F6F6"));
@@ -163,7 +165,7 @@ public class RedTicketDetailActivity extends TitleActivity {
                 count_send = data.getInteger("data");
                 Integer index = mViewPager.getCurrentItem();
                 if(index==0){
-                    tv_recive.setText("¥ "+count_send);
+                    tv_recive.setText(" "+count_send);
                 }
             }
         });
@@ -174,7 +176,7 @@ public class RedTicketDetailActivity extends TitleActivity {
                 count_recive = data.getInteger("data");
                 Integer index = mViewPager.getCurrentItem();
                 if(index==1){
-                    tv_recive.setText("¥ "+count_recive);
+                    tv_recive.setText(" "+count_recive);
                 }
             }
         });

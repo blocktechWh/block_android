@@ -1,10 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical">
 
     <FrameLayout
+        android:id="@+id/fl_option"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/margin_top"
@@ -18,23 +20,96 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
+            android:layout_marginStart="40dp"
+            android:text="问问饿烦烦烦"
             android:textColor="@color/itemTextColor" />
 
         <ProgressBar
             android:id="@+id/pbVoteCountProgress"
-            style="?android:attr/progressBarStyleHorizontal"
-            android:layout_width="100dp"
+            style="@style/tallerBarStyle"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_gravity="center_vertical|center_horizontal"
-            android:progress="0"
-            android:progressBackgroundTint="@android:color/darker_gray" />
+            android:alpha="0.5"
+            android:elevation="0dp"
+            android:progress="80"
+            android:progressBackgroundTint="@color/gray" />
 
         <TextView
             android:id="@+id/tv_number_percetage"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="right|center_vertical"
+            android:layout_marginEnd="35dp"
+            android:layout_marginRight="35dp"
+            android:text="4%(2人)"
             android:textColor="@color/itemTextColor" />
 
+        <ImageView
+            android:id="@+id/iv_array"
+            android:layout_width="15dp"
+            android:layout_height="10dp"
+            android:layout_gravity="right|center_vertical"
+            android:layout_marginRight="10dp"
+            android:background="@mipmap/icon5" />
+
+        <TextView
+            android:id="@+id/tv_is_mysele"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_marginLeft="10dp"
+            android:layout_marginStart="10dp"
+            android:text="✔"
+            android:textColor="@color/btnColor"
+            android:textSize="16sp"
+            android:visibility="gone" />
+
     </FrameLayout>
+
+    <LinearLayout
+        android:id="@+id/ll_voters_info"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+        android:orientation="vertical"
+        android:paddingEnd="50dp"
+        android:paddingLeft="50dp"
+        android:paddingRight="50dp"
+        android:paddingStart="50dp">
+
+        <TextView
+            android:id="@+id/textView44"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="8dp"
+            android:layout_marginTop="10dp"
+            android:text="投此选项的人："
+            android:textColor="@color/itemTextColor" />
+
+        <LinearLayout
+            android:id="@+id/ll_voters_container"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"></LinearLayout>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/ll_no_option"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:background="@color/white"
+        android:gravity="center_vertical|center_horizontal"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/textView11"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center_horizontal"
+            android:text="还没有人投这个哦"
+            android:textColor="@color/itemTextColor" />
+    </LinearLayout>
+
 </LinearLayout>

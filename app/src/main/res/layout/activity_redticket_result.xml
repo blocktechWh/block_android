@@ -99,24 +99,25 @@
             android:gravity="center_vertical|center_horizontal">
 
             <TextView
-                android:id="@+id/textView53"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_centerVertical="true"
-                android:text="￥ "
-                android:textColor="@color/redTicketBorderColor"
-                android:textSize="20sp" />
-
-            <TextView
                 android:id="@+id/tv_gift_amount"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentTop="true"
-                android:layout_toEndOf="@+id/textView53"
-                android:layout_toRightOf="@+id/textView53"
                 android:gravity="center_horizontal"
+                android:text="100"
                 android:textColor="@color/redTicketBorderColor"
                 android:textSize="30sp" />
+
+            <ImageView
+                android:id="@+id/imageView7"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="5dp"
+                android:layout_marginStart="5dp"
+                android:layout_toEndOf="@+id/tv_gift_amount"
+                android:layout_toRightOf="@+id/tv_gift_amount"
+                app:srcCompat="@mipmap/icon_coin" />
         </RelativeLayout>
 
     </LinearLayout>

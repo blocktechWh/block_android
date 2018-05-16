@@ -102,6 +102,14 @@ public class Urls {
     public static final String GetUserInfoById = HOST+"front/user/id/";
 
     /**
+     * 选出用户联系人列表中的用户列表POST
+     * phones:List
+     *
+     * 返回值:{userName:Sring,sex:Int,phone:String,email:String,address:String}
+     */
+    public static final String QueryUsers = HOST+"front/link/isplat/";
+
+    /**
      * 根据用户信息二维码串获取用户信息GET
      * userQrCodeString:Int
      *

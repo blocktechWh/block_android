@@ -22,8 +22,8 @@ public class VoteInfo implements Serializable{
     private  String voteExpireTime;
     private  List<Map<String,Object>>options;
     private  List<Integer>voteTarget;
-    private  List<Double>voteRewardRule;
-    private  Double voteFee;
+    private  List<Integer>voteRewardRule;
+    private  int voteFee;
     private  List<Integer>voterList;
     private  List<Map<String,Object>>playerList;
     private  List<Integer>voterTargetList;
@@ -31,6 +31,10 @@ public class VoteInfo implements Serializable{
     private  List<Integer>checkedRadioButtonList;
     private  List<Integer>checkedPositionList;
     private  boolean ifSetReward;
+    private  boolean isFirstStepFinished;
+    private  boolean isSecondStepFinished;
+    private  boolean isThirdStepFinished;
+    private  boolean isFouthStepFinished;
 
 
 
@@ -40,7 +44,7 @@ public class VoteInfo implements Serializable{
         this.isRaise="false";
         this.isReward="false";
         this.ifSetReward=false;
-        this.voteFee=0.0;
+        this.voteFee=0;
         this.bitmap=null;
         this.ifSetReward=false;
         this.options=new ArrayList<>();
@@ -52,6 +56,10 @@ public class VoteInfo implements Serializable{
         this.checkedRadioButtonList=new ArrayList<>();
         this.checkedPositionList=new ArrayList<>();
         this.imgUrls=new ArrayList<>();
+        this.isFirstStepFinished=false;
+        this.isSecondStepFinished=false;
+        this.isThirdStepFinished=false;
+        this.isFouthStepFinished=false;
     }
 
     public  List<String> getImgUrls() {
@@ -107,19 +115,19 @@ public class VoteInfo implements Serializable{
         this.voteTarget = voteTarget;
     }
 
-    public  List<Double> getVoteRewardRule() {
+    public  List<Integer> getVoteRewardRule() {
         return voteRewardRule;
     }
 
-    public  void setVoteRewardRule(List<Double> voteRewardRule) {
+    public  void setVoteRewardRule(List<Integer> voteRewardRule) {
         this.voteRewardRule = voteRewardRule;
     }
 
-    public  Double getVoteFee() {
+    public  int getVoteFee() {
         return voteFee;
     }
 
-    public  void setVoteFee(Double voteFee) {
+    public  void setVoteFee(int voteFee) {
         this.voteFee = voteFee;
     }
 
@@ -211,4 +219,41 @@ public class VoteInfo implements Serializable{
     public  void setIfSetReward(boolean ifSetReward) {
         this.ifSetReward = ifSetReward;
     }
+
+    public boolean isIfSetReward() {
+        return ifSetReward;
+    }
+
+    public boolean isFirstStepFinished() {
+        return isFirstStepFinished;
+    }
+
+    public void setFirstStepFinished(boolean firstStepFinished) {
+        isFirstStepFinished = firstStepFinished;
+    }
+
+    public boolean isSecondStepFinished() {
+        return isSecondStepFinished;
+    }
+
+    public void setSecondStepFinished(boolean secondStepFinished) {
+        isSecondStepFinished = secondStepFinished;
+    }
+
+    public boolean isThirdStepFinished() {
+        return isThirdStepFinished;
+    }
+
+    public void setThirdStepFinished(boolean thirdStepFinished) {
+        isThirdStepFinished = thirdStepFinished;
+    }
+
+    public boolean isFouthStepFinished() {
+        return isFouthStepFinished;
+    }
+
+    public void setFouthStepFinished(boolean fouthStepFinished) {
+        isFouthStepFinished = fouthStepFinished;
+    }
+
 }

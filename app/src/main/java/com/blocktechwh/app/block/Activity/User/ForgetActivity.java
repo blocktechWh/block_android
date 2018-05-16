@@ -31,6 +31,9 @@ public class ForgetActivity extends TitleActivity {
         setContentView(R.layout.activity_forget);
 
         initTitle("忘记密码");
+
+        App.getInstance().addActivity(this);
+
         initView();
         addEvent();
     }
@@ -56,7 +59,7 @@ public class ForgetActivity extends TitleActivity {
     private View.OnClickListener sendYzm = new View.OnClickListener(){
         @Override
         public void onClick(View view){
-            String phone=et_phone_number.getText().toString();
+            String phone=et_phone_number.getText().toString().trim();
 
             if("".equals(phone)){
                 Toast.makeText(App.getContext(),"请输入手机号",Toast.LENGTH_SHORT).show();
@@ -65,7 +68,7 @@ public class ForgetActivity extends TitleActivity {
 
             //"[1]"代表第1位为数字1，"[358]"代表第二位可以为3、5、8中的一个，"\\d{9}"代表后面是可以是0～9的数字，有9位。
             String telRegex = "[1][34578]\\d{9}" ;
-            if (!phone.matches( telRegex )){
+            if (phone.length()!=11){
                 Toast.makeText(App.getContext(),"无效手机号",Toast.LENGTH_SHORT).show();
                 return;
             }
@@ -74,7 +77,8 @@ public class ForgetActivity extends TitleActivity {
             HttpClient.get(this, Urls.ForgetPasswordActiveCode+phone, null, new CallBack<JSONObject>() {
                 @Override
                 public void onSuccess(JSONObject data) {
-                    Toast.makeText(App.getContext(),data.toString(),Toast.LENGTH_SHORT).show();
+                    System.out.println("验证码="+data);
+                    Toast.makeText(App.getContext(),data.getString("data").toString(),Toast.LENGTH_SHORT).show();
 
                 }
             });
@@ -84,10 +88,10 @@ public class ForgetActivity extends TitleActivity {
     private View.OnClickListener commit = new View.OnClickListener(){
         @Override
         public void onClick(View view){
-            String phone=et_phone_number.getText().toString();
-            String code=et_yzm.getText().toString();
-            String passWord=et_pwd.getText().toString();
-            String passWord1=et_pwd1.getText().toString();
+            String phone=et_phone_number.getText().toString().trim();
+            String code=et_yzm.getText().toString().trim();
+            String passWord=et_pwd.getText().toString().trim();
+            String passWord1=et_pwd1.getText().toString().trim();
 
             if(phone.equals("")){
                 Toast.makeText(App.getContext(),"请输入手机号",Toast.LENGTH_SHORT).show();

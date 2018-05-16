@@ -1,12 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="vertical">
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="45dp"
+        android:layout_height="35dp"
         android:paddingEnd="@dimen/padding_right"
         android:paddingLeft="@dimen/padding_left"
         android:paddingRight="@dimen/padding_right"
@@ -23,48 +24,25 @@
             android:text="第1名"
             android:textColor="@color/itemTextColor" />
 
-        <EditText
+        <TextView
             android:id="@+id/et_reward_percent"
-            android:layout_width="50dp"
-            android:layout_height="40dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:layout_centerVertical="true"
             android:layout_marginLeft="20dp"
             android:layout_marginStart="20dp"
             android:layout_toEndOf="@+id/tv_rank_text"
-            android:layout_toRightOf="@+id/tv_rank_text"
-            android:ems="10"
-            android:inputType="textPersonName"
-            android:textColor="@color/itemTextColor"
-            android:textSize="14sp" />
+            android:layout_toRightOf="@+id/tv_rank_text" />
 
-        <TextView
-            android:id="@+id/textView17"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+        <ImageView
+            android:id="@+id/imageView29"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
             android:layout_centerVertical="true"
+            android:layout_marginLeft="5dp"
+            android:layout_toEndOf="@+id/et_reward_percent"
             android:layout_toRightOf="@+id/et_reward_percent"
-            android:text="%"
-            android:textColor="@color/itemTextColor" />
-
-        <TextView
-            android:id="@+id/textView23"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignBaseline="@+id/tv_reward_amount"
-            android:layout_alignBottom="@+id/tv_reward_amount"
-            android:layout_toLeftOf="@+id/tv_reward_amount"
-            android:layout_toStartOf="@+id/tv_reward_amount"
-            android:text="约￥"
-            android:textColor="@color/itemTextColor" />
-
-        <TextView
-            android:id="@+id/tv_reward_amount"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentRight="true"
-            android:layout_centerVertical="true"
-            android:text="80.0"
-            android:textColor="@color/itemTextColor" />
+            app:srcCompat="@mipmap/icon_coin" />
 
     </RelativeLayout>
 </LinearLayout>

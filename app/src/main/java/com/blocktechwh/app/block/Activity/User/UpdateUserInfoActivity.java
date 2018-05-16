@@ -45,8 +45,10 @@ public class UpdateUserInfoActivity extends TitleActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_update_user_info);
-
         initTitle("更新用户资料");
+
+        App.getInstance().addActivity(this);
+
         initView();
     }
 
@@ -80,7 +82,7 @@ public class UpdateUserInfoActivity extends TitleActivity {
     }
 
     private void setUserData(){
-        userName.setText(App.userInfo.getName());
+        userName.setText(JSONObject.parseObject(PreferencesUtils.getString(this,"UserInfo",""), User.class).getName());
         userPhone.setText(App.userInfo.getPhone());
         userAddress.setText(App.userInfo.getAddress());
         userSex.setText(App.userInfo.getSex());
@@ -136,7 +138,7 @@ public class UpdateUserInfoActivity extends TitleActivity {
                 App.userInfo = result.toJavaObject(User.class);
                 //setUserData();
                 PreferencesUtils.putString(App.getContext(),"UserInfo", JSONObject.toJSONString(App.userInfo));
-            }
+                setUserData();            }
         });
     }
 

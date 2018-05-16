@@ -8,33 +8,27 @@
     android:background="@color/gray"
     tools:context=".Activity.MainActivity">
 
-    <LinearLayout
-        android:orientation="vertical"
+    <com.blocktechwh.app.block.CustomView.NonSwipeableViewPager
+        android:id="@+id/container1"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
-        <com.blocktechwh.app.block.CustomView.NonSwipeableViewPager
-            android:layout_width="match_parent"
-            android:layout_height="0px"
-            android:layout_weight="1"
-            android:id="@+id/container1"
-            />
-        <android.support.design.widget.TabLayout
-            app:tabIndicatorHeight="0dp"
-            app:tabPadding="0dp"
-            app:tabPaddingBottom="-1dp"
-            app:tabPaddingEnd="-1dp"
-            app:tabPaddingStart="-1dp"
-            app:tabPaddingTop="-1dp"
-            app:tabMode="fixed"
-            app:tabGravity="fill"
-            app:tabMaxWidth="0dp"
-            android:layout_width="match_parent"
-            android:layout_height="179px"
-            android:background="@color/white"
-            android:id="@+id/tabHost"
-            android:layout_alignParentBottom="true"
-            />
+        android:layout_height="match_parent"
+        android:layout_marginBottom="179px"
+        android:layout_weight="1" />
 
-    </LinearLayout>
+    <android.support.design.widget.TabLayout
+        android:id="@+id/tabHost"
+        android:layout_width="match_parent"
+        android:layout_height="179px"
+        android:layout_alignParentBottom="true"
+        android:background="@color/white"
+        app:tabGravity="fill"
+        app:tabIndicatorHeight="0dp"
+        app:tabMaxWidth="0dp"
+        app:tabMode="fixed"
+        app:tabPadding="0dp"
+        app:tabPaddingBottom="-1dp"
+        app:tabPaddingEnd="-1dp"
+        app:tabPaddingStart="-1dp"
+        app:tabPaddingTop="-1dp" />
 
 </RelativeLayout>

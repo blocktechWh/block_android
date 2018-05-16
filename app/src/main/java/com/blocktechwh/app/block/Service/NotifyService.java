@@ -10,6 +10,8 @@ import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.Handler;
 import android.os.IBinder;
 import android.os.Message;
@@ -234,6 +236,19 @@ public class NotifyService extends Service {
             public void onClose(int arg0, String arg1, boolean arg2) {
                 System.out.println(client.getURI());
                 System.out.println("链接已关闭");
+
+                if (isWifiConnected(getBaseContext())||isNetworkConnected(getBaseContext())||isMobileConnected(getBaseContext())) {
+                    System.out.println("网络不给力");
+                    //Toast.makeText(App.context,"网络不给力",Toast.LENGTH_SHORT).show();
+                }else{
+                    try {
+                        webSocketConnect();
+                    }
+                    catch(Exception e) {
+                    }
+                }
+
+
             }
 
             @Override
@@ -259,7 +274,44 @@ public class NotifyService extends Service {
 
 
     }
-
+    //判断WIFI网络是否可用
+    public boolean isWifiConnected(Context context) {
+        if (context != null) {
+            ConnectivityManager mConnectivityManager = (ConnectivityManager) context
+                    .getSystemService(Context.CONNECTIVITY_SERVICE);
+            NetworkInfo mWiFiNetworkInfo = mConnectivityManager
+                    .getNetworkInfo(ConnectivityManager.TYPE_WIFI);
+            if (mWiFiNetworkInfo != null) {
+                return mWiFiNetworkInfo.isAvailable();
+            }
+        }
+        return false;
+    }
+    //判断是否有网络连接
+    public boolean isNetworkConnected(Context context) {
+        if (context != null) {
+            ConnectivityManager mConnectivityManager = (ConnectivityManager) context
+                    .getSystemService(Context.CONNECTIVITY_SERVICE);
+            NetworkInfo mNetworkInfo = mConnectivityManager.getActiveNetworkInfo();
+            if (mNetworkInfo != null) {
+                return mNetworkInfo.isAvailable();
+            }
+        }
+        return false;
+    }
+    //判断MOBILE网络是否可用
+    public boolean isMobileConnected(Context context) {
+        if (context != null) {
+            ConnectivityManager mConnectivityManager = (ConnectivityManager) context
+                    .getSystemService(Context.CONNECTIVITY_SERVICE);
+            NetworkInfo mMobileNetworkInfo = mConnectivityManager
+                    .getNetworkInfo(ConnectivityManager.TYPE_MOBILE);
+            if (mMobileNetworkInfo != null) {
+                return mMobileNetworkInfo.isAvailable();
+            }
+        }
+        return false;
+    }
     class HomeWatcherReceiver extends BroadcastReceiver {
 
         @Override

@@ -5,27 +5,34 @@
     android:layout_height="wrap_content"
     android:orientation="vertical">
 
-    <LinearLayout
+    <RelativeLayout
         android:id="@+id/lo_gift_sure"
         android:layout_width="match_parent"
-        android:layout_height="60dp"
-        android:layout_marginBottom="8dp"
+        android:layout_height="65dp"
+        android:layout_marginBottom="4dp"
+        android:layout_marginTop="4dp"
         android:background="@drawable/button_selector"
-        android:gravity="center_vertical"
-        android:orientation="horizontal">
+        android:paddingEnd="@dimen/padding_right"
+        android:paddingLeft="@dimen/padding_left"
+        android:paddingRight="@dimen/padding_right"
+        android:paddingStart="@dimen/padding_left">
 
-        <ImageButton
+        <ImageView
             android:id="@+id/id_sender_image"
-            android:layout_width="40dp"
-            android:layout_height="40dp"
-            android:layout_margin="17.76dp"
-            android:background="@android:color/transparent"
-            android:src="@mipmap/icon9"
-            app:srcCompat="@mipmap/icon29" />
+            android:layout_width="45dp"
+            android:layout_height="45dp"
+            android:layout_centerVertical="true"
+            android:layout_weight="1"
+            app:srcCompat="@mipmap/icon24" />
 
         <LinearLayout
-            android:layout_width="110dp"
+            android:id="@+id/ll_pray"
+            android:layout_width="120dp"
             android:layout_height="match_parent"
+            android:layout_marginLeft="20dp"
+            android:layout_marginStart="20dp"
+            android:layout_toEndOf="@+id/id_sender_image"
+            android:layout_toRightOf="@+id/id_sender_image"
             android:gravity="center_vertical"
             android:orientation="vertical">
 
@@ -33,7 +40,9 @@
                 android:id="@+id/tv_pray"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:ems="13"
+                android:maxEms="13"
+                android:paddingEnd="20dp"
+                android:paddingRight="20dp"
                 android:text="红包祝福"
                 android:textColor="#787878" />
 
@@ -42,29 +51,55 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:layout_toEndOf="@+id/ll_pray"
+            android:layout_toRightOf="@+id/ll_pray"
             android:gravity="center_vertical"
             android:orientation="vertical">
 
-            <TextView
-                android:id="@+id/tv_maker_name"
+            <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:gravity="center_vertical"
-                android:text="发起人   许巍"
-                android:textColor="#787878"
-                android:textSize="12sp" />
+                android:gravity="center_vertical">
+
+                <TextView
+                    android:id="@+id/tv_maker_name"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentEnd="false"
+                    android:layout_alignParentRight="false"
+                    android:layout_centerVertical="true"
+                    android:layout_weight="1"
+                    android:gravity="right|center_vertical"
+                    android:text="发起人   许巍"
+                    android:textColor="#787878"
+                    android:textSize="12sp" />
+
+                <TextView
+                    android:id="@+id/tv_my_self"
+                    android:layout_width="40dp"
+                    android:layout_height="20dp"
+                    android:layout_alignParentEnd="true"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:background="@drawable/coners_bg8"
+                    android:gravity="center_vertical|center_horizontal"
+                    android:text="本人"
+                    android:textColor="@color/white"
+                    android:textSize="12sp"
+                    android:visibility="gone" />
+            </RelativeLayout>
 
             <TextView
                 android:id="@+id/tv_create_time"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:gravity="center_vertical"
+                android:gravity="right|center_vertical"
                 android:text="发送时间   2010-10-10"
                 android:textColor="#787878"
                 android:textSize="12sp" />
         </LinearLayout>
-    </LinearLayout>
+    </RelativeLayout>
 
 </LinearLayout>

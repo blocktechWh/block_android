@@ -18,8 +18,7 @@
     <RadioGroup
         android:id="@+id/id_redio_group"
         android:layout_width="match_parent"
-        android:layout_height="match_parent" >
-    </RadioGroup>
+        android:layout_height="match_parent"></RadioGroup>
 
     <LinearLayout
         android:layout_width="match_parent"

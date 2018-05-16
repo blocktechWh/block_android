@@ -3,6 +3,7 @@ package com.blocktechwh.app.block.Activity.Wallete;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 
+import com.blocktechwh.app.block.Common.App;
 import com.blocktechwh.app.block.CustomView.TitleActivity;
 import com.blocktechwh.app.block.R;
 
@@ -17,5 +18,7 @@ public class ImpotActivity extends TitleActivity {
         setContentView(R.layout.activity_import);
 
         initTitle("导入");
+
+        App.getInstance().addActivity(this);
     }
 }

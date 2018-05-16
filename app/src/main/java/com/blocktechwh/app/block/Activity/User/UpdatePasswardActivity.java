@@ -28,8 +28,10 @@ public class UpdatePasswardActivity extends TitleActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_update_password);
-
         initTitle("修改密码");
+
+        App.getInstance().addActivity(this);
+
         initView();
         addEvent();
     }
@@ -53,9 +55,9 @@ public class UpdatePasswardActivity extends TitleActivity {
         @Override
         public void onClick(View view){
 
-            String passWord=et_new_pwd.getText().toString();
-            String passWord1=et_new_pwd_sure.getText().toString();
-            String oldPwd=et_old_pwd.getText().toString();
+            String passWord=et_new_pwd.getText().toString().trim();
+            String passWord1=et_new_pwd_sure.getText().toString().trim();
+            String oldPwd=et_old_pwd.getText().toString().trim();
             String tel_regex_pwd = "[a-zA-Z0-9]{8,20}";
 
             if(oldPwd.equals("")){

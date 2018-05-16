@@ -101,15 +101,16 @@
         android:layout_centerHorizontal="true"
         android:layout_marginTop="8dp"
         android:gravity="center_vertical"
-        android:orientation="horizontal">
+        android:orientation="horizontal"
+        android:visibility="invisible">
 
         <TextView
             android:id="@+id/textView6"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:textSize="14dp"
-            android:text="点击下方验证按钮表示同意" />
+            android:text="点击下方注册按钮表示同意"
+            android:textSize="14dp" />
 
         <TextView
             android:id="@+id/textView2"

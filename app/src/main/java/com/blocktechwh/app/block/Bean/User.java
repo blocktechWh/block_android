@@ -1,10 +1,11 @@
 package com.blocktechwh.app.block.Bean;
 
-import java.util.Date;
-
 import com.blocktechwh.app.block.Utils.DateUtil;
 
-public class User{
+import java.io.Serializable;
+import java.util.Date;
+
+public class User implements Serializable {
       
 	/**
 	 *
@@ -13,7 +14,7 @@ public class User{
 	/**
 	 * 姓名
 	 */
-	private String name;
+	private static String name;
 	/**
 	 * 手机
 	 */

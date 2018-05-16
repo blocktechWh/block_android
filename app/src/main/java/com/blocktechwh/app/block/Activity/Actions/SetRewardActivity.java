@@ -4,7 +4,6 @@ import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.os.Bundle;
-import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -38,18 +37,14 @@ public class SetRewardActivity extends TitleActivity {
     private TextView tv_reward_add_btn;
     private TextView tv_rank_text;
     private EditText et_reward_percent;
-    private TextView tv_reward_amount;
-    //private static List<Map<String,Object>> rewardEditList=new ArrayList<>();
-    private static Double rewardTotalAmount;
+    private static int rewardTotalAmount;
     private int rank_index=1;
     private EditText et_reward;
     private String isReward="false";
     private Button btn_add_reward_sure;
-    private List<Double>rewardList=new ArrayList<>();
+    private List<Integer>rewardList=new ArrayList<>();
     private RelativeLayout reward_input_container;
-    private RecyclerView mRecyclerView;
     private VotesListAdapter mAdapter;
-    private boolean ifSetReward=true;
     private ImageView tv_icon_add;
 
 
@@ -58,9 +53,9 @@ public class SetRewardActivity extends TitleActivity {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_set_rewards);
+        setContentView(R.layout.fragment_start_vote_4);
         initTitle("奖励资金");
-
+        App.getInstance().addActivity(this);
         initData();
         setEvent();
     }
@@ -77,11 +72,7 @@ public class SetRewardActivity extends TitleActivity {
         tv_reward_add_btn=(TextView) findViewById(R.id.tv_reward_add_btn);
         tv_rank_text=(TextView) findViewById(R.id.tv_rank_text);
         et_reward_percent=(EditText) findViewById(R.id.et_reward_percent);
-        tv_reward_amount=(TextView) findViewById(R.id.tv_reward_amount);
 
-        mRecyclerView = (RecyclerView)findViewById(R.id.id_votes_option_recycler);
-        mRecyclerView.setLayoutManager(new LinearLayoutManager(App.getContext()));
-        mRecyclerView.setAdapter(mAdapter = new VotesListAdapter());
 
     }
 
@@ -119,17 +110,21 @@ public class SetRewardActivity extends TitleActivity {
         tv_reward_add_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                rewardTotalAmount=Double.parseDouble(et_reward.getText().toString());
-                Double totalAmount=0.0;
-                Double hasRewardAmountPercent=0.0;
+                rewardTotalAmount=Integer.parseInt(et_reward.getText().toString());
+                int totalAmount=0;
+                int hasRewardAmountPercent=0;
                 //计算已添加奖励总比例
                 for(int i=0;i<rewardList.size();i++){
                     hasRewardAmountPercent+=rewardList.get(i)*100/rewardTotalAmount;
                 }
 
+                if(et_reward_percent.getText().toString().trim().equals(null)){
+                    Toast.makeText(SetRewardActivity.this,"请输入有效金额",Toast.LENGTH_SHORT).show();
+                    return;
+                }
 
                 //计算已添加奖励总比例并判断
-                hasRewardAmountPercent+=Double.parseDouble(et_reward_percent.getText().toString());
+                hasRewardAmountPercent+=Integer.parseInt(et_reward_percent.getText().toString().trim());
                 if(rewardList.size()+1<App.voteInfo.getOptions().size()&&100-hasRewardAmountPercent==0){
                     Toast.makeText(SetRewardActivity.this,"奖励金额配置数小于投票项目数",Toast.LENGTH_SHORT).show();
 
@@ -143,26 +138,24 @@ public class SetRewardActivity extends TitleActivity {
                     Toast.makeText(SetRewardActivity.this,"奖励金额配置超过100%",Toast.LENGTH_SHORT).show();
                 }else if(100-hasRewardAmountPercent>0){
                     //添加新建奖励到列表
-                    Double amount=Double.parseDouble(et_reward_percent.getText().toString())*rewardTotalAmount/100;
+                    int amount=Integer.parseInt(et_reward_percent.getText().toString().trim())*rewardTotalAmount/100;
                     //tv_reward_amount.setText(amount.toString());
                     View item_reward_info_layout = LayoutInflater.from(getApplicationContext()).inflate(R.layout.item_reward_info,null);
                     TextView tv_rank_text1=item_reward_info_layout.findViewById(R.id.tv_rank_text);
                     tv_rank_text1.setText("第"+rank_index+"名");
                     EditText et_reward_percent1=item_reward_info_layout.findViewById(R.id.et_reward_percent);
-                    et_reward_percent1.setText(et_reward_percent.getText());
+                    et_reward_percent1.setText(et_reward_percent.getText().toString().trim());
                     et_reward_percent1.setFocusable(false);
-                    TextView tv_reward_amount1=item_reward_info_layout.findViewById(R.id.tv_reward_amount);
-                    tv_reward_amount1.setText(amount.toString());
+
                     ll_rewards_container.addView(item_reward_info_layout);
 
                     //添加数据到list
-                    rewardList.add(Double.parseDouble(et_reward_percent.getText().toString())*rewardTotalAmount/100);
+                    rewardList.add(Integer.parseInt(et_reward_percent.getText().toString().trim())*rewardTotalAmount/100);
 
                     //重置输入行数据
                     tv_rank_text.setText("第"+(rank_index+1)+"名");
                     ++rank_index;
                     et_reward_percent.setText((100-hasRewardAmountPercent)+"");
-                    tv_reward_amount.setText(rewardTotalAmount*(100.0-hasRewardAmountPercent)/100+"");
                     App.voteInfo.setVoteRewardRule(rewardList);
                     //Toast.makeText(SetRewardActivity.this,App.voteInfo.getVoteRewardRule().toString(),Toast.LENGTH_SHORT).show();
 
@@ -170,7 +163,7 @@ public class SetRewardActivity extends TitleActivity {
                     //Toast.makeText(SetRewardActivity.this,"奖励金额已配置完",Toast.LENGTH_SHORT).show();
 
                     //添加新建奖励到列表
-                    Double amount=Double.parseDouble(et_reward_percent.getText().toString())/100*rewardTotalAmount;
+                    int amount=Integer.parseInt(et_reward_percent.getText().toString().trim())/100*rewardTotalAmount;
                     //tv_reward_amount.setText(amount.toString());
                     View item_reward_info_layout = LayoutInflater.from(getApplicationContext()).inflate(R.layout.item_reward_info,null);
                     TextView tv_rank_text1=item_reward_info_layout.findViewById(R.id.tv_rank_text);
@@ -178,12 +171,10 @@ public class SetRewardActivity extends TitleActivity {
                     EditText et_reward_percent1=item_reward_info_layout.findViewById(R.id.et_reward_percent);
                     et_reward_percent1.setFocusable(false);
                     et_reward_percent1.setText(et_reward_percent.getText());
-                    TextView tv_reward_amount1=item_reward_info_layout.findViewById(R.id.tv_reward_amount);
-                    tv_reward_amount1.setText(amount.toString());
                     ll_rewards_container.addView(item_reward_info_layout);
 
                     //添加数据到list
-                    rewardList.add(Double.parseDouble(et_reward_percent.getText().toString())*rewardTotalAmount/100);
+                    rewardList.add(Integer.parseInt(et_reward_percent.getText().toString().trim())*rewardTotalAmount/100);
 
                     App.voteInfo.setVoteRewardRule(rewardList);
 
@@ -244,11 +235,11 @@ public class SetRewardActivity extends TitleActivity {
     private View.OnClickListener addRewardOptions = new View.OnClickListener(){
         @Override
         public void onClick(View view) {
-            rewardTotalAmount=Double.parseDouble(et_reward.getText().toString());
+            rewardTotalAmount=Integer.parseInt(et_reward.getText().toString());
             App.voteInfo.setVoteFee(rewardTotalAmount);
 
-            Double totalAmount=0.0;
-            Double hasRewardAmountPercent=0.0;
+            int totalAmount=0;
+            int hasRewardAmountPercent=0;
             //计算已添加奖励总比例
             for(int i=0;i<rewardList.size();i++){
                 hasRewardAmountPercent+=rewardList.get(i)*100/rewardTotalAmount;
@@ -256,7 +247,7 @@ public class SetRewardActivity extends TitleActivity {
 
             //计算已添加奖励总比例并判断
             if(reward_input_container.isShown()){
-                hasRewardAmountPercent+=Double.parseDouble(et_reward_percent.getText().toString());
+                hasRewardAmountPercent+=Integer.parseInt(et_reward_percent.getText().toString().trim());
             }
 
             if(rewardList.size()+1!=App.voteInfo.getOptions().size()&&reward_input_container.isShown()){
@@ -281,7 +272,7 @@ public class SetRewardActivity extends TitleActivity {
             }else if(100-hasRewardAmountPercent==0){
                 //添加数据到list
                 if(reward_input_container.isShown()){
-                    rewardList.add(Double.parseDouble(et_reward_percent.getText().toString())*rewardTotalAmount/100);
+                    rewardList.add(Integer.parseInt(et_reward_percent.getText().toString().trim())*rewardTotalAmount/100);
                 }
 
                 App.voteInfo.setVoteRewardRule(rewardList);

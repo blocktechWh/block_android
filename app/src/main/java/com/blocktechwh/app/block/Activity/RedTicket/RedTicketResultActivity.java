@@ -10,6 +10,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.alibaba.fastjson.JSONObject;
+import com.blocktechwh.app.block.Common.App;
 import com.blocktechwh.app.block.Common.Urls;
 import com.blocktechwh.app.block.CustomView.StatusBarUtils;
 import com.blocktechwh.app.block.CustomView.TitleActivity;
@@ -38,10 +39,11 @@ public class RedTicketResultActivity extends TitleActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_redticket_result);
 
+        App.getInstance().addActivity(this);
+
         //获得上个页面传的数据
         Bundle bundle = this.getIntent().getExtras();
         id=bundle.getInt("id");
-
 
         initView();
 
